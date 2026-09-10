@@ -1,14 +1,16 @@
 /**
- * Prisma Seed — Initial Jerusalem Neighborhoods
+ * Prisma Seed — Initial Data
  *
- * Idempotent: uses upsert on the unique `name` field.
+ * Seeds:
+ * 1. Jerusalem neighborhoods (reference data)
+ * 2. Bootstrap admin user (if environment variables provided)
+ *
+ * Idempotent: uses upsert on unique fields.
  * Running this script multiple times will not create duplicates.
- *
- * Only seeds non-sensitive reference data (neighborhoods).
- * No fake users, properties, customers, or personal data.
  */
 
 import "dotenv/config";
+import * as bcrypt from "bcryptjs";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
@@ -55,6 +57,9 @@ const neighborhoods: { name: string; sortOrder: number }[] = [
 ];
 
 async function main() {
+  console.log("=== Seeding Database ===\n");
+
+  // 1. Seed neighborhoods
   console.log(`Seeding ${neighborhoods.length} Jerusalem neighborhoods...`);
 
   for (const n of neighborhoods) {
@@ -65,7 +70,56 @@ async function main() {
     });
   }
 
-  console.log(`Done. ${neighborhoods.length} neighborhoods upserted.`);
+  console.log(`✓ ${neighborhoods.length} neighborhoods upserted.\n`);
+
+  // 2. Bootstrap admin user
+  await seedAdminUser();
+
+  console.log("\n=== Seeding Complete ===");
+}
+
+/**
+ * Bootstrap admin user from environment variables.
+ *
+ * Reads BOOTSTRAP_ADMIN_EMAIL and BOOTSTRAP_ADMIN_PASSWORD.
+ * If missing, skips admin creation (safe for CI/CD).
+ * If present, creates or updates the admin user idempotently.
+ */
+async function seedAdminUser() {
+  const email = process.env["BOOTSTRAP_ADMIN_EMAIL"];
+  const password = process.env["BOOTSTRAP_ADMIN_PASSWORD"];
+
+  if (!email || !password) {
+    console.warn("⚠ BOOTSTRAP_ADMIN_EMAIL and BOOTSTRAP_ADMIN_PASSWORD not set.");
+    console.warn("  Skipping admin user seed.");
+    return;
+  }
+
+  console.log("Seeding admin user...");
+
+  // Hash password
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  // Upsert admin user
+  const admin = await prisma.user.upsert({
+    where: { email },
+    update: {
+      // Update password hash and ensure active/admin on re-runs
+      passwordHash,
+      active: true,
+      role: "ADMIN",
+    },
+    create: {
+      email,
+      name: "System Admin",
+      role: "ADMIN",
+      active: true,
+      passwordHash,
+      phone: null,
+    },
+  });
+
+  console.log(`✓ Admin user seeded/updated: ${admin.email}`);
 }
 
 main()

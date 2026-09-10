@@ -122,9 +122,12 @@ import { ListUsersUseCase } from "@/application/users/list-users.use-case";
 import { CreateUserUseCase } from "@/application/users/create-user.use-case";
 import { UpdateUserUseCase } from "@/application/users/update-user.use-case";
 
+import { LoginUseCase } from "@/application/auth/login.use-case";
+import { CreateUserWithPasswordUseCase } from "@/application/auth/create-user-with-password.use-case";
+
 export const useCases = {
   properties: {
-    create: new CreatePropertyUseCase(propertyRepository, neighborhoodRepository),
+    create: new CreatePropertyUseCase(propertyRepository, neighborhoodRepository, userRepository),
     update: new UpdatePropertyUseCase(propertyRepository, neighborhoodRepository),
     get: new GetPropertyUseCase(propertyRepository),
     list: new ListPropertiesUseCase(propertyRepository),
@@ -162,5 +165,9 @@ export const useCases = {
     list: new ListUsersUseCase(userRepository),
     create: new CreateUserUseCase(userRepository),
     update: new UpdateUserUseCase(userRepository),
+  },
+  auth: {
+    login: new LoginUseCase(userRepository),
+    createUserWithPassword: new CreateUserWithPasswordUseCase(userRepository),
   },
 } as const;
