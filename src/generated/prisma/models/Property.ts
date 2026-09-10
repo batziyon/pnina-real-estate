@@ -855,6 +855,11 @@ export type PropertyScalarRelationFilter = {
   isNot?: Prisma.PropertyWhereInput
 }
 
+export type PropertyNullableScalarRelationFilter = {
+  is?: Prisma.PropertyWhereInput | null
+  isNot?: Prisma.PropertyWhereInput | null
+}
+
 export type PropertyCreateNestedManyWithoutNeighborhoodInput = {
   create?: Prisma.XOR<Prisma.PropertyCreateWithoutNeighborhoodInput, Prisma.PropertyUncheckedCreateWithoutNeighborhoodInput> | Prisma.PropertyCreateWithoutNeighborhoodInput[] | Prisma.PropertyUncheckedCreateWithoutNeighborhoodInput[]
   connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutNeighborhoodInput | Prisma.PropertyCreateOrConnectWithoutNeighborhoodInput[]
@@ -1051,10 +1056,12 @@ export type PropertyCreateNestedOneWithoutInquiriesInput = {
   connect?: Prisma.PropertyWhereUniqueInput
 }
 
-export type PropertyUpdateOneRequiredWithoutInquiriesNestedInput = {
+export type PropertyUpdateOneWithoutInquiriesNestedInput = {
   create?: Prisma.XOR<Prisma.PropertyCreateWithoutInquiriesInput, Prisma.PropertyUncheckedCreateWithoutInquiriesInput>
   connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutInquiriesInput
   upsert?: Prisma.PropertyUpsertWithoutInquiriesInput
+  disconnect?: Prisma.PropertyWhereInput | boolean
+  delete?: Prisma.PropertyWhereInput | boolean
   connect?: Prisma.PropertyWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutInquiriesInput, Prisma.PropertyUpdateWithoutInquiriesInput>, Prisma.PropertyUncheckedUpdateWithoutInquiriesInput>
 }

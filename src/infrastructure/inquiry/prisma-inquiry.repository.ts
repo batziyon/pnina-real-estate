@@ -80,7 +80,7 @@ export class PrismaInquiryRepository implements InquiryRepository {
   async create(input: CreateInquiryInput): Promise<InquiryData> {
     const record = await prisma.inquiry.create({
       data: {
-        propertyId: input.propertyId,
+        propertyId: input.propertyId ?? null,
         name: input.name,
         phone: input.phone,
         email: input.email ?? null,

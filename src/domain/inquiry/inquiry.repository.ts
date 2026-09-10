@@ -23,7 +23,7 @@ export interface InquiryRepository {
     pagination: PaginationParams
   ): Promise<{ data: InquiryData[]; meta: PaginationMeta }>;
 
-  /** Create a new inquiry (e.g. from a public contact form). */
+  /** Create a new inquiry. propertyId is optional — only PROPERTY_INTEREST requires it. */
   create(input: CreateInquiryInput): Promise<InquiryData>;
 
   /** Update an inquiry's status, notes, or assigned agent. */

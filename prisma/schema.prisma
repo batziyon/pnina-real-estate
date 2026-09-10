@@ -258,7 +258,7 @@ model PropertyVideo {
 
 model Inquiry {
   id         String        @id @default(cuid())
-  propertyId String
+  propertyId String?
   agentId    String?
   name       String
   phone      String
@@ -271,8 +271,8 @@ model Inquiry {
   updatedAt  DateTime      @updatedAt
 
   // Relations
-  property Property @relation(fields: [propertyId], references: [id])
-  agent    User?    @relation("AssignedAgent", fields: [agentId], references: [id])
+  property Property? @relation(fields: [propertyId], references: [id])
+  agent    User?     @relation("AssignedAgent", fields: [agentId], references: [id])
 
   @@index([propertyId])
   @@index([agentId])

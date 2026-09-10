@@ -16,7 +16,7 @@ const ALLOWED_TRANSITIONS: Record<InquiryStatus, InquiryStatus[]> = {
 
 export class Inquiry {
   readonly id: string;
-  readonly propertyId: string;
+  readonly propertyId: string | null;
   readonly agentId: string | null;
   readonly name: string;
   readonly phone: string;

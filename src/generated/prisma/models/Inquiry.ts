@@ -191,7 +191,7 @@ export type InquiryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type InquiryGroupByOutputType = {
   id: string
-  propertyId: string
+  propertyId: string | null
   agentId: string | null
   name: string
   phone: string
@@ -227,7 +227,7 @@ export type InquiryWhereInput = {
   OR?: Prisma.InquiryWhereInput[]
   NOT?: Prisma.InquiryWhereInput | Prisma.InquiryWhereInput[]
   id?: Prisma.StringFilter<"Inquiry"> | string
-  propertyId?: Prisma.StringFilter<"Inquiry"> | string
+  propertyId?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   agentId?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   name?: Prisma.StringFilter<"Inquiry"> | string
   phone?: Prisma.StringFilter<"Inquiry"> | string
@@ -238,13 +238,13 @@ export type InquiryWhereInput = {
   notes?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  property?: Prisma.XOR<Prisma.PropertyNullableScalarRelationFilter, Prisma.PropertyWhereInput> | null
   agent?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type InquiryOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrderInput | Prisma.SortOrder
   agentId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -264,7 +264,7 @@ export type InquiryWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.InquiryWhereInput | Prisma.InquiryWhereInput[]
   OR?: Prisma.InquiryWhereInput[]
   NOT?: Prisma.InquiryWhereInput | Prisma.InquiryWhereInput[]
-  propertyId?: Prisma.StringFilter<"Inquiry"> | string
+  propertyId?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   agentId?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   name?: Prisma.StringFilter<"Inquiry"> | string
   phone?: Prisma.StringFilter<"Inquiry"> | string
@@ -275,13 +275,13 @@ export type InquiryWhereUniqueInput = Prisma.AtLeast<{
   notes?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Inquiry"> | Date | string
-  property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
+  property?: Prisma.XOR<Prisma.PropertyNullableScalarRelationFilter, Prisma.PropertyWhereInput> | null
   agent?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type InquiryOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  propertyId?: Prisma.SortOrder
+  propertyId?: Prisma.SortOrderInput | Prisma.SortOrder
   agentId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   phone?: Prisma.SortOrder
@@ -302,7 +302,7 @@ export type InquiryScalarWhereWithAggregatesInput = {
   OR?: Prisma.InquiryScalarWhereWithAggregatesInput[]
   NOT?: Prisma.InquiryScalarWhereWithAggregatesInput | Prisma.InquiryScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Inquiry"> | string
-  propertyId?: Prisma.StringWithAggregatesFilter<"Inquiry"> | string
+  propertyId?: Prisma.StringNullableWithAggregatesFilter<"Inquiry"> | string | null
   agentId?: Prisma.StringNullableWithAggregatesFilter<"Inquiry"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Inquiry"> | string
   phone?: Prisma.StringWithAggregatesFilter<"Inquiry"> | string
@@ -326,13 +326,13 @@ export type InquiryCreateInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutInquiriesInput
+  property?: Prisma.PropertyCreateNestedOneWithoutInquiriesInput
   agent?: Prisma.UserCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateInput = {
   id?: string
-  propertyId: string
+  propertyId?: string | null
   agentId?: string | null
   name: string
   phone: string
@@ -356,13 +356,13 @@ export type InquiryUpdateInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutInquiriesNestedInput
+  property?: Prisma.PropertyUpdateOneWithoutInquiriesNestedInput
   agent?: Prisma.UserUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -377,7 +377,7 @@ export type InquiryUncheckedUpdateInput = {
 
 export type InquiryCreateManyInput = {
   id?: string
-  propertyId: string
+  propertyId?: string | null
   agentId?: string | null
   name: string
   phone: string
@@ -405,7 +405,7 @@ export type InquiryUpdateManyMutationInput = {
 
 export type InquiryUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
@@ -576,12 +576,12 @@ export type InquiryCreateWithoutAgentInput = {
   notes?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  property: Prisma.PropertyCreateNestedOneWithoutInquiriesInput
+  property?: Prisma.PropertyCreateNestedOneWithoutInquiriesInput
 }
 
 export type InquiryUncheckedCreateWithoutAgentInput = {
   id?: string
-  propertyId: string
+  propertyId?: string | null
   name: string
   phone: string
   email?: string | null
@@ -624,7 +624,7 @@ export type InquiryScalarWhereInput = {
   OR?: Prisma.InquiryScalarWhereInput[]
   NOT?: Prisma.InquiryScalarWhereInput | Prisma.InquiryScalarWhereInput[]
   id?: Prisma.StringFilter<"Inquiry"> | string
-  propertyId?: Prisma.StringFilter<"Inquiry"> | string
+  propertyId?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   agentId?: Prisma.StringNullableFilter<"Inquiry"> | string | null
   name?: Prisma.StringFilter<"Inquiry"> | string
   phone?: Prisma.StringFilter<"Inquiry"> | string
@@ -693,7 +693,7 @@ export type InquiryUpdateManyWithWhereWithoutPropertyInput = {
 
 export type InquiryCreateManyAgentInput = {
   id?: string
-  propertyId: string
+  propertyId?: string | null
   name: string
   phone: string
   email?: string | null
@@ -716,12 +716,12 @@ export type InquiryUpdateWithoutAgentInput = {
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  property?: Prisma.PropertyUpdateOneRequiredWithoutInquiriesNestedInput
+  property?: Prisma.PropertyUpdateOneWithoutInquiriesNestedInput
 }
 
 export type InquiryUncheckedUpdateWithoutAgentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -735,7 +735,7 @@ export type InquiryUncheckedUpdateWithoutAgentInput = {
 
 export type InquiryUncheckedUpdateManyWithoutAgentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  propertyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -818,7 +818,7 @@ export type InquirySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  property?: boolean | Prisma.Inquiry$propertyArgs<ExtArgs>
   agent?: boolean | Prisma.Inquiry$agentArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
 
@@ -835,7 +835,7 @@ export type InquirySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  property?: boolean | Prisma.Inquiry$propertyArgs<ExtArgs>
   agent?: boolean | Prisma.Inquiry$agentArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
 
@@ -852,7 +852,7 @@ export type InquirySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   notes?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  property?: boolean | Prisma.Inquiry$propertyArgs<ExtArgs>
   agent?: boolean | Prisma.Inquiry$agentArgs<ExtArgs>
 }, ExtArgs["result"]["inquiry"]>
 
@@ -873,27 +873,27 @@ export type InquirySelectScalar = {
 
 export type InquiryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "agentId" | "name" | "phone" | "email" | "message" | "type" | "status" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["inquiry"]>
 export type InquiryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  property?: boolean | Prisma.Inquiry$propertyArgs<ExtArgs>
   agent?: boolean | Prisma.Inquiry$agentArgs<ExtArgs>
 }
 export type InquiryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  property?: boolean | Prisma.Inquiry$propertyArgs<ExtArgs>
   agent?: boolean | Prisma.Inquiry$agentArgs<ExtArgs>
 }
 export type InquiryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
+  property?: boolean | Prisma.Inquiry$propertyArgs<ExtArgs>
   agent?: boolean | Prisma.Inquiry$agentArgs<ExtArgs>
 }
 
 export type $InquiryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Inquiry"
   objects: {
-    property: Prisma.$PropertyPayload<ExtArgs>
+    property: Prisma.$PropertyPayload<ExtArgs> | null
     agent: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    propertyId: string
+    propertyId: string | null
     agentId: string | null
     name: string
     phone: string
@@ -1298,7 +1298,7 @@ readonly fields: InquiryFieldRefs;
  */
 export interface Prisma__InquiryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  property<T extends Prisma.PropertyDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PropertyDefaultArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  property<T extends Prisma.Inquiry$propertyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$propertyArgs<ExtArgs>>): Prisma.Prisma__PropertyClient<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   agent<T extends Prisma.Inquiry$agentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Inquiry$agentArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1739,6 +1739,25 @@ export type InquiryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Inquiries to delete.
    */
   limit?: number
+}
+
+/**
+ * Inquiry.property
+ */
+export type Inquiry$propertyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Property
+   */
+  select?: Prisma.PropertySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Property
+   */
+  omit?: Prisma.PropertyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInclude<ExtArgs> | null
+  where?: Prisma.PropertyWhereInput
 }
 
 /**

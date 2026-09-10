@@ -84,3 +84,83 @@ export {
   valuationRequestRepository,
   testimonialRepository,
 };
+
+// ---------------------------------------------------------------------------
+// Use case factories — instantiate application use cases with injected dependencies.
+// ---------------------------------------------------------------------------
+
+import { CreatePropertyUseCase } from "@/application/properties/create-property.use-case";
+import { UpdatePropertyUseCase } from "@/application/properties/update-property.use-case";
+import { GetPropertyUseCase } from "@/application/properties/get-property.use-case";
+import { ListPropertiesUseCase } from "@/application/properties/list-properties.use-case";
+import { PublishPropertyUseCase } from "@/application/properties/publish-property.use-case";
+import { ArchivePropertyUseCase } from "@/application/properties/archive-property.use-case";
+
+import { CreateProjectUseCase } from "@/application/projects/create-project.use-case";
+import { UpdateProjectUseCase } from "@/application/projects/update-project.use-case";
+import { GetProjectUseCase } from "@/application/projects/get-project.use-case";
+import { ListProjectsUseCase } from "@/application/projects/list-projects.use-case";
+
+import { ListNeighborhoodsUseCase } from "@/application/neighborhoods/list-neighborhoods.use-case";
+import { ManageNeighborhoodUseCase } from "@/application/neighborhoods/manage-neighborhood.use-case";
+
+import { CreateInquiryUseCase } from "@/application/inquiries/create-inquiry.use-case";
+import { ListInquiriesUseCase } from "@/application/inquiries/list-inquiries.use-case";
+import { UpdateInquiryStatusUseCase } from "@/application/inquiries/update-inquiry-status.use-case";
+
+import { CreateValuationRequestUseCase } from "@/application/valuations/create-valuation-request.use-case";
+import { ListValuationRequestsUseCase } from "@/application/valuations/list-valuation-requests.use-case";
+import { UpdateValuationStatusUseCase } from "@/application/valuations/update-valuation-status.use-case";
+
+import { CreateTestimonialUseCase } from "@/application/testimonials/create-testimonial.use-case";
+import { ListPublicTestimonialsUseCase } from "@/application/testimonials/list-public-testimonials.use-case";
+import { ApproveTestimonialUseCase } from "@/application/testimonials/approve-testimonial.use-case";
+import { RejectTestimonialUseCase } from "@/application/testimonials/reject-testimonial.use-case";
+
+import { GetUserUseCase } from "@/application/users/get-user.use-case";
+import { ListUsersUseCase } from "@/application/users/list-users.use-case";
+import { CreateUserUseCase } from "@/application/users/create-user.use-case";
+import { UpdateUserUseCase } from "@/application/users/update-user.use-case";
+
+export const useCases = {
+  properties: {
+    create: new CreatePropertyUseCase(propertyRepository, neighborhoodRepository),
+    update: new UpdatePropertyUseCase(propertyRepository, neighborhoodRepository),
+    get: new GetPropertyUseCase(propertyRepository),
+    list: new ListPropertiesUseCase(propertyRepository),
+    publish: new PublishPropertyUseCase(propertyRepository),
+    archive: new ArchivePropertyUseCase(propertyRepository),
+  },
+  projects: {
+    create: new CreateProjectUseCase(projectRepository, neighborhoodRepository),
+    update: new UpdateProjectUseCase(projectRepository, neighborhoodRepository),
+    get: new GetProjectUseCase(projectRepository),
+    list: new ListProjectsUseCase(projectRepository),
+  },
+  neighborhoods: {
+    list: new ListNeighborhoodsUseCase(neighborhoodRepository),
+    manage: new ManageNeighborhoodUseCase(neighborhoodRepository),
+  },
+  inquiries: {
+    create: new CreateInquiryUseCase(inquiryRepository, propertyRepository),
+    list: new ListInquiriesUseCase(inquiryRepository),
+    updateStatus: new UpdateInquiryStatusUseCase(inquiryRepository),
+  },
+  valuations: {
+    create: new CreateValuationRequestUseCase(valuationRequestRepository, neighborhoodRepository),
+    list: new ListValuationRequestsUseCase(valuationRequestRepository),
+    updateStatus: new UpdateValuationStatusUseCase(valuationRequestRepository),
+  },
+  testimonials: {
+    create: new CreateTestimonialUseCase(testimonialRepository),
+    listPublic: new ListPublicTestimonialsUseCase(testimonialRepository),
+    approve: new ApproveTestimonialUseCase(testimonialRepository),
+    reject: new RejectTestimonialUseCase(testimonialRepository),
+  },
+  users: {
+    get: new GetUserUseCase(userRepository),
+    list: new ListUsersUseCase(userRepository),
+    create: new CreateUserUseCase(userRepository),
+    update: new UpdateUserUseCase(userRepository),
+  },
+} as const;

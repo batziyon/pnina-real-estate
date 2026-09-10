@@ -22,7 +22,7 @@ export type InquiryType =
 
 export interface InquiryData {
   id: string;
-  propertyId: string;
+  propertyId: string | null;
   agentId: string | null;
   name: string;
   phone: string;
@@ -40,7 +40,7 @@ export interface InquiryData {
 // ---------------------------------------------------------------------------
 
 export type CreateInquiryInput = {
-  propertyId: string;
+  propertyId?: string;
   name: string;
   phone: string;
   email?: string;
