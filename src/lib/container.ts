@@ -95,11 +95,13 @@ import { GetPropertyUseCase } from "@/application/properties/get-property.use-ca
 import { ListPropertiesUseCase } from "@/application/properties/list-properties.use-case";
 import { PublishPropertyUseCase } from "@/application/properties/publish-property.use-case";
 import { ArchivePropertyUseCase } from "@/application/properties/archive-property.use-case";
+import { GetPropertyStatisticsUseCase } from "@/application/properties/get-property-statistics.use-case";
 
 import { CreateProjectUseCase } from "@/application/projects/create-project.use-case";
 import { UpdateProjectUseCase } from "@/application/projects/update-project.use-case";
 import { GetProjectUseCase } from "@/application/projects/get-project.use-case";
 import { ListProjectsUseCase } from "@/application/projects/list-projects.use-case";
+import { GetProjectStatisticsUseCase } from "@/application/projects/get-project-statistics.use-case";
 
 import { ListNeighborhoodsUseCase } from "@/application/neighborhoods/list-neighborhoods.use-case";
 import { ManageNeighborhoodUseCase } from "@/application/neighborhoods/manage-neighborhood.use-case";
@@ -133,12 +135,14 @@ export const useCases = {
     list: new ListPropertiesUseCase(propertyRepository),
     publish: new PublishPropertyUseCase(propertyRepository),
     archive: new ArchivePropertyUseCase(propertyRepository),
+    getStatistics: new GetPropertyStatisticsUseCase(propertyRepository),
   },
   projects: {
     create: new CreateProjectUseCase(projectRepository, neighborhoodRepository),
     update: new UpdateProjectUseCase(projectRepository, neighborhoodRepository),
     get: new GetProjectUseCase(projectRepository),
     list: new ListProjectsUseCase(projectRepository),
+    getStatistics: new GetProjectStatisticsUseCase(projectRepository),
   },
   neighborhoods: {
     list: new ListNeighborhoodsUseCase(neighborhoodRepository),
