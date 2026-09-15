@@ -1,14 +1,9 @@
-/**
- * Edit Property Page — Hebrew RTL
- *
- * Server Component that fetches property data and renders edit form.
- */
-
 import { notFound } from "next/navigation";
 import { requireAuth } from "@/lib/auth-helpers";
 import { useCases } from "@/lib/container";
 import { PropertyForm } from "@/components/admin/PropertyForm";
 import { PropertyActions } from "@/components/admin/PropertyActions";
+import { canActorPublish } from "@/domain/property/property.rules";
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -32,6 +27,9 @@ export default async function EditPropertyPage({ params }: PageProps) {
       : Promise.resolve({ data: [], meta: { page: 1, pageSize: 100, total: 0, totalPages: 0 } }),
   ]);
 
+  // Server-side determination of permissions
+  const userCanPublish = canActorPublish(user.id, user.role, property);
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
@@ -40,7 +38,11 @@ export default async function EditPropertyPage({ params }: PageProps) {
           <p className="text-gray-600 mt-1">{property.title}</p>
         </div>
 
-        <PropertyActions propertyId={id} status={property.status} />
+        <PropertyActions
+          propertyId={id}
+          status={property.status}
+          canPublish={userCanPublish}
+        />
       </div>
 
       <PropertyForm

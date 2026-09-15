@@ -10,7 +10,6 @@ import {
   ValidationError,
   UnauthorizedError,
 } from "@/application/errors";
-import type { PaginationParams } from "@/types";
 
 export interface Actor {
   id: string;
@@ -121,6 +120,3 @@ export class CreatePropertyUseCase {
     });
   }
 }
-
-// Suppress unused import — PaginationParams used indirectly through shared types
-void (0 as unknown as PaginationParams);

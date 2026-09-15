@@ -13,24 +13,24 @@ export interface Actor {
   role: UserRole;
 }
 
-export class ArchivePropertyUseCase {
+export class ReservePropertyUseCase {
   constructor(private readonly propertyRepository: PropertyRepository) {}
 
   async execute(id: string, actor: Actor): Promise<PropertyData> {
     const property = await this.propertyRepository.findById(id);
     if (!property) throw new EntityNotFoundError("Property", id);
 
-    // Authorization check - same rules as publish/status changes
+    // Authorization: same rules as publish
     if (!canActorPublish(actor.id, actor.role, property)) {
-      throw new UnauthorizedError("You are not authorized to archive this property.");
+      throw new UnauthorizedError("You are not authorized to reserve this property.");
     }
 
-    if (!isValidStatusTransition(property.status, "ARCHIVED")) {
+    if (!isValidStatusTransition(property.status, "RESERVED")) {
       throw new BusinessRuleError(
-        `Cannot archive a property with status "${property.status}".`
+        `Cannot reserve a property with status "${property.status}".`
       );
     }
 
-    return this.propertyRepository.archive(id);
+    return this.propertyRepository.update(id, { status: "RESERVED" });
   }
 }

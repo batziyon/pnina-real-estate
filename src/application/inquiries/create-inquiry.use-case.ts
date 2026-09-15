@@ -35,11 +35,11 @@ export class CreateInquiryUseCase {
 
     // GENERAL_CONTACT, COOPERATION, VALUATION_REQUEST are allowed without propertyId
     return this.inquiryRepository.create({
-      propertyId: input.propertyId,
+      propertyId: input.propertyId ?? undefined,
       name: input.name,
       phone: input.phone,
-      email: input.email,
-      message: input.message,
+      email: input.email ?? undefined,
+      message: input.message ?? undefined,
       type: input.type,
     });
   }

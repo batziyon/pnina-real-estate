@@ -32,7 +32,7 @@ export class UpdateInquiryStatusUseCase {
 
     return this.inquiryRepository.update(id, {
       status: parsed.data.status,
-      notes: parsed.data.notes,
+      notes: parsed.data.notes ?? undefined,
     });
   }
 }

@@ -13,24 +13,24 @@ export interface Actor {
   role: UserRole;
 }
 
-export class ArchivePropertyUseCase {
+export class MarkPropertySoldUseCase {
   constructor(private readonly propertyRepository: PropertyRepository) {}
 
   async execute(id: string, actor: Actor): Promise<PropertyData> {
     const property = await this.propertyRepository.findById(id);
     if (!property) throw new EntityNotFoundError("Property", id);
 
-    // Authorization check - same rules as publish/status changes
+    // Authorization: same rules as publish
     if (!canActorPublish(actor.id, actor.role, property)) {
-      throw new UnauthorizedError("You are not authorized to archive this property.");
+      throw new UnauthorizedError("You are not authorized to mark this property as sold.");
     }
 
-    if (!isValidStatusTransition(property.status, "ARCHIVED")) {
+    if (!isValidStatusTransition(property.status, "SOLD")) {
       throw new BusinessRuleError(
-        `Cannot archive a property with status "${property.status}".`
+        `Cannot mark as sold a property with status "${property.status}".`
       );
     }
 
-    return this.propertyRepository.archive(id);
+    return this.propertyRepository.update(id, { status: "SOLD" });
   }
 }

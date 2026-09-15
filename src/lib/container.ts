@@ -94,7 +94,11 @@ import { UpdatePropertyUseCase } from "@/application/properties/update-property.
 import { GetPropertyUseCase } from "@/application/properties/get-property.use-case";
 import { ListPropertiesUseCase } from "@/application/properties/list-properties.use-case";
 import { PublishPropertyUseCase } from "@/application/properties/publish-property.use-case";
+import { UnpublishPropertyUseCase } from "@/application/properties/unpublish-property.use-case";
 import { ArchivePropertyUseCase } from "@/application/properties/archive-property.use-case";
+import { ReservePropertyUseCase } from "@/application/properties/reserve-property.use-case";
+import { MarkPropertySoldUseCase } from "@/application/properties/mark-sold.use-case";
+import { MarkPropertyRentedUseCase } from "@/application/properties/mark-rented.use-case";
 import { GetPropertyStatisticsUseCase } from "@/application/properties/get-property-statistics.use-case";
 
 import { CreateProjectUseCase } from "@/application/projects/create-project.use-case";
@@ -134,7 +138,11 @@ export const useCases = {
     get: new GetPropertyUseCase(propertyRepository),
     list: new ListPropertiesUseCase(propertyRepository),
     publish: new PublishPropertyUseCase(propertyRepository),
+    unpublish: new UnpublishPropertyUseCase(propertyRepository),
     archive: new ArchivePropertyUseCase(propertyRepository),
+    reserve: new ReservePropertyUseCase(propertyRepository),
+    markSold: new MarkPropertySoldUseCase(propertyRepository),
+    markRented: new MarkPropertyRentedUseCase(propertyRepository),
     getStatistics: new GetPropertyStatisticsUseCase(propertyRepository),
   },
   projects: {

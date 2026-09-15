@@ -91,6 +91,13 @@ function buildWhere(filters: PropertyFilters) {
         ...(filters.maxPrice !== undefined && { lte: filters.maxPrice }),
       },
     }),
+    ...(filters.search && {
+      OR: [
+        { title: { contains: filters.search, mode: "insensitive" as const } },
+        { description: { contains: filters.search, mode: "insensitive" as const } },
+        { address: { contains: filters.search, mode: "insensitive" as const } },
+      ],
+    }),
   };
 }
 

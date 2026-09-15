@@ -125,4 +125,5 @@ export interface PropertyFilters {
   projectId?: string;
   minPrice?: string;
   maxPrice?: string;
+  search?: string; // Text search across title, description, address
 }

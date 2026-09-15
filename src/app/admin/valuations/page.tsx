@@ -1,10 +1,10 @@
 /**
- * Admin Inquiries List — Hebrew RTL
+ * Admin Valuation Requests List — Hebrew RTL
  */
 
-import { useCases } from "@/lib/container";
 import { requireAuth } from "@/lib/auth-helpers";
-import { InquiriesTable } from "@/components/admin/InquiriesTable";
+import { useCases } from "@/lib/container";
+import { ValuationsTable } from "@/components/admin/ValuationsTable";
 
 export const dynamic = "force-dynamic";
 
@@ -12,32 +12,35 @@ interface PageProps {
   searchParams: Promise<{
     page?: string;
     status?: string;
-    type?: string;
+    neighborhoodId?: string;
   }>;
 }
 
-export default async function InquiriesListPage({ searchParams }: PageProps) {
+export default async function ValuationRequestsListPage({ searchParams }: PageProps) {
   await requireAuth();
   const params = await searchParams;
 
   const page = parseInt(params.page || "1", 10);
   const status = params.status || undefined;
-  const type = params.type || undefined;
+  const neighborhoodId = params.neighborhoodId || undefined;
 
-  const result = await useCases.inquiries.list.execute(
-    {
-      status: status as "NEW" | "CONTACTED" | "IN_PROGRESS" | "CLOSED" | undefined,
-      type: type as "PROPERTY_INTEREST" | "VALUATION_REQUEST" | "COOPERATION" | "GENERAL_CONTACT" | undefined,
-    },
-    { page, pageSize: 20 }
-  );
+  const [result, neighborhoods] = await Promise.all([
+    useCases.valuations.list.execute(
+      {
+        status: status as "NEW" | "CONTACTED" | "IN_PROGRESS" | "CLOSED" | undefined,
+        neighborhoodId,
+      },
+      { page, pageSize: 20 }
+    ),
+    useCases.neighborhoods.list.execute(),
+  ]);
 
   return (
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">פניות</h1>
-        <p className="text-gray-600 mt-1">ניהול פניות לקוחות</p>
+        <h1 className="text-3xl font-bold text-gray-900">בקשות הערכת שווי</h1>
+        <p className="text-gray-600 mt-1">ניהול בקשות הערכת שווי</p>
       </div>
 
       {/* Filters */}
@@ -61,21 +64,22 @@ export default async function InquiriesListPage({ searchParams }: PageProps) {
             </select>
           </div>
 
-          {/* Type Filter */}
+          {/* Neighborhood Filter */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              סוג פנייה
+              שכונה
             </label>
             <select
-              name="type"
-              defaultValue={type || ""}
+              name="neighborhoodId"
+              defaultValue={neighborhoodId || ""}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             >
               <option value="">הכל</option>
-              <option value="PROPERTY_INTEREST">עניין בנכס</option>
-              <option value="VALUATION_REQUEST">בקשת הערכת שווי</option>
-              <option value="COOPERATION">שיתוף פעולה</option>
-              <option value="GENERAL_CONTACT">יצירת קשר כללית</option>
+              {neighborhoods.map((n) => (
+                <option key={n.id} value={n.id}>
+                  {n.name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -90,8 +94,8 @@ export default async function InquiriesListPage({ searchParams }: PageProps) {
         </form>
       </div>
 
-      {/* Inquiries Table */}
-      <InquiriesTable inquiries={result.data} />
+      {/* Results Table */}
+      <ValuationsTable valuations={result.data} neighborhoods={neighborhoods} />
 
       {/* Pagination */}
       {result.meta.totalPages > 1 && (
@@ -100,7 +104,7 @@ export default async function InquiriesListPage({ searchParams }: PageProps) {
             <a
               key={p}
               href={`?page=${p}${status ? `&status=${status}` : ""}${
-                type ? `&type=${type}` : ""
+                neighborhoodId ? `&neighborhoodId=${neighborhoodId}` : ""
               }`}
               className={`px-4 py-2 rounded-lg ${
                 p === page

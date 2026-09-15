@@ -19,6 +19,7 @@ interface PageProps {
     dealType?: string;
     propertyType?: string;
     neighborhoodId?: string;
+    agentId?: string;
   }>;
 }
 
@@ -28,13 +29,16 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
 
   // Parse query params
   const page = parseInt(params.page || "1", 10);
+  const search = params.search || undefined;
   const status = params.status as PropertyFilters["status"] | undefined;
   const dealType = params.dealType as PropertyFilters["dealType"] | undefined;
   const propertyType = params.propertyType as PropertyFilters["propertyType"] | undefined;
   const neighborhoodId = params.neighborhoodId || undefined;
+  const agentId = params.agentId || undefined;
 
   // Build filters with role-based access
   const filters: PropertyFilters = {
+    ...(search && { search }),
     ...(status && { status }),
     ...(dealType && { dealType }),
     ...(propertyType && { propertyType }),
@@ -44,6 +48,9 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
   // AGENT can only see their own properties
   if (user.role === "AGENT") {
     filters.agentId = user.id;
+  } else if (agentId) {
+    // ADMIN/EDITOR can filter by agent
+    filters.agentId = agentId;
   }
 
   // Fetch properties
@@ -54,6 +61,12 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
 
   // Fetch neighborhoods for filter
   const neighborhoods = await useCases.neighborhoods.list.execute();
+
+  // Fetch agents for ADMIN/EDITOR filter
+  const agentsResult =
+    user.role === "ADMIN" || user.role === "EDITOR"
+      ? await useCases.users.list.execute({ role: "AGENT" }, { page: 1, pageSize: 100 })
+      : { data: [] };
 
   return (
     <div className="space-y-6">
@@ -73,88 +86,125 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-6">
-        <form method="get" className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          {/* Status Filter */}
+        <form method="get" className="space-y-4">
+          {/* Search Input */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              סטטוס
+              חיפוש
             </label>
-            <select
-              name="status"
-              defaultValue={status || ""}
+            <input
+              type="text"
+              name="search"
+              defaultValue={search || ""}
+              placeholder="חפש לפי כותרת, תיאור או כתובת..."
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">הכל</option>
-              <option value="DRAFT">טיוטה</option>
-              <option value="PUBLISHED">מפורסם</option>
-              <option value="RESERVED">שמור</option>
-              <option value="SOLD">נמכר</option>
-              <option value="RENTED">הושכר</option>
-              <option value="ARCHIVED">בארכיון</option>
-            </select>
+            />
           </div>
 
-          {/* Deal Type Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              סוג עסקה
-            </label>
-            <select
-              name="dealType"
-              defaultValue={dealType || ""}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">הכל</option>
-              <option value="SALE">מכירה</option>
-              <option value="RENT">השכרה</option>
-            </select>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Status Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                סטטוס
+              </label>
+              <select
+                name="status"
+                defaultValue={status || ""}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">הכל</option>
+                <option value="DRAFT">טיוטה</option>
+                <option value="PUBLISHED">מפורסם</option>
+                <option value="RESERVED">שמור</option>
+                <option value="SOLD">נמכר</option>
+                <option value="RENTED">הושכר</option>
+                <option value="ARCHIVED">בארכיון</option>
+              </select>
+            </div>
 
-          {/* Property Type Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              סוג נכס
-            </label>
-            <select
-              name="propertyType"
-              defaultValue={propertyType || ""}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">הכל</option>
-              <option value="APARTMENT">דירה</option>
-              <option value="PENTHOUSE">פנטהאוז</option>
-              <option value="HOUSE">בית</option>
-              <option value="VILLA">וילה</option>
-              <option value="DUPLEX">דופלקס</option>
-              <option value="STUDIO">סטודיו</option>
-              <option value="OFFICE">משרד</option>
-              <option value="COMMERCIAL">מסחרי</option>
-              <option value="LAND">קרקע</option>
-              <option value="OTHER">אחר</option>
-            </select>
-          </div>
+            {/* Deal Type Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                סוג עסקה
+              </label>
+              <select
+                name="dealType"
+                defaultValue={dealType || ""}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">הכל</option>
+                <option value="SALE">מכירה</option>
+                <option value="RENT">השכרה</option>
+              </select>
+            </div>
 
-          {/* Neighborhood Filter */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              שכונה
-            </label>
-            <select
-              name="neighborhoodId"
-              defaultValue={neighborhoodId || ""}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">הכל</option>
-              {neighborhoods.map((n) => (
-                <option key={n.id} value={n.id}>
-                  {n.name}
-                </option>
-              ))}
-            </select>
+            {/* Property Type Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                סוג נכס
+              </label>
+              <select
+                name="propertyType"
+                defaultValue={propertyType || ""}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">הכל</option>
+                <option value="APARTMENT">דירה</option>
+                <option value="PENTHOUSE">פנטהאוז</option>
+                <option value="HOUSE">בית</option>
+                <option value="VILLA">וילה</option>
+                <option value="DUPLEX">דופלקס</option>
+                <option value="STUDIO">סטודיו</option>
+                <option value="OFFICE">משרד</option>
+                <option value="COMMERCIAL">מסחרי</option>
+                <option value="LAND">קרקע</option>
+                <option value="OTHER">אחר</option>
+              </select>
+            </div>
+
+            {/* Neighborhood Filter */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                שכונה
+              </label>
+              <select
+                name="neighborhoodId"
+                defaultValue={neighborhoodId || ""}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">הכל</option>
+                {neighborhoods.map((n) => (
+                  <option key={n.id} value={n.id}>
+                    {n.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Agent Filter (ADMIN/EDITOR only) */}
+            {(user.role === "ADMIN" || user.role === "EDITOR") && agentsResult.data.length > 0 && (
+              <div className="md:col-span-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  סוכן
+                </label>
+                <select
+                  name="agentId"
+                  defaultValue={agentId || ""}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">כל הסוכנים</option>
+                  {agentsResult.data.map((agent) => (
+                    <option key={agent.id} value={agent.id}>
+                      {agent.name} ({agent.email})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
           </div>
 
           {/* Submit */}
-          <div className="md:col-span-4">
+          <div>
             <button
               type="submit"
               className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
@@ -238,23 +288,30 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
       {result.meta.totalPages > 1 && (
         <div className="flex items-center justify-center gap-2">
           {Array.from({ length: result.meta.totalPages }, (_, i) => i + 1).map(
-            (pageNum) => (
-              <Link
-                key={pageNum}
-                href={`?page=${pageNum}${status ? `&status=${status}` : ""}${
-                  dealType ? `&dealType=${dealType}` : ""
-                }${propertyType ? `&propertyType=${propertyType}` : ""}${
-                  neighborhoodId ? `&neighborhoodId=${neighborhoodId}` : ""
-                }`}
-                className={`px-4 py-2 rounded-lg ${
-                  pageNum === page
-                    ? "bg-blue-600 text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-50"
-                }`}
-              >
-                {pageNum}
-              </Link>
-            )
+            (pageNum) => {
+              const params = new URLSearchParams();
+              params.set("page", pageNum.toString());
+              if (search) params.set("search", search);
+              if (status) params.set("status", status);
+              if (dealType) params.set("dealType", dealType);
+              if (propertyType) params.set("propertyType", propertyType);
+              if (neighborhoodId) params.set("neighborhoodId", neighborhoodId);
+              if (agentId) params.set("agentId", agentId);
+
+              return (
+                <Link
+                  key={pageNum}
+                  href={`?${params.toString()}`}
+                  className={`px-4 py-2 rounded-lg ${
+                    pageNum === page
+                      ? "bg-blue-600 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-50"
+                  }`}
+                >
+                  {pageNum}
+                </Link>
+              );
+            }
           )}
         </div>
       )}

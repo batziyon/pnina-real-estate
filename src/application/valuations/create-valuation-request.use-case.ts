@@ -27,13 +27,11 @@ export class CreateValuationRequestUseCase {
     return this.valuationRepository.create({
       name: input.name,
       phone: input.phone,
-      email: input.email,
+      email: input.email ?? undefined,
       neighborhoodId: input.neighborhoodId,
-      address: input.address,
-      propertyType: input.propertyType,
-      rooms: input.rooms,
-      area: input.area,
-      message: input.message,
+      address: input.address ?? undefined,
+      propertyType: input.propertyType ?? undefined,
+      message: input.message ?? undefined,
     });
   }
 }
