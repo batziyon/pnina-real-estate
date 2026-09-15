@@ -31,13 +31,16 @@ export class CreateUserWithPasswordUseCase {
   async execute(input: CreateUserWithPasswordInput): Promise<UserData> {
     const { password, ...userData } = input;
 
+    // Normalize email: trim whitespace and convert to lowercase
+    const email = userData.email.trim().toLowerCase();
+
     // 1. Validate password presence
     if (!password || password.trim().length === 0) {
       throw new ValidationError("Password is required.");
     }
 
     // 2. Check for duplicate email
-    const existingUser = await this.userRepository.findByEmail(userData.email);
+    const existingUser = await this.userRepository.findByEmail(email);
     if (existingUser) {
       throw new ValidationError("A user with this email already exists.");
     }
@@ -48,6 +51,7 @@ export class CreateUserWithPasswordUseCase {
     // 4. Create user with hashed password
     const createdUser = await this.userRepository.create({
       ...userData,
+      email,
       passwordHash,
     });
 

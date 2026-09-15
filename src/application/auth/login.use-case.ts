@@ -26,7 +26,10 @@ export class LoginUseCase {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(input: LoginInput): Promise<UserData> {
-    const { email, password } = input;
+    const { password } = input;
+
+    // Normalize email: trim whitespace and convert to lowercase
+    const email = input.email.trim().toLowerCase();
 
     // 1. Find user with credentials
     const userWithCredentials =

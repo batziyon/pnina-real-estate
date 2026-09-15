@@ -17,15 +17,18 @@ export class CreateUserUseCase {
 
     const input = parsed.data;
 
+    // Normalize email: trim whitespace and convert to lowercase
+    const email = input.email.trim().toLowerCase();
+
     // Prevent duplicate email
-    const existing = await this.userRepository.findByEmail(input.email);
+    const existing = await this.userRepository.findByEmail(email);
     if (existing) {
-      throw new BusinessRuleError(`A user with email "${input.email}" already exists.`);
+      throw new BusinessRuleError(`A user with email "${email}" already exists.`);
     }
 
     return this.userRepository.create({
       name: input.name,
-      email: input.email,
+      email,
       phone: input.phone,
       role: input.role,
     });

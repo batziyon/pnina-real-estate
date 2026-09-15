@@ -24,24 +24,22 @@ export default async function AdminLayout({
   }
 
   return (
-    <html lang="he" dir="rtl">
-      <body className="min-h-screen bg-gray-50">
-        <div className="flex h-screen overflow-hidden">
-          {/* Sidebar */}
-          <AdminSidebar user={user} />
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex h-screen overflow-hidden">
+        {/* Sidebar */}
+        <AdminSidebar user={user} />
 
-          {/* Main content */}
-          <div className="flex flex-1 flex-col overflow-hidden">
-            {/* Header */}
-            <AdminHeader user={user} />
+        {/* Main content */}
+        <div className="flex flex-1 flex-col overflow-hidden">
+          {/* Header */}
+          <AdminHeader user={user} />
 
-            {/* Page content */}
-            <main className="flex-1 overflow-y-auto p-6">
-              {children}
-            </main>
-          </div>
+          {/* Page content */}
+          <main className="flex-1 overflow-y-auto p-6">
+            {children}
+          </main>
         </div>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }

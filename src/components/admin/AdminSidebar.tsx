@@ -17,6 +17,7 @@ interface AdminSidebarProps {
 const navigation = [
   { name: "לוח בקרה", href: "/admin", icon: "📊" },
   { name: "נכסים", href: "/admin/properties", icon: "🏢" },
+  { name: "✨ יצירת נכס באמצעות AI", href: "/admin/properties/ai-new", icon: "🤖", agentAccess: true },
   { name: "פרויקטים", href: "/admin/projects", icon: "🏗️" },
   { name: "פניות", href: "/admin/inquiries", icon: "📬" },
   { name: "הערכות שווי", href: "/admin/valuations", icon: "💰" },
@@ -29,9 +30,17 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname();
 
   // Filter navigation based on role
-  const visibleNav = navigation.filter(
-    (item) => !item.adminOnly || user.role === "ADMIN"
-  );
+  const visibleNav = navigation.filter((item) => {
+    // Admin-only items
+    if (item.adminOnly && user.role !== "ADMIN") {
+      return false;
+    }
+    // Agent-access items (ADMIN and AGENT only)
+    if (item.agentAccess && user.role !== "ADMIN" && user.role !== "AGENT") {
+      return false;
+    }
+    return true;
+  });
 
   return (
     <aside className="w-64 bg-white border-l border-gray-200 flex flex-col">

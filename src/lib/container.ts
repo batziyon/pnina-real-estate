@@ -131,6 +131,9 @@ import { UpdateUserUseCase } from "@/application/users/update-user.use-case";
 import { LoginUseCase } from "@/application/auth/login.use-case";
 import { CreateUserWithPasswordUseCase } from "@/application/auth/create-user-with-password.use-case";
 
+import { CreatePropertyFromAIUseCase } from "@/ai/application/use-cases/create-property-from-ai.use-case";
+import { getAIPropertyExtractor } from "@/lib/ai-container";
+
 export const useCases = {
   properties: {
     create: new CreatePropertyUseCase(propertyRepository, neighborhoodRepository, userRepository),
@@ -181,5 +184,17 @@ export const useCases = {
   auth: {
     login: new LoginUseCase(userRepository),
     createUserWithPassword: new CreateUserWithPasswordUseCase(userRepository),
+  },
+  // AI use cases with lazy initialization (requires GEMINI_API_KEY at runtime)
+  get ai() {
+    return {
+      get createPropertyFromText() {
+        return new CreatePropertyFromAIUseCase(
+          getAIPropertyExtractor(),
+          propertyRepository,
+          neighborhoodRepository
+        );
+      },
+    };
   },
 } as const;
