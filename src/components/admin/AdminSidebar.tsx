@@ -21,6 +21,7 @@ const navigation = [
   { name: "פרויקטים", href: "/admin/projects", icon: "🏗️" },
   { name: "פניות", href: "/admin/inquiries", icon: "📬" },
   { name: "הערכות שווי", href: "/admin/valuations", icon: "💰" },
+  { name: "אנשי קשר", href: "/admin/contacts", icon: "👤", agentAccess: true },
   { name: "המלצות", href: "/admin/testimonials", icon: "⭐", adminOnly: true },
   { name: "משתמשים", href: "/admin/users", icon: "👥", adminOnly: true },
   { name: "הגדרות", href: "/admin/settings", icon: "⚙️", adminOnly: true },

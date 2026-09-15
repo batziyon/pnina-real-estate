@@ -22,6 +22,7 @@ import { PrismaPropertyRepository } from "@/infrastructure/property/prisma-prope
 import { PrismaInquiryRepository } from "@/infrastructure/inquiry/prisma-inquiry.repository";
 import { PrismaValuationRequestRepository } from "@/infrastructure/valuation/prisma-valuation-request.repository";
 import { PrismaTestimonialRepository } from "@/infrastructure/testimonial/prisma-testimonial.repository";
+import { PrismaContactRepository } from "@/infrastructure/contact/prisma-contact.repository";
 
 import type { NeighborhoodRepository } from "@/domain/neighborhood/neighborhood.repository";
 import type { UserRepository } from "@/domain/user/user.repository";
@@ -30,6 +31,7 @@ import type { PropertyRepository } from "@/domain/property/property.repository";
 import type { InquiryRepository } from "@/domain/inquiry/inquiry.repository";
 import type { ValuationRequestRepository } from "@/domain/valuation/valuation.repository";
 import type { TestimonialRepository } from "@/domain/testimonial/testimonial.repository";
+import type { ContactRepository } from "@/domain/contact/contact.repository";
 
 // ---------------------------------------------------------------------------
 // Repository instances — one instance per process (repositories are stateless).
@@ -52,6 +54,8 @@ const valuationRequestRepository: ValuationRequestRepository =
 const testimonialRepository: TestimonialRepository =
   new PrismaTestimonialRepository();
 
+const contactRepository: ContactRepository = new PrismaContactRepository();
+
 // ---------------------------------------------------------------------------
 // Container — exported as typed repository interfaces, never as concrete classes.
 // Callers depend on the interface, not the implementation.
@@ -66,6 +70,7 @@ export const container = {
     inquiry: inquiryRepository,
     valuationRequest: valuationRequestRepository,
     testimonial: testimonialRepository,
+    contact: contactRepository,
   },
 } as const;
 
@@ -83,6 +88,7 @@ export {
   inquiryRepository,
   valuationRequestRepository,
   testimonialRepository,
+  contactRepository,
 };
 
 // ---------------------------------------------------------------------------
@@ -130,6 +136,11 @@ import { UpdateUserUseCase } from "@/application/users/update-user.use-case";
 
 import { LoginUseCase } from "@/application/auth/login.use-case";
 import { CreateUserWithPasswordUseCase } from "@/application/auth/create-user-with-password.use-case";
+
+import { CreateContactUseCase } from "@/application/contacts/create-contact.use-case";
+import { UpdateContactUseCase } from "@/application/contacts/update-contact.use-case";
+import { GetContactUseCase } from "@/application/contacts/get-contact.use-case";
+import { ListContactsUseCase } from "@/application/contacts/list-contacts.use-case";
 
 import { CreatePropertyFromAIUseCase } from "@/ai/application/use-cases/create-property-from-ai.use-case";
 import { getAIPropertyExtractor } from "@/lib/ai-container";
@@ -184,6 +195,12 @@ export const useCases = {
   auth: {
     login: new LoginUseCase(userRepository),
     createUserWithPassword: new CreateUserWithPasswordUseCase(userRepository),
+  },
+  contacts: {
+    create: new CreateContactUseCase(contactRepository, userRepository),
+    update: new UpdateContactUseCase(contactRepository, userRepository),
+    get: new GetContactUseCase(contactRepository),
+    list: new ListContactsUseCase(contactRepository),
   },
   // AI use cases with lazy initialization (requires GEMINI_API_KEY at runtime)
   get ai() {

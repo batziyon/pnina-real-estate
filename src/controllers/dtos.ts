@@ -11,6 +11,8 @@ import type { NeighborhoodData } from "@/domain/neighborhood/neighborhood.types"
 import type { TestimonialData } from "@/domain/testimonial/testimonial.types";
 import type { InquiryData } from "@/domain/inquiry/inquiry.types";
 import type { ValuationRequestData } from "@/domain/valuation/valuation.types";
+import type { ContactData } from "@/domain/contact/contact.types";
+import type { UserData } from "@/domain/user/user.types";
 
 // ---------------------------------------------------------------------------
 // Property DTO
@@ -161,5 +163,47 @@ export function toValuationRequestCreatedDTO(
   return {
     id: valuation.id,
     message: "Your valuation request has been received. We will contact you shortly.",
+  };
+}
+
+
+// ---------------------------------------------------------------------------
+// Contact Admin DTO
+// ---------------------------------------------------------------------------
+
+export interface ContactAdminDTO {
+  id: string;
+  name: string;
+  phone: string | null;
+  email: string | null;
+  notes: string | null;
+  assignedAgentId: string | null;
+  assignedAgent: {
+    id: string;
+    name: string;
+  } | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function toContactAdminDTO(
+  contact: ContactData,
+  assignedAgent?: UserData | null
+): ContactAdminDTO {
+  return {
+    id: contact.id,
+    name: contact.name,
+    phone: contact.phone,
+    email: contact.email,
+    notes: contact.notes,
+    assignedAgentId: contact.assignedAgentId,
+    assignedAgent: assignedAgent
+      ? {
+          id: assignedAgent.id,
+          name: assignedAgent.name,
+        }
+      : null,
+    createdAt: contact.createdAt.toISOString(),
+    updatedAt: contact.updatedAt.toISOString(),
   };
 }
