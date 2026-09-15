@@ -54,6 +54,15 @@ export const PropertyType = {
 export type PropertyType = (typeof PropertyType)[keyof typeof PropertyType]
 
 
+export const RepresentationType = {
+  EXCLUSIVE: 'EXCLUSIVE',
+  NON_EXCLUSIVE: 'NON_EXCLUSIVE',
+  COOPERATION: 'COOPERATION'
+} as const
+
+export type RepresentationType = (typeof RepresentationType)[keyof typeof RepresentationType]
+
+
 export const ProjectStatus = {
   DRAFT: 'DRAFT',
   ACTIVE: 'ACTIVE',
@@ -101,3 +110,24 @@ export const TestimonialStatus = {
 } as const
 
 export type TestimonialStatus = (typeof TestimonialStatus)[keyof typeof TestimonialStatus]
+
+
+export const ContactRoleType = {
+  BUYER: 'BUYER',
+  SELLER: 'SELLER',
+  RENTER: 'RENTER',
+  LANDLORD: 'LANDLORD',
+  INVESTOR: 'INVESTOR',
+  COLLABORATOR: 'COLLABORATOR',
+  OTHER: 'OTHER'
+} as const
+
+export type ContactRoleType = (typeof ContactRoleType)[keyof typeof ContactRoleType]
+
+
+export const RequirementPreferenceType = {
+  REQUIRED: 'REQUIRED',
+  PREFERRED: 'PREFERRED'
+} as const
+
+export type RequirementPreferenceType = (typeof RequirementPreferenceType)[keyof typeof RequirementPreferenceType]

@@ -10,6 +10,10 @@
  */
 export type * from './models/Neighborhood'
 export type * from './models/User'
+export type * from './models/Contact'
+export type * from './models/ContactRole'
+export type * from './models/BuyerRequirement'
+export type * from './models/BuyerRequirementNeighborhood'
 export type * from './models/Project'
 export type * from './models/Property'
 export type * from './models/PropertyImage'

@@ -54,6 +54,12 @@ enum PropertyType {
   OTHER
 }
 
+enum RepresentationType {
+  EXCLUSIVE
+  NON_EXCLUSIVE
+  COOPERATION
+}
+
 enum ProjectStatus {
   DRAFT
   ACTIVE
@@ -88,6 +94,21 @@ enum TestimonialStatus {
   REJECTED
 }
 
+enum ContactRoleType {
+  BUYER
+  SELLER
+  RENTER
+  LANDLORD
+  INVESTOR
+  COLLABORATOR
+  OTHER
+}
+
+enum RequirementPreferenceType {
+  REQUIRED
+  PREFERRED
+}
+
 // =============================================================================
 // NEIGHBORHOOD
 // Geographic lookup table. This brokerage operates only in Jerusalem.
@@ -102,9 +123,10 @@ model Neighborhood {
   updatedAt DateTime @updatedAt
 
   // Relations
-  properties        Property[]
-  projects          Project[]
-  valuationRequests ValuationRequest[]
+  properties                    Property[]
+  projects                      Project[]
+  valuationRequests             ValuationRequest[]
+  buyerRequirementNeighborhoods BuyerRequirementNeighborhood[]
 
   @@index([active, sortOrder])
   @@map("neighborhoods")
@@ -126,12 +148,121 @@ model User {
   updatedAt    DateTime @updatedAt
 
   // Relations
-  properties Property[]
-  inquiries  Inquiry[]  @relation("AssignedAgent")
+  properties       Property[]
+  inquiries        Inquiry[]  @relation("AssignedAgent")
+  assignedContacts Contact[]  @relation("AssignedContactAgent")
 
   @@index([email])
   @@index([role])
   @@map("users")
+}
+
+// =============================================================================
+// CONTACT
+// Central CRM person/entity.
+// =============================================================================
+
+model Contact {
+  id              String   @id @default(cuid())
+  name            String
+  phone           String?
+  email           String?
+  notes           String?
+  assignedAgentId String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  assignedAgent     User?              @relation("AssignedContactAgent", fields: [assignedAgentId], references: [id], onDelete: SetNull)
+  roles             ContactRole[]
+  buyerRequirements BuyerRequirement[]
+  ownedProperties   Property[]         @relation("PropertyOwner")
+  inquiries         Inquiry[]
+  testimonials      Testimonial[]
+
+  @@index([phone])
+  @@index([email])
+  @@index([assignedAgentId])
+  @@index([createdAt])
+  @@map("contacts")
+}
+
+// =============================================================================
+// CONTACT ROLE
+// A contact may have multiple roles.
+// =============================================================================
+
+model ContactRole {
+  id        String          @id @default(cuid())
+  contactId String
+  role      ContactRoleType
+  notes     String?
+  active    Boolean         @default(true)
+  createdAt DateTime        @default(now())
+
+  // Relations
+  contact Contact @relation(fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@unique([contactId, role])
+  @@index([contactId])
+  @@index([role])
+  @@index([active])
+  @@map("contact_roles")
+}
+
+// =============================================================================
+// BUYER REQUIREMENT
+// Structured search requirements belonging to a Contact.
+// =============================================================================
+
+model BuyerRequirement {
+  id           String        @id @default(cuid())
+  contactId    String
+  dealType     DealType
+  propertyType PropertyType?
+  minRooms     Decimal?      @db.Decimal(4, 1)
+  maxRooms     Decimal?      @db.Decimal(4, 1)
+  minArea      Decimal?      @db.Decimal(10, 2)
+  maxArea      Decimal?      @db.Decimal(10, 2)
+  minPrice     Decimal?      @db.Decimal(14, 2)
+  maxPrice     Decimal?      @db.Decimal(14, 2)
+  notes        String?
+  active       Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relations
+  contact                Contact                        @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  preferredNeighborhoods BuyerRequirementNeighborhood[]
+
+  @@index([contactId])
+  @@index([dealType])
+  @@index([propertyType])
+  @@index([active])
+  @@index([createdAt])
+  @@map("buyer_requirements")
+}
+
+// =============================================================================
+// BUYER REQUIREMENT ↔ NEIGHBORHOOD
+// Many-to-many relation with explicit preference level.
+// =============================================================================
+
+model BuyerRequirementNeighborhood {
+  id                 String                    @id @default(cuid())
+  buyerRequirementId String
+  neighborhoodId     String
+  preferenceType     RequirementPreferenceType @default(PREFERRED)
+
+  // Relations
+  buyerRequirement BuyerRequirement @relation(fields: [buyerRequirementId], references: [id], onDelete: Cascade)
+  neighborhood     Neighborhood     @relation(fields: [neighborhoodId], references: [id], onDelete: Cascade)
+
+  @@unique([buyerRequirementId, neighborhoodId])
+  @@index([buyerRequirementId])
+  @@index([neighborhoodId])
+  @@index([preferenceType])
+  @@map("buyer_requirement_neighborhoods")
 }
 
 // =============================================================================
@@ -163,19 +294,29 @@ model Project {
 // =============================================================================
 
 model Property {
-  id             String         @id @default(cuid())
+  id             String       @id @default(cuid())
   title          String
   description    String?
   dealType       DealType
   propertyType   PropertyType
-  price          Decimal        @db.Decimal(14, 2)
+  price          Decimal      @db.Decimal(14, 2)
   neighborhoodId String
-  address        String?
-  rooms          Decimal?       @db.Decimal(4, 1)
-  area           Decimal?       @db.Decimal(10, 2)
-  floor          Int?
-  totalFloors    Int?
-  status         PropertyStatus @default(DRAFT)
+
+  // Address
+  // `address` is retained temporarily for backwards compatibility.
+  address     String?
+  street      String?
+  houseNumber String?
+
+  rooms       Decimal?       @db.Decimal(4, 1)
+  area        Decimal?       @db.Decimal(10, 2)
+  floor       Int?
+  totalFloors Int?
+  status      PropertyStatus @default(DRAFT)
+
+  // Internal business information
+  internalNotes      String?
+  representationType RepresentationType @default(NON_EXCLUSIVE)
 
   // Features stored as individual boolean columns for direct filtering
   parking         Boolean @default(false)
@@ -188,8 +329,9 @@ model Property {
   furnished       Boolean @default(false)
 
   // Foreign keys
-  agentId   String
-  projectId String?
+  agentId        String
+  projectId      String?
+  ownerContactId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -198,6 +340,7 @@ model Property {
   neighborhood Neighborhood    @relation(fields: [neighborhoodId], references: [id])
   agent        User            @relation(fields: [agentId], references: [id])
   project      Project?        @relation(fields: [projectId], references: [id])
+  ownerContact Contact?        @relation("PropertyOwner", fields: [ownerContactId], references: [id], onDelete: SetNull)
   images       PropertyImage[]
   videos       PropertyVideo[]
   inquiries    Inquiry[]
@@ -208,6 +351,8 @@ model Property {
   @@index([neighborhoodId])
   @@index([agentId])
   @@index([projectId])
+  @@index([ownerContactId])
+  @@index([representationType])
   @@index([status, dealType])
   @@index([status, neighborhoodId])
   @@map("properties")
@@ -259,6 +404,7 @@ model PropertyVideo {
 model Inquiry {
   id         String        @id @default(cuid())
   propertyId String?
+  contactId  String?
   agentId    String?
   name       String
   phone      String
@@ -272,9 +418,11 @@ model Inquiry {
 
   // Relations
   property Property? @relation(fields: [propertyId], references: [id])
+  contact  Contact?  @relation(fields: [contactId], references: [id], onDelete: SetNull)
   agent    User?     @relation("AssignedAgent", fields: [agentId], references: [id])
 
   @@index([propertyId])
+  @@index([contactId])
   @@index([agentId])
   @@index([status])
   @@index([type])
@@ -317,6 +465,7 @@ model ValuationRequest {
 
 model Testimonial {
   id          String            @id @default(cuid())
+  contactId   String?
   name        String
   displayName String?
   content     String
@@ -324,6 +473,10 @@ model Testimonial {
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
 
+  // Relations
+  contact Contact? @relation(fields: [contactId], references: [id], onDelete: SetNull)
+
+  @@index([contactId])
   @@index([status])
   @@map("testimonials")
 }

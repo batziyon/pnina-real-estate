@@ -51,11 +51,15 @@ export type PropertyMinAggregateOutputType = {
   price: runtime.Decimal | null
   neighborhoodId: string | null
   address: string | null
+  street: string | null
+  houseNumber: string | null
   rooms: runtime.Decimal | null
   area: runtime.Decimal | null
   floor: number | null
   totalFloors: number | null
   status: $Enums.PropertyStatus | null
+  internalNotes: string | null
+  representationType: $Enums.RepresentationType | null
   parking: boolean | null
   elevator: boolean | null
   balcony: boolean | null
@@ -66,6 +70,7 @@ export type PropertyMinAggregateOutputType = {
   furnished: boolean | null
   agentId: string | null
   projectId: string | null
+  ownerContactId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -79,11 +84,15 @@ export type PropertyMaxAggregateOutputType = {
   price: runtime.Decimal | null
   neighborhoodId: string | null
   address: string | null
+  street: string | null
+  houseNumber: string | null
   rooms: runtime.Decimal | null
   area: runtime.Decimal | null
   floor: number | null
   totalFloors: number | null
   status: $Enums.PropertyStatus | null
+  internalNotes: string | null
+  representationType: $Enums.RepresentationType | null
   parking: boolean | null
   elevator: boolean | null
   balcony: boolean | null
@@ -94,6 +103,7 @@ export type PropertyMaxAggregateOutputType = {
   furnished: boolean | null
   agentId: string | null
   projectId: string | null
+  ownerContactId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -107,11 +117,15 @@ export type PropertyCountAggregateOutputType = {
   price: number
   neighborhoodId: number
   address: number
+  street: number
+  houseNumber: number
   rooms: number
   area: number
   floor: number
   totalFloors: number
   status: number
+  internalNotes: number
+  representationType: number
   parking: number
   elevator: number
   balcony: number
@@ -122,6 +136,7 @@ export type PropertyCountAggregateOutputType = {
   furnished: number
   agentId: number
   projectId: number
+  ownerContactId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -153,11 +168,15 @@ export type PropertyMinAggregateInputType = {
   price?: true
   neighborhoodId?: true
   address?: true
+  street?: true
+  houseNumber?: true
   rooms?: true
   area?: true
   floor?: true
   totalFloors?: true
   status?: true
+  internalNotes?: true
+  representationType?: true
   parking?: true
   elevator?: true
   balcony?: true
@@ -168,6 +187,7 @@ export type PropertyMinAggregateInputType = {
   furnished?: true
   agentId?: true
   projectId?: true
+  ownerContactId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -181,11 +201,15 @@ export type PropertyMaxAggregateInputType = {
   price?: true
   neighborhoodId?: true
   address?: true
+  street?: true
+  houseNumber?: true
   rooms?: true
   area?: true
   floor?: true
   totalFloors?: true
   status?: true
+  internalNotes?: true
+  representationType?: true
   parking?: true
   elevator?: true
   balcony?: true
@@ -196,6 +220,7 @@ export type PropertyMaxAggregateInputType = {
   furnished?: true
   agentId?: true
   projectId?: true
+  ownerContactId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -209,11 +234,15 @@ export type PropertyCountAggregateInputType = {
   price?: true
   neighborhoodId?: true
   address?: true
+  street?: true
+  houseNumber?: true
   rooms?: true
   area?: true
   floor?: true
   totalFloors?: true
   status?: true
+  internalNotes?: true
+  representationType?: true
   parking?: true
   elevator?: true
   balcony?: true
@@ -224,6 +253,7 @@ export type PropertyCountAggregateInputType = {
   furnished?: true
   agentId?: true
   projectId?: true
+  ownerContactId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -324,11 +354,15 @@ export type PropertyGroupByOutputType = {
   price: runtime.Decimal
   neighborhoodId: string
   address: string | null
+  street: string | null
+  houseNumber: string | null
   rooms: runtime.Decimal | null
   area: runtime.Decimal | null
   floor: number | null
   totalFloors: number | null
   status: $Enums.PropertyStatus
+  internalNotes: string | null
+  representationType: $Enums.RepresentationType
   parking: boolean
   elevator: boolean
   balcony: boolean
@@ -339,6 +373,7 @@ export type PropertyGroupByOutputType = {
   furnished: boolean
   agentId: string
   projectId: string | null
+  ownerContactId: string | null
   createdAt: Date
   updatedAt: Date
   _count: PropertyCountAggregateOutputType | null
@@ -375,11 +410,15 @@ export type PropertyWhereInput = {
   price?: Prisma.DecimalFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFilter<"Property"> | string
   address?: Prisma.StringNullableFilter<"Property"> | string | null
+  street?: Prisma.StringNullableFilter<"Property"> | string | null
+  houseNumber?: Prisma.StringNullableFilter<"Property"> | string | null
   rooms?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.IntNullableFilter<"Property"> | number | null
   totalFloors?: Prisma.IntNullableFilter<"Property"> | number | null
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
+  internalNotes?: Prisma.StringNullableFilter<"Property"> | string | null
+  representationType?: Prisma.EnumRepresentationTypeFilter<"Property"> | $Enums.RepresentationType
   parking?: Prisma.BoolFilter<"Property"> | boolean
   elevator?: Prisma.BoolFilter<"Property"> | boolean
   balcony?: Prisma.BoolFilter<"Property"> | boolean
@@ -390,11 +429,13 @@ export type PropertyWhereInput = {
   furnished?: Prisma.BoolFilter<"Property"> | boolean
   agentId?: Prisma.StringFilter<"Property"> | string
   projectId?: Prisma.StringNullableFilter<"Property"> | string | null
+  ownerContactId?: Prisma.StringNullableFilter<"Property"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   neighborhood?: Prisma.XOR<Prisma.NeighborhoodScalarRelationFilter, Prisma.NeighborhoodWhereInput>
   agent?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
+  ownerContact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
   images?: Prisma.PropertyImageListRelationFilter
   videos?: Prisma.PropertyVideoListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
@@ -409,11 +450,15 @@ export type PropertyOrderByWithRelationInput = {
   price?: Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  street?: Prisma.SortOrderInput | Prisma.SortOrder
+  houseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   rooms?: Prisma.SortOrderInput | Prisma.SortOrder
   area?: Prisma.SortOrderInput | Prisma.SortOrder
   floor?: Prisma.SortOrderInput | Prisma.SortOrder
   totalFloors?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  internalNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  representationType?: Prisma.SortOrder
   parking?: Prisma.SortOrder
   elevator?: Prisma.SortOrder
   balcony?: Prisma.SortOrder
@@ -424,11 +469,13 @@ export type PropertyOrderByWithRelationInput = {
   furnished?: Prisma.SortOrder
   agentId?: Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownerContactId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   neighborhood?: Prisma.NeighborhoodOrderByWithRelationInput
   agent?: Prisma.UserOrderByWithRelationInput
   project?: Prisma.ProjectOrderByWithRelationInput
+  ownerContact?: Prisma.ContactOrderByWithRelationInput
   images?: Prisma.PropertyImageOrderByRelationAggregateInput
   videos?: Prisma.PropertyVideoOrderByRelationAggregateInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
@@ -446,11 +493,15 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   price?: Prisma.DecimalFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFilter<"Property"> | string
   address?: Prisma.StringNullableFilter<"Property"> | string | null
+  street?: Prisma.StringNullableFilter<"Property"> | string | null
+  houseNumber?: Prisma.StringNullableFilter<"Property"> | string | null
   rooms?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.IntNullableFilter<"Property"> | number | null
   totalFloors?: Prisma.IntNullableFilter<"Property"> | number | null
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
+  internalNotes?: Prisma.StringNullableFilter<"Property"> | string | null
+  representationType?: Prisma.EnumRepresentationTypeFilter<"Property"> | $Enums.RepresentationType
   parking?: Prisma.BoolFilter<"Property"> | boolean
   elevator?: Prisma.BoolFilter<"Property"> | boolean
   balcony?: Prisma.BoolFilter<"Property"> | boolean
@@ -461,11 +512,13 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   furnished?: Prisma.BoolFilter<"Property"> | boolean
   agentId?: Prisma.StringFilter<"Property"> | string
   projectId?: Prisma.StringNullableFilter<"Property"> | string | null
+  ownerContactId?: Prisma.StringNullableFilter<"Property"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   neighborhood?: Prisma.XOR<Prisma.NeighborhoodScalarRelationFilter, Prisma.NeighborhoodWhereInput>
   agent?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
+  ownerContact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
   images?: Prisma.PropertyImageListRelationFilter
   videos?: Prisma.PropertyVideoListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
@@ -480,11 +533,15 @@ export type PropertyOrderByWithAggregationInput = {
   price?: Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
+  street?: Prisma.SortOrderInput | Prisma.SortOrder
+  houseNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   rooms?: Prisma.SortOrderInput | Prisma.SortOrder
   area?: Prisma.SortOrderInput | Prisma.SortOrder
   floor?: Prisma.SortOrderInput | Prisma.SortOrder
   totalFloors?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
+  internalNotes?: Prisma.SortOrderInput | Prisma.SortOrder
+  representationType?: Prisma.SortOrder
   parking?: Prisma.SortOrder
   elevator?: Prisma.SortOrder
   balcony?: Prisma.SortOrder
@@ -495,6 +552,7 @@ export type PropertyOrderByWithAggregationInput = {
   furnished?: Prisma.SortOrder
   agentId?: Prisma.SortOrder
   projectId?: Prisma.SortOrderInput | Prisma.SortOrder
+  ownerContactId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.PropertyCountOrderByAggregateInput
@@ -516,11 +574,15 @@ export type PropertyScalarWhereWithAggregatesInput = {
   price?: Prisma.DecimalWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringWithAggregatesFilter<"Property"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  street?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  houseNumber?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   rooms?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.IntNullableWithAggregatesFilter<"Property"> | number | null
   totalFloors?: Prisma.IntNullableWithAggregatesFilter<"Property"> | number | null
   status?: Prisma.EnumPropertyStatusWithAggregatesFilter<"Property"> | $Enums.PropertyStatus
+  internalNotes?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  representationType?: Prisma.EnumRepresentationTypeWithAggregatesFilter<"Property"> | $Enums.RepresentationType
   parking?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   elevator?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   balcony?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
@@ -531,6 +593,7 @@ export type PropertyScalarWhereWithAggregatesInput = {
   furnished?: Prisma.BoolWithAggregatesFilter<"Property"> | boolean
   agentId?: Prisma.StringWithAggregatesFilter<"Property"> | string
   projectId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
+  ownerContactId?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Property"> | Date | string
 }
@@ -543,11 +606,15 @@ export type PropertyCreateInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -561,6 +628,7 @@ export type PropertyCreateInput = {
   neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
   agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
   project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
@@ -575,11 +643,15 @@ export type PropertyUncheckedCreateInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -590,6 +662,7 @@ export type PropertyUncheckedCreateInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
@@ -605,11 +678,15 @@ export type PropertyUpdateInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -623,6 +700,7 @@ export type PropertyUpdateInput = {
   neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
   agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
@@ -637,11 +715,15 @@ export type PropertyUncheckedUpdateInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -652,6 +734,7 @@ export type PropertyUncheckedUpdateInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
@@ -668,11 +751,15 @@ export type PropertyCreateManyInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -683,6 +770,7 @@ export type PropertyCreateManyInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -695,11 +783,15 @@ export type PropertyUpdateManyMutationInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -721,11 +813,15 @@ export type PropertyUncheckedUpdateManyInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -736,6 +832,7 @@ export type PropertyUncheckedUpdateManyInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -759,11 +856,15 @@ export type PropertyCountOrderByAggregateInput = {
   price?: Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  houseNumber?: Prisma.SortOrder
   rooms?: Prisma.SortOrder
   area?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   totalFloors?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  internalNotes?: Prisma.SortOrder
+  representationType?: Prisma.SortOrder
   parking?: Prisma.SortOrder
   elevator?: Prisma.SortOrder
   balcony?: Prisma.SortOrder
@@ -774,6 +875,7 @@ export type PropertyCountOrderByAggregateInput = {
   furnished?: Prisma.SortOrder
   agentId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  ownerContactId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -795,11 +897,15 @@ export type PropertyMaxOrderByAggregateInput = {
   price?: Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  houseNumber?: Prisma.SortOrder
   rooms?: Prisma.SortOrder
   area?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   totalFloors?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  internalNotes?: Prisma.SortOrder
+  representationType?: Prisma.SortOrder
   parking?: Prisma.SortOrder
   elevator?: Prisma.SortOrder
   balcony?: Prisma.SortOrder
@@ -810,6 +916,7 @@ export type PropertyMaxOrderByAggregateInput = {
   furnished?: Prisma.SortOrder
   agentId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  ownerContactId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -823,11 +930,15 @@ export type PropertyMinOrderByAggregateInput = {
   price?: Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  houseNumber?: Prisma.SortOrder
   rooms?: Prisma.SortOrder
   area?: Prisma.SortOrder
   floor?: Prisma.SortOrder
   totalFloors?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  internalNotes?: Prisma.SortOrder
+  representationType?: Prisma.SortOrder
   parking?: Prisma.SortOrder
   elevator?: Prisma.SortOrder
   balcony?: Prisma.SortOrder
@@ -838,6 +949,7 @@ export type PropertyMinOrderByAggregateInput = {
   furnished?: Prisma.SortOrder
   agentId?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  ownerContactId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -944,6 +1056,48 @@ export type PropertyUncheckedUpdateManyWithoutAgentNestedInput = {
   deleteMany?: Prisma.PropertyScalarWhereInput | Prisma.PropertyScalarWhereInput[]
 }
 
+export type PropertyCreateNestedManyWithoutOwnerContactInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutOwnerContactInput, Prisma.PropertyUncheckedCreateWithoutOwnerContactInput> | Prisma.PropertyCreateWithoutOwnerContactInput[] | Prisma.PropertyUncheckedCreateWithoutOwnerContactInput[]
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutOwnerContactInput | Prisma.PropertyCreateOrConnectWithoutOwnerContactInput[]
+  createMany?: Prisma.PropertyCreateManyOwnerContactInputEnvelope
+  connect?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+}
+
+export type PropertyUncheckedCreateNestedManyWithoutOwnerContactInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutOwnerContactInput, Prisma.PropertyUncheckedCreateWithoutOwnerContactInput> | Prisma.PropertyCreateWithoutOwnerContactInput[] | Prisma.PropertyUncheckedCreateWithoutOwnerContactInput[]
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutOwnerContactInput | Prisma.PropertyCreateOrConnectWithoutOwnerContactInput[]
+  createMany?: Prisma.PropertyCreateManyOwnerContactInputEnvelope
+  connect?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+}
+
+export type PropertyUpdateManyWithoutOwnerContactNestedInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutOwnerContactInput, Prisma.PropertyUncheckedCreateWithoutOwnerContactInput> | Prisma.PropertyCreateWithoutOwnerContactInput[] | Prisma.PropertyUncheckedCreateWithoutOwnerContactInput[]
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutOwnerContactInput | Prisma.PropertyCreateOrConnectWithoutOwnerContactInput[]
+  upsert?: Prisma.PropertyUpsertWithWhereUniqueWithoutOwnerContactInput | Prisma.PropertyUpsertWithWhereUniqueWithoutOwnerContactInput[]
+  createMany?: Prisma.PropertyCreateManyOwnerContactInputEnvelope
+  set?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  disconnect?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  delete?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  connect?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  update?: Prisma.PropertyUpdateWithWhereUniqueWithoutOwnerContactInput | Prisma.PropertyUpdateWithWhereUniqueWithoutOwnerContactInput[]
+  updateMany?: Prisma.PropertyUpdateManyWithWhereWithoutOwnerContactInput | Prisma.PropertyUpdateManyWithWhereWithoutOwnerContactInput[]
+  deleteMany?: Prisma.PropertyScalarWhereInput | Prisma.PropertyScalarWhereInput[]
+}
+
+export type PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutOwnerContactInput, Prisma.PropertyUncheckedCreateWithoutOwnerContactInput> | Prisma.PropertyCreateWithoutOwnerContactInput[] | Prisma.PropertyUncheckedCreateWithoutOwnerContactInput[]
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutOwnerContactInput | Prisma.PropertyCreateOrConnectWithoutOwnerContactInput[]
+  upsert?: Prisma.PropertyUpsertWithWhereUniqueWithoutOwnerContactInput | Prisma.PropertyUpsertWithWhereUniqueWithoutOwnerContactInput[]
+  createMany?: Prisma.PropertyCreateManyOwnerContactInputEnvelope
+  set?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  disconnect?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  delete?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  connect?: Prisma.PropertyWhereUniqueInput | Prisma.PropertyWhereUniqueInput[]
+  update?: Prisma.PropertyUpdateWithWhereUniqueWithoutOwnerContactInput | Prisma.PropertyUpdateWithWhereUniqueWithoutOwnerContactInput[]
+  updateMany?: Prisma.PropertyUpdateManyWithWhereWithoutOwnerContactInput | Prisma.PropertyUpdateManyWithWhereWithoutOwnerContactInput[]
+  deleteMany?: Prisma.PropertyScalarWhereInput | Prisma.PropertyScalarWhereInput[]
+}
+
 export type PropertyCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.PropertyCreateWithoutProjectInput, Prisma.PropertyUncheckedCreateWithoutProjectInput> | Prisma.PropertyCreateWithoutProjectInput[] | Prisma.PropertyUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutProjectInput | Prisma.PropertyCreateOrConnectWithoutProjectInput[]
@@ -986,24 +1140,12 @@ export type PropertyUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.PropertyScalarWhereInput | Prisma.PropertyScalarWhereInput[]
 }
 
-export type EnumDealTypeFieldUpdateOperationsInput = {
-  set?: $Enums.DealType
-}
-
 export type EnumPropertyTypeFieldUpdateOperationsInput = {
   set?: $Enums.PropertyType
 }
 
 export type DecimalFieldUpdateOperationsInput = {
   set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
   decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
   multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -1020,6 +1162,10 @@ export type NullableIntFieldUpdateOperationsInput = {
 
 export type EnumPropertyStatusFieldUpdateOperationsInput = {
   set?: $Enums.PropertyStatus
+}
+
+export type EnumRepresentationTypeFieldUpdateOperationsInput = {
+  set?: $Enums.RepresentationType
 }
 
 export type PropertyCreateNestedOneWithoutImagesInput = {
@@ -1074,11 +1220,15 @@ export type PropertyCreateWithoutNeighborhoodInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1091,6 +1241,7 @@ export type PropertyCreateWithoutNeighborhoodInput = {
   updatedAt?: Date | string
   agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
   project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
@@ -1104,11 +1255,15 @@ export type PropertyUncheckedCreateWithoutNeighborhoodInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1119,6 +1274,7 @@ export type PropertyUncheckedCreateWithoutNeighborhoodInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
@@ -1164,11 +1320,15 @@ export type PropertyScalarWhereInput = {
   price?: Prisma.DecimalFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFilter<"Property"> | string
   address?: Prisma.StringNullableFilter<"Property"> | string | null
+  street?: Prisma.StringNullableFilter<"Property"> | string | null
+  houseNumber?: Prisma.StringNullableFilter<"Property"> | string | null
   rooms?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.IntNullableFilter<"Property"> | number | null
   totalFloors?: Prisma.IntNullableFilter<"Property"> | number | null
   status?: Prisma.EnumPropertyStatusFilter<"Property"> | $Enums.PropertyStatus
+  internalNotes?: Prisma.StringNullableFilter<"Property"> | string | null
+  representationType?: Prisma.EnumRepresentationTypeFilter<"Property"> | $Enums.RepresentationType
   parking?: Prisma.BoolFilter<"Property"> | boolean
   elevator?: Prisma.BoolFilter<"Property"> | boolean
   balcony?: Prisma.BoolFilter<"Property"> | boolean
@@ -1179,6 +1339,7 @@ export type PropertyScalarWhereInput = {
   furnished?: Prisma.BoolFilter<"Property"> | boolean
   agentId?: Prisma.StringFilter<"Property"> | string
   projectId?: Prisma.StringNullableFilter<"Property"> | string | null
+  ownerContactId?: Prisma.StringNullableFilter<"Property"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Property"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Property"> | Date | string
 }
@@ -1191,11 +1352,15 @@ export type PropertyCreateWithoutAgentInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1208,6 +1373,7 @@ export type PropertyCreateWithoutAgentInput = {
   updatedAt?: Date | string
   neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
   project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
@@ -1222,11 +1388,15 @@ export type PropertyUncheckedCreateWithoutAgentInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1236,6 +1406,7 @@ export type PropertyUncheckedCreateWithoutAgentInput = {
   accessible?: boolean
   furnished?: boolean
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
@@ -1269,7 +1440,7 @@ export type PropertyUpdateManyWithWhereWithoutAgentInput = {
   data: Prisma.XOR<Prisma.PropertyUpdateManyMutationInput, Prisma.PropertyUncheckedUpdateManyWithoutAgentInput>
 }
 
-export type PropertyCreateWithoutProjectInput = {
+export type PropertyCreateWithoutOwnerContactInput = {
   id?: string
   title: string
   description?: string | null
@@ -1277,11 +1448,15 @@ export type PropertyCreateWithoutProjectInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1294,6 +1469,103 @@ export type PropertyCreateWithoutProjectInput = {
   updatedAt?: Date | string
   neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
   agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
+  videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+}
+
+export type PropertyUncheckedCreateWithoutOwnerContactInput = {
+  id?: string
+  title: string
+  description?: string | null
+  dealType: $Enums.DealType
+  propertyType: $Enums.PropertyType
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  neighborhoodId: string
+  address?: string | null
+  street?: string | null
+  houseNumber?: string | null
+  rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: number | null
+  totalFloors?: number | null
+  status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
+  parking?: boolean
+  elevator?: boolean
+  balcony?: boolean
+  safeRoom?: boolean
+  storage?: boolean
+  airConditioning?: boolean
+  accessible?: boolean
+  furnished?: boolean
+  agentId: string
+  projectId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
+  videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+}
+
+export type PropertyCreateOrConnectWithoutOwnerContactInput = {
+  where: Prisma.PropertyWhereUniqueInput
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutOwnerContactInput, Prisma.PropertyUncheckedCreateWithoutOwnerContactInput>
+}
+
+export type PropertyCreateManyOwnerContactInputEnvelope = {
+  data: Prisma.PropertyCreateManyOwnerContactInput | Prisma.PropertyCreateManyOwnerContactInput[]
+  skipDuplicates?: boolean
+}
+
+export type PropertyUpsertWithWhereUniqueWithoutOwnerContactInput = {
+  where: Prisma.PropertyWhereUniqueInput
+  update: Prisma.XOR<Prisma.PropertyUpdateWithoutOwnerContactInput, Prisma.PropertyUncheckedUpdateWithoutOwnerContactInput>
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutOwnerContactInput, Prisma.PropertyUncheckedCreateWithoutOwnerContactInput>
+}
+
+export type PropertyUpdateWithWhereUniqueWithoutOwnerContactInput = {
+  where: Prisma.PropertyWhereUniqueInput
+  data: Prisma.XOR<Prisma.PropertyUpdateWithoutOwnerContactInput, Prisma.PropertyUncheckedUpdateWithoutOwnerContactInput>
+}
+
+export type PropertyUpdateManyWithWhereWithoutOwnerContactInput = {
+  where: Prisma.PropertyScalarWhereInput
+  data: Prisma.XOR<Prisma.PropertyUpdateManyMutationInput, Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactInput>
+}
+
+export type PropertyCreateWithoutProjectInput = {
+  id?: string
+  title: string
+  description?: string | null
+  dealType: $Enums.DealType
+  propertyType: $Enums.PropertyType
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  address?: string | null
+  street?: string | null
+  houseNumber?: string | null
+  rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: number | null
+  totalFloors?: number | null
+  status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
+  parking?: boolean
+  elevator?: boolean
+  balcony?: boolean
+  safeRoom?: boolean
+  storage?: boolean
+  airConditioning?: boolean
+  accessible?: boolean
+  furnished?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
+  agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
@@ -1308,11 +1580,15 @@ export type PropertyUncheckedCreateWithoutProjectInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1322,6 +1598,7 @@ export type PropertyUncheckedCreateWithoutProjectInput = {
   accessible?: boolean
   furnished?: boolean
   agentId: string
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
@@ -1363,11 +1640,15 @@ export type PropertyCreateWithoutImagesInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1381,6 +1662,7 @@ export type PropertyCreateWithoutImagesInput = {
   neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
   agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
   project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
 }
@@ -1394,11 +1676,15 @@ export type PropertyUncheckedCreateWithoutImagesInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1409,6 +1695,7 @@ export type PropertyUncheckedCreateWithoutImagesInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
@@ -1439,11 +1726,15 @@ export type PropertyUpdateWithoutImagesInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1457,6 +1748,7 @@ export type PropertyUpdateWithoutImagesInput = {
   neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
   agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
 }
@@ -1470,11 +1762,15 @@ export type PropertyUncheckedUpdateWithoutImagesInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1485,6 +1781,7 @@ export type PropertyUncheckedUpdateWithoutImagesInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
@@ -1499,11 +1796,15 @@ export type PropertyCreateWithoutVideosInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1517,6 +1818,7 @@ export type PropertyCreateWithoutVideosInput = {
   neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
   agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
   project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
 }
@@ -1530,11 +1832,15 @@ export type PropertyUncheckedCreateWithoutVideosInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1545,6 +1851,7 @@ export type PropertyUncheckedCreateWithoutVideosInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
@@ -1575,11 +1882,15 @@ export type PropertyUpdateWithoutVideosInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1593,6 +1904,7 @@ export type PropertyUpdateWithoutVideosInput = {
   neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
   agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
 }
@@ -1606,11 +1918,15 @@ export type PropertyUncheckedUpdateWithoutVideosInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1621,6 +1937,7 @@ export type PropertyUncheckedUpdateWithoutVideosInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
@@ -1635,11 +1952,15 @@ export type PropertyCreateWithoutInquiriesInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1653,6 +1974,7 @@ export type PropertyCreateWithoutInquiriesInput = {
   neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
   agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
   project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
 }
@@ -1666,11 +1988,15 @@ export type PropertyUncheckedCreateWithoutInquiriesInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1681,6 +2007,7 @@ export type PropertyUncheckedCreateWithoutInquiriesInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
@@ -1711,11 +2038,15 @@ export type PropertyUpdateWithoutInquiriesInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1729,6 +2060,7 @@ export type PropertyUpdateWithoutInquiriesInput = {
   neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
   agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
 }
@@ -1742,11 +2074,15 @@ export type PropertyUncheckedUpdateWithoutInquiriesInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1757,6 +2093,7 @@ export type PropertyUncheckedUpdateWithoutInquiriesInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
@@ -1771,11 +2108,15 @@ export type PropertyCreateManyNeighborhoodInput = {
   propertyType: $Enums.PropertyType
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1786,6 +2127,7 @@ export type PropertyCreateManyNeighborhoodInput = {
   furnished?: boolean
   agentId: string
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1798,11 +2140,15 @@ export type PropertyUpdateWithoutNeighborhoodInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1815,6 +2161,7 @@ export type PropertyUpdateWithoutNeighborhoodInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
@@ -1828,11 +2175,15 @@ export type PropertyUncheckedUpdateWithoutNeighborhoodInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1843,6 +2194,7 @@ export type PropertyUncheckedUpdateWithoutNeighborhoodInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
@@ -1858,11 +2210,15 @@ export type PropertyUncheckedUpdateManyWithoutNeighborhoodInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1873,6 +2229,7 @@ export type PropertyUncheckedUpdateManyWithoutNeighborhoodInput = {
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1886,11 +2243,15 @@ export type PropertyCreateManyAgentInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -1900,6 +2261,7 @@ export type PropertyCreateManyAgentInput = {
   accessible?: boolean
   furnished?: boolean
   projectId?: string | null
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1912,11 +2274,15 @@ export type PropertyUpdateWithoutAgentInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1929,6 +2295,7 @@ export type PropertyUpdateWithoutAgentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
   project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
@@ -1943,11 +2310,15 @@ export type PropertyUncheckedUpdateWithoutAgentInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1957,6 +2328,7 @@ export type PropertyUncheckedUpdateWithoutAgentInput = {
   accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
@@ -1973,11 +2345,15 @@ export type PropertyUncheckedUpdateManyWithoutAgentInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1986,6 +2362,141 @@ export type PropertyUncheckedUpdateManyWithoutAgentInput = {
   airConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
   accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type PropertyCreateManyOwnerContactInput = {
+  id?: string
+  title: string
+  description?: string | null
+  dealType: $Enums.DealType
+  propertyType: $Enums.PropertyType
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  neighborhoodId: string
+  address?: string | null
+  street?: string | null
+  houseNumber?: string | null
+  rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: number | null
+  totalFloors?: number | null
+  status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
+  parking?: boolean
+  elevator?: boolean
+  balcony?: boolean
+  safeRoom?: boolean
+  storage?: boolean
+  airConditioning?: boolean
+  accessible?: boolean
+  furnished?: boolean
+  agentId: string
+  projectId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type PropertyUpdateWithoutOwnerContactInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
+  parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safeRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  storage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  airConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
+  agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
+  videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+}
+
+export type PropertyUncheckedUpdateWithoutOwnerContactInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
+  parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safeRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  storage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  airConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  agentId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
+  videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+}
+
+export type PropertyUncheckedUpdateManyWithoutOwnerContactInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
+  parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safeRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  storage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  airConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  agentId?: Prisma.StringFieldUpdateOperationsInput | string
   projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2000,11 +2511,15 @@ export type PropertyCreateManyProjectInput = {
   price: runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId: string
   address?: string | null
+  street?: string | null
+  houseNumber?: string | null
   rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: number | null
   totalFloors?: number | null
   status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -2014,6 +2529,7 @@ export type PropertyCreateManyProjectInput = {
   accessible?: boolean
   furnished?: boolean
   agentId: string
+  ownerContactId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -2026,11 +2542,15 @@ export type PropertyUpdateWithoutProjectInput = {
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2043,6 +2563,7 @@ export type PropertyUpdateWithoutProjectInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
   agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
@@ -2057,11 +2578,15 @@ export type PropertyUncheckedUpdateWithoutProjectInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2071,6 +2596,7 @@ export type PropertyUncheckedUpdateWithoutProjectInput = {
   accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
@@ -2087,11 +2613,15 @@ export type PropertyUncheckedUpdateManyWithoutProjectInput = {
   price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
   parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
   elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
   balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2101,6 +2631,7 @@ export type PropertyUncheckedUpdateManyWithoutProjectInput = {
   accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
   furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
   agentId?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -2163,11 +2694,15 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   price?: boolean
   neighborhoodId?: boolean
   address?: boolean
+  street?: boolean
+  houseNumber?: boolean
   rooms?: boolean
   area?: boolean
   floor?: boolean
   totalFloors?: boolean
   status?: boolean
+  internalNotes?: boolean
+  representationType?: boolean
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -2178,11 +2713,13 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   furnished?: boolean
   agentId?: boolean
   projectId?: boolean
+  ownerContactId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   neighborhood?: boolean | Prisma.NeighborhoodDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Property$projectArgs<ExtArgs>
+  ownerContact?: boolean | Prisma.Property$ownerContactArgs<ExtArgs>
   images?: boolean | Prisma.Property$imagesArgs<ExtArgs>
   videos?: boolean | Prisma.Property$videosArgs<ExtArgs>
   inquiries?: boolean | Prisma.Property$inquiriesArgs<ExtArgs>
@@ -2198,11 +2735,15 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   price?: boolean
   neighborhoodId?: boolean
   address?: boolean
+  street?: boolean
+  houseNumber?: boolean
   rooms?: boolean
   area?: boolean
   floor?: boolean
   totalFloors?: boolean
   status?: boolean
+  internalNotes?: boolean
+  representationType?: boolean
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -2213,11 +2754,13 @@ export type PropertySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   furnished?: boolean
   agentId?: boolean
   projectId?: boolean
+  ownerContactId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   neighborhood?: boolean | Prisma.NeighborhoodDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Property$projectArgs<ExtArgs>
+  ownerContact?: boolean | Prisma.Property$ownerContactArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
 export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -2229,11 +2772,15 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   price?: boolean
   neighborhoodId?: boolean
   address?: boolean
+  street?: boolean
+  houseNumber?: boolean
   rooms?: boolean
   area?: boolean
   floor?: boolean
   totalFloors?: boolean
   status?: boolean
+  internalNotes?: boolean
+  representationType?: boolean
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -2244,11 +2791,13 @@ export type PropertySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   furnished?: boolean
   agentId?: boolean
   projectId?: boolean
+  ownerContactId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   neighborhood?: boolean | Prisma.NeighborhoodDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Property$projectArgs<ExtArgs>
+  ownerContact?: boolean | Prisma.Property$ownerContactArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
 export type PropertySelectScalar = {
@@ -2260,11 +2809,15 @@ export type PropertySelectScalar = {
   price?: boolean
   neighborhoodId?: boolean
   address?: boolean
+  street?: boolean
+  houseNumber?: boolean
   rooms?: boolean
   area?: boolean
   floor?: boolean
   totalFloors?: boolean
   status?: boolean
+  internalNotes?: boolean
+  representationType?: boolean
   parking?: boolean
   elevator?: boolean
   balcony?: boolean
@@ -2275,15 +2828,17 @@ export type PropertySelectScalar = {
   furnished?: boolean
   agentId?: boolean
   projectId?: boolean
+  ownerContactId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "dealType" | "propertyType" | "price" | "neighborhoodId" | "address" | "rooms" | "area" | "floor" | "totalFloors" | "status" | "parking" | "elevator" | "balcony" | "safeRoom" | "storage" | "airConditioning" | "accessible" | "furnished" | "agentId" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
+export type PropertyOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "dealType" | "propertyType" | "price" | "neighborhoodId" | "address" | "street" | "houseNumber" | "rooms" | "area" | "floor" | "totalFloors" | "status" | "internalNotes" | "representationType" | "parking" | "elevator" | "balcony" | "safeRoom" | "storage" | "airConditioning" | "accessible" | "furnished" | "agentId" | "projectId" | "ownerContactId" | "createdAt" | "updatedAt", ExtArgs["result"]["property"]>
 export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   neighborhood?: boolean | Prisma.NeighborhoodDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Property$projectArgs<ExtArgs>
+  ownerContact?: boolean | Prisma.Property$ownerContactArgs<ExtArgs>
   images?: boolean | Prisma.Property$imagesArgs<ExtArgs>
   videos?: boolean | Prisma.Property$videosArgs<ExtArgs>
   inquiries?: boolean | Prisma.Property$inquiriesArgs<ExtArgs>
@@ -2293,11 +2848,13 @@ export type PropertyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   neighborhood?: boolean | Prisma.NeighborhoodDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Property$projectArgs<ExtArgs>
+  ownerContact?: boolean | Prisma.Property$ownerContactArgs<ExtArgs>
 }
 export type PropertyIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   neighborhood?: boolean | Prisma.NeighborhoodDefaultArgs<ExtArgs>
   agent?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   project?: boolean | Prisma.Property$projectArgs<ExtArgs>
+  ownerContact?: boolean | Prisma.Property$ownerContactArgs<ExtArgs>
 }
 
 export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2306,6 +2863,7 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     neighborhood: Prisma.$NeighborhoodPayload<ExtArgs>
     agent: Prisma.$UserPayload<ExtArgs>
     project: Prisma.$ProjectPayload<ExtArgs> | null
+    ownerContact: Prisma.$ContactPayload<ExtArgs> | null
     images: Prisma.$PropertyImagePayload<ExtArgs>[]
     videos: Prisma.$PropertyVideoPayload<ExtArgs>[]
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
@@ -2319,11 +2877,15 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     price: runtime.Decimal
     neighborhoodId: string
     address: string | null
+    street: string | null
+    houseNumber: string | null
     rooms: runtime.Decimal | null
     area: runtime.Decimal | null
     floor: number | null
     totalFloors: number | null
     status: $Enums.PropertyStatus
+    internalNotes: string | null
+    representationType: $Enums.RepresentationType
     parking: boolean
     elevator: boolean
     balcony: boolean
@@ -2334,6 +2896,7 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     furnished: boolean
     agentId: string
     projectId: string | null
+    ownerContactId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["property"]>
@@ -2733,6 +3296,7 @@ export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends runtime
   neighborhood<T extends Prisma.NeighborhoodDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.NeighborhoodDefaultArgs<ExtArgs>>): Prisma.Prisma__NeighborhoodClient<runtime.Types.Result.GetResult<Prisma.$NeighborhoodPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   agent<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   project<T extends Prisma.Property$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ownerContact<T extends Prisma.Property$ownerContactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$ownerContactArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   images<T extends Prisma.Property$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   videos<T extends Prisma.Property$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inquiries<T extends Prisma.Property$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2773,11 +3337,15 @@ export interface PropertyFieldRefs {
   readonly price: Prisma.FieldRef<"Property", 'Decimal'>
   readonly neighborhoodId: Prisma.FieldRef<"Property", 'String'>
   readonly address: Prisma.FieldRef<"Property", 'String'>
+  readonly street: Prisma.FieldRef<"Property", 'String'>
+  readonly houseNumber: Prisma.FieldRef<"Property", 'String'>
   readonly rooms: Prisma.FieldRef<"Property", 'Decimal'>
   readonly area: Prisma.FieldRef<"Property", 'Decimal'>
   readonly floor: Prisma.FieldRef<"Property", 'Int'>
   readonly totalFloors: Prisma.FieldRef<"Property", 'Int'>
   readonly status: Prisma.FieldRef<"Property", 'PropertyStatus'>
+  readonly internalNotes: Prisma.FieldRef<"Property", 'String'>
+  readonly representationType: Prisma.FieldRef<"Property", 'RepresentationType'>
   readonly parking: Prisma.FieldRef<"Property", 'Boolean'>
   readonly elevator: Prisma.FieldRef<"Property", 'Boolean'>
   readonly balcony: Prisma.FieldRef<"Property", 'Boolean'>
@@ -2788,6 +3356,7 @@ export interface PropertyFieldRefs {
   readonly furnished: Prisma.FieldRef<"Property", 'Boolean'>
   readonly agentId: Prisma.FieldRef<"Property", 'String'>
   readonly projectId: Prisma.FieldRef<"Property", 'String'>
+  readonly ownerContactId: Prisma.FieldRef<"Property", 'String'>
   readonly createdAt: Prisma.FieldRef<"Property", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Property", 'DateTime'>
 }
@@ -3207,6 +3776,25 @@ export type Property$projectArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   include?: Prisma.ProjectInclude<ExtArgs> | null
   where?: Prisma.ProjectWhereInput
+}
+
+/**
+ * Property.ownerContact
+ */
+export type Property$ownerContactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contact
+   */
+  select?: Prisma.ContactSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contact
+   */
+  omit?: Prisma.ContactOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
 }
 
 /**

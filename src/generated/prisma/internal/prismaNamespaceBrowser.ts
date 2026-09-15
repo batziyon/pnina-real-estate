@@ -53,6 +53,10 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Neighborhood: 'Neighborhood',
   User: 'User',
+  Contact: 'Contact',
+  ContactRole: 'ContactRole',
+  BuyerRequirement: 'BuyerRequirement',
+  BuyerRequirementNeighborhood: 'BuyerRequirementNeighborhood',
   Project: 'Project',
   Property: 'Property',
   PropertyImage: 'PropertyImage',
@@ -105,6 +109,62 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const ContactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  notes: 'notes',
+  assignedAgentId: 'assignedAgentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+export const ContactRoleScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  role: 'role',
+  notes: 'notes',
+  active: 'active',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactRoleScalarFieldEnum = (typeof ContactRoleScalarFieldEnum)[keyof typeof ContactRoleScalarFieldEnum]
+
+
+export const BuyerRequirementScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  dealType: 'dealType',
+  propertyType: 'propertyType',
+  minRooms: 'minRooms',
+  maxRooms: 'maxRooms',
+  minArea: 'minArea',
+  maxArea: 'maxArea',
+  minPrice: 'minPrice',
+  maxPrice: 'maxPrice',
+  notes: 'notes',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BuyerRequirementScalarFieldEnum = (typeof BuyerRequirementScalarFieldEnum)[keyof typeof BuyerRequirementScalarFieldEnum]
+
+
+export const BuyerRequirementNeighborhoodScalarFieldEnum = {
+  id: 'id',
+  buyerRequirementId: 'buyerRequirementId',
+  neighborhoodId: 'neighborhoodId',
+  preferenceType: 'preferenceType'
+} as const
+
+export type BuyerRequirementNeighborhoodScalarFieldEnum = (typeof BuyerRequirementNeighborhoodScalarFieldEnum)[keyof typeof BuyerRequirementNeighborhoodScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -129,11 +189,15 @@ export const PropertyScalarFieldEnum = {
   price: 'price',
   neighborhoodId: 'neighborhoodId',
   address: 'address',
+  street: 'street',
+  houseNumber: 'houseNumber',
   rooms: 'rooms',
   area: 'area',
   floor: 'floor',
   totalFloors: 'totalFloors',
   status: 'status',
+  internalNotes: 'internalNotes',
+  representationType: 'representationType',
   parking: 'parking',
   elevator: 'elevator',
   balcony: 'balcony',
@@ -144,6 +208,7 @@ export const PropertyScalarFieldEnum = {
   furnished: 'furnished',
   agentId: 'agentId',
   projectId: 'projectId',
+  ownerContactId: 'ownerContactId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -179,6 +244,7 @@ export type PropertyVideoScalarFieldEnum = (typeof PropertyVideoScalarFieldEnum)
 export const InquiryScalarFieldEnum = {
   id: 'id',
   propertyId: 'propertyId',
+  contactId: 'contactId',
   agentId: 'agentId',
   name: 'name',
   phone: 'phone',
@@ -216,6 +282,7 @@ export type ValuationRequestScalarFieldEnum = (typeof ValuationRequestScalarFiel
 
 export const TestimonialScalarFieldEnum = {
   id: 'id',
+  contactId: 'contactId',
   name: 'name',
   displayName: 'displayName',
   content: 'content',

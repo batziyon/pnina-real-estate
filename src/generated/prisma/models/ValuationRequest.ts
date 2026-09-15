@@ -607,10 +607,6 @@ export type ValuationRequestUncheckedUpdateManyWithoutNeighborhoodNestedInput = 
   deleteMany?: Prisma.ValuationRequestScalarWhereInput | Prisma.ValuationRequestScalarWhereInput[]
 }
 
-export type NullableEnumPropertyTypeFieldUpdateOperationsInput = {
-  set?: $Enums.PropertyType | null
-}
-
 export type EnumValuationRequestStatusFieldUpdateOperationsInput = {
   set?: $Enums.ValuationRequestStatus
 }

@@ -26,6 +26,7 @@ export type AggregateTestimonial = {
 
 export type TestimonialMinAggregateOutputType = {
   id: string | null
+  contactId: string | null
   name: string | null
   displayName: string | null
   content: string | null
@@ -36,6 +37,7 @@ export type TestimonialMinAggregateOutputType = {
 
 export type TestimonialMaxAggregateOutputType = {
   id: string | null
+  contactId: string | null
   name: string | null
   displayName: string | null
   content: string | null
@@ -46,6 +48,7 @@ export type TestimonialMaxAggregateOutputType = {
 
 export type TestimonialCountAggregateOutputType = {
   id: number
+  contactId: number
   name: number
   displayName: number
   content: number
@@ -58,6 +61,7 @@ export type TestimonialCountAggregateOutputType = {
 
 export type TestimonialMinAggregateInputType = {
   id?: true
+  contactId?: true
   name?: true
   displayName?: true
   content?: true
@@ -68,6 +72,7 @@ export type TestimonialMinAggregateInputType = {
 
 export type TestimonialMaxAggregateInputType = {
   id?: true
+  contactId?: true
   name?: true
   displayName?: true
   content?: true
@@ -78,6 +83,7 @@ export type TestimonialMaxAggregateInputType = {
 
 export type TestimonialCountAggregateInputType = {
   id?: true
+  contactId?: true
   name?: true
   displayName?: true
   content?: true
@@ -161,6 +167,7 @@ export type TestimonialGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type TestimonialGroupByOutputType = {
   id: string
+  contactId: string | null
   name: string
   displayName: string | null
   content: string
@@ -192,22 +199,26 @@ export type TestimonialWhereInput = {
   OR?: Prisma.TestimonialWhereInput[]
   NOT?: Prisma.TestimonialWhereInput | Prisma.TestimonialWhereInput[]
   id?: Prisma.StringFilter<"Testimonial"> | string
+  contactId?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   name?: Prisma.StringFilter<"Testimonial"> | string
   displayName?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   content?: Prisma.StringFilter<"Testimonial"> | string
   status?: Prisma.EnumTestimonialStatusFilter<"Testimonial"> | $Enums.TestimonialStatus
   createdAt?: Prisma.DateTimeFilter<"Testimonial"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Testimonial"> | Date | string
+  contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
 }
 
 export type TestimonialOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrder
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  contact?: Prisma.ContactOrderByWithRelationInput
 }
 
 export type TestimonialWhereUniqueInput = Prisma.AtLeast<{
@@ -215,16 +226,19 @@ export type TestimonialWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.TestimonialWhereInput | Prisma.TestimonialWhereInput[]
   OR?: Prisma.TestimonialWhereInput[]
   NOT?: Prisma.TestimonialWhereInput | Prisma.TestimonialWhereInput[]
+  contactId?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   name?: Prisma.StringFilter<"Testimonial"> | string
   displayName?: Prisma.StringNullableFilter<"Testimonial"> | string | null
   content?: Prisma.StringFilter<"Testimonial"> | string
   status?: Prisma.EnumTestimonialStatusFilter<"Testimonial"> | $Enums.TestimonialStatus
   createdAt?: Prisma.DateTimeFilter<"Testimonial"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Testimonial"> | Date | string
+  contact?: Prisma.XOR<Prisma.ContactNullableScalarRelationFilter, Prisma.ContactWhereInput> | null
 }, "id">
 
 export type TestimonialOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrder
   displayName?: Prisma.SortOrderInput | Prisma.SortOrder
   content?: Prisma.SortOrder
@@ -241,6 +255,7 @@ export type TestimonialScalarWhereWithAggregatesInput = {
   OR?: Prisma.TestimonialScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TestimonialScalarWhereWithAggregatesInput | Prisma.TestimonialScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
+  contactId?: Prisma.StringNullableWithAggregatesFilter<"Testimonial"> | string | null
   name?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
   displayName?: Prisma.StringNullableWithAggregatesFilter<"Testimonial"> | string | null
   content?: Prisma.StringWithAggregatesFilter<"Testimonial"> | string
@@ -257,10 +272,12 @@ export type TestimonialCreateInput = {
   status?: $Enums.TestimonialStatus
   createdAt?: Date | string
   updatedAt?: Date | string
+  contact?: Prisma.ContactCreateNestedOneWithoutTestimonialsInput
 }
 
 export type TestimonialUncheckedCreateInput = {
   id?: string
+  contactId?: string | null
   name: string
   displayName?: string | null
   content: string
@@ -277,10 +294,12 @@ export type TestimonialUpdateInput = {
   status?: Prisma.EnumTestimonialStatusFieldUpdateOperationsInput | $Enums.TestimonialStatus
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  contact?: Prisma.ContactUpdateOneWithoutTestimonialsNestedInput
 }
 
 export type TestimonialUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -291,6 +310,7 @@ export type TestimonialUncheckedUpdateInput = {
 
 export type TestimonialCreateManyInput = {
   id?: string
+  contactId?: string | null
   name: string
   displayName?: string | null
   content: string
@@ -311,6 +331,7 @@ export type TestimonialUpdateManyMutationInput = {
 
 export type TestimonialUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  contactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   content?: Prisma.StringFieldUpdateOperationsInput | string
@@ -319,8 +340,19 @@ export type TestimonialUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type TestimonialListRelationFilter = {
+  every?: Prisma.TestimonialWhereInput
+  some?: Prisma.TestimonialWhereInput
+  none?: Prisma.TestimonialWhereInput
+}
+
+export type TestimonialOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type TestimonialCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   content?: Prisma.SortOrder
@@ -331,6 +363,7 @@ export type TestimonialCountOrderByAggregateInput = {
 
 export type TestimonialMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   content?: Prisma.SortOrder
@@ -341,6 +374,7 @@ export type TestimonialMaxOrderByAggregateInput = {
 
 export type TestimonialMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  contactId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   displayName?: Prisma.SortOrder
   content?: Prisma.SortOrder
@@ -349,44 +383,193 @@ export type TestimonialMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type TestimonialCreateNestedManyWithoutContactInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutContactInput, Prisma.TestimonialUncheckedCreateWithoutContactInput> | Prisma.TestimonialCreateWithoutContactInput[] | Prisma.TestimonialUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutContactInput | Prisma.TestimonialCreateOrConnectWithoutContactInput[]
+  createMany?: Prisma.TestimonialCreateManyContactInputEnvelope
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+}
+
+export type TestimonialUncheckedCreateNestedManyWithoutContactInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutContactInput, Prisma.TestimonialUncheckedCreateWithoutContactInput> | Prisma.TestimonialCreateWithoutContactInput[] | Prisma.TestimonialUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutContactInput | Prisma.TestimonialCreateOrConnectWithoutContactInput[]
+  createMany?: Prisma.TestimonialCreateManyContactInputEnvelope
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+}
+
+export type TestimonialUpdateManyWithoutContactNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutContactInput, Prisma.TestimonialUncheckedCreateWithoutContactInput> | Prisma.TestimonialCreateWithoutContactInput[] | Prisma.TestimonialUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutContactInput | Prisma.TestimonialCreateOrConnectWithoutContactInput[]
+  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutContactInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutContactInput[]
+  createMany?: Prisma.TestimonialCreateManyContactInputEnvelope
+  set?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  disconnect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  delete?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutContactInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutContactInput[]
+  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutContactInput | Prisma.TestimonialUpdateManyWithWhereWithoutContactInput[]
+  deleteMany?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
+}
+
+export type TestimonialUncheckedUpdateManyWithoutContactNestedInput = {
+  create?: Prisma.XOR<Prisma.TestimonialCreateWithoutContactInput, Prisma.TestimonialUncheckedCreateWithoutContactInput> | Prisma.TestimonialCreateWithoutContactInput[] | Prisma.TestimonialUncheckedCreateWithoutContactInput[]
+  connectOrCreate?: Prisma.TestimonialCreateOrConnectWithoutContactInput | Prisma.TestimonialCreateOrConnectWithoutContactInput[]
+  upsert?: Prisma.TestimonialUpsertWithWhereUniqueWithoutContactInput | Prisma.TestimonialUpsertWithWhereUniqueWithoutContactInput[]
+  createMany?: Prisma.TestimonialCreateManyContactInputEnvelope
+  set?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  disconnect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  delete?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  connect?: Prisma.TestimonialWhereUniqueInput | Prisma.TestimonialWhereUniqueInput[]
+  update?: Prisma.TestimonialUpdateWithWhereUniqueWithoutContactInput | Prisma.TestimonialUpdateWithWhereUniqueWithoutContactInput[]
+  updateMany?: Prisma.TestimonialUpdateManyWithWhereWithoutContactInput | Prisma.TestimonialUpdateManyWithWhereWithoutContactInput[]
+  deleteMany?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
+}
+
 export type EnumTestimonialStatusFieldUpdateOperationsInput = {
   set?: $Enums.TestimonialStatus
+}
+
+export type TestimonialCreateWithoutContactInput = {
+  id?: string
+  name: string
+  displayName?: string | null
+  content: string
+  status?: $Enums.TestimonialStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TestimonialUncheckedCreateWithoutContactInput = {
+  id?: string
+  name: string
+  displayName?: string | null
+  content: string
+  status?: $Enums.TestimonialStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TestimonialCreateOrConnectWithoutContactInput = {
+  where: Prisma.TestimonialWhereUniqueInput
+  create: Prisma.XOR<Prisma.TestimonialCreateWithoutContactInput, Prisma.TestimonialUncheckedCreateWithoutContactInput>
+}
+
+export type TestimonialCreateManyContactInputEnvelope = {
+  data: Prisma.TestimonialCreateManyContactInput | Prisma.TestimonialCreateManyContactInput[]
+  skipDuplicates?: boolean
+}
+
+export type TestimonialUpsertWithWhereUniqueWithoutContactInput = {
+  where: Prisma.TestimonialWhereUniqueInput
+  update: Prisma.XOR<Prisma.TestimonialUpdateWithoutContactInput, Prisma.TestimonialUncheckedUpdateWithoutContactInput>
+  create: Prisma.XOR<Prisma.TestimonialCreateWithoutContactInput, Prisma.TestimonialUncheckedCreateWithoutContactInput>
+}
+
+export type TestimonialUpdateWithWhereUniqueWithoutContactInput = {
+  where: Prisma.TestimonialWhereUniqueInput
+  data: Prisma.XOR<Prisma.TestimonialUpdateWithoutContactInput, Prisma.TestimonialUncheckedUpdateWithoutContactInput>
+}
+
+export type TestimonialUpdateManyWithWhereWithoutContactInput = {
+  where: Prisma.TestimonialScalarWhereInput
+  data: Prisma.XOR<Prisma.TestimonialUpdateManyMutationInput, Prisma.TestimonialUncheckedUpdateManyWithoutContactInput>
+}
+
+export type TestimonialScalarWhereInput = {
+  AND?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
+  OR?: Prisma.TestimonialScalarWhereInput[]
+  NOT?: Prisma.TestimonialScalarWhereInput | Prisma.TestimonialScalarWhereInput[]
+  id?: Prisma.StringFilter<"Testimonial"> | string
+  contactId?: Prisma.StringNullableFilter<"Testimonial"> | string | null
+  name?: Prisma.StringFilter<"Testimonial"> | string
+  displayName?: Prisma.StringNullableFilter<"Testimonial"> | string | null
+  content?: Prisma.StringFilter<"Testimonial"> | string
+  status?: Prisma.EnumTestimonialStatusFilter<"Testimonial"> | $Enums.TestimonialStatus
+  createdAt?: Prisma.DateTimeFilter<"Testimonial"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"Testimonial"> | Date | string
+}
+
+export type TestimonialCreateManyContactInput = {
+  id?: string
+  name: string
+  displayName?: string | null
+  content: string
+  status?: $Enums.TestimonialStatus
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type TestimonialUpdateWithoutContactInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTestimonialStatusFieldUpdateOperationsInput | $Enums.TestimonialStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TestimonialUncheckedUpdateWithoutContactInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTestimonialStatusFieldUpdateOperationsInput | $Enums.TestimonialStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type TestimonialUncheckedUpdateManyWithoutContactInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.EnumTestimonialStatusFieldUpdateOperationsInput | $Enums.TestimonialStatus
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
 
 export type TestimonialSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contactId?: boolean
   name?: boolean
   displayName?: boolean
   content?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  contact?: boolean | Prisma.Testimonial$contactArgs<ExtArgs>
 }, ExtArgs["result"]["testimonial"]>
 
 export type TestimonialSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contactId?: boolean
   name?: boolean
   displayName?: boolean
   content?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  contact?: boolean | Prisma.Testimonial$contactArgs<ExtArgs>
 }, ExtArgs["result"]["testimonial"]>
 
 export type TestimonialSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  contactId?: boolean
   name?: boolean
   displayName?: boolean
   content?: boolean
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  contact?: boolean | Prisma.Testimonial$contactArgs<ExtArgs>
 }, ExtArgs["result"]["testimonial"]>
 
 export type TestimonialSelectScalar = {
   id?: boolean
+  contactId?: boolean
   name?: boolean
   displayName?: boolean
   content?: boolean
@@ -395,13 +578,25 @@ export type TestimonialSelectScalar = {
   updatedAt?: boolean
 }
 
-export type TestimonialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "displayName" | "content" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["testimonial"]>
+export type TestimonialOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contactId" | "name" | "displayName" | "content" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["testimonial"]>
+export type TestimonialInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contact?: boolean | Prisma.Testimonial$contactArgs<ExtArgs>
+}
+export type TestimonialIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contact?: boolean | Prisma.Testimonial$contactArgs<ExtArgs>
+}
+export type TestimonialIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  contact?: boolean | Prisma.Testimonial$contactArgs<ExtArgs>
+}
 
 export type $TestimonialPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Testimonial"
-  objects: {}
+  objects: {
+    contact: Prisma.$ContactPayload<ExtArgs> | null
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    contactId: string | null
     name: string
     displayName: string | null
     content: string
@@ -802,6 +997,7 @@ readonly fields: TestimonialFieldRefs;
  */
 export interface Prisma__TestimonialClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  contact<T extends Prisma.Testimonial$contactArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Testimonial$contactArgs<ExtArgs>>): Prisma.Prisma__ContactClient<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -832,6 +1028,7 @@ export interface Prisma__TestimonialClient<T, Null = never, ExtArgs extends runt
  */
 export interface TestimonialFieldRefs {
   readonly id: Prisma.FieldRef<"Testimonial", 'String'>
+  readonly contactId: Prisma.FieldRef<"Testimonial", 'String'>
   readonly name: Prisma.FieldRef<"Testimonial", 'String'>
   readonly displayName: Prisma.FieldRef<"Testimonial", 'String'>
   readonly content: Prisma.FieldRef<"Testimonial", 'String'>
@@ -855,6 +1052,10 @@ export type TestimonialFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
+  /**
    * Filter, which Testimonial to fetch.
    */
   where: Prisma.TestimonialWhereUniqueInput
@@ -873,6 +1074,10 @@ export type TestimonialFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
+  /**
    * Filter, which Testimonial to fetch.
    */
   where: Prisma.TestimonialWhereUniqueInput
@@ -890,6 +1095,10 @@ export type TestimonialFindFirstArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the Testimonial
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
   /**
    * Filter, which Testimonial to fetch.
    */
@@ -939,6 +1148,10 @@ export type TestimonialFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extens
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
+  /**
    * Filter, which Testimonial to fetch.
    */
   where?: Prisma.TestimonialWhereInput
@@ -986,6 +1199,10 @@ export type TestimonialFindManyArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Testimonial
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
   /**
    * Filter, which Testimonials to fetch.
    */
@@ -1035,6 +1252,10 @@ export type TestimonialCreateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
+  /**
    * The data needed to create a Testimonial.
    */
   data: Prisma.XOR<Prisma.TestimonialCreateInput, Prisma.TestimonialUncheckedCreateInput>
@@ -1068,6 +1289,10 @@ export type TestimonialCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    */
   data: Prisma.TestimonialCreateManyInput | Prisma.TestimonialCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1082,6 +1307,10 @@ export type TestimonialUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Testimonial
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
   /**
    * The data needed to update a Testimonial.
    */
@@ -1134,6 +1363,10 @@ export type TestimonialUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Ext
    * Limit how many Testimonials to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1148,6 +1381,10 @@ export type TestimonialUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Omit specific fields from the Testimonial
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
   /**
    * The filter to search for the Testimonial to update in case it exists.
    */
@@ -1175,6 +1412,10 @@ export type TestimonialDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
+  /**
    * Filter which Testimonial to delete.
    */
   where: Prisma.TestimonialWhereUniqueInput
@@ -1195,6 +1436,25 @@ export type TestimonialDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
 }
 
 /**
+ * Testimonial.contact
+ */
+export type Testimonial$contactArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contact
+   */
+  select?: Prisma.ContactSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contact
+   */
+  omit?: Prisma.ContactOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
+}
+
+/**
  * Testimonial without action
  */
 export type TestimonialDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1206,4 +1466,8 @@ export type TestimonialDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Testimonial
    */
   omit?: Prisma.TestimonialOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TestimonialInclude<ExtArgs> | null
 }

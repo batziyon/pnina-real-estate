@@ -28,6 +28,26 @@ export type Neighborhood = Prisma.NeighborhoodModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
+/**
+ * Model ContactRole
+ * 
+ */
+export type ContactRole = Prisma.ContactRoleModel
+/**
+ * Model BuyerRequirement
+ * 
+ */
+export type BuyerRequirement = Prisma.BuyerRequirementModel
+/**
+ * Model BuyerRequirementNeighborhood
+ * 
+ */
+export type BuyerRequirementNeighborhood = Prisma.BuyerRequirementNeighborhoodModel
+/**
  * Model Project
  * 
  */

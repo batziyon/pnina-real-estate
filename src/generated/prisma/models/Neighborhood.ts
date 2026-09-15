@@ -227,6 +227,7 @@ export type NeighborhoodWhereInput = {
   properties?: Prisma.PropertyListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   valuationRequests?: Prisma.ValuationRequestListRelationFilter
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodListRelationFilter
 }
 
 export type NeighborhoodOrderByWithRelationInput = {
@@ -239,6 +240,7 @@ export type NeighborhoodOrderByWithRelationInput = {
   properties?: Prisma.PropertyOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   valuationRequests?: Prisma.ValuationRequestOrderByRelationAggregateInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodOrderByRelationAggregateInput
 }
 
 export type NeighborhoodWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +256,7 @@ export type NeighborhoodWhereUniqueInput = Prisma.AtLeast<{
   properties?: Prisma.PropertyListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   valuationRequests?: Prisma.ValuationRequestListRelationFilter
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodListRelationFilter
 }, "id" | "name">
 
 export type NeighborhoodOrderByWithAggregationInput = {
@@ -292,6 +295,7 @@ export type NeighborhoodCreateInput = {
   properties?: Prisma.PropertyCreateNestedManyWithoutNeighborhoodInput
   projects?: Prisma.ProjectCreateNestedManyWithoutNeighborhoodInput
   valuationRequests?: Prisma.ValuationRequestCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodUncheckedCreateInput = {
@@ -304,6 +308,7 @@ export type NeighborhoodUncheckedCreateInput = {
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutNeighborhoodInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutNeighborhoodInput
   valuationRequests?: Prisma.ValuationRequestUncheckedCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodUpdateInput = {
@@ -316,6 +321,7 @@ export type NeighborhoodUpdateInput = {
   properties?: Prisma.PropertyUpdateManyWithoutNeighborhoodNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutNeighborhoodNestedInput
   valuationRequests?: Prisma.ValuationRequestUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodUncheckedUpdateInput = {
@@ -328,6 +334,7 @@ export type NeighborhoodUncheckedUpdateInput = {
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutNeighborhoodNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutNeighborhoodNestedInput
   valuationRequests?: Prisma.ValuationRequestUncheckedUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodCreateManyInput = {
@@ -417,6 +424,20 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type NeighborhoodCreateNestedOneWithoutBuyerRequirementNeighborhoodsInput = {
+  create?: Prisma.XOR<Prisma.NeighborhoodCreateWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUncheckedCreateWithoutBuyerRequirementNeighborhoodsInput>
+  connectOrCreate?: Prisma.NeighborhoodCreateOrConnectWithoutBuyerRequirementNeighborhoodsInput
+  connect?: Prisma.NeighborhoodWhereUniqueInput
+}
+
+export type NeighborhoodUpdateOneRequiredWithoutBuyerRequirementNeighborhoodsNestedInput = {
+  create?: Prisma.XOR<Prisma.NeighborhoodCreateWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUncheckedCreateWithoutBuyerRequirementNeighborhoodsInput>
+  connectOrCreate?: Prisma.NeighborhoodCreateOrConnectWithoutBuyerRequirementNeighborhoodsInput
+  upsert?: Prisma.NeighborhoodUpsertWithoutBuyerRequirementNeighborhoodsInput
+  connect?: Prisma.NeighborhoodWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.NeighborhoodUpdateToOneWithWhereWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUpdateWithoutBuyerRequirementNeighborhoodsInput>, Prisma.NeighborhoodUncheckedUpdateWithoutBuyerRequirementNeighborhoodsInput>
+}
+
 export type NeighborhoodCreateNestedOneWithoutProjectsInput = {
   create?: Prisma.XOR<Prisma.NeighborhoodCreateWithoutProjectsInput, Prisma.NeighborhoodUncheckedCreateWithoutProjectsInput>
   connectOrCreate?: Prisma.NeighborhoodCreateOrConnectWithoutProjectsInput
@@ -459,6 +480,70 @@ export type NeighborhoodUpdateOneRequiredWithoutValuationRequestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.NeighborhoodUpdateToOneWithWhereWithoutValuationRequestsInput, Prisma.NeighborhoodUpdateWithoutValuationRequestsInput>, Prisma.NeighborhoodUncheckedUpdateWithoutValuationRequestsInput>
 }
 
+export type NeighborhoodCreateWithoutBuyerRequirementNeighborhoodsInput = {
+  id?: string
+  name: string
+  active?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyCreateNestedManyWithoutNeighborhoodInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutNeighborhoodInput
+  valuationRequests?: Prisma.ValuationRequestCreateNestedManyWithoutNeighborhoodInput
+}
+
+export type NeighborhoodUncheckedCreateWithoutBuyerRequirementNeighborhoodsInput = {
+  id?: string
+  name: string
+  active?: boolean
+  sortOrder?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutNeighborhoodInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutNeighborhoodInput
+  valuationRequests?: Prisma.ValuationRequestUncheckedCreateNestedManyWithoutNeighborhoodInput
+}
+
+export type NeighborhoodCreateOrConnectWithoutBuyerRequirementNeighborhoodsInput = {
+  where: Prisma.NeighborhoodWhereUniqueInput
+  create: Prisma.XOR<Prisma.NeighborhoodCreateWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUncheckedCreateWithoutBuyerRequirementNeighborhoodsInput>
+}
+
+export type NeighborhoodUpsertWithoutBuyerRequirementNeighborhoodsInput = {
+  update: Prisma.XOR<Prisma.NeighborhoodUpdateWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUncheckedUpdateWithoutBuyerRequirementNeighborhoodsInput>
+  create: Prisma.XOR<Prisma.NeighborhoodCreateWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUncheckedCreateWithoutBuyerRequirementNeighborhoodsInput>
+  where?: Prisma.NeighborhoodWhereInput
+}
+
+export type NeighborhoodUpdateToOneWithWhereWithoutBuyerRequirementNeighborhoodsInput = {
+  where?: Prisma.NeighborhoodWhereInput
+  data: Prisma.XOR<Prisma.NeighborhoodUpdateWithoutBuyerRequirementNeighborhoodsInput, Prisma.NeighborhoodUncheckedUpdateWithoutBuyerRequirementNeighborhoodsInput>
+}
+
+export type NeighborhoodUpdateWithoutBuyerRequirementNeighborhoodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUpdateManyWithoutNeighborhoodNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutNeighborhoodNestedInput
+  valuationRequests?: Prisma.ValuationRequestUpdateManyWithoutNeighborhoodNestedInput
+}
+
+export type NeighborhoodUncheckedUpdateWithoutBuyerRequirementNeighborhoodsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  properties?: Prisma.PropertyUncheckedUpdateManyWithoutNeighborhoodNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutNeighborhoodNestedInput
+  valuationRequests?: Prisma.ValuationRequestUncheckedUpdateManyWithoutNeighborhoodNestedInput
+}
+
 export type NeighborhoodCreateWithoutProjectsInput = {
   id?: string
   name: string
@@ -468,6 +553,7 @@ export type NeighborhoodCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutNeighborhoodInput
   valuationRequests?: Prisma.ValuationRequestCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodUncheckedCreateWithoutProjectsInput = {
@@ -479,6 +565,7 @@ export type NeighborhoodUncheckedCreateWithoutProjectsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutNeighborhoodInput
   valuationRequests?: Prisma.ValuationRequestUncheckedCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodCreateOrConnectWithoutProjectsInput = {
@@ -506,6 +593,7 @@ export type NeighborhoodUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutNeighborhoodNestedInput
   valuationRequests?: Prisma.ValuationRequestUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodUncheckedUpdateWithoutProjectsInput = {
@@ -517,6 +605,7 @@ export type NeighborhoodUncheckedUpdateWithoutProjectsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutNeighborhoodNestedInput
   valuationRequests?: Prisma.ValuationRequestUncheckedUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodCreateWithoutPropertiesInput = {
@@ -528,6 +617,7 @@ export type NeighborhoodCreateWithoutPropertiesInput = {
   updatedAt?: Date | string
   projects?: Prisma.ProjectCreateNestedManyWithoutNeighborhoodInput
   valuationRequests?: Prisma.ValuationRequestCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodUncheckedCreateWithoutPropertiesInput = {
@@ -539,6 +629,7 @@ export type NeighborhoodUncheckedCreateWithoutPropertiesInput = {
   updatedAt?: Date | string
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutNeighborhoodInput
   valuationRequests?: Prisma.ValuationRequestUncheckedCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodCreateOrConnectWithoutPropertiesInput = {
@@ -566,6 +657,7 @@ export type NeighborhoodUpdateWithoutPropertiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUpdateManyWithoutNeighborhoodNestedInput
   valuationRequests?: Prisma.ValuationRequestUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodUncheckedUpdateWithoutPropertiesInput = {
@@ -577,6 +669,7 @@ export type NeighborhoodUncheckedUpdateWithoutPropertiesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutNeighborhoodNestedInput
   valuationRequests?: Prisma.ValuationRequestUncheckedUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodCreateWithoutValuationRequestsInput = {
@@ -588,6 +681,7 @@ export type NeighborhoodCreateWithoutValuationRequestsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyCreateNestedManyWithoutNeighborhoodInput
   projects?: Prisma.ProjectCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodUncheckedCreateWithoutValuationRequestsInput = {
@@ -599,6 +693,7 @@ export type NeighborhoodUncheckedCreateWithoutValuationRequestsInput = {
   updatedAt?: Date | string
   properties?: Prisma.PropertyUncheckedCreateNestedManyWithoutNeighborhoodInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutNeighborhoodInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedCreateNestedManyWithoutNeighborhoodInput
 }
 
 export type NeighborhoodCreateOrConnectWithoutValuationRequestsInput = {
@@ -626,6 +721,7 @@ export type NeighborhoodUpdateWithoutValuationRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUpdateManyWithoutNeighborhoodNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUpdateManyWithoutNeighborhoodNestedInput
 }
 
 export type NeighborhoodUncheckedUpdateWithoutValuationRequestsInput = {
@@ -637,6 +733,7 @@ export type NeighborhoodUncheckedUpdateWithoutValuationRequestsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   properties?: Prisma.PropertyUncheckedUpdateManyWithoutNeighborhoodNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutNeighborhoodNestedInput
+  buyerRequirementNeighborhoods?: Prisma.BuyerRequirementNeighborhoodUncheckedUpdateManyWithoutNeighborhoodNestedInput
 }
 
 
@@ -648,12 +745,14 @@ export type NeighborhoodCountOutputType = {
   properties: number
   projects: number
   valuationRequests: number
+  buyerRequirementNeighborhoods: number
 }
 
 export type NeighborhoodCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   properties?: boolean | NeighborhoodCountOutputTypeCountPropertiesArgs
   projects?: boolean | NeighborhoodCountOutputTypeCountProjectsArgs
   valuationRequests?: boolean | NeighborhoodCountOutputTypeCountValuationRequestsArgs
+  buyerRequirementNeighborhoods?: boolean | NeighborhoodCountOutputTypeCountBuyerRequirementNeighborhoodsArgs
 }
 
 /**
@@ -687,6 +786,13 @@ export type NeighborhoodCountOutputTypeCountValuationRequestsArgs<ExtArgs extend
   where?: Prisma.ValuationRequestWhereInput
 }
 
+/**
+ * NeighborhoodCountOutputType without action
+ */
+export type NeighborhoodCountOutputTypeCountBuyerRequirementNeighborhoodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.BuyerRequirementNeighborhoodWhereInput
+}
+
 
 export type NeighborhoodSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -698,6 +804,7 @@ export type NeighborhoodSelect<ExtArgs extends runtime.Types.Extensions.Internal
   properties?: boolean | Prisma.Neighborhood$propertiesArgs<ExtArgs>
   projects?: boolean | Prisma.Neighborhood$projectsArgs<ExtArgs>
   valuationRequests?: boolean | Prisma.Neighborhood$valuationRequestsArgs<ExtArgs>
+  buyerRequirementNeighborhoods?: boolean | Prisma.Neighborhood$buyerRequirementNeighborhoodsArgs<ExtArgs>
   _count?: boolean | Prisma.NeighborhoodCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["neighborhood"]>
 
@@ -733,6 +840,7 @@ export type NeighborhoodInclude<ExtArgs extends runtime.Types.Extensions.Interna
   properties?: boolean | Prisma.Neighborhood$propertiesArgs<ExtArgs>
   projects?: boolean | Prisma.Neighborhood$projectsArgs<ExtArgs>
   valuationRequests?: boolean | Prisma.Neighborhood$valuationRequestsArgs<ExtArgs>
+  buyerRequirementNeighborhoods?: boolean | Prisma.Neighborhood$buyerRequirementNeighborhoodsArgs<ExtArgs>
   _count?: boolean | Prisma.NeighborhoodCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type NeighborhoodIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -744,6 +852,7 @@ export type $NeighborhoodPayload<ExtArgs extends runtime.Types.Extensions.Intern
     properties: Prisma.$PropertyPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     valuationRequests: Prisma.$ValuationRequestPayload<ExtArgs>[]
+    buyerRequirementNeighborhoods: Prisma.$BuyerRequirementNeighborhoodPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1149,6 +1258,7 @@ export interface Prisma__NeighborhoodClient<T, Null = never, ExtArgs extends run
   properties<T extends Prisma.Neighborhood$propertiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Neighborhood$propertiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.Neighborhood$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Neighborhood$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   valuationRequests<T extends Prisma.Neighborhood$valuationRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Neighborhood$valuationRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ValuationRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  buyerRequirementNeighborhoods<T extends Prisma.Neighborhood$buyerRequirementNeighborhoodsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Neighborhood$buyerRequirementNeighborhoodsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BuyerRequirementNeighborhoodPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1646,6 +1756,30 @@ export type Neighborhood$valuationRequestsArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.ValuationRequestScalarFieldEnum | Prisma.ValuationRequestScalarFieldEnum[]
+}
+
+/**
+ * Neighborhood.buyerRequirementNeighborhoods
+ */
+export type Neighborhood$buyerRequirementNeighborhoodsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BuyerRequirementNeighborhood
+   */
+  select?: Prisma.BuyerRequirementNeighborhoodSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BuyerRequirementNeighborhood
+   */
+  omit?: Prisma.BuyerRequirementNeighborhoodOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BuyerRequirementNeighborhoodInclude<ExtArgs> | null
+  where?: Prisma.BuyerRequirementNeighborhoodWhereInput
+  orderBy?: Prisma.BuyerRequirementNeighborhoodOrderByWithRelationInput | Prisma.BuyerRequirementNeighborhoodOrderByWithRelationInput[]
+  cursor?: Prisma.BuyerRequirementNeighborhoodWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.BuyerRequirementNeighborhoodScalarFieldEnum | Prisma.BuyerRequirementNeighborhoodScalarFieldEnum[]
 }
 
 /**

@@ -399,6 +399,10 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Neighborhood: 'Neighborhood',
   User: 'User',
+  Contact: 'Contact',
+  ContactRole: 'ContactRole',
+  BuyerRequirement: 'BuyerRequirement',
+  BuyerRequirementNeighborhood: 'BuyerRequirementNeighborhood',
   Project: 'Project',
   Property: 'Property',
   PropertyImage: 'PropertyImage',
@@ -421,7 +425,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "neighborhood" | "user" | "project" | "property" | "propertyImage" | "propertyVideo" | "inquiry" | "valuationRequest" | "testimonial"
+    modelProps: "neighborhood" | "user" | "contact" | "contactRole" | "buyerRequirement" | "buyerRequirementNeighborhood" | "project" | "property" | "propertyImage" | "propertyVideo" | "inquiry" | "valuationRequest" | "testimonial"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -570,6 +574,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.UserCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.UserCountAggregateOutputType> | number
+        }
+      }
+    }
+    Contact: {
+      payload: Prisma.$ContactPayload<ExtArgs>
+      fields: Prisma.ContactFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        findFirst: {
+          args: Prisma.ContactFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        findMany: {
+          args: Prisma.ContactFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
+        }
+        create: {
+          args: Prisma.ContactCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        createMany: {
+          args: Prisma.ContactCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
+        }
+        delete: {
+          args: Prisma.ContactDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        update: {
+          args: Prisma.ContactUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactPayload>
+        }
+        aggregate: {
+          args: Prisma.ContactAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContact>
+        }
+        groupBy: {
+          args: Prisma.ContactGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactCountAggregateOutputType> | number
+        }
+      }
+    }
+    ContactRole: {
+      payload: Prisma.$ContactRolePayload<ExtArgs>
+      fields: Prisma.ContactRoleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ContactRoleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ContactRoleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        findFirst: {
+          args: Prisma.ContactRoleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ContactRoleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        findMany: {
+          args: Prisma.ContactRoleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>[]
+        }
+        create: {
+          args: Prisma.ContactRoleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        createMany: {
+          args: Prisma.ContactRoleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ContactRoleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>[]
+        }
+        delete: {
+          args: Prisma.ContactRoleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        update: {
+          args: Prisma.ContactRoleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        deleteMany: {
+          args: Prisma.ContactRoleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ContactRoleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ContactRoleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>[]
+        }
+        upsert: {
+          args: Prisma.ContactRoleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ContactRolePayload>
+        }
+        aggregate: {
+          args: Prisma.ContactRoleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateContactRole>
+        }
+        groupBy: {
+          args: Prisma.ContactRoleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactRoleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ContactRoleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ContactRoleCountAggregateOutputType> | number
+        }
+      }
+    }
+    BuyerRequirement: {
+      payload: Prisma.$BuyerRequirementPayload<ExtArgs>
+      fields: Prisma.BuyerRequirementFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BuyerRequirementFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BuyerRequirementFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>
+        }
+        findFirst: {
+          args: Prisma.BuyerRequirementFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BuyerRequirementFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>
+        }
+        findMany: {
+          args: Prisma.BuyerRequirementFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>[]
+        }
+        create: {
+          args: Prisma.BuyerRequirementCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>
+        }
+        createMany: {
+          args: Prisma.BuyerRequirementCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BuyerRequirementCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>[]
+        }
+        delete: {
+          args: Prisma.BuyerRequirementDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>
+        }
+        update: {
+          args: Prisma.BuyerRequirementUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>
+        }
+        deleteMany: {
+          args: Prisma.BuyerRequirementDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BuyerRequirementUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BuyerRequirementUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>[]
+        }
+        upsert: {
+          args: Prisma.BuyerRequirementUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementPayload>
+        }
+        aggregate: {
+          args: Prisma.BuyerRequirementAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBuyerRequirement>
+        }
+        groupBy: {
+          args: Prisma.BuyerRequirementGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BuyerRequirementGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BuyerRequirementCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BuyerRequirementCountAggregateOutputType> | number
+        }
+      }
+    }
+    BuyerRequirementNeighborhood: {
+      payload: Prisma.$BuyerRequirementNeighborhoodPayload<ExtArgs>
+      fields: Prisma.BuyerRequirementNeighborhoodFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.BuyerRequirementNeighborhoodFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.BuyerRequirementNeighborhoodFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>
+        }
+        findFirst: {
+          args: Prisma.BuyerRequirementNeighborhoodFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.BuyerRequirementNeighborhoodFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>
+        }
+        findMany: {
+          args: Prisma.BuyerRequirementNeighborhoodFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>[]
+        }
+        create: {
+          args: Prisma.BuyerRequirementNeighborhoodCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>
+        }
+        createMany: {
+          args: Prisma.BuyerRequirementNeighborhoodCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.BuyerRequirementNeighborhoodCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>[]
+        }
+        delete: {
+          args: Prisma.BuyerRequirementNeighborhoodDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>
+        }
+        update: {
+          args: Prisma.BuyerRequirementNeighborhoodUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>
+        }
+        deleteMany: {
+          args: Prisma.BuyerRequirementNeighborhoodDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.BuyerRequirementNeighborhoodUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.BuyerRequirementNeighborhoodUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>[]
+        }
+        upsert: {
+          args: Prisma.BuyerRequirementNeighborhoodUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$BuyerRequirementNeighborhoodPayload>
+        }
+        aggregate: {
+          args: Prisma.BuyerRequirementNeighborhoodAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateBuyerRequirementNeighborhood>
+        }
+        groupBy: {
+          args: Prisma.BuyerRequirementNeighborhoodGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BuyerRequirementNeighborhoodGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.BuyerRequirementNeighborhoodCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.BuyerRequirementNeighborhoodCountAggregateOutputType> | number
         }
       }
     }
@@ -1157,6 +1457,62 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const ContactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  email: 'email',
+  notes: 'notes',
+  assignedAgentId: 'assignedAgentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactScalarFieldEnum = (typeof ContactScalarFieldEnum)[keyof typeof ContactScalarFieldEnum]
+
+
+export const ContactRoleScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  role: 'role',
+  notes: 'notes',
+  active: 'active',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactRoleScalarFieldEnum = (typeof ContactRoleScalarFieldEnum)[keyof typeof ContactRoleScalarFieldEnum]
+
+
+export const BuyerRequirementScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  dealType: 'dealType',
+  propertyType: 'propertyType',
+  minRooms: 'minRooms',
+  maxRooms: 'maxRooms',
+  minArea: 'minArea',
+  maxArea: 'maxArea',
+  minPrice: 'minPrice',
+  maxPrice: 'maxPrice',
+  notes: 'notes',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BuyerRequirementScalarFieldEnum = (typeof BuyerRequirementScalarFieldEnum)[keyof typeof BuyerRequirementScalarFieldEnum]
+
+
+export const BuyerRequirementNeighborhoodScalarFieldEnum = {
+  id: 'id',
+  buyerRequirementId: 'buyerRequirementId',
+  neighborhoodId: 'neighborhoodId',
+  preferenceType: 'preferenceType'
+} as const
+
+export type BuyerRequirementNeighborhoodScalarFieldEnum = (typeof BuyerRequirementNeighborhoodScalarFieldEnum)[keyof typeof BuyerRequirementNeighborhoodScalarFieldEnum]
+
+
 export const ProjectScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1181,11 +1537,15 @@ export const PropertyScalarFieldEnum = {
   price: 'price',
   neighborhoodId: 'neighborhoodId',
   address: 'address',
+  street: 'street',
+  houseNumber: 'houseNumber',
   rooms: 'rooms',
   area: 'area',
   floor: 'floor',
   totalFloors: 'totalFloors',
   status: 'status',
+  internalNotes: 'internalNotes',
+  representationType: 'representationType',
   parking: 'parking',
   elevator: 'elevator',
   balcony: 'balcony',
@@ -1196,6 +1556,7 @@ export const PropertyScalarFieldEnum = {
   furnished: 'furnished',
   agentId: 'agentId',
   projectId: 'projectId',
+  ownerContactId: 'ownerContactId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1231,6 +1592,7 @@ export type PropertyVideoScalarFieldEnum = (typeof PropertyVideoScalarFieldEnum)
 export const InquiryScalarFieldEnum = {
   id: 'id',
   propertyId: 'propertyId',
+  contactId: 'contactId',
   agentId: 'agentId',
   name: 'name',
   phone: 'phone',
@@ -1268,6 +1630,7 @@ export type ValuationRequestScalarFieldEnum = (typeof ValuationRequestScalarFiel
 
 export const TestimonialScalarFieldEnum = {
   id: 'id',
+  contactId: 'contactId',
   name: 'name',
   displayName: 'displayName',
   content: 'content',
@@ -1373,16 +1736,16 @@ export type ListEnumUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
 
 
 /**
- * Reference to a field of type 'ProjectStatus'
+ * Reference to a field of type 'ContactRoleType'
  */
-export type EnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus'>
+export type EnumContactRoleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactRoleType'>
     
 
 
 /**
- * Reference to a field of type 'ProjectStatus[]'
+ * Reference to a field of type 'ContactRoleType[]'
  */
-export type ListEnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus[]'>
+export type ListEnumContactRoleTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ContactRoleType[]'>
     
 
 
@@ -1429,6 +1792,34 @@ export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMo
 
 
 /**
+ * Reference to a field of type 'RequirementPreferenceType'
+ */
+export type EnumRequirementPreferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RequirementPreferenceType'>
+    
+
+
+/**
+ * Reference to a field of type 'RequirementPreferenceType[]'
+ */
+export type ListEnumRequirementPreferenceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RequirementPreferenceType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectStatus'
+ */
+export type EnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'ProjectStatus[]'
+ */
+export type ListEnumProjectStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectStatus[]'>
+    
+
+
+/**
  * Reference to a field of type 'PropertyStatus'
  */
 export type EnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatus'>
@@ -1439,6 +1830,20 @@ export type EnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$P
  * Reference to a field of type 'PropertyStatus[]'
  */
 export type ListEnumPropertyStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'RepresentationType'
+ */
+export type EnumRepresentationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RepresentationType'>
+    
+
+
+/**
+ * Reference to a field of type 'RepresentationType[]'
+ */
+export type ListEnumRepresentationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'RepresentationType[]'>
     
 
 
@@ -1664,6 +2069,10 @@ export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaC
 export type GlobalOmitConfig = {
   neighborhood?: Prisma.NeighborhoodOmit
   user?: Prisma.UserOmit
+  contact?: Prisma.ContactOmit
+  contactRole?: Prisma.ContactRoleOmit
+  buyerRequirement?: Prisma.BuyerRequirementOmit
+  buyerRequirementNeighborhood?: Prisma.BuyerRequirementNeighborhoodOmit
   project?: Prisma.ProjectOmit
   property?: Prisma.PropertyOmit
   propertyImage?: Prisma.PropertyImageOmit
