@@ -1567,6 +1567,7 @@ export type PropertyScalarFieldEnum = (typeof PropertyScalarFieldEnum)[keyof typ
 export const PropertyImageScalarFieldEnum = {
   id: 'id',
   propertyId: 'propertyId',
+  storageKey: 'storageKey',
   url: 'url',
   alt: 'alt',
   sortOrder: 'sortOrder',

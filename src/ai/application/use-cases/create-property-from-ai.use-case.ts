@@ -25,7 +25,7 @@ export interface Actor {
 }
 
 export interface CreatePropertyFromAIResult {
-  property: PropertyData;
+  property: PropertyData | null;
   extraction: PropertyExtractionResult;
   warnings: string[];
 }
@@ -49,22 +49,29 @@ export class CreatePropertyFromAIUseCase {
 
     // 2. Resolve neighborhood
     let neighborhoodId: string | undefined;
+
     if (extraction.neighborhoodName.value) {
       const neighborhoods = await this.neighborhoodRepository.findAll();
-      const match = neighborhoods.find(
-        (n) =>
-          n.name.trim().toLowerCase() ===
-          extraction.neighborhoodName.value!.trim().toLowerCase()
-      );
-      
+      const normalizedInput = this.normalizeNeighborhoodName(extraction.neighborhoodName.value);
+
+      const match = neighborhoods.find((n) => {
+        const normalizedDb = this.normalizeNeighborhoodName(n.name);
+        return normalizedDb === normalizedInput;
+      });
+
       if (match) {
         neighborhoodId = match.id;
       } else {
-        // Neighborhood not found - will be caught by validation below
-        neighborhoodId = undefined;
-        warnings.push(`לא הצלחתי לזהות את השכונה "${extraction.neighborhoodName.value}". אנא בחר שכונה מהרשימה.`);
+        // AI provided a neighborhood but it doesn't match any DB record
+        // This is a validation error - user must manually select
+        throw new ValidationError(
+          `לא הצלחתי לזהות את השכונה "${extraction.neighborhoodName.value}". אנא בחר שכונה מהרשימה.`,
+          { neighborhoodId: "שכונה לא תקינה או חסרה" }
+        );
       }
     } else {
+      // AI did not provide a neighborhood at all
+      // This is acceptable - return extraction without creating property
       warnings.push("לא צוין שם שכונה. אנא בחר שכונה מהרשימה.");
     }
 
@@ -87,7 +94,16 @@ export class CreatePropertyFromAIUseCase {
       warnings.push("לא צוין שטח הנכס.");
     }
 
-    // 3. Map extraction to CreatePropertyInput
+    // 3. If no neighborhood was resolved, return extraction without creating property
+    if (!neighborhoodId) {
+      return {
+        property: null,
+        extraction,
+        warnings,
+      };
+    }
+
+    // 4. Map extraction to CreatePropertyInput
     const propertyInput: CreatePropertyInput = {
       // Core fields
       title: extraction.title.value || "נכס חדש (טעון בדיקה)",
@@ -97,7 +113,7 @@ export class CreatePropertyFromAIUseCase {
       price: extraction.price.value || "0",
 
       // Location
-      neighborhoodId: neighborhoodId || "", // Will fail validation if empty
+      neighborhoodId: neighborhoodId, // Now guaranteed to be non-empty
       address: extraction.address.value ?? null,
 
       // Details
@@ -124,14 +140,7 @@ export class CreatePropertyFromAIUseCase {
       status: "DRAFT",
     };
 
-    // 4. Validate minimum requirements
-    if (!neighborhoodId) {
-      throw new ValidationError(
-        "לא הצלחתי לזהות את השכונה. אנא בחר שכונה מהרשימה.",
-        { neighborhoodId: "שכונה לא תקינה או חסרה" }
-      );
-    }
-
+    // 5. Validate minimum requirements (title is required)
     if (!propertyInput.title || propertyInput.title.trim().length === 0) {
       throw new ValidationError(
         "כותרת הנכס חסרה. אנא הוסף כותרת.",
@@ -139,7 +148,7 @@ export class CreatePropertyFromAIUseCase {
       );
     }
 
-    // 5. Create property as DRAFT
+    // 6. Create property as DRAFT
     const property = await this.propertyRepository.create(propertyInput);
 
     return {
@@ -147,5 +156,31 @@ export class CreatePropertyFromAIUseCase {
       extraction,
       warnings,
     };
+  }
+
+  /**
+   * Normalize neighborhood name for consistent matching.
+   *
+   * Handles common formatting variations:
+   * - Case differences
+   * - Extra whitespace
+   * - Common punctuation separators (-, _, parentheses)
+   *
+   * Examples:
+   * - "קטמון הישנה" → "קטמון הישנה"
+   * - "קטמון-הישנה" → "קטמון הישנה"
+   * - "קטמון (הישנה)" → "קטמון הישנה"
+   * - "קטמון   הישנה" → "קטמון הישנה"
+   *
+   * IMPORTANT: This does NOT perform fuzzy matching.
+   * After normalization, an exact match is still required.
+   */
+  private normalizeNeighborhoodName(name: string): string {
+    return name
+      .trim()                        // Remove leading/trailing whitespace
+      .toLowerCase()                 // Case-insensitive comparison
+      .replace(/[-_()]/g, ' ')       // Replace punctuation separators with space
+      .replace(/\s+/g, ' ')          // Collapse multiple spaces into one
+      .trim();                       // Remove any resulting leading/trailing space
   }
 }

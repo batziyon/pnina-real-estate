@@ -12,6 +12,7 @@ import { UpdatePropertySchemaClient } from "@/validations/property.schema.client
 import type { NeighborhoodData } from "@/domain/neighborhood/neighborhood.types";
 import type { UserData } from "@/domain/user/user.types";
 import type { PropertyData, DealType, PropertyType } from "@/domain/property/property.types";
+import { PropertyMediaUpload } from "./PropertyMediaUpload";
 
 interface PropertyFormProps {
   neighborhoods: NeighborhoodData[];
@@ -375,20 +376,19 @@ export function PropertyForm({
         </div>
       </div>
 
-      {/* Media Section — Placeholder */}
-      <div className="bg-white rounded-lg shadow p-6 space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">מדיה</h2>
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center">
-          <div className="text-gray-500 space-y-2">
-            <p className="font-medium">ניהול תמונות וסרטונים יהיה זמין בשלב הבא</p>
-            <p className="text-sm">
-              במערכת זו לא יאוחסן תוכן מדיה בבסיס הנתונים.
-              <br />
-              תמיכה בהעלאה לשירות אחסון חיצוני תתווסף בפאזה עתידית.
-            </p>
-          </div>
+      {/* Media Section */}
+      {isEdit && initialData && (
+        <div className="bg-white rounded-lg shadow p-6 space-y-4">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">תמונות</h2>
+          <PropertyMediaUpload
+            propertyId={initialData.id}
+            onUploadComplete={() => {
+              // Refresh page to show new images
+              window.location.reload();
+            }}
+          />
         </div>
-      </div>
+      )}
 
       {/* Publish Settings */}
       {isEdit && (

@@ -54,6 +54,7 @@ function toImageData(record: PrismaPropertyImage): PropertyImageData {
   return {
     id: record.id,
     propertyId: record.propertyId,
+    storageKey: record.storageKey,
     url: record.url,
     alt: record.alt,
     sortOrder: record.sortOrder,
@@ -257,11 +258,13 @@ export class PrismaPropertyRepository implements PropertyRepository {
 
   async addImage(
     propertyId: string,
-    data: Omit<PropertyImageData, "id" | "propertyId" | "createdAt">
+    data: Omit<PropertyImageData, "propertyId" | "createdAt">
   ): Promise<PropertyImageData> {
     const record = await prisma.propertyImage.create({
       data: {
+        id: data.id,  // Client-provided ID from upload intent
         propertyId,
+        storageKey: data.storageKey ?? null,
         url: data.url,
         alt: data.alt ?? null,
         sortOrder: data.sortOrder ?? 0,
@@ -269,6 +272,46 @@ export class PrismaPropertyRepository implements PropertyRepository {
       },
     });
     return toImageData(record);
+  }
+
+  async findImageById(imageId: string): Promise<PropertyImageData | null> {
+    const record = await prisma.propertyImage.findUnique({
+      where: { id: imageId },
+    });
+    return record ? toImageData(record) : null;
+  }
+
+  async updateImage(
+    imageId: string,
+    data: Partial<Pick<PropertyImageData, "isMain" | "sortOrder" | "alt">>
+  ): Promise<PropertyImageData> {
+    const record = await prisma.propertyImage.update({
+      where: { id: imageId },
+      data: {
+        ...(data.isMain !== undefined && { isMain: data.isMain }),
+        ...(data.sortOrder !== undefined && { sortOrder: data.sortOrder }),
+        ...(data.alt !== undefined && { alt: data.alt }),
+      },
+    });
+    return toImageData(record);
+  }
+
+  async setImageAsMain(propertyId: string, imageId: string): Promise<PropertyImageData> {
+    // Transaction: unset current main, set new main
+    const [, updatedImage] = await prisma.$transaction([
+      // Unset all mains for this property
+      prisma.propertyImage.updateMany({
+        where: { propertyId, isMain: true },
+        data: { isMain: false },
+      }),
+      // Set requested image as main
+      prisma.propertyImage.update({
+        where: { id: imageId },
+        data: { isMain: true },
+      }),
+    ]);
+
+    return toImageData(updatedImage);
   }
 
   async deleteImage(imageId: string): Promise<void> {

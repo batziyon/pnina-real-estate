@@ -207,3 +207,57 @@ export function toContactAdminDTO(
     updatedAt: contact.updatedAt.toISOString(),
   };
 }
+
+// ---------------------------------------------------------------------------
+// Buyer Requirement DTO
+// ---------------------------------------------------------------------------
+
+import type { BuyerRequirementData } from "@/domain/buyer-requirement/buyer-requirement.types";
+
+export interface BuyerRequirementAdminDTO {
+  id: string;
+  contactId: string;
+  dealType: string;
+  propertyType: string | null;
+  minRooms: number | null;
+  maxRooms: number | null;
+  minArea: number | null;
+  maxArea: number | null;
+  minPrice: number | null;
+  maxPrice: number | null;
+  notes: string | null;
+  active: boolean;
+  neighborhoods: Array<{
+    neighborhoodId: string;
+    preferenceType: string;
+    neighborhoodName: string | undefined;
+  }>;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export function mapBuyerRequirementToDTO(
+  requirement: BuyerRequirementData
+): BuyerRequirementAdminDTO {
+  return {
+    id: requirement.id,
+    contactId: requirement.contactId,
+    dealType: requirement.dealType,
+    propertyType: requirement.propertyType,
+    minRooms: requirement.minRooms,
+    maxRooms: requirement.maxRooms,
+    minArea: requirement.minArea,
+    maxArea: requirement.maxArea,
+    minPrice: requirement.minPrice,
+    maxPrice: requirement.maxPrice,
+    notes: requirement.notes,
+    active: requirement.active,
+    neighborhoods: requirement.neighborhoods.map((n) => ({
+      neighborhoodId: n.neighborhoodId,
+      preferenceType: n.preferenceType,
+      neighborhoodName: n.neighborhoodName,
+    })),
+    createdAt: requirement.createdAt.toISOString(),
+    updatedAt: requirement.updatedAt.toISOString(),
+  };
+}

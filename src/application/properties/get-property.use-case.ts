@@ -20,4 +20,9 @@ export class GetPropertyUseCase {
     if (!property) throw new EntityNotFoundError("Property", id);
     return property;
   }
+
+  /** Returns all images for a property. */
+  async getImages(id: string): Promise<PropertyImageData[]> {
+    return await this.propertyRepository.findImages(id);
+  }
 }

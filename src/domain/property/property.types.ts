@@ -56,6 +56,7 @@ export interface PropertyFeatures {
 export interface PropertyImageData {
   id: string;
   propertyId: string;
+  storageKey: string | null;
   url: string;
   alt: string | null;
   sortOrder: number;

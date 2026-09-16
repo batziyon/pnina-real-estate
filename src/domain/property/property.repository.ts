@@ -53,11 +53,23 @@ export interface PropertyRepository {
   /** Return all images for a property ordered by sortOrder. */
   findImages(propertyId: string): Promise<PropertyImageData[]>;
 
-  /** Add an image record to a property. */
+  /** Find a single image by its ID. Returns null if not found. */
+  findImageById(imageId: string): Promise<PropertyImageData | null>;
+
+  /** Add an image record to a property. ID must be provided from upload intent. */
   addImage(
     propertyId: string,
-    data: Omit<PropertyImageData, "id" | "propertyId" | "createdAt">
+    data: Omit<PropertyImageData, "propertyId" | "createdAt">
   ): Promise<PropertyImageData>;
+
+  /** Update an existing image record. */
+  updateImage(
+    imageId: string,
+    data: Partial<Pick<PropertyImageData, "isMain" | "sortOrder" | "alt">>
+  ): Promise<PropertyImageData>;
+
+  /** Set an image as main (unsets other mains in same property). */
+  setImageAsMain(propertyId: string, imageId: string): Promise<PropertyImageData>;
 
   /** Delete a single image record. */
   deleteImage(imageId: string): Promise<void>;

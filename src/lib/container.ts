@@ -23,6 +23,7 @@ import { PrismaInquiryRepository } from "@/infrastructure/inquiry/prisma-inquiry
 import { PrismaValuationRequestRepository } from "@/infrastructure/valuation/prisma-valuation-request.repository";
 import { PrismaTestimonialRepository } from "@/infrastructure/testimonial/prisma-testimonial.repository";
 import { PrismaContactRepository } from "@/infrastructure/contact/prisma-contact.repository";
+import { PrismaBuyerRequirementRepository } from "@/infrastructure/buyer-requirement/prisma-buyer-requirement.repository";
 
 import type { NeighborhoodRepository } from "@/domain/neighborhood/neighborhood.repository";
 import type { UserRepository } from "@/domain/user/user.repository";
@@ -32,6 +33,10 @@ import type { InquiryRepository } from "@/domain/inquiry/inquiry.repository";
 import type { ValuationRequestRepository } from "@/domain/valuation/valuation.repository";
 import type { TestimonialRepository } from "@/domain/testimonial/testimonial.repository";
 import type { ContactRepository } from "@/domain/contact/contact.repository";
+import type { BuyerRequirementRepository } from "@/domain/buyer-requirement/buyer-requirement.repository";
+import type { ObjectStoragePort } from "@/application/ports/storage/object-storage.port";
+
+import { createObjectStorage } from "@/infrastructure/storage/storage.factory";
 
 // ---------------------------------------------------------------------------
 // Repository instances — one instance per process (repositories are stateless).
@@ -56,6 +61,15 @@ const testimonialRepository: TestimonialRepository =
 
 const contactRepository: ContactRepository = new PrismaContactRepository();
 
+const buyerRequirementRepository: BuyerRequirementRepository =
+  new PrismaBuyerRequirementRepository();
+
+// ---------------------------------------------------------------------------
+// Service instances — stateless services (storage, etc.)
+// ---------------------------------------------------------------------------
+
+const objectStorage: ObjectStoragePort = createObjectStorage();
+
 // ---------------------------------------------------------------------------
 // Container — exported as typed repository interfaces, never as concrete classes.
 // Callers depend on the interface, not the implementation.
@@ -71,6 +85,10 @@ export const container = {
     valuationRequest: valuationRequestRepository,
     testimonial: testimonialRepository,
     contact: contactRepository,
+    buyerRequirement: buyerRequirementRepository,
+  },
+  services: {
+    objectStorage,
   },
 } as const;
 
@@ -89,6 +107,8 @@ export {
   valuationRequestRepository,
   testimonialRepository,
   contactRepository,
+  buyerRequirementRepository,
+  objectStorage,
 };
 
 // ---------------------------------------------------------------------------
@@ -106,6 +126,11 @@ import { ReservePropertyUseCase } from "@/application/properties/reserve-propert
 import { MarkPropertySoldUseCase } from "@/application/properties/mark-sold.use-case";
 import { MarkPropertyRentedUseCase } from "@/application/properties/mark-rented.use-case";
 import { GetPropertyStatisticsUseCase } from "@/application/properties/get-property-statistics.use-case";
+import { GenerateImageUploadUseCase } from "@/application/properties/media/generate-image-upload.use-case";
+import { ConfirmImageUploadUseCase } from "@/application/properties/media/confirm-image-upload.use-case";
+import { DeleteImageUseCase } from "@/application/properties/media/delete-image.use-case";
+import { SetMainImageUseCase } from "@/application/properties/media/set-main-image.use-case";
+import { ReorderImagesUseCase } from "@/application/properties/media/reorder-images.use-case";
 
 import { CreateProjectUseCase } from "@/application/projects/create-project.use-case";
 import { UpdateProjectUseCase } from "@/application/projects/update-project.use-case";
@@ -142,6 +167,12 @@ import { UpdateContactUseCase } from "@/application/contacts/update-contact.use-
 import { GetContactUseCase } from "@/application/contacts/get-contact.use-case";
 import { ListContactsUseCase } from "@/application/contacts/list-contacts.use-case";
 
+import { CreateBuyerRequirementUseCase } from "@/application/buyer-requirements/create-buyer-requirement.use-case";
+import { UpdateBuyerRequirementUseCase } from "@/application/buyer-requirements/update-buyer-requirement.use-case";
+import { GetBuyerRequirementUseCase } from "@/application/buyer-requirements/get-buyer-requirement.use-case";
+import { ListContactBuyerRequirementsUseCase } from "@/application/buyer-requirements/list-contact-buyer-requirements.use-case";
+import { DeactivateBuyerRequirementUseCase } from "@/application/buyer-requirements/deactivate-buyer-requirement.use-case";
+
 import { CreatePropertyFromAIUseCase } from "@/ai/application/use-cases/create-property-from-ai.use-case";
 import { getAIPropertyExtractor } from "@/lib/ai-container";
 
@@ -158,6 +189,11 @@ export const useCases = {
     markSold: new MarkPropertySoldUseCase(propertyRepository),
     markRented: new MarkPropertyRentedUseCase(propertyRepository),
     getStatistics: new GetPropertyStatisticsUseCase(propertyRepository),
+    generateImageUpload: new GenerateImageUploadUseCase(propertyRepository, objectStorage),
+    confirmImageUpload: new ConfirmImageUploadUseCase(propertyRepository, objectStorage),
+    deleteImage: new DeleteImageUseCase(propertyRepository, objectStorage),
+    setMainImage: new SetMainImageUseCase(propertyRepository),
+    reorderImages: new ReorderImagesUseCase(propertyRepository),
   },
   projects: {
     create: new CreateProjectUseCase(projectRepository, neighborhoodRepository),
@@ -201,6 +237,30 @@ export const useCases = {
     update: new UpdateContactUseCase(contactRepository, userRepository),
     get: new GetContactUseCase(contactRepository),
     list: new ListContactsUseCase(contactRepository),
+  },
+  buyerRequirements: {
+    create: new CreateBuyerRequirementUseCase(
+      buyerRequirementRepository,
+      contactRepository,
+      neighborhoodRepository
+    ),
+    update: new UpdateBuyerRequirementUseCase(
+      buyerRequirementRepository,
+      contactRepository,
+      neighborhoodRepository
+    ),
+    get: new GetBuyerRequirementUseCase(
+      buyerRequirementRepository,
+      contactRepository
+    ),
+    listByContact: new ListContactBuyerRequirementsUseCase(
+      buyerRequirementRepository,
+      contactRepository
+    ),
+    deactivate: new DeactivateBuyerRequirementUseCase(
+      buyerRequirementRepository,
+      contactRepository
+    ),
   },
   // AI use cases with lazy initialization (requires GEMINI_API_KEY at runtime)
   get ai() {

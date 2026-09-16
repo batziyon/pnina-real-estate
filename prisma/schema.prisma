@@ -363,9 +363,10 @@ model Property {
 // =============================================================================
 
 model PropertyImage {
-  id         String   @id @default(cuid())
+  id         String   @id  // Client-provided from upload intent (no auto-generation)
   propertyId String
-  url        String
+  storageKey String?  @unique  // Storage location (source of truth for new uploads)
+  url        String   // Public CDN URL
   alt        String?
   sortOrder  Int      @default(0)
   isMain     Boolean  @default(false)

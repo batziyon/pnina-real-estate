@@ -22,38 +22,67 @@ const prisma = new PrismaClient({ adapter });
 
 // ---------------------------------------------------------------------------
 // Jerusalem neighborhoods — sortOrder controls admin UI display order.
+// Complete list of Jerusalem neighborhoods (alphabetical in Hebrew).
 // ---------------------------------------------------------------------------
 
 const neighborhoods: { name: string; sortOrder: number }[] = [
-  // Central / prestigious
-  { name: "רחביה",              sortOrder: 10 },
-  { name: "טלביה",              sortOrder: 20 },
-  { name: "מרכז העיר",          sortOrder: 30 },
-  { name: "נחלאות",             sortOrder: 40 },
-  { name: "ניות",               sortOrder: 50 },
-
-  // South / German Colony area
-  { name: "בקעה",               sortOrder: 60 },
-  { name: "המושבה הגרמנית",     sortOrder: 70 },
-  { name: "המושבה האמריקאית",   sortOrder: 80 },
-  { name: "קטמון",              sortOrder: 90 },
-  { name: "קטמון הישנה",        sortOrder: 100 },
-  { name: "ארנונה",             sortOrder: 110 },
-  { name: "תלפיות",             sortOrder: 120 },
-
-  // West
-  { name: "בית הכרם",           sortOrder: 130 },
-  { name: "רמת שרת",            sortOrder: 140 },
-  { name: "עין כרם",            sortOrder: 150 },
-
-  // North / North-East
-  { name: "רמות",               sortOrder: 160 },
-  { name: "פסגת זאב",           sortOrder: 170 },
-  { name: "גבעת משואה",         sortOrder: 180 },
-
-  // South / periphery
-  { name: "גילה",               sortOrder: 190 },
-  { name: "הר חומה",            sortOrder: 200 },
+  { name: "אבו תור",                          sortOrder: 10 },
+  { name: "בית הכרם",                         sortOrder: 20 },
+  { name: "בית וגן",                          sortOrder: 30 },
+  { name: "בית חנינא",                        sortOrder: 40 },
+  { name: "בית צפאפא",                        sortOrder: 50 },
+  { name: "בקעה",                             sortOrder: 60 },
+  { name: "ג'אבל מוכבר",                      sortOrder: 70 },
+  { name: "גבעת מרדכי",                       sortOrder: 80 },
+  { name: "גבעת משואה",                       sortOrder: 90 },
+  { name: "גבעת שאול",                        sortOrder: 100 },
+  { name: "גוננים - קטמונים",                sortOrder: 110 },
+  { name: "גילה",                             sortOrder: 120 },
+  { name: "הבוכרים – בית ישראל",             sortOrder: 130 },
+  { name: "הגבעה הצרפתית",                    sortOrder: 140 },
+  { name: "המושבה האמריקאית",                 sortOrder: 150 },
+  { name: "המושבה הגרמנית",                   sortOrder: 160 },
+  { name: "הר חומה",                          sortOrder: 170 },
+  { name: "הר נוף",                           sortOrder: 180 },
+  { name: "הרובע היהודי",                     sortOrder: 190 },
+  { name: "הרובע המוסלמי",                    sortOrder: 200 },
+  { name: "ואדי ג'וז",                        sortOrder: 210 },
+  { name: "טלביה – קוממיות",                  sortOrder: 220 },
+  { name: "ימין משה",                         sortOrder: 230 },
+  { name: "מאה שערים",                        sortOrder: 240 },
+  { name: "מוסררה - מורשה",                   sortOrder: 250 },
+  { name: "מלחה",                             sortOrder: 260 },
+  { name: "ממילא",                            sortOrder: 270 },
+  { name: "מעלות דפנה",                       sortOrder: 280 },
+  { name: "מרכז העיר",                        sortOrder: 290 },
+  { name: "נווה יעקב",                        sortOrder: 300 },
+  { name: "נחלאות - לב העיר",                 sortOrder: 310 },
+  { name: "ניות",                             sortOrder: 320 },
+  { name: "סילואן",                           sortOrder: 330 },
+  { name: "סנהדריה",                          sortOrder: 340 },
+  { name: "עין כרם",                          sortOrder: 350 },
+  { name: "עיסוויה",                          sortOrder: 360 },
+  { name: "עיר גנים",                         sortOrder: 370 },
+  { name: "פסגת זאב",                         sortOrder: 380 },
+  { name: "פת",                               sortOrder: 390 },
+  { name: "צור באחר – אום טובה",              sortOrder: 400 },
+  { name: "קטמון",                            sortOrder: 410 },
+  { name: "קריית יובל",                       sortOrder: 420 },
+  { name: "קריית מנחם",                       sortOrder: 430 },
+  { name: "קריית משה",                        sortOrder: 440 },
+  { name: "ראס אל עמוד",                      sortOrder: 450 },
+  { name: "רוממה",                            sortOrder: 460 },
+  { name: "רחביה",                            sortOrder: 470 },
+  { name: "רמות",                             sortOrder: 480 },
+  { name: "רמת אשכול",                        sortOrder: 490 },
+  { name: "רמת שלמה",                         sortOrder: 500 },
+  { name: "רמת שרת ורמת דניה",                sortOrder: 510 },
+  { name: "רסקו - גבעת הורדים",               sortOrder: 520 },
+  { name: "שועפט",                            sortOrder: 530 },
+  { name: "שיח ג'ראח",                        sortOrder: 540 },
+  { name: "שמואל הנביא",                      sortOrder: 550 },
+  { name: "תלפיות – ארנונה",                  sortOrder: 560 },
+  { name: "תלפיות מזרח - ארמון הנציב",        sortOrder: 570 },
 ];
 
 async function main() {

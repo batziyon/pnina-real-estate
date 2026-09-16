@@ -8,6 +8,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireAuth } from "@/lib/auth-helpers";
 import { ContactForm } from "@/components/admin/ContactForm";
+import { BuyerRequirementsSection } from "@/components/admin/BuyerRequirementsSection";
 
 export const dynamic = "force-dynamic";
 
@@ -83,6 +84,27 @@ export default async function ContactDetailPage({
       }
     } catch {
       // Ignore agents fetch error
+    }
+  }
+
+  // Fetch buyer requirements (only in view mode)
+  let buyerRequirements: unknown[] = [];
+  if (!isEditMode) {
+    try {
+      const requirementsResponse = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/contacts/${id}/requirements`,
+        {
+          headers: {
+            Cookie: (await import("next/headers")).cookies().toString(),
+          },
+          cache: "no-store",
+        }
+      );
+      if (requirementsResponse.ok) {
+        buyerRequirements = await requirementsResponse.json();
+      }
+    } catch {
+      // Ignore requirements fetch error
     }
   }
 
@@ -215,18 +237,19 @@ export default async function ContactDetailPage({
         </div>
       )}
 
-      {/* CRM Hub - Placeholder Sections */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Buyer Requirements */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            דרישות חיפוש
-          </h2>
-          <div className="text-center py-8">
-            <p className="text-gray-500">דרישות קנייה/שכירות יופיעו כאן</p>
-          </div>
+      {/* Buyer Requirements - Real Implementation */}
+      <div className="bg-white rounded-lg shadow p-6 lg:col-span-2">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-900">דרישות חיפוש</h2>
         </div>
+        <BuyerRequirementsSection
+          contactId={contact.id}
+          initialRequirements={buyerRequirements as never[]}
+        />
+      </div>
 
+      {/* CRM Hub - Future Placeholder Sections */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Matching Properties */}
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">

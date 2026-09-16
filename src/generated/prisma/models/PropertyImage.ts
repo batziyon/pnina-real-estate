@@ -37,6 +37,7 @@ export type PropertyImageSumAggregateOutputType = {
 export type PropertyImageMinAggregateOutputType = {
   id: string | null
   propertyId: string | null
+  storageKey: string | null
   url: string | null
   alt: string | null
   sortOrder: number | null
@@ -47,6 +48,7 @@ export type PropertyImageMinAggregateOutputType = {
 export type PropertyImageMaxAggregateOutputType = {
   id: string | null
   propertyId: string | null
+  storageKey: string | null
   url: string | null
   alt: string | null
   sortOrder: number | null
@@ -57,6 +59,7 @@ export type PropertyImageMaxAggregateOutputType = {
 export type PropertyImageCountAggregateOutputType = {
   id: number
   propertyId: number
+  storageKey: number
   url: number
   alt: number
   sortOrder: number
@@ -77,6 +80,7 @@ export type PropertyImageSumAggregateInputType = {
 export type PropertyImageMinAggregateInputType = {
   id?: true
   propertyId?: true
+  storageKey?: true
   url?: true
   alt?: true
   sortOrder?: true
@@ -87,6 +91,7 @@ export type PropertyImageMinAggregateInputType = {
 export type PropertyImageMaxAggregateInputType = {
   id?: true
   propertyId?: true
+  storageKey?: true
   url?: true
   alt?: true
   sortOrder?: true
@@ -97,6 +102,7 @@ export type PropertyImageMaxAggregateInputType = {
 export type PropertyImageCountAggregateInputType = {
   id?: true
   propertyId?: true
+  storageKey?: true
   url?: true
   alt?: true
   sortOrder?: true
@@ -194,6 +200,7 @@ export type PropertyImageGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type PropertyImageGroupByOutputType = {
   id: string
   propertyId: string
+  storageKey: string | null
   url: string
   alt: string | null
   sortOrder: number
@@ -227,6 +234,7 @@ export type PropertyImageWhereInput = {
   NOT?: Prisma.PropertyImageWhereInput | Prisma.PropertyImageWhereInput[]
   id?: Prisma.StringFilter<"PropertyImage"> | string
   propertyId?: Prisma.StringFilter<"PropertyImage"> | string
+  storageKey?: Prisma.StringNullableFilter<"PropertyImage"> | string | null
   url?: Prisma.StringFilter<"PropertyImage"> | string
   alt?: Prisma.StringNullableFilter<"PropertyImage"> | string | null
   sortOrder?: Prisma.IntFilter<"PropertyImage"> | number
@@ -238,6 +246,7 @@ export type PropertyImageWhereInput = {
 export type PropertyImageOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
   alt?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -248,6 +257,7 @@ export type PropertyImageOrderByWithRelationInput = {
 
 export type PropertyImageWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  storageKey?: string
   AND?: Prisma.PropertyImageWhereInput | Prisma.PropertyImageWhereInput[]
   OR?: Prisma.PropertyImageWhereInput[]
   NOT?: Prisma.PropertyImageWhereInput | Prisma.PropertyImageWhereInput[]
@@ -258,11 +268,12 @@ export type PropertyImageWhereUniqueInput = Prisma.AtLeast<{
   isMain?: Prisma.BoolFilter<"PropertyImage"> | boolean
   createdAt?: Prisma.DateTimeFilter<"PropertyImage"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
-}, "id">
+}, "id" | "storageKey">
 
 export type PropertyImageOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
   alt?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -281,6 +292,7 @@ export type PropertyImageScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PropertyImageScalarWhereWithAggregatesInput | Prisma.PropertyImageScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PropertyImage"> | string
   propertyId?: Prisma.StringWithAggregatesFilter<"PropertyImage"> | string
+  storageKey?: Prisma.StringNullableWithAggregatesFilter<"PropertyImage"> | string | null
   url?: Prisma.StringWithAggregatesFilter<"PropertyImage"> | string
   alt?: Prisma.StringNullableWithAggregatesFilter<"PropertyImage"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"PropertyImage"> | number
@@ -289,7 +301,8 @@ export type PropertyImageScalarWhereWithAggregatesInput = {
 }
 
 export type PropertyImageCreateInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   alt?: string | null
   sortOrder?: number
@@ -299,8 +312,9 @@ export type PropertyImageCreateInput = {
 }
 
 export type PropertyImageUncheckedCreateInput = {
-  id?: string
+  id: string
   propertyId: string
+  storageKey?: string | null
   url: string
   alt?: string | null
   sortOrder?: number
@@ -310,6 +324,7 @@ export type PropertyImageUncheckedCreateInput = {
 
 export type PropertyImageUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -321,6 +336,7 @@ export type PropertyImageUpdateInput = {
 export type PropertyImageUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -329,8 +345,9 @@ export type PropertyImageUncheckedUpdateInput = {
 }
 
 export type PropertyImageCreateManyInput = {
-  id?: string
+  id: string
   propertyId: string
+  storageKey?: string | null
   url: string
   alt?: string | null
   sortOrder?: number
@@ -340,6 +357,7 @@ export type PropertyImageCreateManyInput = {
 
 export type PropertyImageUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -350,6 +368,7 @@ export type PropertyImageUpdateManyMutationInput = {
 export type PropertyImageUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -370,6 +389,7 @@ export type PropertyImageOrderByRelationAggregateInput = {
 export type PropertyImageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   url?: Prisma.SortOrder
   alt?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -384,6 +404,7 @@ export type PropertyImageAvgOrderByAggregateInput = {
 export type PropertyImageMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   url?: Prisma.SortOrder
   alt?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -394,6 +415,7 @@ export type PropertyImageMaxOrderByAggregateInput = {
 export type PropertyImageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   url?: Prisma.SortOrder
   alt?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -448,7 +470,8 @@ export type PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput = {
 }
 
 export type PropertyImageCreateWithoutPropertyInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   alt?: string | null
   sortOrder?: number
@@ -457,7 +480,8 @@ export type PropertyImageCreateWithoutPropertyInput = {
 }
 
 export type PropertyImageUncheckedCreateWithoutPropertyInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   alt?: string | null
   sortOrder?: number
@@ -497,6 +521,7 @@ export type PropertyImageScalarWhereInput = {
   NOT?: Prisma.PropertyImageScalarWhereInput | Prisma.PropertyImageScalarWhereInput[]
   id?: Prisma.StringFilter<"PropertyImage"> | string
   propertyId?: Prisma.StringFilter<"PropertyImage"> | string
+  storageKey?: Prisma.StringNullableFilter<"PropertyImage"> | string | null
   url?: Prisma.StringFilter<"PropertyImage"> | string
   alt?: Prisma.StringNullableFilter<"PropertyImage"> | string | null
   sortOrder?: Prisma.IntFilter<"PropertyImage"> | number
@@ -505,7 +530,8 @@ export type PropertyImageScalarWhereInput = {
 }
 
 export type PropertyImageCreateManyPropertyInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   alt?: string | null
   sortOrder?: number
@@ -515,6 +541,7 @@ export type PropertyImageCreateManyPropertyInput = {
 
 export type PropertyImageUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -524,6 +551,7 @@ export type PropertyImageUpdateWithoutPropertyInput = {
 
 export type PropertyImageUncheckedUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -533,6 +561,7 @@ export type PropertyImageUncheckedUpdateWithoutPropertyInput = {
 
 export type PropertyImageUncheckedUpdateManyWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -545,6 +574,7 @@ export type PropertyImageUncheckedUpdateManyWithoutPropertyInput = {
 export type PropertyImageSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   alt?: boolean
   sortOrder?: boolean
@@ -556,6 +586,7 @@ export type PropertyImageSelect<ExtArgs extends runtime.Types.Extensions.Interna
 export type PropertyImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   alt?: boolean
   sortOrder?: boolean
@@ -567,6 +598,7 @@ export type PropertyImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types
 export type PropertyImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   alt?: boolean
   sortOrder?: boolean
@@ -578,6 +610,7 @@ export type PropertyImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type PropertyImageSelectScalar = {
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   alt?: boolean
   sortOrder?: boolean
@@ -585,7 +618,7 @@ export type PropertyImageSelectScalar = {
   createdAt?: boolean
 }
 
-export type PropertyImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "url" | "alt" | "sortOrder" | "isMain" | "createdAt", ExtArgs["result"]["propertyImage"]>
+export type PropertyImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "storageKey" | "url" | "alt" | "sortOrder" | "isMain" | "createdAt", ExtArgs["result"]["propertyImage"]>
 export type PropertyImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }
@@ -604,6 +637,7 @@ export type $PropertyImagePayload<ExtArgs extends runtime.Types.Extensions.Inter
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     propertyId: string
+    storageKey: string | null
     url: string
     alt: string | null
     sortOrder: number
@@ -1035,6 +1069,7 @@ export interface Prisma__PropertyImageClient<T, Null = never, ExtArgs extends ru
 export interface PropertyImageFieldRefs {
   readonly id: Prisma.FieldRef<"PropertyImage", 'String'>
   readonly propertyId: Prisma.FieldRef<"PropertyImage", 'String'>
+  readonly storageKey: Prisma.FieldRef<"PropertyImage", 'String'>
   readonly url: Prisma.FieldRef<"PropertyImage", 'String'>
   readonly alt: Prisma.FieldRef<"PropertyImage", 'String'>
   readonly sortOrder: Prisma.FieldRef<"PropertyImage", 'Int'>
