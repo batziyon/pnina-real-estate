@@ -67,6 +67,7 @@ export interface PropertyImageData {
 export interface PropertyVideoData {
   id: string;
   propertyId: string;
+  storageKey: string | null;
   url: string;
   thumbnailUrl: string | null;
   sortOrder: number;

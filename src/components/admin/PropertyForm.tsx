@@ -13,6 +13,7 @@ import type { NeighborhoodData } from "@/domain/neighborhood/neighborhood.types"
 import type { UserData } from "@/domain/user/user.types";
 import type { PropertyData, DealType, PropertyType } from "@/domain/property/property.types";
 import { PropertyMediaUpload } from "./PropertyMediaUpload";
+import { PropertyVideoUpload } from "./PropertyVideoUpload";
 
 interface PropertyFormProps {
   neighborhoods: NeighborhoodData[];
@@ -378,16 +379,29 @@ export function PropertyForm({
 
       {/* Media Section */}
       {isEdit && initialData && (
-        <div className="bg-white rounded-lg shadow p-6 space-y-4">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">תמונות</h2>
-          <PropertyMediaUpload
-            propertyId={initialData.id}
-            onUploadComplete={() => {
-              // Refresh page to show new images
-              window.location.reload();
-            }}
-          />
-        </div>
+        <>
+          <div className="bg-white rounded-lg shadow p-6 space-y-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">תמונות</h2>
+            <PropertyMediaUpload
+              propertyId={initialData.id}
+              onUploadComplete={() => {
+                // Refresh page to show new images
+                window.location.reload();
+              }}
+            />
+          </div>
+
+          <div className="bg-white rounded-lg shadow p-6 space-y-4">
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">סרטוני הנכס</h2>
+            <PropertyVideoUpload
+              propertyId={initialData.id}
+              onUploadComplete={() => {
+                // Refresh page to show new videos
+                window.location.reload();
+              }}
+            />
+          </div>
+        </>
       )}
 
       {/* Publish Settings */}

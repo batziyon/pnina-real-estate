@@ -233,6 +233,7 @@ export type PropertyImageScalarFieldEnum = (typeof PropertyImageScalarFieldEnum)
 export const PropertyVideoScalarFieldEnum = {
   id: 'id',
   propertyId: 'propertyId',
+  storageKey: 'storageKey',
   url: 'url',
   thumbnailUrl: 'thumbnailUrl',
   sortOrder: 'sortOrder',

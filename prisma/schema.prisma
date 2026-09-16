@@ -384,8 +384,9 @@ model PropertyImage {
 // =============================================================================
 
 model PropertyVideo {
-  id           String   @id @default(cuid())
+  id           String   @id
   propertyId   String
+  storageKey   String?  @unique
   url          String
   thumbnailUrl String?
   sortOrder    Int      @default(0)

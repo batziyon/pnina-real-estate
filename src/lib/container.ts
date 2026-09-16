@@ -131,6 +131,10 @@ import { ConfirmImageUploadUseCase } from "@/application/properties/media/confir
 import { DeleteImageUseCase } from "@/application/properties/media/delete-image.use-case";
 import { SetMainImageUseCase } from "@/application/properties/media/set-main-image.use-case";
 import { ReorderImagesUseCase } from "@/application/properties/media/reorder-images.use-case";
+import { GenerateVideoUploadUseCase } from "@/application/properties/media/generate-video-upload.use-case";
+import { ConfirmVideoUploadUseCase } from "@/application/properties/media/confirm-video-upload.use-case";
+import { DeleteVideoUseCase } from "@/application/properties/media/delete-video.use-case";
+import { ReorderVideosUseCase } from "@/application/properties/media/reorder-videos.use-case";
 
 import { CreateProjectUseCase } from "@/application/projects/create-project.use-case";
 import { UpdateProjectUseCase } from "@/application/projects/update-project.use-case";
@@ -194,6 +198,10 @@ export const useCases = {
     deleteImage: new DeleteImageUseCase(propertyRepository, objectStorage),
     setMainImage: new SetMainImageUseCase(propertyRepository),
     reorderImages: new ReorderImagesUseCase(propertyRepository),
+    generateVideoUpload: new GenerateVideoUploadUseCase(propertyRepository, objectStorage),
+    confirmVideoUpload: new ConfirmVideoUploadUseCase(propertyRepository, objectStorage),
+    deleteVideo: new DeleteVideoUseCase(propertyRepository, objectStorage),
+    reorderVideos: new ReorderVideosUseCase(propertyRepository),
   },
   projects: {
     create: new CreateProjectUseCase(projectRepository, neighborhoodRepository),

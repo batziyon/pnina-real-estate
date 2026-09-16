@@ -37,6 +37,7 @@ export type PropertyVideoSumAggregateOutputType = {
 export type PropertyVideoMinAggregateOutputType = {
   id: string | null
   propertyId: string | null
+  storageKey: string | null
   url: string | null
   thumbnailUrl: string | null
   sortOrder: number | null
@@ -46,6 +47,7 @@ export type PropertyVideoMinAggregateOutputType = {
 export type PropertyVideoMaxAggregateOutputType = {
   id: string | null
   propertyId: string | null
+  storageKey: string | null
   url: string | null
   thumbnailUrl: string | null
   sortOrder: number | null
@@ -55,6 +57,7 @@ export type PropertyVideoMaxAggregateOutputType = {
 export type PropertyVideoCountAggregateOutputType = {
   id: number
   propertyId: number
+  storageKey: number
   url: number
   thumbnailUrl: number
   sortOrder: number
@@ -74,6 +77,7 @@ export type PropertyVideoSumAggregateInputType = {
 export type PropertyVideoMinAggregateInputType = {
   id?: true
   propertyId?: true
+  storageKey?: true
   url?: true
   thumbnailUrl?: true
   sortOrder?: true
@@ -83,6 +87,7 @@ export type PropertyVideoMinAggregateInputType = {
 export type PropertyVideoMaxAggregateInputType = {
   id?: true
   propertyId?: true
+  storageKey?: true
   url?: true
   thumbnailUrl?: true
   sortOrder?: true
@@ -92,6 +97,7 @@ export type PropertyVideoMaxAggregateInputType = {
 export type PropertyVideoCountAggregateInputType = {
   id?: true
   propertyId?: true
+  storageKey?: true
   url?: true
   thumbnailUrl?: true
   sortOrder?: true
@@ -188,6 +194,7 @@ export type PropertyVideoGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 export type PropertyVideoGroupByOutputType = {
   id: string
   propertyId: string
+  storageKey: string | null
   url: string
   thumbnailUrl: string | null
   sortOrder: number
@@ -220,6 +227,7 @@ export type PropertyVideoWhereInput = {
   NOT?: Prisma.PropertyVideoWhereInput | Prisma.PropertyVideoWhereInput[]
   id?: Prisma.StringFilter<"PropertyVideo"> | string
   propertyId?: Prisma.StringFilter<"PropertyVideo"> | string
+  storageKey?: Prisma.StringNullableFilter<"PropertyVideo"> | string | null
   url?: Prisma.StringFilter<"PropertyVideo"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"PropertyVideo"> | string | null
   sortOrder?: Prisma.IntFilter<"PropertyVideo"> | number
@@ -230,6 +238,7 @@ export type PropertyVideoWhereInput = {
 export type PropertyVideoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -239,6 +248,7 @@ export type PropertyVideoOrderByWithRelationInput = {
 
 export type PropertyVideoWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  storageKey?: string
   AND?: Prisma.PropertyVideoWhereInput | Prisma.PropertyVideoWhereInput[]
   OR?: Prisma.PropertyVideoWhereInput[]
   NOT?: Prisma.PropertyVideoWhereInput | Prisma.PropertyVideoWhereInput[]
@@ -248,11 +258,12 @@ export type PropertyVideoWhereUniqueInput = Prisma.AtLeast<{
   sortOrder?: Prisma.IntFilter<"PropertyVideo"> | number
   createdAt?: Prisma.DateTimeFilter<"PropertyVideo"> | Date | string
   property?: Prisma.XOR<Prisma.PropertyScalarRelationFilter, Prisma.PropertyWhereInput>
-}, "id">
+}, "id" | "storageKey">
 
 export type PropertyVideoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrderInput | Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -270,6 +281,7 @@ export type PropertyVideoScalarWhereWithAggregatesInput = {
   NOT?: Prisma.PropertyVideoScalarWhereWithAggregatesInput | Prisma.PropertyVideoScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PropertyVideo"> | string
   propertyId?: Prisma.StringWithAggregatesFilter<"PropertyVideo"> | string
+  storageKey?: Prisma.StringNullableWithAggregatesFilter<"PropertyVideo"> | string | null
   url?: Prisma.StringWithAggregatesFilter<"PropertyVideo"> | string
   thumbnailUrl?: Prisma.StringNullableWithAggregatesFilter<"PropertyVideo"> | string | null
   sortOrder?: Prisma.IntWithAggregatesFilter<"PropertyVideo"> | number
@@ -277,7 +289,8 @@ export type PropertyVideoScalarWhereWithAggregatesInput = {
 }
 
 export type PropertyVideoCreateInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   thumbnailUrl?: string | null
   sortOrder?: number
@@ -286,8 +299,9 @@ export type PropertyVideoCreateInput = {
 }
 
 export type PropertyVideoUncheckedCreateInput = {
-  id?: string
+  id: string
   propertyId: string
+  storageKey?: string | null
   url: string
   thumbnailUrl?: string | null
   sortOrder?: number
@@ -296,6 +310,7 @@ export type PropertyVideoUncheckedCreateInput = {
 
 export type PropertyVideoUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -306,6 +321,7 @@ export type PropertyVideoUpdateInput = {
 export type PropertyVideoUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -313,8 +329,9 @@ export type PropertyVideoUncheckedUpdateInput = {
 }
 
 export type PropertyVideoCreateManyInput = {
-  id?: string
+  id: string
   propertyId: string
+  storageKey?: string | null
   url: string
   thumbnailUrl?: string | null
   sortOrder?: number
@@ -323,6 +340,7 @@ export type PropertyVideoCreateManyInput = {
 
 export type PropertyVideoUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -332,6 +350,7 @@ export type PropertyVideoUpdateManyMutationInput = {
 export type PropertyVideoUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   propertyId?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -351,6 +370,7 @@ export type PropertyVideoOrderByRelationAggregateInput = {
 export type PropertyVideoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -364,6 +384,7 @@ export type PropertyVideoAvgOrderByAggregateInput = {
 export type PropertyVideoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -373,6 +394,7 @@ export type PropertyVideoMaxOrderByAggregateInput = {
 export type PropertyVideoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   propertyId?: Prisma.SortOrder
+  storageKey?: Prisma.SortOrder
   url?: Prisma.SortOrder
   thumbnailUrl?: Prisma.SortOrder
   sortOrder?: Prisma.SortOrder
@@ -426,7 +448,8 @@ export type PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput = {
 }
 
 export type PropertyVideoCreateWithoutPropertyInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   thumbnailUrl?: string | null
   sortOrder?: number
@@ -434,7 +457,8 @@ export type PropertyVideoCreateWithoutPropertyInput = {
 }
 
 export type PropertyVideoUncheckedCreateWithoutPropertyInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   thumbnailUrl?: string | null
   sortOrder?: number
@@ -473,6 +497,7 @@ export type PropertyVideoScalarWhereInput = {
   NOT?: Prisma.PropertyVideoScalarWhereInput | Prisma.PropertyVideoScalarWhereInput[]
   id?: Prisma.StringFilter<"PropertyVideo"> | string
   propertyId?: Prisma.StringFilter<"PropertyVideo"> | string
+  storageKey?: Prisma.StringNullableFilter<"PropertyVideo"> | string | null
   url?: Prisma.StringFilter<"PropertyVideo"> | string
   thumbnailUrl?: Prisma.StringNullableFilter<"PropertyVideo"> | string | null
   sortOrder?: Prisma.IntFilter<"PropertyVideo"> | number
@@ -480,7 +505,8 @@ export type PropertyVideoScalarWhereInput = {
 }
 
 export type PropertyVideoCreateManyPropertyInput = {
-  id?: string
+  id: string
+  storageKey?: string | null
   url: string
   thumbnailUrl?: string | null
   sortOrder?: number
@@ -489,6 +515,7 @@ export type PropertyVideoCreateManyPropertyInput = {
 
 export type PropertyVideoUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -497,6 +524,7 @@ export type PropertyVideoUpdateWithoutPropertyInput = {
 
 export type PropertyVideoUncheckedUpdateWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -505,6 +533,7 @@ export type PropertyVideoUncheckedUpdateWithoutPropertyInput = {
 
 export type PropertyVideoUncheckedUpdateManyWithoutPropertyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  storageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   url?: Prisma.StringFieldUpdateOperationsInput | string
   thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sortOrder?: Prisma.IntFieldUpdateOperationsInput | number
@@ -516,6 +545,7 @@ export type PropertyVideoUncheckedUpdateManyWithoutPropertyInput = {
 export type PropertyVideoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   thumbnailUrl?: boolean
   sortOrder?: boolean
@@ -526,6 +556,7 @@ export type PropertyVideoSelect<ExtArgs extends runtime.Types.Extensions.Interna
 export type PropertyVideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   thumbnailUrl?: boolean
   sortOrder?: boolean
@@ -536,6 +567,7 @@ export type PropertyVideoSelectCreateManyAndReturn<ExtArgs extends runtime.Types
 export type PropertyVideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   thumbnailUrl?: boolean
   sortOrder?: boolean
@@ -546,13 +578,14 @@ export type PropertyVideoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type PropertyVideoSelectScalar = {
   id?: boolean
   propertyId?: boolean
+  storageKey?: boolean
   url?: boolean
   thumbnailUrl?: boolean
   sortOrder?: boolean
   createdAt?: boolean
 }
 
-export type PropertyVideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "url" | "thumbnailUrl" | "sortOrder" | "createdAt", ExtArgs["result"]["propertyVideo"]>
+export type PropertyVideoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "propertyId" | "storageKey" | "url" | "thumbnailUrl" | "sortOrder" | "createdAt", ExtArgs["result"]["propertyVideo"]>
 export type PropertyVideoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   property?: boolean | Prisma.PropertyDefaultArgs<ExtArgs>
 }
@@ -571,6 +604,7 @@ export type $PropertyVideoPayload<ExtArgs extends runtime.Types.Extensions.Inter
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     propertyId: string
+    storageKey: string | null
     url: string
     thumbnailUrl: string | null
     sortOrder: number
@@ -1001,6 +1035,7 @@ export interface Prisma__PropertyVideoClient<T, Null = never, ExtArgs extends ru
 export interface PropertyVideoFieldRefs {
   readonly id: Prisma.FieldRef<"PropertyVideo", 'String'>
   readonly propertyId: Prisma.FieldRef<"PropertyVideo", 'String'>
+  readonly storageKey: Prisma.FieldRef<"PropertyVideo", 'String'>
   readonly url: Prisma.FieldRef<"PropertyVideo", 'String'>
   readonly thumbnailUrl: Prisma.FieldRef<"PropertyVideo", 'String'>
   readonly sortOrder: Prisma.FieldRef<"PropertyVideo", 'Int'>

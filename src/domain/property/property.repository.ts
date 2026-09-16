@@ -81,12 +81,21 @@ export interface PropertyRepository {
   // Video helpers
   // ---------------------------------------------------------------------------
 
-  /** Add a video record to a property. */
+  /** Return all videos for a property ordered by sortOrder. */
+  findVideos(propertyId: string): Promise<PropertyVideoData[]>;
+
+  /** Find a single video by its ID. Returns null if not found. */
+  findVideoById(videoId: string): Promise<PropertyVideoData | null>;
+
+  /** Add a video record to a property. ID must be provided from upload intent. */
   addVideo(
     propertyId: string,
-    data: Omit<PropertyVideoData, "id" | "propertyId" | "createdAt">
+    data: Omit<PropertyVideoData, "propertyId" | "createdAt">
   ): Promise<PropertyVideoData>;
 
   /** Delete a single video record. */
   deleteVideo(videoId: string): Promise<void>;
+
+  /** Reorder videos by providing an ordered list of video IDs. */
+  reorderVideos(propertyId: string, orderedVideoIds: string[]): Promise<void>;
 }

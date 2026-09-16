@@ -67,6 +67,7 @@ function toVideoData(record: PrismaPropertyVideo): PropertyVideoData {
   return {
     id: record.id,
     propertyId: record.propertyId,
+    storageKey: record.storageKey,
     url: record.url,
     thumbnailUrl: record.thumbnailUrl,
     sortOrder: record.sortOrder,
@@ -337,13 +338,28 @@ export class PrismaPropertyRepository implements PropertyRepository {
   // Video helpers
   // ---------------------------------------------------------------------------
 
+  async findVideos(propertyId: string): Promise<PropertyVideoData[]> {
+    const records = await prisma.propertyVideo.findMany({
+      where: { propertyId },
+      orderBy: { sortOrder: "asc" },
+    });
+    return records.map(toVideoData);
+  }
+
+  async findVideoById(videoId: string): Promise<PropertyVideoData | null> {
+    const record = await prisma.propertyVideo.findUnique({ where: { id: videoId } });
+    return record ? toVideoData(record) : null;
+  }
+
   async addVideo(
     propertyId: string,
-    data: Omit<PropertyVideoData, "id" | "propertyId" | "createdAt">
+    data: Omit<PropertyVideoData, "propertyId" | "createdAt">
   ): Promise<PropertyVideoData> {
     const record = await prisma.propertyVideo.create({
       data: {
+        id: data.id,
         propertyId,
+        storageKey: data.storageKey ?? null,
         url: data.url,
         thumbnailUrl: data.thumbnailUrl ?? null,
         sortOrder: data.sortOrder ?? 0,
@@ -354,5 +370,20 @@ export class PrismaPropertyRepository implements PropertyRepository {
 
   async deleteVideo(videoId: string): Promise<void> {
     await prisma.propertyVideo.delete({ where: { id: videoId } });
+  }
+
+  async reorderVideos(
+    propertyId: string,
+    orderedVideoIds: string[]
+  ): Promise<void> {
+    // Execute all updates inside a transaction so partial failures roll back.
+    await prisma.$transaction(
+      orderedVideoIds.map((videoId, index) =>
+        prisma.propertyVideo.update({
+          where: { id: videoId },
+          data: { sortOrder: index },
+        })
+      )
+    );
   }
 }
