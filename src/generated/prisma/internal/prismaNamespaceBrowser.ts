@@ -64,7 +64,8 @@ export const ModelName = {
   Inquiry: 'Inquiry',
   ValuationRequest: 'ValuationRequest',
   Testimonial: 'Testimonial',
-  PropertyStatusHistory: 'PropertyStatusHistory'
+  PropertyStatusHistory: 'PropertyStatusHistory',
+  PropertyInterest: 'PropertyInterest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -309,6 +310,20 @@ export const PropertyStatusHistoryScalarFieldEnum = {
 } as const
 
 export type PropertyStatusHistoryScalarFieldEnum = (typeof PropertyStatusHistoryScalarFieldEnum)[keyof typeof PropertyStatusHistoryScalarFieldEnum]
+
+
+export const PropertyInterestScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  propertyId: 'propertyId',
+  status: 'status',
+  source: 'source',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyInterestScalarFieldEnum = (typeof PropertyInterestScalarFieldEnum)[keyof typeof PropertyInterestScalarFieldEnum]
 
 
 export const SortOrder = {

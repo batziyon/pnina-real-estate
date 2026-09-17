@@ -486,6 +486,40 @@ export type EnumPropertyStatusChangeReasonWithAggregatesFilter<$PrismaModel = ne
   _max?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
 }
 
+export type EnumPropertyInterestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestStatus | Prisma.EnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestStatusFilter<$PrismaModel> | $Enums.PropertyInterestStatus
+}
+
+export type EnumPropertyInterestSourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestSource | Prisma.EnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestSourceFilter<$PrismaModel> | $Enums.PropertyInterestSource
+}
+
+export type EnumPropertyInterestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestStatus | Prisma.EnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestStatusWithAggregatesFilter<$PrismaModel> | $Enums.PropertyInterestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyInterestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyInterestStatusFilter<$PrismaModel>
+}
+
+export type EnumPropertyInterestSourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestSource | Prisma.EnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestSourceWithAggregatesFilter<$PrismaModel> | $Enums.PropertyInterestSource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyInterestSourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyInterestSourceFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -969,6 +1003,40 @@ export type NestedEnumPropertyStatusChangeReasonWithAggregatesFilter<$PrismaMode
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
   _max?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
+}
+
+export type NestedEnumPropertyInterestStatusFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestStatus | Prisma.EnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestStatusFilter<$PrismaModel> | $Enums.PropertyInterestStatus
+}
+
+export type NestedEnumPropertyInterestSourceFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestSource | Prisma.EnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestSourceFilter<$PrismaModel> | $Enums.PropertyInterestSource
+}
+
+export type NestedEnumPropertyInterestStatusWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestStatus | Prisma.EnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestStatus[] | Prisma.ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestStatusWithAggregatesFilter<$PrismaModel> | $Enums.PropertyInterestStatus
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyInterestStatusFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyInterestStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumPropertyInterestSourceWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyInterestSource | Prisma.EnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyInterestSource[] | Prisma.ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyInterestSourceWithAggregatesFilter<$PrismaModel> | $Enums.PropertyInterestSource
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyInterestSourceFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyInterestSourceFilter<$PrismaModel>
 }
 
 

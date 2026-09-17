@@ -410,7 +410,8 @@ export const ModelName = {
   Inquiry: 'Inquiry',
   ValuationRequest: 'ValuationRequest',
   Testimonial: 'Testimonial',
-  PropertyStatusHistory: 'PropertyStatusHistory'
+  PropertyStatusHistory: 'PropertyStatusHistory',
+  PropertyInterest: 'PropertyInterest'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -426,7 +427,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "neighborhood" | "user" | "contact" | "contactRole" | "buyerRequirement" | "buyerRequirementNeighborhood" | "project" | "property" | "propertyImage" | "propertyVideo" | "inquiry" | "valuationRequest" | "testimonial" | "propertyStatusHistory"
+    modelProps: "neighborhood" | "user" | "contact" | "contactRole" | "buyerRequirement" | "buyerRequirementNeighborhood" | "project" | "property" | "propertyImage" | "propertyVideo" | "inquiry" | "valuationRequest" | "testimonial" | "propertyStatusHistory" | "propertyInterest"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1466,6 +1467,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PropertyInterest: {
+      payload: Prisma.$PropertyInterestPayload<ExtArgs>
+      fields: Prisma.PropertyInterestFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PropertyInterestFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PropertyInterestFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>
+        }
+        findFirst: {
+          args: Prisma.PropertyInterestFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PropertyInterestFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>
+        }
+        findMany: {
+          args: Prisma.PropertyInterestFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>[]
+        }
+        create: {
+          args: Prisma.PropertyInterestCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>
+        }
+        createMany: {
+          args: Prisma.PropertyInterestCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PropertyInterestCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>[]
+        }
+        delete: {
+          args: Prisma.PropertyInterestDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>
+        }
+        update: {
+          args: Prisma.PropertyInterestUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>
+        }
+        deleteMany: {
+          args: Prisma.PropertyInterestDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PropertyInterestUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PropertyInterestUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>[]
+        }
+        upsert: {
+          args: Prisma.PropertyInterestUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyInterestPayload>
+        }
+        aggregate: {
+          args: Prisma.PropertyInterestAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePropertyInterest>
+        }
+        groupBy: {
+          args: Prisma.PropertyInterestGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyInterestGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PropertyInterestCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyInterestCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1731,6 +1806,20 @@ export const PropertyStatusHistoryScalarFieldEnum = {
 } as const
 
 export type PropertyStatusHistoryScalarFieldEnum = (typeof PropertyStatusHistoryScalarFieldEnum)[keyof typeof PropertyStatusHistoryScalarFieldEnum]
+
+
+export const PropertyInterestScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  propertyId: 'propertyId',
+  status: 'status',
+  source: 'source',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PropertyInterestScalarFieldEnum = (typeof PropertyInterestScalarFieldEnum)[keyof typeof PropertyInterestScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2009,6 +2098,34 @@ export type ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel> = Fiel
 
 
 /**
+ * Reference to a field of type 'PropertyInterestStatus'
+ */
+export type EnumPropertyInterestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyInterestStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'PropertyInterestStatus[]'
+ */
+export type ListEnumPropertyInterestStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyInterestStatus[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PropertyInterestSource'
+ */
+export type EnumPropertyInterestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyInterestSource'>
+    
+
+
+/**
+ * Reference to a field of type 'PropertyInterestSource[]'
+ */
+export type ListEnumPropertyInterestSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyInterestSource[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2186,6 +2303,7 @@ export type GlobalOmitConfig = {
   valuationRequest?: Prisma.ValuationRequestOmit
   testimonial?: Prisma.TestimonialOmit
   propertyStatusHistory?: Prisma.PropertyStatusHistoryOmit
+  propertyInterest?: Prisma.PropertyInterestOmit
 }
 
 /* Types for Logging */

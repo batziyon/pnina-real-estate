@@ -118,6 +118,20 @@ enum PropertyStatusChangeReason {
   OTHER
 }
 
+enum PropertyInterestStatus {
+  INTERESTED
+  WAITING
+  CONTACTED
+  NOT_INTERESTED
+}
+
+enum PropertyInterestSource {
+  INQUIRY
+  AGENT_ADDED
+  REQUIREMENT_MATCH
+  WEBSITE
+}
+
 // =============================================================================
 // NEIGHBORHOOD
 // Geographic lookup table. This brokerage operates only in Jerusalem.
@@ -189,6 +203,7 @@ model Contact {
   ownedProperties   Property[]         @relation("PropertyOwner")
   inquiries         Inquiry[]
   testimonials      Testimonial[]
+  propertyInterests PropertyInterest[]
 
   @@index([phone])
   @@index([email])
@@ -355,6 +370,7 @@ model Property {
   videos       PropertyVideo[]
   inquiries    Inquiry[]
   statusHistory PropertyStatusHistory[]
+  propertyInterests PropertyInterest[]
 
   @@index([status])
   @@index([dealType])
@@ -516,4 +532,31 @@ model PropertyStatusHistory {
   @@index([propertyId, createdAt(sort: Desc)])
   @@index([createdAt])
   @@map("property_status_history")
+}
+
+// =============================================================================
+// PROPERTY INTEREST
+// Tracks which contacts are interested in which properties.
+// Separate from Inquiry: Inquiry = event history, PropertyInterest = CRM relationship.
+// =============================================================================
+
+model PropertyInterest {
+  id         String                   @id @default(cuid())
+  contactId  String
+  propertyId String
+  status     PropertyInterestStatus   @default(INTERESTED)
+  source     PropertyInterestSource
+  notes      String?
+  createdAt  DateTime                 @default(now())
+  updatedAt  DateTime                 @updatedAt
+
+  // Relations
+  contact  Contact  @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@unique([contactId, propertyId])
+  @@index([contactId])
+  @@index([propertyId])
+  @@index([propertyId, status])
+  @@map("property_interests")
 }

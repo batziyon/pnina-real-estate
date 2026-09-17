@@ -87,3 +87,8 @@ export type Testimonial = Prisma.TestimonialModel
  * 
  */
 export type PropertyStatusHistory = Prisma.PropertyStatusHistoryModel
+/**
+ * Model PropertyInterest
+ * 
+ */
+export type PropertyInterest = Prisma.PropertyInterestModel

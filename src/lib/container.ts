@@ -25,6 +25,7 @@ import { PrismaTestimonialRepository } from "@/infrastructure/testimonial/prisma
 import { PrismaContactRepository } from "@/infrastructure/contact/prisma-contact.repository";
 import { PrismaBuyerRequirementRepository } from "@/infrastructure/buyer-requirement/prisma-buyer-requirement.repository";
 import { PrismaPropertyStatusHistoryRepository } from "@/infrastructure/repositories/property-status-history.repository";
+import { PrismaPropertyInterestRepository } from "@/infrastructure/property-interest/prisma-property-interest.repository";
 
 import type { NeighborhoodRepository } from "@/domain/neighborhood/neighborhood.repository";
 import type { UserRepository } from "@/domain/user/user.repository";
@@ -36,6 +37,7 @@ import type { TestimonialRepository } from "@/domain/testimonial/testimonial.rep
 import type { ContactRepository } from "@/domain/contact/contact.repository";
 import type { BuyerRequirementRepository } from "@/domain/buyer-requirement/buyer-requirement.repository";
 import type { PropertyStatusHistoryRepository } from "@/domain/property-status-history/property-status-history.repository";
+import type { PropertyInterestRepository } from "@/domain/property-interest/property-interest.repository";
 import type { ObjectStoragePort } from "@/application/ports/storage/object-storage.port";
 
 import { createObjectStorage } from "@/infrastructure/storage/storage.factory";
@@ -69,6 +71,9 @@ const buyerRequirementRepository: BuyerRequirementRepository =
 const propertyStatusHistoryRepository: PropertyStatusHistoryRepository =
   new PrismaPropertyStatusHistoryRepository();
 
+const propertyInterestRepository: PropertyInterestRepository =
+  new PrismaPropertyInterestRepository();
+
 // ---------------------------------------------------------------------------
 // Service instances — stateless services (storage, etc.)
 // ---------------------------------------------------------------------------
@@ -92,6 +97,7 @@ export const container = {
     contact: contactRepository,
     buyerRequirement: buyerRequirementRepository,
     propertyStatusHistory: propertyStatusHistoryRepository,
+    propertyInterest: propertyInterestRepository,
   },
   services: {
     objectStorage,
@@ -115,6 +121,7 @@ export {
   contactRepository,
   buyerRequirementRepository,
   propertyStatusHistoryRepository,
+  propertyInterestRepository,
   objectStorage,
 };
 
@@ -185,6 +192,13 @@ import { UpdateBuyerRequirementUseCase } from "@/application/buyer-requirements/
 import { GetBuyerRequirementUseCase } from "@/application/buyer-requirements/get-buyer-requirement.use-case";
 import { ListContactBuyerRequirementsUseCase } from "@/application/buyer-requirements/list-contact-buyer-requirements.use-case";
 import { DeactivateBuyerRequirementUseCase } from "@/application/buyer-requirements/deactivate-buyer-requirement.use-case";
+
+import { CreatePropertyInterestUseCase } from "@/application/property-interests/create-property-interest.use-case";
+import { UpdatePropertyInterestStatusUseCase } from "@/application/property-interests/update-property-interest-status.use-case";
+import { GetPropertyInterestUseCase } from "@/application/property-interests/get-property-interest.use-case";
+import { ListPropertyInterestsByPropertyUseCase } from "@/application/property-interests/list-property-interests-by-property.use-case";
+import { ListPropertyInterestsByContactUseCase } from "@/application/property-interests/list-property-interests-by-contact.use-case";
+import { DeletePropertyInterestUseCase } from "@/application/property-interests/delete-property-interest.use-case";
 
 import { CreatePropertyFromAIUseCase } from "@/ai/application/use-cases/create-property-from-ai.use-case";
 import { getAIPropertyExtractor } from "@/lib/ai-container";
@@ -279,6 +293,36 @@ export const useCases = {
     deactivate: new DeactivateBuyerRequirementUseCase(
       buyerRequirementRepository,
       contactRepository
+    ),
+  },
+  propertyInterests: {
+    create: new CreatePropertyInterestUseCase(
+      propertyInterestRepository,
+      contactRepository,
+      propertyRepository
+    ),
+    update: new UpdatePropertyInterestStatusUseCase(
+      propertyInterestRepository,
+      contactRepository,
+      propertyRepository
+    ),
+    get: new GetPropertyInterestUseCase(
+      propertyInterestRepository,
+      contactRepository,
+      propertyRepository
+    ),
+    listByProperty: new ListPropertyInterestsByPropertyUseCase(
+      propertyInterestRepository,
+      propertyRepository
+    ),
+    listByContact: new ListPropertyInterestsByContactUseCase(
+      propertyInterestRepository,
+      contactRepository
+    ),
+    delete: new DeletePropertyInterestUseCase(
+      propertyInterestRepository,
+      contactRepository,
+      propertyRepository
     ),
   },
   // AI use cases with lazy initialization (requires GEMINI_API_KEY at runtime)

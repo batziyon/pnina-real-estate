@@ -212,6 +212,7 @@ export type ContactWhereInput = {
   ownedProperties?: Prisma.PropertyListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
   testimonials?: Prisma.TestimonialListRelationFilter
+  propertyInterests?: Prisma.PropertyInterestListRelationFilter
 }
 
 export type ContactOrderByWithRelationInput = {
@@ -229,6 +230,7 @@ export type ContactOrderByWithRelationInput = {
   ownedProperties?: Prisma.PropertyOrderByRelationAggregateInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
   testimonials?: Prisma.TestimonialOrderByRelationAggregateInput
+  propertyInterests?: Prisma.PropertyInterestOrderByRelationAggregateInput
 }
 
 export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -249,6 +251,7 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   ownedProperties?: Prisma.PropertyListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
   testimonials?: Prisma.TestimonialListRelationFilter
+  propertyInterests?: Prisma.PropertyInterestListRelationFilter
 }, "id">
 
 export type ContactOrderByWithAggregationInput = {
@@ -293,6 +296,7 @@ export type ContactCreateInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateInput = {
@@ -309,6 +313,7 @@ export type ContactUncheckedCreateInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactUpdateInput = {
@@ -325,6 +330,7 @@ export type ContactUpdateInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateInput = {
@@ -341,6 +347,7 @@ export type ContactUncheckedUpdateInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyInput = {
@@ -546,6 +553,20 @@ export type ContactUpdateOneWithoutTestimonialsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutTestimonialsInput, Prisma.ContactUpdateWithoutTestimonialsInput>, Prisma.ContactUncheckedUpdateWithoutTestimonialsInput>
 }
 
+export type ContactCreateNestedOneWithoutPropertyInterestsInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutPropertyInterestsInput, Prisma.ContactUncheckedCreateWithoutPropertyInterestsInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutPropertyInterestsInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneRequiredWithoutPropertyInterestsNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutPropertyInterestsInput, Prisma.ContactUncheckedCreateWithoutPropertyInterestsInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutPropertyInterestsInput
+  upsert?: Prisma.ContactUpsertWithoutPropertyInterestsInput
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutPropertyInterestsInput, Prisma.ContactUpdateWithoutPropertyInterestsInput>, Prisma.ContactUncheckedUpdateWithoutPropertyInterestsInput>
+}
+
 export type ContactCreateWithoutAssignedAgentInput = {
   id?: string
   name: string
@@ -559,6 +580,7 @@ export type ContactCreateWithoutAssignedAgentInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutAssignedAgentInput = {
@@ -574,6 +596,7 @@ export type ContactUncheckedCreateWithoutAssignedAgentInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutAssignedAgentInput = {
@@ -629,6 +652,7 @@ export type ContactCreateWithoutRolesInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutRolesInput = {
@@ -644,6 +668,7 @@ export type ContactUncheckedCreateWithoutRolesInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutRolesInput = {
@@ -675,6 +700,7 @@ export type ContactUpdateWithoutRolesInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutRolesInput = {
@@ -690,6 +716,7 @@ export type ContactUncheckedUpdateWithoutRolesInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutBuyerRequirementsInput = {
@@ -705,6 +732,7 @@ export type ContactCreateWithoutBuyerRequirementsInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutBuyerRequirementsInput = {
@@ -720,6 +748,7 @@ export type ContactUncheckedCreateWithoutBuyerRequirementsInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutBuyerRequirementsInput = {
@@ -751,6 +780,7 @@ export type ContactUpdateWithoutBuyerRequirementsInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutBuyerRequirementsInput = {
@@ -766,6 +796,7 @@ export type ContactUncheckedUpdateWithoutBuyerRequirementsInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutOwnedPropertiesInput = {
@@ -781,6 +812,7 @@ export type ContactCreateWithoutOwnedPropertiesInput = {
   buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutOwnedPropertiesInput = {
@@ -796,6 +828,7 @@ export type ContactUncheckedCreateWithoutOwnedPropertiesInput = {
   buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutOwnedPropertiesInput = {
@@ -827,6 +860,7 @@ export type ContactUpdateWithoutOwnedPropertiesInput = {
   buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutOwnedPropertiesInput = {
@@ -842,6 +876,7 @@ export type ContactUncheckedUpdateWithoutOwnedPropertiesInput = {
   buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutInquiriesInput = {
@@ -857,6 +892,7 @@ export type ContactCreateWithoutInquiriesInput = {
   buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutInquiriesInput = {
@@ -872,6 +908,7 @@ export type ContactUncheckedCreateWithoutInquiriesInput = {
   buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutInquiriesInput = {
@@ -903,6 +940,7 @@ export type ContactUpdateWithoutInquiriesInput = {
   buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutInquiriesInput = {
@@ -918,6 +956,7 @@ export type ContactUncheckedUpdateWithoutInquiriesInput = {
   buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutTestimonialsInput = {
@@ -933,6 +972,7 @@ export type ContactCreateWithoutTestimonialsInput = {
   buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutTestimonialsInput = {
@@ -948,6 +988,7 @@ export type ContactUncheckedCreateWithoutTestimonialsInput = {
   buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutTestimonialsInput = {
@@ -979,6 +1020,7 @@ export type ContactUpdateWithoutTestimonialsInput = {
   buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutTestimonialsInput = {
@@ -994,6 +1036,87 @@ export type ContactUncheckedUpdateWithoutTestimonialsInput = {
   buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutPropertyInterestsInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
+  roles?: Prisma.ContactRoleCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutPropertyInterestsInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  assignedAgentId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutPropertyInterestsInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutPropertyInterestsInput, Prisma.ContactUncheckedCreateWithoutPropertyInterestsInput>
+}
+
+export type ContactUpsertWithoutPropertyInterestsInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutPropertyInterestsInput, Prisma.ContactUncheckedUpdateWithoutPropertyInterestsInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutPropertyInterestsInput, Prisma.ContactUncheckedCreateWithoutPropertyInterestsInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutPropertyInterestsInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutPropertyInterestsInput, Prisma.ContactUncheckedUpdateWithoutPropertyInterestsInput>
+}
+
+export type ContactUpdateWithoutPropertyInterestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
+  roles?: Prisma.ContactRoleUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutPropertyInterestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyAssignedAgentInput = {
@@ -1019,6 +1142,7 @@ export type ContactUpdateWithoutAssignedAgentInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutAssignedAgentInput = {
@@ -1034,6 +1158,7 @@ export type ContactUncheckedUpdateWithoutAssignedAgentInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateManyWithoutAssignedAgentInput = {
@@ -1057,6 +1182,7 @@ export type ContactCountOutputType = {
   ownedProperties: number
   inquiries: number
   testimonials: number
+  propertyInterests: number
 }
 
 export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1065,6 +1191,7 @@ export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   ownedProperties?: boolean | ContactCountOutputTypeCountOwnedPropertiesArgs
   inquiries?: boolean | ContactCountOutputTypeCountInquiriesArgs
   testimonials?: boolean | ContactCountOutputTypeCountTestimonialsArgs
+  propertyInterests?: boolean | ContactCountOutputTypeCountPropertyInterestsArgs
 }
 
 /**
@@ -1112,6 +1239,13 @@ export type ContactCountOutputTypeCountTestimonialsArgs<ExtArgs extends runtime.
   where?: Prisma.TestimonialWhereInput
 }
 
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountPropertyInterestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PropertyInterestWhereInput
+}
+
 
 export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1128,6 +1262,7 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   ownedProperties?: boolean | Prisma.Contact$ownedPropertiesArgs<ExtArgs>
   inquiries?: boolean | Prisma.Contact$inquiriesArgs<ExtArgs>
   testimonials?: boolean | Prisma.Contact$testimonialsArgs<ExtArgs>
+  propertyInterests?: boolean | Prisma.Contact$propertyInterestsArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contact"]>
 
@@ -1174,6 +1309,7 @@ export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   ownedProperties?: boolean | Prisma.Contact$ownedPropertiesArgs<ExtArgs>
   inquiries?: boolean | Prisma.Contact$inquiriesArgs<ExtArgs>
   testimonials?: boolean | Prisma.Contact$testimonialsArgs<ExtArgs>
+  propertyInterests?: boolean | Prisma.Contact$propertyInterestsArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContactIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1192,6 +1328,7 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     ownedProperties: Prisma.$PropertyPayload<ExtArgs>[]
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
     testimonials: Prisma.$TestimonialPayload<ExtArgs>[]
+    propertyInterests: Prisma.$PropertyInterestPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1602,6 +1739,7 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   ownedProperties<T extends Prisma.Contact$ownedPropertiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$ownedPropertiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inquiries<T extends Prisma.Contact$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testimonials<T extends Prisma.Contact$testimonialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$testimonialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestimonialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  propertyInterests<T extends Prisma.Contact$propertyInterestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$propertyInterestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyInterestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2176,6 +2314,30 @@ export type Contact$testimonialsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.TestimonialScalarFieldEnum | Prisma.TestimonialScalarFieldEnum[]
+}
+
+/**
+ * Contact.propertyInterests
+ */
+export type Contact$propertyInterestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PropertyInterest
+   */
+  select?: Prisma.PropertyInterestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PropertyInterest
+   */
+  omit?: Prisma.PropertyInterestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyInterestInclude<ExtArgs> | null
+  where?: Prisma.PropertyInterestWhereInput
+  orderBy?: Prisma.PropertyInterestOrderByWithRelationInput | Prisma.PropertyInterestOrderByWithRelationInput[]
+  cursor?: Prisma.PropertyInterestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PropertyInterestScalarFieldEnum | Prisma.PropertyInterestScalarFieldEnum[]
 }
 
 /**

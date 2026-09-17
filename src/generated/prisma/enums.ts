@@ -143,3 +143,23 @@ export const PropertyStatusChangeReason = {
 } as const
 
 export type PropertyStatusChangeReason = (typeof PropertyStatusChangeReason)[keyof typeof PropertyStatusChangeReason]
+
+
+export const PropertyInterestStatus = {
+  INTERESTED: 'INTERESTED',
+  WAITING: 'WAITING',
+  CONTACTED: 'CONTACTED',
+  NOT_INTERESTED: 'NOT_INTERESTED'
+} as const
+
+export type PropertyInterestStatus = (typeof PropertyInterestStatus)[keyof typeof PropertyInterestStatus]
+
+
+export const PropertyInterestSource = {
+  INQUIRY: 'INQUIRY',
+  AGENT_ADDED: 'AGENT_ADDED',
+  REQUIREMENT_MATCH: 'REQUIREMENT_MATCH',
+  WEBSITE: 'WEBSITE'
+} as const
+
+export type PropertyInterestSource = (typeof PropertyInterestSource)[keyof typeof PropertyInterestSource]
