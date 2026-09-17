@@ -33,6 +33,9 @@ export function PropertyForm({
   const [error, setError] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
 
+  // Debug: log neighborhoods
+  console.log('[PropertyForm] Received neighborhoods:', neighborhoods?.length, neighborhoods);
+
   const isEdit = !!initialData;
 
   const [formData, setFormData] = useState({
@@ -43,6 +46,7 @@ export function PropertyForm({
     price: initialData?.price || "",
     neighborhoodId: initialData?.neighborhoodId || "",
     address: initialData?.address || "",
+    houseNumber: "", // TODO: extract from address if needed
     rooms: initialData?.rooms || "",
     area: initialData?.area || "",
     floor: initialData?.floor?.toString() || "",
@@ -58,6 +62,8 @@ export function PropertyForm({
     airConditioning: initialData?.airConditioning || false,
     accessible: initialData?.accessible || false,
     furnished: initialData?.furnished || false,
+    hasOther: !!initialData?.internalNotes,
+    otherFeature: initialData?.internalNotes || "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -70,13 +76,26 @@ export function PropertyForm({
       // Client-side Zod validation with Hebrew messages
       const validationPayload = {
         ...formData,
+        // Empty price → null (nullable price after migration)
+        price: formData.price.trim() || null,
+        // Empty numeric fields → null (not empty string)
+        rooms: formData.rooms.trim() || null,
+        area: formData.area.trim() || null,
         floor: formData.floor ? parseInt(formData.floor, 10) : null,
         totalFloors: formData.totalFloors
           ? parseInt(formData.totalFloors, 10)
           : null,
         agentId: formData.agentId || undefined,
         projectId: formData.projectId || undefined,
+        // Store "other" feature in internalNotes
+        internalNotes: formData.hasOther && formData.otherFeature ? formData.otherFeature : null,
       };
+
+      // Remove UI-only fields
+      const cleaned = { ...validationPayload };
+      delete (cleaned as {hasOther?: unknown}).hasOther;
+      delete (cleaned as {otherFeature?: unknown}).otherFeature;
+      delete (cleaned as {houseNumber?: unknown}).houseNumber;
 
       const result = UpdatePropertySchemaClient.safeParse(validationPayload);
       if (!result.success) {
@@ -87,8 +106,13 @@ export function PropertyForm({
         });
         setValidationErrors(fieldErrors);
         setError("יש לתקן את השגיאות בטופס");
+        console.error("Client validation failed:", fieldErrors);
         return;
       }
+
+      console.log("\n=== PropertyForm POST payload ===");
+      console.log(JSON.stringify(validationPayload, null, 2));
+      console.log("=================================\n");
 
       const url = isEdit
         ? `/api/admin/properties/${initialData.id}`
@@ -99,11 +123,14 @@ export function PropertyForm({
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(validationPayload),
+        body: JSON.stringify(cleaned),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.error("\n✗ Server responded with error:");
+        console.error("Status:", response.status);
+        console.error("Response:", errorData);
         throw new Error(errorData.error || "Failed to save property");
       }
 
@@ -136,11 +163,19 @@ export function PropertyForm({
             type="text"
             required
             value={formData.title}
-            onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            onChange={(e) => {
+              setFormData({ ...formData, title: e.target.value });
+              if (validationErrors.title) {
+                const { title: _, ...rest } = validationErrors;
+                setValidationErrors(rest);
+              }
+            }}
+            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              validationErrors.title ? 'border-red-500' : 'border-gray-300'
+            }`}
           />
           {validationErrors.title && (
-            <p className="text-red-600 text-sm mt-1">{validationErrors.title}</p>
+            <p className="text-red-600 text-sm mt-1">❌ {validationErrors.title}</p>
           )}
         </div>
 
@@ -169,14 +204,23 @@ export function PropertyForm({
             <select
               required
               value={formData.dealType}
-              onChange={(e) =>
-                setFormData({ ...formData, dealType: e.target.value as DealType })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              onChange={(e) => {
+                setFormData({ ...formData, dealType: e.target.value as DealType });
+                if (validationErrors.dealType) {
+                  const { dealType: _, ...rest } = validationErrors;
+                  setValidationErrors(rest);
+                }
+              }}
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                validationErrors.dealType ? 'border-red-500' : 'border-gray-300'
+              }`}
             >
               <option value="SALE">מכירה</option>
               <option value="RENT">השכרה</option>
             </select>
+            {validationErrors.dealType && (
+              <p className="text-red-600 text-sm mt-1">❌ {validationErrors.dealType}</p>
+            )}
           </div>
 
           <div>
@@ -186,10 +230,16 @@ export function PropertyForm({
             <select
               required
               value={formData.propertyType}
-              onChange={(e) =>
-                setFormData({ ...formData, propertyType: e.target.value as PropertyType })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              onChange={(e) => {
+                setFormData({ ...formData, propertyType: e.target.value as PropertyType });
+                if (validationErrors.propertyType) {
+                  const { propertyType: _, ...rest } = validationErrors;
+                  setValidationErrors(rest);
+                }
+              }}
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                validationErrors.propertyType ? 'border-red-500' : 'border-gray-300'
+              }`}
             >
               <option value="APARTMENT">דירה</option>
               <option value="PENTHOUSE">פנטהאוז</option>
@@ -205,90 +255,130 @@ export function PropertyForm({
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        {/* Agent Assignment - Always visible for ADMIN/EDITOR */}
+        {(userRole === "ADMIN" || userRole === "EDITOR") && (
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              מחיר *
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.price}
-              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="0"
-            />
-            {validationErrors.price && (
-              <p className="text-red-600 text-sm mt-1">{validationErrors.price}</p>
-            )}
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              שכונה *
-            </label>
-            <select
-              required
-              value={formData.neighborhoodId}
-              onChange={(e) =>
-                setFormData({ ...formData, neighborhoodId: e.target.value })
-              }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            >
-              <option value="">בחר שכונה</option>
-              {neighborhoods.map((n) => (
-                <option key={n.id} value={n.id}>
-                  {n.name}
-                </option>
-              ))}
-            </select>
-            {validationErrors.neighborhoodId && (
-              <p className="text-red-600 text-sm mt-1">{validationErrors.neighborhoodId}</p>
-            )}
-          </div>
-        </div>
-
-        {/* Agent Assignment */}
-        {(userRole === "ADMIN" || userRole === "EDITOR") && agents.length > 0 && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              סוכן מטפל
+              סוכן מטפל {userRole === "EDITOR" && "*"}
             </label>
             <select
               value={formData.agentId}
               onChange={(e) =>
                 setFormData({ ...formData, agentId: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+                validationErrors.agentId ? 'border-red-500' : 'border-gray-300'
+              }`}
             >
-              <option value="">בחר סוכן</option>
+              <option value="">{userRole === "ADMIN" ? "ברירת מחדל (אני)" : "בחר סוכן"}</option>
               {agents.map((agent) => (
                 <option key={agent.id} value={agent.id}>
-                  {agent.name}
+                  {agent.name} ({agent.email})
                 </option>
               ))}
             </select>
+            {validationErrors.agentId && (
+              <p className="text-red-600 text-sm mt-1">❌ {validationErrors.agentId}</p>
+            )}
           </div>
         )}
+      </div>
+
+      {/* Location */}
+      <div className="bg-white rounded-lg shadow p-6 space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">מיקום</h2>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            שכונה *
+          </label>
+          <select
+            required
+            value={formData.neighborhoodId}
+            onChange={(e) => {
+              setFormData({ ...formData, neighborhoodId: e.target.value });
+              // Clear error when user selects
+              if (validationErrors.neighborhoodId) {
+                const { neighborhoodId: _, ...rest } = validationErrors;
+                setValidationErrors(rest);
+              }
+            }}
+            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${
+              validationErrors.neighborhoodId ? 'border-red-500' : 'border-gray-300'
+            }`}
+          >
+            <option value="">בחר שכונה</option>
+            {neighborhoods.map((n) => (
+              <option key={n.id} value={n.id}>
+                {n.name}
+              </option>
+            ))}
+          </select>
+          {validationErrors.neighborhoodId && (
+            <p className="text-red-600 text-sm mt-1">❌ {validationErrors.neighborhoodId}</p>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              רחוב
+            </label>
+            <input
+              type="text"
+              value={formData.address}
+              onChange={(e) =>
+                setFormData({ ...formData, address: e.target.value })
+              }
+              placeholder="שם הרחוב"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              מספר בית
+            </label>
+            <input
+              type="text"
+              value={formData.houseNumber || ""}
+              onChange={(e) =>
+                setFormData({ ...formData, houseNumber: e.target.value })
+              }
+              placeholder="מספר"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Price */}
+      <div className="bg-white rounded-lg shadow p-6 space-y-4">
+        <h2 className="text-xl font-semibold text-gray-900 mb-4">מחיר</h2>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            מחיר
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              value={formData.price}
+              onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="מחיר טרם נקבע"
+            />
+            <div className="absolute left-3 top-2.5 text-gray-500">₪</div>
+          </div>
+          <p className="text-xs text-gray-500 mt-1">ניתן להשאיר ריק אם המחיר טרם נקבע</p>
+          {validationErrors.price && (
+            <p className="text-red-600 text-sm mt-1">{validationErrors.price}</p>
+          )}
+        </div>
       </div>
 
       {/* Property Details */}
       <div className="bg-white rounded-lg shadow p-6 space-y-4">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">פרטי הנכס</h2>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            כתובת
-          </label>
-          <input
-            type="text"
-            value={formData.address}
-            onChange={(e) =>
-              setFormData({ ...formData, address: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
@@ -374,6 +464,40 @@ export function PropertyForm({
               <span className="text-sm text-gray-700">{feature.label}</span>
             </label>
           ))}
+        </div>
+
+        {/* Other Feature */}
+        <div className="space-y-3">
+          <label className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={formData.hasOther}
+              onChange={(e) => {
+                setFormData({ 
+                  ...formData, 
+                  hasOther: e.target.checked,
+                  otherFeature: e.target.checked ? formData.otherFeature : ""
+                });
+              }}
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <span className="text-sm text-gray-700">אחר</span>
+          </label>
+
+          {formData.hasOther && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                פרט אחר
+              </label>
+              <input
+                type="text"
+                value={formData.otherFeature}
+                onChange={(e) => setFormData({ ...formData, otherFeature: e.target.value })}
+                placeholder="לדוגמה: גינה פרטית"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+          )}
         </div>
       </div>
 

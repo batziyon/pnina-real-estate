@@ -59,7 +59,28 @@ export async function GET(request: NextRequest, context: RouteContext) {
       }
     );
 
-    return NextResponse.json(interests);
+    // 5. Fetch contact details for each interest
+    const interestsWithContacts = await Promise.all(
+      interests.map(async (interest) => {
+        const contact = await useCases.contacts.get.execute(interest.contactId, {
+          id: actor.id,
+          role: actor.role,
+        });
+        return {
+          ...interest,
+          contact: contact
+            ? {
+                id: contact.id,
+                name: contact.name,
+                phone: contact.phone,
+                email: contact.email,
+              }
+            : null,
+        };
+      })
+    );
+
+    return NextResponse.json(interestsWithContacts);
   } catch (error) {
     return handleApiError(error);
   }

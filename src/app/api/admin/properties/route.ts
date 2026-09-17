@@ -30,14 +30,33 @@ export async function POST(request: NextRequest) {
     // 2. Parse body
     const body = await request.json();
 
+    // STEP 1 SESSION VERIFICATION LOGGING
+    console.log("\n========== POST /api/admin/properties ==========");
+    console.log("✓ Session actor verified:");
+    console.log("  - id:    ", actor.id);
+    console.log("  - email: ", actor.email);
+    console.log("  - role:  ", actor.role);
+    console.log("Expected ID after fresh login: cmu5p56oa001lu8u4ady241vk");
+    console.log("Request body:", JSON.stringify(body, null, 2));
+    console.log("================================================\n");
+
     // 3. Call use case (agentId assignment happens inside use case)
     const property = await useCases.properties.create.execute(body, {
       id: actor.id,
       role: actor.role,
     });
 
+    console.log("\n✓ Property created successfully:", property.id);
+
     return NextResponse.json(property, { status: 201 });
   } catch (error) {
+    console.error("\n✗ POST /api/admin/properties FAILED:");
+    console.error("Error type:", error?.constructor?.name);
+    console.error("Error message:", error instanceof Error ? error.message : String(error));
+    if (error && typeof error === 'object' && 'fields' in error) {
+      console.error("Validation fields:", error.fields);
+    }
+    console.error("\n");
     return handleApiError(error);
   }
 }

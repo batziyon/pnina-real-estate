@@ -99,8 +99,15 @@ export function PropertyActions({ propertyId, status, canPublish }: PropertyActi
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || `Failed to ${action}`);
+        // Handle non-JSON responses (e.g., 404 HTML pages)
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const error = await response.json();
+          throw new Error(error.error || `Failed to ${action}`);
+        } else {
+          // Non-JSON response (likely HTML error page)
+          throw new Error(`שגיאה: הפעולה נכשלה (${response.status}). יש לבדוק את הגדרות המערכת.`);
+        }
       }
 
       router.refresh();
@@ -125,8 +132,15 @@ export function PropertyActions({ propertyId, status, canPublish }: PropertyActi
       });
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || "Failed to republish property");
+        // Handle non-JSON responses (e.g., 404 HTML pages)
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const error = await response.json();
+          throw new Error(error.error || "Failed to republish property");
+        } else {
+          // Non-JSON response (likely HTML error page)
+          throw new Error(`שגיאה: הפעולה נכשלה (${response.status}). יש לבדוק את הגדרות המערכת.`);
+        }
       }
 
       router.refresh();

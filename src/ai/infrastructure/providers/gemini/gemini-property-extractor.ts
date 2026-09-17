@@ -17,15 +17,21 @@ import { AIProviderUnavailableError } from "@/ai/application/errors/ai-provider-
 
 export class GeminiPropertyExtractor implements AIPropertyExtractor {
   private readonly ai: GoogleGenAI;
-  private readonly modelName: string;
+  private readonly primaryModel: string;
+  private readonly fallbackModel: string | null;
 
-  constructor(apiKey: string, modelName = "gemini-3.6-flash") {
+  constructor(
+    apiKey: string,
+    primaryModel = "gemini-3.6-flash",
+    fallbackModel: string | null = "gemini-2.5-flash"
+  ) {
     if (!apiKey) {
       throw new Error("Gemini API key is required");
     }
 
     this.ai = new GoogleGenAI({ apiKey });
-    this.modelName = modelName;
+    this.primaryModel = primaryModel;
+    this.fallbackModel = fallbackModel;
   }
 
   async extractFromText(freeText: string): Promise<PropertyExtractionResult> {
@@ -33,15 +39,72 @@ export class GeminiPropertyExtractor implements AIPropertyExtractor {
       throw new AIExtractionError("Free text input is required");
     }
 
-    const maxAttempts = 3;
+    console.log(`\n[Gemini] Starting extraction`);
+    console.log(`[Gemini] Primary model: ${this.primaryModel}`);
+    console.log(`[Gemini] Fallback model: ${this.fallbackModel || "none"}`);
+    console.log(`[Gemini] Text length: ${freeText.length} chars`);
+
+    // Try primary model first
+    const primaryResult = await this.tryModelWithRetry(this.primaryModel, freeText, 3);
+    
+    if (primaryResult.success) {
+      return primaryResult.result!;
+    }
+
+    // Primary model failed - check if we should try fallback
+    const shouldTryFallback = this.fallbackModel && (
+      this.isTransientError(primaryResult.error) ||
+      this.isModelUnavailableError(primaryResult.error)
+    );
+
+    if (shouldTryFallback) {
+      console.log(`\n[Gemini] Primary model failed, trying fallback...`);
+      console.log(`[Gemini] Fallback model: ${this.fallbackModel}`);
+      
+      const fallbackResult = await this.tryModelWithRetry(this.fallbackModel!, freeText, 3);
+      
+      if (fallbackResult.success) {
+        console.log(`[Gemini] ✓ Extraction succeeded using fallback model`);
+        return fallbackResult.result!;
+      }
+
+      // Both models failed
+      console.error(`[Gemini] Both primary and fallback models failed`);
+      throw new AIProviderUnavailableError(
+        "AI provider is temporarily unavailable",
+        fallbackResult.error
+      );
+    }
+
+    // No fallback or error type doesn't warrant fallback
+    if (primaryResult.error instanceof AIValidationError || primaryResult.error instanceof AIExtractionError) {
+      throw primaryResult.error;
+    }
+
+    throw new AIProviderUnavailableError(
+      "AI provider is temporarily unavailable",
+      primaryResult.error
+    );
+  }
+
+  /**
+   * Try a specific model with retry logic
+   */
+  private async tryModelWithRetry(
+    modelName: string,
+    freeText: string,
+    maxAttempts: number
+  ): Promise<{ success: boolean; result?: PropertyExtractionResult; error?: unknown }> {
     let lastError: unknown = null;
 
     for (let attempt = 1; attempt <= maxAttempts; attempt++) {
       try {
+        console.log(`[Gemini] ${modelName} - Attempt ${attempt}/${maxAttempts}...`);
+        
         const prompt = this.buildPrompt(freeText);
 
         const response = await this.ai.models.generateContent({
-          model: this.modelName,
+          model: modelName,
           contents: prompt,
           config: {
             temperature: 0.1, // Low temperature for extraction accuracy
@@ -51,26 +114,33 @@ export class GeminiPropertyExtractor implements AIPropertyExtractor {
           },
         });
 
+        console.log(`[Gemini] ${modelName} - Received response from provider`);
         const rawJson = response.text;
 
         if (!rawJson) {
+          console.error(`[Gemini] ${modelName} - Empty response received`);
           throw new AIExtractionError("AI returned empty response");
         }
+
+        console.log(`[Gemini] ${modelName} - Response length: ${rawJson.length} chars`);
 
         // Parse JSON
         let parsed: unknown;
         try {
           parsed = JSON.parse(rawJson);
         } catch (err) {
+          console.error(`[Gemini] ${modelName} - JSON parse error:`, err);
           throw new AIValidationError("AI returned invalid JSON", err);
         }
+
+        console.log(`[Gemini] ${modelName} - JSON parsed successfully`);
 
         // Add metadata
         const withMetadata = {
           ...(parsed as Record<string, unknown>),
           metadata: {
             provider: "gemini",
-            model: this.modelName,
+            model: modelName,
             extractedAt: new Date(),
           },
         };
@@ -79,6 +149,7 @@ export class GeminiPropertyExtractor implements AIPropertyExtractor {
         let validated;
         try {
           validated = PropertyExtractionResultSchema.parse(withMetadata);
+          console.log(`[Gemini] ${modelName} - Validation successful`);
         } catch (zodError) {
           // Provide detailed validation error
           if (zodError instanceof Error && 'issues' in zodError) {
@@ -86,94 +157,125 @@ export class GeminiPropertyExtractor implements AIPropertyExtractor {
             const errorDetails = zodIssues.issues.map((issue) =>
               `${issue.path.join('.')}: ${issue.message}`
             ).join('; ');
+            console.error(`[Gemini] ${modelName} - Validation failed:`, errorDetails);
             throw new AIValidationError(
               `AI output validation failed: ${errorDetails}`,
               zodError
             );
           }
+          console.error(`[Gemini] ${modelName} - Validation failed:`, zodError);
           throw new AIValidationError("AI output validation failed", zodError);
         }
 
         // Success - return immediately
         if (attempt > 1) {
-          console.log(`[Gemini] Extraction succeeded on attempt ${attempt}`);
+          console.log(`[Gemini] ✓ ${modelName} succeeded on attempt ${attempt}`);
+        } else {
+          console.log(`[Gemini] ✓ ${modelName} succeeded on first attempt`);
         }
-        return validated as PropertyExtractionResult;
+        
+        return { success: true, result: validated as PropertyExtractionResult };
 
       } catch (error) {
         lastError = error;
+        console.error(`[Gemini] ${modelName} - Attempt ${attempt} failed:`, error instanceof Error ? error.message : String(error));
 
         // Never retry validation errors - these are permanent issues
         if (error instanceof AIValidationError) {
-          throw error;
+          console.error(`[Gemini] ${modelName} - Validation error - not retrying`);
+          return { success: false, error };
         }
 
-        // Check if this is a transient 503 error that should be retried
-        const isRetryable = this.isTransient503Error(error);
+        // Check if this is a model unavailability error (404, NOT_FOUND)
+        const isModelUnavailable = this.isModelUnavailableError(error);
+        
+        if (isModelUnavailable) {
+          // Model doesn't exist or isn't available - fail immediately to try fallback
+          console.error(`[Gemini] ${modelName} - Model unavailable (404/NOT_FOUND) - not retrying`);
+          return {
+            success: false,
+            error: new AIProviderUnavailableError(
+              "Model is unavailable",
+              error
+            ),
+          };
+        }
+
+        // Check if this is a transient error that should be retried
+        const isRetryable = this.isTransientError(error);
 
         if (!isRetryable) {
           // Permanent error (auth, malformed request, etc.) - fail immediately
-          throw new AIExtractionError(
-            "Failed to extract property data from text",
-            error
-          );
+          console.error(`[Gemini] ${modelName} - Permanent error - not retrying`);
+          return {
+            success: false,
+            error: new AIExtractionError(
+              "Failed to extract property data from text",
+              error
+            ),
+          };
         }
 
-        // This is a transient 503/429 - retry if we have attempts left
+        // This is a transient error - retry if we have attempts left
         if (attempt < maxAttempts) {
           const delayMs = Math.pow(2, attempt - 1) * 1000; // 1s, 2s
           console.log(
-            `[Gemini] Attempt ${attempt} failed with transient error (503/429). ` +
+            `[Gemini] ${modelName} - Transient error (503/429). ` +
             `Retrying in ${delayMs}ms... (${maxAttempts - attempt} attempts remaining)`
           );
           await this.delay(delayMs);
           continue;
         }
 
-        // All attempts exhausted - throw with original error preserved
+        // All attempts exhausted for this model
         console.error(
-          `[Gemini] All ${maxAttempts} attempts failed. Provider: ${this.modelName}`
+          `[Gemini] ${modelName} - All ${maxAttempts} attempts failed`
         );
-        throw new AIProviderUnavailableError(
-          "AI provider is temporarily unavailable",
-          error
-        );
+        return { success: false, error };
       }
     }
 
     // Should never reach here, but TypeScript needs it
-    throw new AIProviderUnavailableError(
-      "AI provider is temporarily unavailable",
-      lastError
-    );
+    return { success: false, error: lastError };
   }
 
   /**
-   * Check if an error is a transient 503/UNAVAILABLE or 429/RESOURCE_EXHAUSTED that should be retried
+   * Check if an error is transient (429, 500, 502, 503, 504) and should trigger retry
    */
-  private isTransient503Error(error: unknown): boolean {
+  private isTransientError(error: unknown): boolean {
     if (typeof error !== 'object' || error === null) {
       return false;
     }
 
     // Check direct error properties
     const err = error as { status?: number; code?: number; message?: string };
-    if (err.status === 503 || err.code === 503 || err.status === 429 || err.code === 429) {
+    
+    // Transient HTTP status codes
+    const transientStatuses = [429, 500, 502, 503, 504];
+    if (err.status && transientStatuses.includes(err.status)) {
+      return true;
+    }
+    if (err.code && transientStatuses.includes(err.code)) {
       return true;
     }
 
-    // Check cause chain for nested 503/429
+    // Check cause chain for nested transient errors
     const withCause = error as { cause?: unknown };
     if (withCause.cause && typeof withCause.cause === 'object') {
       const cause = withCause.cause as { status?: number; code?: number; message?: string };
-      if (cause.status === 503 || cause.code === 503 || cause.status === 429 || cause.code === 429) {
+      if (cause.status && transientStatuses.includes(cause.status)) {
+        return true;
+      }
+      if (cause.code && transientStatuses.includes(cause.code)) {
         return true;
       }
 
-      // Check for UNAVAILABLE or RESOURCE_EXHAUSTED status in message
+      // Check for status strings in message
       if (cause.message && (
         cause.message.includes('"status":"UNAVAILABLE"') ||
-        cause.message.includes('"status":"RESOURCE_EXHAUSTED"')
+        cause.message.includes('"status":"RESOURCE_EXHAUSTED"') ||
+        cause.message.includes('"status":"INTERNAL"') ||
+        cause.message.includes('"status":"DEADLINE_EXCEEDED"')
       )) {
         return true;
       }
@@ -183,8 +285,63 @@ export class GeminiPropertyExtractor implements AIPropertyExtractor {
     if (err.message) {
       if (err.message.includes('"status":"UNAVAILABLE"') ||
           err.message.includes('"status":"RESOURCE_EXHAUSTED"') ||
-          err.message.includes('"code":503') ||
-          err.message.includes('"code":429')) {
+          err.message.includes('"status":"INTERNAL"') ||
+          err.message.includes('"status":"DEADLINE_EXCEEDED"')) {
+        return true;
+      }
+      // Check for numeric codes in message
+      for (const status of transientStatuses) {
+        if (err.message.includes(`"code":${status}`)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  /**
+   * Check if an error is a model unavailability error (404, NOT_FOUND)
+   * This should trigger immediate fallback without retries
+   */
+  private isModelUnavailableError(error: unknown): boolean {
+    if (typeof error !== 'object' || error === null) {
+      return false;
+    }
+
+    const err = error as { status?: number; code?: number; message?: string };
+    
+    // Check for 404 status
+    if (err.status === 404 || err.code === 404) {
+      return true;
+    }
+
+    // Check cause chain
+    const withCause = error as { cause?: unknown };
+    if (withCause.cause && typeof withCause.cause === 'object') {
+      const cause = withCause.cause as { status?: number; code?: number; message?: string };
+      if (cause.status === 404 || cause.code === 404) {
+        return true;
+      }
+
+      // Check for NOT_FOUND status in message
+      if (cause.message && (
+        cause.message.includes('"status":"NOT_FOUND"') ||
+        cause.message.includes('is not found for API') ||
+        cause.message.includes('model not found') ||
+        cause.message.includes('not supported for generateContent')
+      )) {
+        return true;
+      }
+    }
+
+    // Check message for NOT_FOUND indicators
+    if (err.message) {
+      if (err.message.includes('"status":"NOT_FOUND"') ||
+          err.message.includes('is not found for API') ||
+          err.message.includes('model not found') ||
+          err.message.includes('not supported for generateContent') ||
+          err.message.includes('"code":404')) {
         return true;
       }
     }

@@ -84,8 +84,11 @@ export interface PropertyData extends PropertyFeatures {
   description: string | null;
   dealType: DealType;
   propertyType: PropertyType;
-  /** Stored as string to avoid floating-point precision issues across layers. */
-  price: string;
+  /** 
+   * Stored as string to avoid floating-point precision issues across layers.
+   * Nullable — property can be created without a known price.
+   */
+  price: string | null;
   /** FK to Neighborhood — the sole geographic locator in this system. */
   neighborhoodId: string;
   address: string | null;
@@ -98,6 +101,7 @@ export interface PropertyData extends PropertyFeatures {
   status: PropertyStatus;
   agentId: string;
   projectId: string | null;
+  internalNotes: string | null;
   createdAt: Date;
   updatedAt: Date;
 }

@@ -11,13 +11,12 @@
  * 2. Click "חלץ נתונים" → API call
  * 3. Show loading state
  * 4. Display extraction result with confidence indicators
- * 5. User can edit extracted values
- * 6. Click "שמור טיוטה" → navigate to property edit page
+ * 5. User reviews extracted values
+ * 6. Click "שמור כטיוטה" → Create property as DRAFT → redirect to edit page
  *
  * Features:
  * - Confidence badges (HIGH: green, MEDIUM: yellow, LOW: red)
- * - Editable extracted values
- * - Warnings for missing/uncertain fields
+ * - All relevant fields displayed (found or not found)
  * - Clear indication this is a DRAFT
  */
 
@@ -28,7 +27,7 @@ import type { PropertyData } from "@/domain/property/property.types";
 
 interface AIExtractResponse {
   success: boolean;
-  property: PropertyData;
+  property: PropertyData | null;
   extraction: PropertyExtractionResult;
   warnings: string[];
 }
@@ -37,6 +36,7 @@ export function AIPropertyIntakeForm() {
   const router = useRouter();
   const [text, setText] = useState("");
   const [isExtracting, setIsExtracting] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [result, setResult] = useState<AIExtractResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -71,9 +71,31 @@ export function AIPropertyIntakeForm() {
     }
   };
 
-  const handleSaveDraft = () => {
-    if (!result?.property.id) return;
-    router.push(`/admin/properties/${result.property.id}/edit`);
+  const handleSaveDraft = async () => {
+    if (!result) return;
+
+    setIsSaving(true);
+    setError(null);
+
+    try {
+      // If property was already created by AI extraction (with neighborhoodId)
+      if (result.property?.id) {
+        router.push(`/admin/properties/${result.property.id}`);
+        return;
+      }
+
+      // Property wasn't created yet (no neighborhoodId resolved)
+      // We need to redirect to regular create form with extracted data pre-filled
+      // For now, show error and ask user to manually create
+      setError(
+        "לא ניתן לשמור טיוטה ללא שכונה. אנא בחר שכונה ידנית בטופס היצירה הרגיל."
+      );
+    } catch (err) {
+      console.error("Save draft error:", err);
+      setError(err instanceof Error ? err.message : "שגיאה בשמירת הטיוטה");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const getConfidenceBadge = (fieldConfidence: { confidence: number; reason?: string }) => {
@@ -201,25 +223,18 @@ export function AIPropertyIntakeForm() {
             <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
               <div className="text-sm font-medium text-gray-700">כותרת</div>
               <div className="col-span-2">
-                <div className="flex items-center gap-2 mb-1">
-                  {getConfidenceBadge(result.extraction.title.confidence)}
-                </div>
-                <div className="text-sm text-gray-900">
-                  {result.extraction.title.value || "(לא חולץ)"}
-                </div>
-              </div>
-            </div>
-
-            {/* Property Type */}
-            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
-              <div className="text-sm font-medium text-gray-700">סוג נכס</div>
-              <div className="col-span-2">
-                <div className="flex items-center gap-2 mb-1">
-                  {getConfidenceBadge(result.extraction.propertyType.confidence)}
-                </div>
-                <div className="text-sm text-gray-900">
-                  {result.extraction.propertyType.value || "(לא חולץ)"}
-                </div>
+                {result.extraction.title.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.title.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.title.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
               </div>
             </div>
 
@@ -227,113 +242,209 @@ export function AIPropertyIntakeForm() {
             <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
               <div className="text-sm font-medium text-gray-700">סוג עסקה</div>
               <div className="col-span-2">
-                <div className="flex items-center gap-2 mb-1">
-                  {getConfidenceBadge(result.extraction.dealType.confidence)}
-                </div>
-                <div className="text-sm text-gray-900">
-                  {result.extraction.dealType.value || "(לא חולץ)"}
-                </div>
+                {result.extraction.dealType.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.dealType.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.dealType.value === "SALE" ? "מכירה" : "השכרה"}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
               </div>
             </div>
 
-            {/* Price */}
-            {result.extraction.price && (
-              <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
-                <div className="text-sm font-medium text-gray-700">מחיר</div>
-                <div className="col-span-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    {getConfidenceBadge(result.extraction.price.confidence)}
-                  </div>
-                  <div className="text-sm text-gray-900">
-                    {result.extraction.price.value ? `₪${result.extraction.price.value}` : "(לא חולץ)"}
-                  </div>
-                </div>
+            {/* Property Type */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">סוג נכס</div>
+              <div className="col-span-2">
+                {result.extraction.propertyType.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.propertyType.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.propertyType.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
               </div>
-            )}
-
-            {/* Rooms */}
-            {result.extraction.rooms && (
-              <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
-                <div className="text-sm font-medium text-gray-700">חדרים</div>
-                <div className="col-span-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    {getConfidenceBadge(result.extraction.rooms.confidence)}
-                  </div>
-                  <div className="text-sm text-gray-900">
-                    {result.extraction.rooms.value}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Area */}
-            {result.extraction.area && (
-              <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
-                <div className="text-sm font-medium text-gray-700">שטח</div>
-                <div className="col-span-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    {getConfidenceBadge(result.extraction.area.confidence)}
-                  </div>
-                  <div className="text-sm text-gray-900">
-                    {result.extraction.area.value} מ״ר
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Floor */}
-            {result.extraction.floor !== undefined && (
-              <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
-                <div className="text-sm font-medium text-gray-700">קומה</div>
-                <div className="col-span-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    {getConfidenceBadge(result.extraction.floor.confidence)}
-                  </div>
-                  <div className="text-sm text-gray-900">
-                    {result.extraction.floor.value}
-                  </div>
-                </div>
-              </div>
-            )}
+            </div>
 
             {/* Neighborhood */}
             <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
               <div className="text-sm font-medium text-gray-700">שכונה</div>
               <div className="col-span-2">
-                <div className="flex items-center gap-2 mb-1">
-                  {getConfidenceBadge(
-                    result.extraction.neighborhoodName.confidence
-                  )}
-                </div>
-                <div className="text-sm text-gray-900">
-                  {result.extraction.neighborhoodName.value || "(לא חולץ)"}
-                </div>
+                {result.extraction.neighborhoodName.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.neighborhoodName.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.neighborhoodName.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
+              </div>
+            </div>
+
+            {/* Address (Street) */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">רחוב</div>
+              <div className="col-span-2">
+                {result.extraction.address.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.address.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.address.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
+              </div>
+            </div>
+
+            {/* House Number - Note: currently not extracted separately */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">מספר בית</div>
+              <div className="col-span-2">
+                <div className="text-sm text-gray-500 italic">לא נמצא</div>
+              </div>
+            </div>
+
+            {/* Price */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">מחיר</div>
+              <div className="col-span-2">
+                {result.extraction.price.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.price.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      ₪{result.extraction.price.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
+              </div>
+            </div>
+
+            {/* Rooms */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">חדרים</div>
+              <div className="col-span-2">
+                {result.extraction.rooms.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.rooms.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.rooms.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
+              </div>
+            </div>
+
+            {/* Area */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">שטח</div>
+              <div className="col-span-2">
+                {result.extraction.area.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.area.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.area.value} מ״ר
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
+              </div>
+            </div>
+
+            {/* Floor */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">קומה</div>
+              <div className="col-span-2">
+                {result.extraction.floor.value !== null && result.extraction.floor.value !== undefined ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.floor.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.floor.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
+              </div>
+            </div>
+
+            {/* Total Floors */}
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">מתוך קומות</div>
+              <div className="col-span-2">
+                {result.extraction.totalFloors.value !== null && result.extraction.totalFloors.value !== undefined ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.totalFloors.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {result.extraction.totalFloors.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
               </div>
             </div>
 
             {/* Description */}
-            {result.extraction.description && (
-              <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
-                <div className="text-sm font-medium text-gray-700">תיאור</div>
-                <div className="col-span-2">
-                  <div className="flex items-center gap-2 mb-1">
-                    {getConfidenceBadge(result.extraction.description.confidence)}
-                  </div>
-                  <div className="text-sm text-gray-900 whitespace-pre-wrap">
-                    {result.extraction.description.value}
-                  </div>
-                </div>
+            <div className="px-4 py-3 grid grid-cols-3 gap-4 items-start">
+              <div className="text-sm font-medium text-gray-700">תיאור</div>
+              <div className="col-span-2">
+                {result.extraction.description.value ? (
+                  <>
+                    <div className="flex items-center gap-2 mb-1">
+                      {getConfidenceBadge(result.extraction.description.confidence)}
+                    </div>
+                    <div className="text-sm text-gray-900 whitespace-pre-wrap">
+                      {result.extraction.description.value}
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-gray-500 italic">לא נמצא</div>
+                )}
               </div>
-            )}
+            </div>
           </div>
 
           {/* Actions */}
           <div className="flex gap-4">
             <button
               onClick={handleSaveDraft}
-              className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+              disabled={isSaving}
+              className="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 disabled:bg-gray-400 transition-colors"
             >
-              ערוך טיוטה
+              {isSaving ? "שומר..." : result.property ? "עבור לעריכת הנכס" : "שמור כטיוטה"}
             </button>
             <button
               onClick={() => {

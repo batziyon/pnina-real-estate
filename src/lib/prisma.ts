@@ -26,7 +26,16 @@ function createPrismaClient(): PrismaClient {
     );
   }
 
-  const adapter = new PrismaPg({ connectionString });
+  // Use smaller connection pool in development to avoid exhaustion on hot-reloads.
+  // In dev mode, Next.js frequently hot-reloads modules, and each reload can create
+  // new connections. A smaller pool prevents accumulating connections across reloads.
+  // Production uses the pg default (10 connections per instance).
+  const poolConfig =
+    process.env["NODE_ENV"] === "production"
+      ? connectionString // Use string (default pool config)
+      : { connectionString, max: 3 }; // Development: limit to 3
+
+  const adapter = new PrismaPg(poolConfig);
   return new PrismaClient({ adapter });
 }
 

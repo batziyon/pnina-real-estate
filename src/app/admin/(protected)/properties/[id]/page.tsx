@@ -3,6 +3,8 @@ import { requireAuth } from "@/lib/auth-helpers";
 import { useCases } from "@/lib/container";
 import { PropertyForm } from "@/components/admin/PropertyForm";
 import { PropertyActions } from "@/components/admin/PropertyActions";
+import { PropertyInterestsSection } from "@/components/admin/PropertyInterestsSection";
+import { PropertyStatusHistory } from "@/components/admin/PropertyStatusHistory";
 import { canActorPublish } from "@/domain/property/property.rules";
 
 interface PageProps {
@@ -51,6 +53,12 @@ export default async function EditPropertyPage({ params }: PageProps) {
         userRole={user.role}
         initialData={property}
       />
+
+      {/* Property Interests */}
+      <PropertyInterestsSection propertyId={id} />
+
+      {/* Status History */}
+      <PropertyStatusHistory propertyId={id} />
     </div>
   );
 }

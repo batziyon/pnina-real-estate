@@ -36,7 +36,7 @@ export class Property {
   readonly description: string | null;
   readonly dealType: DealType;
   readonly propertyType: PropertyType;
-  readonly price: string;
+  readonly price: string | null;
   readonly neighborhoodId: string;
   readonly address: string | null;
   readonly rooms: string | null;
@@ -47,6 +47,7 @@ export class Property {
   readonly features: PropertyFeatures;
   readonly agentId: string;
   readonly projectId: string | null;
+  readonly internalNotes: string | null;
   readonly createdAt: Date;
   readonly updatedAt: Date;
 
@@ -66,6 +67,7 @@ export class Property {
     this.status = data.status;
     this.agentId = data.agentId;
     this.projectId = data.projectId;
+    this.internalNotes = data.internalNotes;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
     this.features = {
@@ -127,9 +129,13 @@ export class Property {
       problems.push("A neighborhood must be assigned before publishing.");
     }
 
-    const price = parseFloat(this.price);
-    if (isNaN(price) || price <= 0) {
-      problems.push("A valid price is required before publishing.");
+    if (!this.price) {
+      problems.push("Price is required before publishing.");
+    } else {
+      const price = parseFloat(this.price);
+      if (isNaN(price) || price <= 0) {
+        problems.push("A valid price is required before publishing.");
+      }
     }
 
     return problems;
@@ -160,6 +166,7 @@ export class Property {
       status: this.status,
       agentId: this.agentId,
       projectId: this.projectId,
+      internalNotes: this.internalNotes,
       createdAt: this.createdAt,
       updatedAt: this.updatedAt,
       ...this.features,

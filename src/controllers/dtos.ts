@@ -24,7 +24,7 @@ export interface PropertyPublicDTO {
   description: string | null;
   dealType: string;
   propertyType: string;
-  price: string;
+  price: string | null;
   neighborhoodId: string;
   address: string | null;
   rooms: string | null;

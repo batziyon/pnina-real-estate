@@ -16,7 +16,15 @@ export const CreatePropertySchemaClient = z.object({
   description:    z.string().max(5000, "התיאור יכול להכיל עד 5000 תווים").nullable().optional(),
   dealType:       DealTypeEnum,
   propertyType:   PropertyTypeEnum,
-  price:          z.string().refine((v) => parseFloat(v) > 0, "המחיר חייב להיות גדול מאפס"),
+  // Price: Optional - property can be created without a known price
+  price:          z.string().nullable().optional().refine(
+    (v) => {
+      if (!v || v === "") return true;
+      const num = parseFloat(v);
+      return !isNaN(num) && num > 0;
+    },
+    { message: "המחיר חייב להיות מספר חיובי" }
+  ),
   neighborhoodId: z.string().cuid("מזהה שכונה לא תקין"),
   address:        z.string().max(500, "הכתובת יכולה להכיל עד 500 תווים").nullable().optional(),
   rooms:          z.string().nullable().optional(),
@@ -32,8 +40,9 @@ export const CreatePropertySchemaClient = z.object({
   airConditioning: z.boolean().optional(),
   accessible:     z.boolean().optional(),
   furnished:      z.boolean().optional(),
-  agentId:        z.string().cuid("מזהה סוכן לא תקין"),
+  agentId:        z.string().cuid("מזהה סוכן לא תקין").optional(),
   projectId:      z.string().cuid("מזהה פרויקט לא תקין").nullable().optional(),
+  internalNotes:  z.string().max(1000, "הערות פנימיות יכולות להכיל עד 1000 תווים").nullable().optional(),
 });
 
 export const UpdatePropertySchemaClient = CreatePropertySchemaClient.partial();

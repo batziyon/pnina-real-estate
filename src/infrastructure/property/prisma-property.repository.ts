@@ -27,7 +27,7 @@ function toPropertyData(record: PrismaProperty): PropertyData {
     description: record.description,
     dealType: record.dealType as PropertyData["dealType"],
     propertyType: record.propertyType as PropertyData["propertyType"],
-    price: record.price.toString(),
+    price: record.price !== null ? record.price.toString() : null,
     neighborhoodId: record.neighborhoodId,
     address: record.address,
     rooms: record.rooms !== null ? record.rooms.toString() : null,
@@ -45,6 +45,7 @@ function toPropertyData(record: PrismaProperty): PropertyData {
     furnished: record.furnished,
     agentId: record.agentId,
     projectId: record.projectId,
+    internalNotes: record.internalNotes,
     createdAt: record.createdAt,
     updatedAt: record.updatedAt,
   };
@@ -170,11 +171,12 @@ export class PrismaPropertyRepository implements PropertyRepository {
         description: input.description ?? null,
         dealType: input.dealType,
         propertyType: input.propertyType,
-        price: input.price,
+        price: input.price ?? null,
         neighborhoodId: input.neighborhoodId,
         address: input.address ?? null,
-        rooms: input.rooms ?? null,
-        area: input.area ?? null,
+        // Protect Decimal fields from empty strings
+        rooms: input.rooms && input.rooms.trim() !== "" ? input.rooms : null,
+        area: input.area && input.area.trim() !== "" ? input.area : null,
         floor: input.floor ?? null,
         totalFloors: input.totalFloors ?? null,
         status: input.status ?? "DRAFT",
@@ -188,6 +190,7 @@ export class PrismaPropertyRepository implements PropertyRepository {
         furnished: input.furnished ?? false,
         agentId: input.agentId,
         projectId: input.projectId ?? null,
+        internalNotes: input.internalNotes ?? null,
       },
     });
     return toPropertyData(record);
@@ -201,13 +204,18 @@ export class PrismaPropertyRepository implements PropertyRepository {
         ...(input.description !== undefined && { description: input.description }),
         ...(input.dealType !== undefined && { dealType: input.dealType }),
         ...(input.propertyType !== undefined && { propertyType: input.propertyType }),
-        ...(input.price !== undefined && { price: input.price }),
+        ...(input.price !== undefined && { price: input.price ?? null }),
         ...(input.neighborhoodId !== undefined && {
           neighborhoodId: input.neighborhoodId,
         }),
         ...(input.address !== undefined && { address: input.address }),
-        ...(input.rooms !== undefined && { rooms: input.rooms }),
-        ...(input.area !== undefined && { area: input.area }),
+        // Protect Decimal fields from empty strings
+        ...(input.rooms !== undefined && { 
+          rooms: input.rooms && input.rooms.trim() !== "" ? input.rooms : null 
+        }),
+        ...(input.area !== undefined && { 
+          area: input.area && input.area.trim() !== "" ? input.area : null 
+        }),
         ...(input.floor !== undefined && { floor: input.floor }),
         ...(input.totalFloors !== undefined && { totalFloors: input.totalFloors }),
         ...(input.status !== undefined && { status: input.status }),
@@ -223,6 +231,7 @@ export class PrismaPropertyRepository implements PropertyRepository {
         ...(input.furnished !== undefined && { furnished: input.furnished }),
         ...(input.agentId !== undefined && { agentId: input.agentId }),
         ...(input.projectId !== undefined && { projectId: input.projectId }),
+        ...(input.internalNotes !== undefined && { internalNotes: input.internalNotes }),
       },
     });
     return toPropertyData(record);

@@ -63,11 +63,11 @@ export class CreatePropertyFromAIUseCase {
         neighborhoodId = match.id;
       } else {
         // AI provided a neighborhood but it doesn't match any DB record
-        // This is a validation error - user must manually select
-        throw new ValidationError(
-          `לא הצלחתי לזהות את השכונה "${extraction.neighborhoodName.value}". אנא בחר שכונה מהרשימה.`,
-          { neighborhoodId: "שכונה לא תקינה או חסרה" }
+        // DO NOT throw error - preserve extraction and let user select manually
+        warnings.push(
+          `לא הצלחתי לזהות את השכונה "${extraction.neighborhoodName.value}". אנא בחר שכונה מהרשימה.`
         );
+        neighborhoodId = undefined;
       }
     } else {
       // AI did not provide a neighborhood at all
@@ -110,7 +110,8 @@ export class CreatePropertyFromAIUseCase {
       description: extraction.description.value ?? null,
       dealType: extraction.dealType.value || "SALE",
       propertyType: extraction.propertyType.value || "APARTMENT",
-      price: extraction.price.value || "0",
+      // Price: nullable - null when not found
+      price: extraction.price.value || null,
 
       // Location
       neighborhoodId: neighborhoodId, // Now guaranteed to be non-empty
@@ -135,6 +136,7 @@ export class CreatePropertyFromAIUseCase {
       // CRITICAL: Server-controlled fields
       agentId: actor.id, // Always set to the authenticated actor
       projectId: null, // AI never determines project
+      internalNotes: null, // AI doesn't extract this
 
       // CRITICAL: Force DRAFT status
       status: "DRAFT",

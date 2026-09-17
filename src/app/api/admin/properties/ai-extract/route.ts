@@ -33,11 +33,19 @@ import { AIValidationError } from "@/ai/application/errors/ai-validation-error";
 import { AIProviderUnavailableError } from "@/ai/application/errors/ai-provider-unavailable-error";
 
 export async function POST(request: NextRequest) {
+  console.log("\n========== POST /api/admin/properties/ai-extract ==========");
+  
   try {
-    // 1. Authenticate and authorize
+    // STEP 1 SESSION VERIFICATION LOGGING
     const actor = await requireAuth();
+    console.log("✓ Session actor verified:");
+    console.log("  - id:    ", actor.id);
+    console.log("  - email: ", actor.email);
+    console.log("  - role:  ", actor.role);
+    console.log("Expected ID after fresh login: cmu5p56oa001lu8u4ady241vk");
 
     if (actor.role !== "ADMIN" && actor.role !== "AGENT") {
+      console.error("Authorization failed: role not allowed");
       return NextResponse.json(
         { error: "רק מנהלים וסוכנים מורשים להשתמש ביצירת נכס באמצעות AI" },
         { status: 403 }
@@ -46,9 +54,12 @@ export async function POST(request: NextRequest) {
 
     // 2. Parse and validate request body
     const body = await request.json();
+    console.log("Request body length:", body.text?.length || 0);
+    
     const validation = aiExtractRequestSchema.safeParse(body);
 
     if (!validation.success) {
+      console.error("Validation failed:", validation.error.flatten().fieldErrors);
       return NextResponse.json(
         {
           error: "נתונים לא תקינים",
@@ -59,12 +70,19 @@ export async function POST(request: NextRequest) {
     }
 
     const { text } = validation.data;
+    console.log("Starting AI extraction for text (first 100 chars):", text.substring(0, 100));
 
     // 3. Call use case
+    console.log("Calling CreatePropertyFromAIUseCase...");
     const result = await useCases.ai.createPropertyFromText.execute({
       text,
       actor,
     });
+
+    console.log("✓ AI extraction succeeded");
+    console.log("Property created:", !!result.property);
+    console.log("Warnings:", result.warnings.length);
+    console.log("================================================\n");
 
     // 4. Return structured result
     // Note: property may be null if neighborhood was not provided or not resolvable
@@ -78,7 +96,13 @@ export async function POST(request: NextRequest) {
       { status: result.property ? 201 : 200 }
     );
   } catch (error) {
-    console.error("[AI Extract API] Error:", error);
+    console.error("\n✗ AI Extract API ERROR:");
+    console.error("Error type:", error?.constructor?.name);
+    console.error("Error message:", error instanceof Error ? error.message : String(error));
+    if (error && typeof error === 'object' && 'cause' in error) {
+      console.error("Error cause:", error.cause);
+    }
+    console.error("================================================\n");
 
     // AI provider unavailable (503/429 from Gemini)
     if (error instanceof AIProviderUnavailableError) {

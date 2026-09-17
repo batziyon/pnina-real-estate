@@ -1,56 +1,44 @@
 /**
- * Admin Login Page — Hebrew RTL
- *
- * Server Component that renders the login form.
- * Uses Auth.js Credentials provider for authentication.
- *
- * Flow:
- * 1. User enters email + password
- * 2. Form submits to Auth.js signIn action
- * 3. Auth.js calls LoginUseCase (server-side)
- * 4. On success: redirect to /admin
- * 5. On failure: display error message
- *
- * Security:
- * - Authentication handled by Auth.js
- * - No database code in UI
- * - Credentials provider configured in auth.ts
+ * Admin Login Page — Pnina Real Estate
  */
 
 import { LoginForm } from "@/components/admin/LoginForm";
+import Image from "next/image";
 
 export const metadata = {
-  title: "התחברות | ניהול נכסים",
+  title: "התחברות | פנינה נדל״ן",
   description: "התחברות למערכת ניהול הנכסים",
 };
 
 export default function AdminLoginPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4" dir="rtl">
+    <div className="min-h-screen bg-[#135C87] flex items-center justify-center px-4 py-12" dir="rtl">
       <div className="w-full max-w-md">
-        {/* Logo/Brand */}
+        {/* Brand */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            פנינה נדל&quot;ן
-          </h1>
-          <p className="text-gray-600">מערכת ניהול נכסים</p>
+          <div className="mb-6 flex justify-center">
+            <div className="relative w-48 h-24 bg-white p-4 rounded">
+              <Image
+                src="/images/pnina-logo.jpg"
+                alt="פנינה נדל״ן"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
+          <h2 className="text-xl font-semibold text-white">כניסה למערכת</h2>
         </div>
 
-        {/* Login Card */}
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            התחברות למערכת
-          </h2>
-
+        {/* Login Form Card */}
+        <div className="bg-white border border-white/20 p-8">
           <LoginForm />
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-6">
-          <p className="text-sm text-gray-600">
-            © 2026 פנינה נדל&quot;ן. כל הזכויות שמורות.
-          </p>
-        </div>
+        <p className="text-center text-white/70 text-xs mt-6">
+          © {new Date().getFullYear()} פנינה נדל״ן. כל הזכויות שמורות.
+        </p>
       </div>
     </div>
   );

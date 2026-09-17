@@ -76,12 +76,20 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
           <h1 className="text-3xl font-bold text-gray-900">נכסים</h1>
           <p className="text-gray-600 mt-1">ניהול נכסים במערכת</p>
         </div>
-        <Link
-          href="/admin/properties/new"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-        >
-          + הוסף נכס חדש
-        </Link>
+        <div className="flex gap-3">
+          <Link
+            href="/admin/properties/ai-new"
+            className="px-4 py-2 bg-white border-2 border-[#135C87] text-[#135C87] rounded hover:bg-blue-50 transition-colors font-medium text-sm"
+          >
+            יצירת נכס באמצעות AI
+          </Link>
+          <Link
+            href="/admin/properties/new"
+            className="px-4 py-2 bg-[#135C87] text-white rounded hover:bg-[#0f4a6d] transition-colors font-medium text-sm"
+          >
+            + נכס חדש
+          </Link>
+        </div>
       </div>
 
       {/* Filters */}
@@ -257,7 +265,9 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-gray-900">
-                      {property.price} ₪
+                      {!property.price || property.price === "0"
+                        ? <span className="text-gray-500 italic">מחיר טרם נקבע</span>
+                        : `${property.price} ₪`}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

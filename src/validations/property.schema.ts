@@ -16,7 +16,15 @@ export const CreatePropertySchema = z.object({
   description:    z.string().max(5000).nullable().optional(),
   dealType:       DealTypeEnum,
   propertyType:   PropertyTypeEnum,
-  price:          z.string().refine((v) => parseFloat(v) > 0, "Price must be greater than zero"),
+  // Price: Optional - property can be created without a known price
+  price:          z.string().nullable().optional().refine(
+    (val) => {
+      if (!val || val === "") return true;
+      const num = parseFloat(val);
+      return !isNaN(num) && num > 0;
+    },
+    { message: "Price must be a positive number" }
+  ),
   neighborhoodId: z.string().cuid("Invalid neighborhood ID"),
   address:        z.string().max(500).nullable().optional(),
   rooms:          z.string().nullable().optional(),
@@ -32,8 +40,9 @@ export const CreatePropertySchema = z.object({
   airConditioning: z.boolean().optional(),
   accessible:     z.boolean().optional(),
   furnished:      z.boolean().optional(),
-  agentId:        z.string().cuid("Invalid agent ID"),
+  agentId:        z.string().cuid("Invalid agent ID").optional(),
   projectId:      z.string().cuid("Invalid project ID").nullable().optional(),
+  internalNotes:  z.string().max(1000).nullable().optional(),
 });
 
 export const UpdatePropertySchema = CreatePropertySchema.partial();

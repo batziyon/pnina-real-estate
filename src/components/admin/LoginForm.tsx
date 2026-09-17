@@ -1,31 +1,20 @@
 "use client";
 
 /**
- * Login Form Component — Hebrew RTL
+ * LoginForm Component — Pnina Real Estate Premium Design
  *
- * Client Component for login form UI and state management.
- * Submits to Auth.js signIn server action.
- *
- * Features:
- * - Email + Password fields
- * - Client-side validation
- * - Loading state during authentication
- * - Hebrew error messages
- * - Redirect to /admin on success
- *
- * Security:
- * - Uses Auth.js signIn (server action)
- * - No direct database access
- * - Credentials validated server-side
+ * Client Component for login form with Auth.js integration.
  */
 
 import { useState, useTransition, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { Button } from "@/components/ui/Button";
+import { Input } from "@/components/ui/Input";
+import { Alert } from "@/components/ui/Alert";
 
 /**
  * Inner component that uses useSearchParams
- * Wrapped in Suspense boundary by parent
  */
 function LoginFormContent() {
   const router = useRouter();
@@ -36,14 +25,12 @@ function LoginFormContent() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  // Check for error from URL (Auth.js redirect with error)
   const urlError = searchParams.get("error");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    // Client-side validation
     if (!email || !password) {
       setError("נא למלא את כל השדות");
       return;
@@ -56,22 +43,18 @@ function LoginFormContent() {
 
     startTransition(async () => {
       try {
-        // Call Auth.js signIn with credentials
         const result = await signIn("credentials", {
           email,
           password,
-          redirect: false, // Handle redirect manually
+          redirect: false,
         });
 
         if (result?.error) {
-          // Authentication failed
           setError("אימייל או סיסמה שגויים");
         } else if (result?.ok) {
-          // Authentication succeeded — redirect to admin
           router.push("/admin");
           router.refresh();
         } else {
-          // Unknown error
           setError("אירעה שגיאה. נסה שוב.");
         }
       } catch (err) {
@@ -83,63 +66,46 @@ function LoginFormContent() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* Error Display */}
       {(error || urlError) && (
-        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-          <p className="text-sm text-red-800 text-center">
-            {error || "שגיאה בהתחברות. נסה שוב."}
-          </p>
-        </div>
+        <Alert variant="error">
+          {error || "שגיאה בהתחברות. נסה שוב."}
+        </Alert>
       )}
 
-      {/* Email Field */}
-      <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-          כתובת אימייל
-        </label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autoComplete="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isPending}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
-          placeholder="example@domain.com"
-        />
-      </div>
-
-      {/* Password Field */}
-      <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-          סיסמה
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={isPending}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
-          placeholder="••••••••"
-        />
-      </div>
-
-      {/* Submit Button */}
-      <button
-        type="submit"
+      <Input
+        label="דואר אלקטרוני"
+        type="email"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="example@domain.com"
+        required
+        autoComplete="email"
         disabled={isPending}
-        className="w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
-      >
-        {isPending ? "מתחבר..." : "התחברות"}
-      </button>
+      />
 
-      {/* Info Text */}
+      <Input
+        label="סיסמה"
+        type="password"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="••••••••"
+        required
+        autoComplete="current-password"
+        disabled={isPending}
+      />
+
+      <Button
+        type="submit"
+        variant="primary"
+        fullWidth
+        isLoading={isPending}
+        disabled={isPending}
+      >
+        כניסה למערכת
+      </Button>
+
       <div className="text-center">
         <p className="text-xs text-gray-500">
           מערכת מאובטחת למשתמשים מורשים בלבד
@@ -149,10 +115,6 @@ function LoginFormContent() {
   );
 }
 
-/**
- * LoginForm with Suspense boundary
- * Wraps LoginFormContent to satisfy Next.js useSearchParams requirement
- */
 export function LoginForm() {
   return (
     <Suspense fallback={<LoginFormSkeleton />}>
@@ -161,9 +123,6 @@ export function LoginForm() {
   );
 }
 
-/**
- * Loading skeleton for LoginForm
- */
 function LoginFormSkeleton() {
   return (
     <div className="space-y-6 animate-pulse">

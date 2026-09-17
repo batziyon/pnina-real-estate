@@ -7,7 +7,6 @@
  * - Route handler only authenticates and passes actor
  *
  * PATCH /api/admin/properties/[id] - Update property
- * POST  /api/admin/properties/[id]/publish - Publish property
  */
 
 import { NextRequest, NextResponse } from "next/server";
@@ -39,35 +38,6 @@ export async function PATCH(
 
     // 3. Call use case (authorization happens inside)
     const property = await useCases.properties.update.execute(id, body, {
-      id: actor.id,
-      role: actor.role,
-    });
-
-    return NextResponse.json(property);
-  } catch (error) {
-    return handleApiError(error);
-  }
-}
-
-/**
- * POST /api/admin/properties/[id]/publish
- *
- * Publish property.
- * Authorization happens inside PublishPropertyUseCase via canActorPublish().
- */
-export async function POST(
-  request: NextRequest,
-  context: RouteContext
-) {
-  try {
-    // 1. Authenticate
-    const actor = await requireAuth();
-
-    // 2. Parse params
-    const { id } = await context.params;
-
-    // 3. Call use case (authorization happens inside)
-    const property = await useCases.properties.publish.execute(id, {
       id: actor.id,
       role: actor.role,
     });

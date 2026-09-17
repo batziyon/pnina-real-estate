@@ -351,7 +351,7 @@ export type PropertyGroupByOutputType = {
   description: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal
+  price: runtime.Decimal | null
   neighborhoodId: string
   address: string | null
   street: string | null
@@ -407,7 +407,7 @@ export type PropertyWhereInput = {
   description?: Prisma.StringNullableFilter<"Property"> | string | null
   dealType?: Prisma.EnumDealTypeFilter<"Property"> | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFilter<"Property"> | $Enums.PropertyType
-  price?: Prisma.DecimalFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFilter<"Property"> | string
   address?: Prisma.StringNullableFilter<"Property"> | string | null
   street?: Prisma.StringNullableFilter<"Property"> | string | null
@@ -449,7 +449,7 @@ export type PropertyOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   dealType?: Prisma.SortOrder
   propertyType?: Prisma.SortOrder
-  price?: Prisma.SortOrder
+  price?: Prisma.SortOrderInput | Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   street?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -494,7 +494,7 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Property"> | string | null
   dealType?: Prisma.EnumDealTypeFilter<"Property"> | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFilter<"Property"> | $Enums.PropertyType
-  price?: Prisma.DecimalFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFilter<"Property"> | string
   address?: Prisma.StringNullableFilter<"Property"> | string | null
   street?: Prisma.StringNullableFilter<"Property"> | string | null
@@ -536,7 +536,7 @@ export type PropertyOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   dealType?: Prisma.SortOrder
   propertyType?: Prisma.SortOrder
-  price?: Prisma.SortOrder
+  price?: Prisma.SortOrderInput | Prisma.SortOrder
   neighborhoodId?: Prisma.SortOrder
   address?: Prisma.SortOrderInput | Prisma.SortOrder
   street?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -577,7 +577,7 @@ export type PropertyScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   dealType?: Prisma.EnumDealTypeWithAggregatesFilter<"Property"> | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeWithAggregatesFilter<"Property"> | $Enums.PropertyType
-  price?: Prisma.DecimalWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.DecimalNullableWithAggregatesFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringWithAggregatesFilter<"Property"> | string
   address?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
   street?: Prisma.StringNullableWithAggregatesFilter<"Property"> | string | null
@@ -610,7 +610,7 @@ export type PropertyCreateInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -648,7 +648,7 @@ export type PropertyUncheckedCreateInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -686,7 +686,7 @@ export type PropertyUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -724,7 +724,7 @@ export type PropertyUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -762,7 +762,7 @@ export type PropertyCreateManyInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -795,7 +795,7 @@ export type PropertyUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -824,7 +824,7 @@ export type PropertyUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1158,14 +1158,6 @@ export type EnumPropertyTypeFieldUpdateOperationsInput = {
   set?: $Enums.PropertyType
 }
 
-export type DecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
 export type NullableIntFieldUpdateOperationsInput = {
   set?: number | null
   increment?: number
@@ -1260,7 +1252,7 @@ export type PropertyCreateWithoutNeighborhoodInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1297,7 +1289,7 @@ export type PropertyUncheckedCreateWithoutNeighborhoodInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1363,7 +1355,7 @@ export type PropertyScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Property"> | string | null
   dealType?: Prisma.EnumDealTypeFilter<"Property"> | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFilter<"Property"> | $Enums.PropertyType
-  price?: Prisma.DecimalFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.DecimalNullableFilter<"Property"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFilter<"Property"> | string
   address?: Prisma.StringNullableFilter<"Property"> | string | null
   street?: Prisma.StringNullableFilter<"Property"> | string | null
@@ -1396,7 +1388,7 @@ export type PropertyCreateWithoutAgentInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1433,7 +1425,7 @@ export type PropertyUncheckedCreateWithoutAgentInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -1496,7 +1488,7 @@ export type PropertyCreateWithoutOwnerContactInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1533,7 +1525,7 @@ export type PropertyUncheckedCreateWithoutOwnerContactInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -1596,7 +1588,7 @@ export type PropertyCreateWithoutProjectInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1633,7 +1625,7 @@ export type PropertyUncheckedCreateWithoutProjectInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -1696,7 +1688,7 @@ export type PropertyCreateWithoutImagesInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1733,7 +1725,7 @@ export type PropertyUncheckedCreateWithoutImagesInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -1786,7 +1778,7 @@ export type PropertyUpdateWithoutImagesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1823,7 +1815,7 @@ export type PropertyUncheckedUpdateWithoutImagesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1860,7 +1852,7 @@ export type PropertyCreateWithoutVideosInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -1897,7 +1889,7 @@ export type PropertyUncheckedCreateWithoutVideosInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -1950,7 +1942,7 @@ export type PropertyUpdateWithoutVideosInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1987,7 +1979,7 @@ export type PropertyUncheckedUpdateWithoutVideosInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2024,7 +2016,7 @@ export type PropertyCreateWithoutInquiriesInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -2061,7 +2053,7 @@ export type PropertyUncheckedCreateWithoutInquiriesInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -2114,7 +2106,7 @@ export type PropertyUpdateWithoutInquiriesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2151,7 +2143,7 @@ export type PropertyUncheckedUpdateWithoutInquiriesInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2188,7 +2180,7 @@ export type PropertyCreateWithoutStatusHistoryInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -2225,7 +2217,7 @@ export type PropertyUncheckedCreateWithoutStatusHistoryInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -2278,7 +2270,7 @@ export type PropertyUpdateWithoutStatusHistoryInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2315,7 +2307,7 @@ export type PropertyUncheckedUpdateWithoutStatusHistoryInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2352,7 +2344,7 @@ export type PropertyCreateWithoutPropertyInterestsInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -2389,7 +2381,7 @@ export type PropertyUncheckedCreateWithoutPropertyInterestsInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -2442,7 +2434,7 @@ export type PropertyUpdateWithoutPropertyInterestsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2479,7 +2471,7 @@ export type PropertyUncheckedUpdateWithoutPropertyInterestsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2516,7 +2508,7 @@ export type PropertyCreateManyNeighborhoodInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: string | null
   street?: string | null
   houseNumber?: string | null
@@ -2548,7 +2540,7 @@ export type PropertyUpdateWithoutNeighborhoodInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2585,7 +2577,7 @@ export type PropertyUncheckedUpdateWithoutNeighborhoodInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2622,7 +2614,7 @@ export type PropertyUncheckedUpdateManyWithoutNeighborhoodInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2654,7 +2646,7 @@ export type PropertyCreateManyAgentInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -2686,7 +2678,7 @@ export type PropertyUpdateWithoutAgentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2723,7 +2715,7 @@ export type PropertyUncheckedUpdateWithoutAgentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2760,7 +2752,7 @@ export type PropertyUncheckedUpdateManyWithoutAgentInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2792,7 +2784,7 @@ export type PropertyCreateManyOwnerContactInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -2824,7 +2816,7 @@ export type PropertyUpdateWithoutOwnerContactInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2861,7 +2853,7 @@ export type PropertyUncheckedUpdateWithoutOwnerContactInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2898,7 +2890,7 @@ export type PropertyUncheckedUpdateManyWithoutOwnerContactInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2930,7 +2922,7 @@ export type PropertyCreateManyProjectInput = {
   description?: string | null
   dealType: $Enums.DealType
   propertyType: $Enums.PropertyType
-  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId: string
   address?: string | null
   street?: string | null
@@ -2962,7 +2954,7 @@ export type PropertyUpdateWithoutProjectInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2999,7 +2991,7 @@ export type PropertyUncheckedUpdateWithoutProjectInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3036,7 +3028,7 @@ export type PropertyUncheckedUpdateManyWithoutProjectInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
   propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
-  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  price?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3324,7 +3316,7 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     description: string | null
     dealType: $Enums.DealType
     propertyType: $Enums.PropertyType
-    price: runtime.Decimal
+    price: runtime.Decimal | null
     neighborhoodId: string
     address: string | null
     street: string | null

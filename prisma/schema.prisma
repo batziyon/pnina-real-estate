@@ -324,7 +324,7 @@ model Property {
   description    String?
   dealType       DealType
   propertyType   PropertyType
-  price          Decimal      @db.Decimal(14, 2)
+  price          Decimal?     @db.Decimal(14, 2)
   neighborhoodId String
 
   // Address

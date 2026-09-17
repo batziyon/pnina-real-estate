@@ -1,13 +1,13 @@
 "use client";
 
 /**
- * Admin Sidebar Navigation — Hebrew RTL
- *
- * Client Component for navigation and active state tracking.
+ * Admin Sidebar Navigation — Professional Real Estate CRM
+ * Pnina Real Estate
  */
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import type { AuthenticatedUser } from "@/lib/auth-helpers";
 
 interface AdminSidebarProps {
@@ -15,16 +15,15 @@ interface AdminSidebarProps {
 }
 
 const navigation = [
-  { name: "לוח בקרה", href: "/admin", icon: "📊" },
-  { name: "נכסים", href: "/admin/properties", icon: "🏢" },
-  { name: "✨ יצירת נכס באמצעות AI", href: "/admin/properties/ai-new", icon: "🤖", agentAccess: true },
-  { name: "פרויקטים", href: "/admin/projects", icon: "🏗️" },
-  { name: "פניות", href: "/admin/inquiries", icon: "📬" },
-  { name: "הערכות שווי", href: "/admin/valuations", icon: "💰" },
-  { name: "אנשי קשר", href: "/admin/contacts", icon: "👤", agentAccess: true },
-  { name: "המלצות", href: "/admin/testimonials", icon: "⭐", adminOnly: true },
-  { name: "משתמשים", href: "/admin/users", icon: "👥", adminOnly: true },
-  { name: "הגדרות", href: "/admin/settings", icon: "⚙️", adminOnly: true },
+  { name: "לוח בקרה", href: "/admin", group: "main" },
+  { name: "נכסים", href: "/admin/properties", group: "main" },
+  { name: "פרויקטים", href: "/admin/projects", group: "main" },
+  { name: "אנשי קשר", href: "/admin/contacts", agentAccess: true, group: "crm" },
+  { name: "פניות", href: "/admin/inquiries", group: "crm" },
+  { name: "הערכות שווי", href: "/admin/valuations", group: "crm" },
+  { name: "המלצות", href: "/admin/testimonials", adminOnly: true, group: "settings" },
+  { name: "משתמשים", href: "/admin/users", adminOnly: true, group: "settings" },
+  { name: "הגדרות", href: "/admin/settings", adminOnly: true, group: "settings" },
 ];
 
 export function AdminSidebar({ user }: AdminSidebarProps) {
@@ -32,66 +31,143 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
 
   // Filter navigation based on role
   const visibleNav = navigation.filter((item) => {
-    // Admin-only items
     if (item.adminOnly && user.role !== "ADMIN") {
       return false;
     }
-    // Agent-access items (ADMIN and AGENT only)
     if (item.agentAccess && user.role !== "ADMIN" && user.role !== "AGENT") {
       return false;
     }
     return true;
   });
 
+  // Group navigation items
+  const groupedNav = {
+    main: visibleNav.filter((item) => item.group === "main"),
+    crm: visibleNav.filter((item) => item.group === "crm"),
+    settings: visibleNav.filter((item) => item.group === "settings"),
+  };
+
   return (
-    <aside className="w-64 bg-white border-l border-gray-200 flex flex-col">
+    <aside className="w-64 bg-[#135C87] flex flex-col">
       {/* Logo/Brand */}
-      <div className="p-6 border-b border-gray-200">
-        <h1 className="text-2xl font-bold text-gray-900">פנינה נדל&quot;ן</h1>
-        <p className="text-sm text-gray-500 mt-1">ניהול נכסים</p>
+      <div className="px-6 py-5 border-b border-white/10">
+        <div className="relative w-full h-16">
+          <Image
+            src="/images/pnina-logo.jpg"
+            alt="פנינה נדל״ן"
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
       </div>
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-1">
-        {visibleNav.map((item) => {
-          const isActive =
-            pathname === item.href ||
-            (item.href !== "/admin" && pathname.startsWith(item.href));
+      <nav className="flex-1 px-3 py-4 space-y-5 overflow-y-auto">
+        {/* Main Section */}
+        {groupedNav.main.length > 0 && (
+          <div className="space-y-0.5">
+            {groupedNav.main.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/admin" && pathname.startsWith(item.href));
 
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`
-                flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium
-                transition-colors
-                ${
-                  isActive
-                    ? "bg-blue-50 text-blue-700"
-                    : "text-gray-700 hover:bg-gray-50"
-                }
-              `}
-            >
-              <span className="text-lg">{item.icon}</span>
-              <span>{item.name}</span>
-            </Link>
-          );
-        })}
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`
+                    block px-3 py-2 text-sm font-medium rounded transition-colors
+                    ${
+                      isActive
+                        ? "bg-white text-[#135C87]"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }
+                  `}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+
+        {/* CRM Section */}
+        {groupedNav.crm.length > 0 && (
+          <div className="space-y-0.5">
+            <h3 className="px-3 text-[10px] font-semibold text-white/60 uppercase tracking-wider mb-2">
+              ניהול לקוחות
+            </h3>
+            {groupedNav.crm.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/admin" && pathname.startsWith(item.href));
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`
+                    block px-3 py-2 text-sm font-medium rounded transition-colors
+                    ${
+                      isActive
+                        ? "bg-white text-[#135C87]"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }
+                  `}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Settings Section */}
+        {groupedNav.settings.length > 0 && (
+          <div className="space-y-0.5">
+            <h3 className="px-3 text-[10px] font-semibold text-white/60 uppercase tracking-wider mb-2">
+              הגדרות
+            </h3>
+            {groupedNav.settings.map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/admin" && pathname.startsWith(item.href));
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`
+                    block px-3 py-2 text-sm font-medium rounded transition-colors
+                    ${
+                      isActive
+                        ? "bg-white text-[#135C87]"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }
+                  `}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </nav>
 
       {/* User info */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="px-4 py-3 border-t border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-            <span className="text-blue-700 font-semibold">
+          <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center">
+            <span className="text-[#135C87] font-semibold text-sm">
               {user.name.charAt(0)}
             </span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-xs font-medium text-white truncate">
               {user.name}
             </p>
-            <p className="text-xs text-gray-500">{getRoleLabel(user.role)}</p>
+            <p className="text-[10px] text-white/70">{getRoleLabel(user.role)}</p>
           </div>
         </div>
       </div>

@@ -44,6 +44,9 @@ export interface PublishingViolation {
 /**
  * Returns a list of violations that prevent a property from being published.
  * An empty array means the property satisfies all publication requirements.
+ * 
+ * Note: Price is optional. Properties may be published with price = null,
+ * which displays as "מחיר טרם נקבע" (price not yet determined).
  */
 export function getPublishingViolations(
   property: PropertyData
@@ -68,13 +71,8 @@ export function getPublishingViolations(
     });
   }
 
-  const price = parseFloat(property.price);
-  if (isNaN(price) || price <= 0) {
-    violations.push({
-      field: "price",
-      message: "A valid price greater than zero is required.",
-    });
-  }
+  // Price is optional - removed validation requirement
+  // Properties can be published with price = null ("מחיר טרם נקבע")
 
   if (!property.propertyType) {
     violations.push({
@@ -101,7 +99,8 @@ export function canBePublished(property: PropertyData): boolean {
 // Price rules
 // ---------------------------------------------------------------------------
 
-export function isValidPrice(price: string): boolean {
+export function isValidPrice(price: string | null): boolean {
+  if (!price) return false;
   const n = parseFloat(price);
   return !isNaN(n) && n > 0 && isFinite(n);
 }
@@ -109,7 +108,7 @@ export function isValidPrice(price: string): boolean {
 export function hasMeaningfulPrice(
   property: Pick<PropertyData, "price" | "dealType">
 ): boolean {
-  return isValidPrice(property.price);
+  return property.price !== null && isValidPrice(property.price);
 }
 
 // ---------------------------------------------------------------------------

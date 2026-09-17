@@ -25,27 +25,40 @@ export class CreatePropertyUseCase {
 
   async execute(rawInput: unknown, actor: Actor): Promise<PropertyData> {
     // 1. Schema validation
+    console.log("\n--- CreatePropertyUseCase.execute ---");
+    console.log("Raw input type:", typeof rawInput);
+    console.log("Raw input:", JSON.stringify(rawInput, null, 2));
+    
     const parsed = CreatePropertySchema.safeParse(rawInput);
     if (!parsed.success) {
+      console.error("\n✗ Schema validation FAILED:");
+      console.error("Zod errors:", JSON.stringify(parsed.error.format(), null, 2));
+      
       const fields = Object.fromEntries(
         Object.entries(parsed.error.flatten().fieldErrors).map(([k, v]) => [k, v?.[0] ?? "Invalid"])
       );
+      console.error("Validation fields:", fields);
       throw new ValidationError("Invalid property input.", fields);
     }
 
+    console.log("✓ Schema validation passed");
     const input = parsed.data;
 
     // 2. Determine agentId based on actor role (CRITICAL: server-controlled)
     let agentId: string;
 
     if (actor.role === "ADMIN") {
-      // Admin can assign any agent (use client input if provided, else self)
-      agentId = input.agentId ?? actor.id;
-
-      // Verify agent exists and is active
-      const agent = await this.userRepository.findById(agentId);
-      if (!agent || !agent.active || agent.role !== "AGENT") {
-        throw new ValidationError("Invalid agent ID.");
+      // Admin can assign any agent, or if not specified, assign self (the ADMIN)
+      if (input.agentId) {
+        // Verify the specified agent exists and is active
+        const agent = await this.userRepository.findById(input.agentId);
+        if (!agent || !agent.active) {
+          throw new ValidationError("Invalid agent ID - user not found or inactive.");
+        }
+        agentId = input.agentId;
+      } else {
+        // No agent specified - use the ADMIN themselves as the assigned agent
+        agentId = actor.id;
       }
     } else if (actor.role === "AGENT") {
       // Agent properties are auto-assigned to the agent (ignore client input)
@@ -71,6 +84,7 @@ export class CreatePropertyUseCase {
     const violations = getCreationViolations({
       ...input,
       agentId, // Use server-determined agentId
+      price: input.price ?? null,
       description: input.description ?? null,
       address: input.address ?? null,
       rooms: input.rooms ?? null,
@@ -86,6 +100,7 @@ export class CreatePropertyUseCase {
       airConditioning: input.airConditioning ?? false,
       accessible: input.accessible ?? false,
       furnished: input.furnished ?? false,
+      internalNotes: input.internalNotes ?? null,
     });
     if (violations.length > 0) {
       const fields = Object.fromEntries(violations.map((v) => [v.field, v.message]));
@@ -102,6 +117,7 @@ export class CreatePropertyUseCase {
     return this.propertyRepository.create({
       ...input,
       agentId, // Server-controlled
+      price: input.price ?? null,
       description: input.description ?? null,
       address: input.address ?? null,
       rooms: input.rooms ?? null,
@@ -117,6 +133,7 @@ export class CreatePropertyUseCase {
       airConditioning: input.airConditioning ?? false,
       accessible: input.accessible ?? false,
       furnished: input.furnished ?? false,
+      internalNotes: input.internalNotes ?? null,
     });
   }
 }
