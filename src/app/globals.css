@@ -4,21 +4,30 @@
  * Pnina Real Estate — Global Styles
  * Professional Jerusalem Real Estate Design System
  *
- * Brand Colors (from actual logo):
- * - Primary Blue: #135C87
- * - White for clean backgrounds
- * - Restrained orange accents for emphasis
+ * Brand Colors:
+ * - Primary Blue: #135C87 (dominant brand color)
+ * - Accent Orange: #D9822B (restrained accent only)
+ * - Neutrals: white, warm off-whites, charcoal grays
  */
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2937;
   
-  /* Brand Colors - Based on Pnina Logo */
+  /* Brand Colors */
   --color-primary: #135C87;
   --color-primary-dark: #0f4a6d;
-  --color-accent: #f97316;
-  --color-accent-dark: #ea580c;
+  --color-primary-light: #1a6fa0;
+  --color-accent: #D9822B;
+  --color-accent-dark: #c2721f;
+  
+  /* Neutrals */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
 }
 
 @theme inline {
@@ -46,28 +55,93 @@ body {
 *:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* Smooth scrolling with reduced motion support */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
-/* Custom scrollbar */
+/* Improved scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--color-gray-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  background: var(--color-gray-600);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--color-primary);
 }
+
+/* Typography Scale - Professional & Editorial */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px */
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-size: 1.5rem; /* 24px */
+}
+
+h4 {
+  font-size: 1.25rem; /* 20px */
+}
+
+p {
+  line-height: 1.7;
+  color: var(--color-gray-700);
+}
+
+@media (min-width: 640px) {
+  h1 {
+    font-size: 3rem; /* 48px */
+  }
+  
+  h2 {
+    font-size: 2.25rem; /* 36px */
+  }
+}
+
+/* Links */
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-primary);
+  color: white;
+}
+
