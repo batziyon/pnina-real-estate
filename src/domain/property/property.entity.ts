@@ -17,19 +17,14 @@ import type {
   PropertyStatus,
   PropertyType,
 } from "./property.types";
+import { isValidStatusTransition } from "./property.rules";
 
 // ---------------------------------------------------------------------------
 // Valid status transitions
 // ---------------------------------------------------------------------------
 
-const ALLOWED_TRANSITIONS: Record<PropertyStatus, PropertyStatus[]> = {
-  DRAFT:     ["PUBLISHED", "ARCHIVED"],
-  PUBLISHED: ["RESERVED", "SOLD", "RENTED", "ARCHIVED", "DRAFT"],
-  RESERVED:  ["PUBLISHED", "SOLD", "RENTED", "ARCHIVED"],
-  SOLD:      ["ARCHIVED"],
-  RENTED:    ["PUBLISHED", "ARCHIVED"],
-  ARCHIVED:  ["DRAFT"],
-};
+// Note: Transition rules are defined in property.rules.ts
+// This duplicate definition is kept for backwards compatibility but should be removed
 
 // ---------------------------------------------------------------------------
 // Entity
@@ -106,7 +101,7 @@ export class Property {
   }
 
   canTransitionTo(next: PropertyStatus): boolean {
-    return ALLOWED_TRANSITIONS[this.status].includes(next);
+    return isValidStatusTransition(this.status, next);
   }
 
   // ---------------------------------------------------------------------------

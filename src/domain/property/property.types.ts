@@ -18,7 +18,7 @@
 export type PropertyStatus =
   | "DRAFT"
   | "PUBLISHED"
-  | "RESERVED"
+  | "UNDER_CONTRACT"
   | "SOLD"
   | "RENTED"
   | "ARCHIVED";

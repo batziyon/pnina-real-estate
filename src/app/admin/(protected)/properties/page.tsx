@@ -115,7 +115,7 @@ export default async function PropertiesListPage({ searchParams }: PageProps) {
                 <option value="">הכל</option>
                 <option value="DRAFT">טיוטה</option>
                 <option value="PUBLISHED">מפורסם</option>
-                <option value="RESERVED">שמור</option>
+                <option value="UNDER_CONTRACT">בחוזה</option>
                 <option value="SOLD">נמכר</option>
                 <option value="RENTED">הושכר</option>
                 <option value="ARCHIVED">בארכיון</option>
@@ -323,7 +323,7 @@ function getStatusLabel(status: string): string {
   const labels: Record<string, string> = {
     DRAFT: "טיוטה",
     PUBLISHED: "מפורסם",
-    RESERVED: "שמור",
+    UNDER_CONTRACT: "בחוזה",
     SOLD: "נמכר",
     RENTED: "הושכר",
     ARCHIVED: "בארכיון",
@@ -335,7 +335,7 @@ function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
     DRAFT: "bg-gray-100 text-gray-800",
     PUBLISHED: "bg-green-100 text-green-800",
-    RESERVED: "bg-yellow-100 text-yellow-800",
+    UNDER_CONTRACT: "bg-yellow-100 text-yellow-800",
     SOLD: "bg-blue-100 text-blue-800",
     RENTED: "bg-purple-100 text-purple-800",
     ARCHIVED: "bg-gray-100 text-gray-600",

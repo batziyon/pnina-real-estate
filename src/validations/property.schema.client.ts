@@ -8,7 +8,7 @@ const PropertyTypeEnum = z.enum([
 const DealTypeEnum = z.enum(["SALE", "RENT"]);
 
 const PropertyStatusEnum = z.enum([
-  "DRAFT", "PUBLISHED", "RESERVED", "SOLD", "RENTED", "ARCHIVED",
+  "DRAFT", "PUBLISHED", "UNDER_CONTRACT", "SOLD", "RENTED", "ARCHIVED",
 ]);
 
 export const CreatePropertySchemaClient = z.object({

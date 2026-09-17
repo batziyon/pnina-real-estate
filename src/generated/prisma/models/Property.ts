@@ -439,6 +439,7 @@ export type PropertyWhereInput = {
   images?: Prisma.PropertyImageListRelationFilter
   videos?: Prisma.PropertyVideoListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
+  statusHistory?: Prisma.PropertyStatusHistoryListRelationFilter
 }
 
 export type PropertyOrderByWithRelationInput = {
@@ -479,6 +480,7 @@ export type PropertyOrderByWithRelationInput = {
   images?: Prisma.PropertyImageOrderByRelationAggregateInput
   videos?: Prisma.PropertyVideoOrderByRelationAggregateInput
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
+  statusHistory?: Prisma.PropertyStatusHistoryOrderByRelationAggregateInput
 }
 
 export type PropertyWhereUniqueInput = Prisma.AtLeast<{
@@ -522,6 +524,7 @@ export type PropertyWhereUniqueInput = Prisma.AtLeast<{
   images?: Prisma.PropertyImageListRelationFilter
   videos?: Prisma.PropertyVideoListRelationFilter
   inquiries?: Prisma.InquiryListRelationFilter
+  statusHistory?: Prisma.PropertyStatusHistoryListRelationFilter
 }, "id">
 
 export type PropertyOrderByWithAggregationInput = {
@@ -632,6 +635,7 @@ export type PropertyCreateInput = {
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateInput = {
@@ -668,6 +672,7 @@ export type PropertyUncheckedCreateInput = {
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUpdateInput = {
@@ -704,6 +709,7 @@ export type PropertyUpdateInput = {
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateInput = {
@@ -740,6 +746,7 @@ export type PropertyUncheckedUpdateInput = {
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyInput = {
@@ -1212,6 +1219,20 @@ export type PropertyUpdateOneWithoutInquiriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutInquiriesInput, Prisma.PropertyUpdateWithoutInquiriesInput>, Prisma.PropertyUncheckedUpdateWithoutInquiriesInput>
 }
 
+export type PropertyCreateNestedOneWithoutStatusHistoryInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutStatusHistoryInput, Prisma.PropertyUncheckedCreateWithoutStatusHistoryInput>
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutStatusHistoryInput
+  connect?: Prisma.PropertyWhereUniqueInput
+}
+
+export type PropertyUpdateOneRequiredWithoutStatusHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.PropertyCreateWithoutStatusHistoryInput, Prisma.PropertyUncheckedCreateWithoutStatusHistoryInput>
+  connectOrCreate?: Prisma.PropertyCreateOrConnectWithoutStatusHistoryInput
+  upsert?: Prisma.PropertyUpsertWithoutStatusHistoryInput
+  connect?: Prisma.PropertyWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PropertyUpdateToOneWithWhereWithoutStatusHistoryInput, Prisma.PropertyUpdateWithoutStatusHistoryInput>, Prisma.PropertyUncheckedUpdateWithoutStatusHistoryInput>
+}
+
 export type PropertyCreateWithoutNeighborhoodInput = {
   id?: string
   title: string
@@ -1245,6 +1266,7 @@ export type PropertyCreateWithoutNeighborhoodInput = {
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutNeighborhoodInput = {
@@ -1280,6 +1302,7 @@ export type PropertyUncheckedCreateWithoutNeighborhoodInput = {
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutNeighborhoodInput = {
@@ -1377,6 +1400,7 @@ export type PropertyCreateWithoutAgentInput = {
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutAgentInput = {
@@ -1412,6 +1436,7 @@ export type PropertyUncheckedCreateWithoutAgentInput = {
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutAgentInput = {
@@ -1473,6 +1498,7 @@ export type PropertyCreateWithoutOwnerContactInput = {
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutOwnerContactInput = {
@@ -1508,6 +1534,7 @@ export type PropertyUncheckedCreateWithoutOwnerContactInput = {
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutOwnerContactInput = {
@@ -1569,6 +1596,7 @@ export type PropertyCreateWithoutProjectInput = {
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutProjectInput = {
@@ -1604,6 +1632,7 @@ export type PropertyUncheckedCreateWithoutProjectInput = {
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutProjectInput = {
@@ -1665,6 +1694,7 @@ export type PropertyCreateWithoutImagesInput = {
   ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutImagesInput = {
@@ -1700,6 +1730,7 @@ export type PropertyUncheckedCreateWithoutImagesInput = {
   updatedAt?: Date | string
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutImagesInput = {
@@ -1751,6 +1782,7 @@ export type PropertyUpdateWithoutImagesInput = {
   ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutImagesInput = {
@@ -1786,6 +1818,7 @@ export type PropertyUncheckedUpdateWithoutImagesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutVideosInput = {
@@ -1821,6 +1854,7 @@ export type PropertyCreateWithoutVideosInput = {
   ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutVideosInput = {
@@ -1856,6 +1890,7 @@ export type PropertyUncheckedCreateWithoutVideosInput = {
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutVideosInput = {
@@ -1907,6 +1942,7 @@ export type PropertyUpdateWithoutVideosInput = {
   ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutVideosInput = {
@@ -1942,6 +1978,7 @@ export type PropertyUncheckedUpdateWithoutVideosInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateWithoutInquiriesInput = {
@@ -1977,6 +2014,7 @@ export type PropertyCreateWithoutInquiriesInput = {
   ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
   images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyUncheckedCreateWithoutInquiriesInput = {
@@ -2012,6 +2050,7 @@ export type PropertyUncheckedCreateWithoutInquiriesInput = {
   updatedAt?: Date | string
   images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
   videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedCreateNestedManyWithoutPropertyInput
 }
 
 export type PropertyCreateOrConnectWithoutInquiriesInput = {
@@ -2063,6 +2102,7 @@ export type PropertyUpdateWithoutInquiriesInput = {
   ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutInquiriesInput = {
@@ -2098,6 +2138,167 @@ export type PropertyUncheckedUpdateWithoutInquiriesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
+}
+
+export type PropertyCreateWithoutStatusHistoryInput = {
+  id?: string
+  title: string
+  description?: string | null
+  dealType: $Enums.DealType
+  propertyType: $Enums.PropertyType
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  address?: string | null
+  street?: string | null
+  houseNumber?: string | null
+  rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: number | null
+  totalFloors?: number | null
+  status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
+  parking?: boolean
+  elevator?: boolean
+  balcony?: boolean
+  safeRoom?: boolean
+  storage?: boolean
+  airConditioning?: boolean
+  accessible?: boolean
+  furnished?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  neighborhood: Prisma.NeighborhoodCreateNestedOneWithoutPropertiesInput
+  agent: Prisma.UserCreateNestedOneWithoutPropertiesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutPropertiesInput
+  ownerContact?: Prisma.ContactCreateNestedOneWithoutOwnedPropertiesInput
+  images?: Prisma.PropertyImageCreateNestedManyWithoutPropertyInput
+  videos?: Prisma.PropertyVideoCreateNestedManyWithoutPropertyInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutPropertyInput
+}
+
+export type PropertyUncheckedCreateWithoutStatusHistoryInput = {
+  id?: string
+  title: string
+  description?: string | null
+  dealType: $Enums.DealType
+  propertyType: $Enums.PropertyType
+  price: runtime.Decimal | runtime.DecimalJsLike | number | string
+  neighborhoodId: string
+  address?: string | null
+  street?: string | null
+  houseNumber?: string | null
+  rooms?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: number | null
+  totalFloors?: number | null
+  status?: $Enums.PropertyStatus
+  internalNotes?: string | null
+  representationType?: $Enums.RepresentationType
+  parking?: boolean
+  elevator?: boolean
+  balcony?: boolean
+  safeRoom?: boolean
+  storage?: boolean
+  airConditioning?: boolean
+  accessible?: boolean
+  furnished?: boolean
+  agentId: string
+  projectId?: string | null
+  ownerContactId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  images?: Prisma.PropertyImageUncheckedCreateNestedManyWithoutPropertyInput
+  videos?: Prisma.PropertyVideoUncheckedCreateNestedManyWithoutPropertyInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutPropertyInput
+}
+
+export type PropertyCreateOrConnectWithoutStatusHistoryInput = {
+  where: Prisma.PropertyWhereUniqueInput
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutStatusHistoryInput, Prisma.PropertyUncheckedCreateWithoutStatusHistoryInput>
+}
+
+export type PropertyUpsertWithoutStatusHistoryInput = {
+  update: Prisma.XOR<Prisma.PropertyUpdateWithoutStatusHistoryInput, Prisma.PropertyUncheckedUpdateWithoutStatusHistoryInput>
+  create: Prisma.XOR<Prisma.PropertyCreateWithoutStatusHistoryInput, Prisma.PropertyUncheckedCreateWithoutStatusHistoryInput>
+  where?: Prisma.PropertyWhereInput
+}
+
+export type PropertyUpdateToOneWithWhereWithoutStatusHistoryInput = {
+  where?: Prisma.PropertyWhereInput
+  data: Prisma.XOR<Prisma.PropertyUpdateWithoutStatusHistoryInput, Prisma.PropertyUncheckedUpdateWithoutStatusHistoryInput>
+}
+
+export type PropertyUpdateWithoutStatusHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
+  parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safeRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  storage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  airConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  neighborhood?: Prisma.NeighborhoodUpdateOneRequiredWithoutPropertiesNestedInput
+  agent?: Prisma.UserUpdateOneRequiredWithoutPropertiesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutPropertiesNestedInput
+  ownerContact?: Prisma.ContactUpdateOneWithoutOwnedPropertiesNestedInput
+  images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
+  videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+}
+
+export type PropertyUncheckedUpdateWithoutStatusHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dealType?: Prisma.EnumDealTypeFieldUpdateOperationsInput | $Enums.DealType
+  propertyType?: Prisma.EnumPropertyTypeFieldUpdateOperationsInput | $Enums.PropertyType
+  price?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  neighborhoodId?: Prisma.StringFieldUpdateOperationsInput | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  street?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  houseNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rooms?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  area?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  floor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  totalFloors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  status?: Prisma.EnumPropertyStatusFieldUpdateOperationsInput | $Enums.PropertyStatus
+  internalNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  representationType?: Prisma.EnumRepresentationTypeFieldUpdateOperationsInput | $Enums.RepresentationType
+  parking?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  elevator?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  balcony?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  safeRoom?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  storage?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  airConditioning?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  accessible?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  furnished?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  agentId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownerContactId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
+  videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyCreateManyNeighborhoodInput = {
@@ -2165,6 +2366,7 @@ export type PropertyUpdateWithoutNeighborhoodInput = {
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutNeighborhoodInput = {
@@ -2200,6 +2402,7 @@ export type PropertyUncheckedUpdateWithoutNeighborhoodInput = {
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutNeighborhoodInput = {
@@ -2299,6 +2502,7 @@ export type PropertyUpdateWithoutAgentInput = {
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutAgentInput = {
@@ -2334,6 +2538,7 @@ export type PropertyUncheckedUpdateWithoutAgentInput = {
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutAgentInput = {
@@ -2433,6 +2638,7 @@ export type PropertyUpdateWithoutOwnerContactInput = {
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutOwnerContactInput = {
@@ -2468,6 +2674,7 @@ export type PropertyUncheckedUpdateWithoutOwnerContactInput = {
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutOwnerContactInput = {
@@ -2567,6 +2774,7 @@ export type PropertyUpdateWithoutProjectInput = {
   images?: Prisma.PropertyImageUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateWithoutProjectInput = {
@@ -2602,6 +2810,7 @@ export type PropertyUncheckedUpdateWithoutProjectInput = {
   images?: Prisma.PropertyImageUncheckedUpdateManyWithoutPropertyNestedInput
   videos?: Prisma.PropertyVideoUncheckedUpdateManyWithoutPropertyNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutPropertyNestedInput
+  statusHistory?: Prisma.PropertyStatusHistoryUncheckedUpdateManyWithoutPropertyNestedInput
 }
 
 export type PropertyUncheckedUpdateManyWithoutProjectInput = {
@@ -2645,12 +2854,14 @@ export type PropertyCountOutputType = {
   images: number
   videos: number
   inquiries: number
+  statusHistory: number
 }
 
 export type PropertyCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | PropertyCountOutputTypeCountImagesArgs
   videos?: boolean | PropertyCountOutputTypeCountVideosArgs
   inquiries?: boolean | PropertyCountOutputTypeCountInquiriesArgs
+  statusHistory?: boolean | PropertyCountOutputTypeCountStatusHistoryArgs
 }
 
 /**
@@ -2682,6 +2893,13 @@ export type PropertyCountOutputTypeCountVideosArgs<ExtArgs extends runtime.Types
  */
 export type PropertyCountOutputTypeCountInquiriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.InquiryWhereInput
+}
+
+/**
+ * PropertyCountOutputType without action
+ */
+export type PropertyCountOutputTypeCountStatusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PropertyStatusHistoryWhereInput
 }
 
 
@@ -2723,6 +2941,7 @@ export type PropertySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   images?: boolean | Prisma.Property$imagesArgs<ExtArgs>
   videos?: boolean | Prisma.Property$videosArgs<ExtArgs>
   inquiries?: boolean | Prisma.Property$inquiriesArgs<ExtArgs>
+  statusHistory?: boolean | Prisma.Property$statusHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["property"]>
 
@@ -2842,6 +3061,7 @@ export type PropertyInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   images?: boolean | Prisma.Property$imagesArgs<ExtArgs>
   videos?: boolean | Prisma.Property$videosArgs<ExtArgs>
   inquiries?: boolean | Prisma.Property$inquiriesArgs<ExtArgs>
+  statusHistory?: boolean | Prisma.Property$statusHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.PropertyCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PropertyIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2867,6 +3087,7 @@ export type $PropertyPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     images: Prisma.$PropertyImagePayload<ExtArgs>[]
     videos: Prisma.$PropertyVideoPayload<ExtArgs>[]
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
+    statusHistory: Prisma.$PropertyStatusHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3300,6 +3521,7 @@ export interface Prisma__PropertyClient<T, Null = never, ExtArgs extends runtime
   images<T extends Prisma.Property$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   videos<T extends Prisma.Property$videosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$videosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyVideoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inquiries<T extends Prisma.Property$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  statusHistory<T extends Prisma.Property$statusHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Property$statusHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyStatusHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3867,6 +4089,30 @@ export type Property$inquiriesArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.InquiryScalarFieldEnum | Prisma.InquiryScalarFieldEnum[]
+}
+
+/**
+ * Property.statusHistory
+ */
+export type Property$statusHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PropertyStatusHistory
+   */
+  select?: Prisma.PropertyStatusHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PropertyStatusHistory
+   */
+  omit?: Prisma.PropertyStatusHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PropertyStatusHistoryInclude<ExtArgs> | null
+  where?: Prisma.PropertyStatusHistoryWhereInput
+  orderBy?: Prisma.PropertyStatusHistoryOrderByWithRelationInput | Prisma.PropertyStatusHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.PropertyStatusHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PropertyStatusHistoryScalarFieldEnum | Prisma.PropertyStatusHistoryScalarFieldEnum[]
 }
 
 /**

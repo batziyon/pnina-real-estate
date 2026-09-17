@@ -30,7 +30,7 @@ enum UserRole {
 enum PropertyStatus {
   DRAFT
   PUBLISHED
-  RESERVED
+  UNDER_CONTRACT
   SOLD
   RENTED
   ARCHIVED
@@ -109,6 +109,15 @@ enum RequirementPreferenceType {
   PREFERRED
 }
 
+enum PropertyStatusChangeReason {
+  DEAL_FELL_THROUGH
+  TRANSACTION_COMPLETED
+  RENTAL_ENDED
+  OWNER_DECISION
+  PRICE_CHANGE
+  OTHER
+}
+
 // =============================================================================
 // NEIGHBORHOOD
 // Geographic lookup table. This brokerage operates only in Jerusalem.
@@ -151,6 +160,7 @@ model User {
   properties       Property[]
   inquiries        Inquiry[]  @relation("AssignedAgent")
   assignedContacts Contact[]  @relation("AssignedContactAgent")
+  statusChanges    PropertyStatusHistory[]
 
   @@index([email])
   @@index([role])
@@ -344,6 +354,7 @@ model Property {
   images       PropertyImage[]
   videos       PropertyVideo[]
   inquiries    Inquiry[]
+  statusHistory PropertyStatusHistory[]
 
   @@index([status])
   @@index([dealType])
@@ -481,4 +492,28 @@ model Testimonial {
   @@index([contactId])
   @@index([status])
   @@map("testimonials")
+}
+
+// =============================================================================
+// PROPERTY STATUS HISTORY
+// Tracks all status transitions for properties with business reasons.
+// =============================================================================
+
+model PropertyStatusHistory {
+  id         String                     @id @default(cuid())
+  propertyId String
+  fromStatus PropertyStatus?
+  toStatus   PropertyStatus
+  reason     PropertyStatusChangeReason
+  notes      String?
+  changedBy  String
+  createdAt  DateTime                   @default(now())
+
+  // Relations
+  property  Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  changedByUser User @relation(fields: [changedBy], references: [id], onDelete: Restrict)
+
+  @@index([propertyId, createdAt(sort: Desc)])
+  @@index([createdAt])
+  @@map("property_status_history")
 }

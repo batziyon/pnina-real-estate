@@ -8,21 +8,21 @@ interface RouteContext {
   }>;
 }
 
-export async function POST(req: Request, context: RouteContext) {
+export async function GET(req: Request, context: RouteContext) {
   try {
     const user = await requireAuth();
     const { id } = await context.params;
 
-    const property = await useCases.properties.markUnderContract.execute(id, {
+    const history = await useCases.properties.getStatusHistory.execute(id, {
       id: user.id,
       role: user.role,
     });
 
-    return NextResponse.json(property);
+    return NextResponse.json(history);
   } catch (error) {
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
-    return NextResponse.json({ error: "Failed to mark property as under contract" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to retrieve status history" }, { status: 500 });
   }
 }

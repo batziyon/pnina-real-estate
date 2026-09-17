@@ -106,3 +106,8 @@ export type ValuationRequest = Prisma.ValuationRequestModel
  * 
  */
 export type Testimonial = Prisma.TestimonialModel
+/**
+ * Model PropertyStatusHistory
+ * 
+ */
+export type PropertyStatusHistory = Prisma.PropertyStatusHistoryModel

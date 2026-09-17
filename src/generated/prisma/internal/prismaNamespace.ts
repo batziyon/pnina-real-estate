@@ -409,7 +409,8 @@ export const ModelName = {
   PropertyVideo: 'PropertyVideo',
   Inquiry: 'Inquiry',
   ValuationRequest: 'ValuationRequest',
-  Testimonial: 'Testimonial'
+  Testimonial: 'Testimonial',
+  PropertyStatusHistory: 'PropertyStatusHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -425,7 +426,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "neighborhood" | "user" | "contact" | "contactRole" | "buyerRequirement" | "buyerRequirementNeighborhood" | "project" | "property" | "propertyImage" | "propertyVideo" | "inquiry" | "valuationRequest" | "testimonial"
+    modelProps: "neighborhood" | "user" | "contact" | "contactRole" | "buyerRequirement" | "buyerRequirementNeighborhood" | "project" | "property" | "propertyImage" | "propertyVideo" | "inquiry" | "valuationRequest" | "testimonial" | "propertyStatusHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1391,6 +1392,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    PropertyStatusHistory: {
+      payload: Prisma.$PropertyStatusHistoryPayload<ExtArgs>
+      fields: Prisma.PropertyStatusHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PropertyStatusHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PropertyStatusHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.PropertyStatusHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PropertyStatusHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.PropertyStatusHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.PropertyStatusHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.PropertyStatusHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PropertyStatusHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.PropertyStatusHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>
+        }
+        update: {
+          args: Prisma.PropertyStatusHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.PropertyStatusHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PropertyStatusHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PropertyStatusHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.PropertyStatusHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PropertyStatusHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.PropertyStatusHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePropertyStatusHistory>
+        }
+        groupBy: {
+          args: Prisma.PropertyStatusHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyStatusHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PropertyStatusHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PropertyStatusHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1642,6 +1717,20 @@ export const TestimonialScalarFieldEnum = {
 } as const
 
 export type TestimonialScalarFieldEnum = (typeof TestimonialScalarFieldEnum)[keyof typeof TestimonialScalarFieldEnum]
+
+
+export const PropertyStatusHistoryScalarFieldEnum = {
+  id: 'id',
+  propertyId: 'propertyId',
+  fromStatus: 'fromStatus',
+  toStatus: 'toStatus',
+  reason: 'reason',
+  notes: 'notes',
+  changedBy: 'changedBy',
+  createdAt: 'createdAt'
+} as const
+
+export type PropertyStatusHistoryScalarFieldEnum = (typeof PropertyStatusHistoryScalarFieldEnum)[keyof typeof PropertyStatusHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1906,6 +1995,20 @@ export type ListEnumTestimonialStatusFieldRefInput<$PrismaModel> = FieldRefInput
 
 
 /**
+ * Reference to a field of type 'PropertyStatusChangeReason'
+ */
+export type EnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatusChangeReason'>
+    
+
+
+/**
+ * Reference to a field of type 'PropertyStatusChangeReason[]'
+ */
+export type ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PropertyStatusChangeReason[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -2082,6 +2185,7 @@ export type GlobalOmitConfig = {
   inquiry?: Prisma.InquiryOmit
   valuationRequest?: Prisma.ValuationRequestOmit
   testimonial?: Prisma.TestimonialOmit
+  propertyStatusHistory?: Prisma.PropertyStatusHistoryOmit
 }
 
 /* Types for Logging */

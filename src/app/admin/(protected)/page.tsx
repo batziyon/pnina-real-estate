@@ -161,7 +161,7 @@ function getStatusLabel(status: string): string {
   const labels: Record<string, string> = {
     DRAFT: "טיוטה",
     PUBLISHED: "מפורסם",
-    RESERVED: "שמור",
+    UNDER_CONTRACT: "בחוזה",
     SOLD: "נמכר",
     RENTED: "הושכר",
     ARCHIVED: "בארכיון",
@@ -173,7 +173,7 @@ function getStatusColor(status: string): string {
   const colors: Record<string, string> = {
     DRAFT: "bg-gray-100 text-gray-700",
     PUBLISHED: "bg-green-100 text-green-700",
-    RESERVED: "bg-yellow-100 text-yellow-700",
+    UNDER_CONTRACT: "bg-yellow-100 text-yellow-700",
     SOLD: "bg-blue-100 text-blue-700",
     RENTED: "bg-purple-100 text-purple-700",
     ARCHIVED: "bg-gray-100 text-gray-500",

@@ -413,7 +413,7 @@ export function PropertyForm({
               <strong>סטטוס נוכחי:</strong>{" "}
               {initialData?.status === "DRAFT" && "טיוטה"}
               {initialData?.status === "PUBLISHED" && "פורסם"}
-              {initialData?.status === "RESERVED" && "שמור"}
+              {initialData?.status === "UNDER_CONTRACT" && "בחוזה"}
               {initialData?.status === "SOLD" && "נמכר"}
               {initialData?.status === "RENTED" && "הושכר"}
               {initialData?.status === "ARCHIVED" && "בארכיון"}

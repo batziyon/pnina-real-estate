@@ -24,6 +24,7 @@ import { PrismaValuationRequestRepository } from "@/infrastructure/valuation/pri
 import { PrismaTestimonialRepository } from "@/infrastructure/testimonial/prisma-testimonial.repository";
 import { PrismaContactRepository } from "@/infrastructure/contact/prisma-contact.repository";
 import { PrismaBuyerRequirementRepository } from "@/infrastructure/buyer-requirement/prisma-buyer-requirement.repository";
+import { PrismaPropertyStatusHistoryRepository } from "@/infrastructure/repositories/property-status-history.repository";
 
 import type { NeighborhoodRepository } from "@/domain/neighborhood/neighborhood.repository";
 import type { UserRepository } from "@/domain/user/user.repository";
@@ -34,6 +35,7 @@ import type { ValuationRequestRepository } from "@/domain/valuation/valuation.re
 import type { TestimonialRepository } from "@/domain/testimonial/testimonial.repository";
 import type { ContactRepository } from "@/domain/contact/contact.repository";
 import type { BuyerRequirementRepository } from "@/domain/buyer-requirement/buyer-requirement.repository";
+import type { PropertyStatusHistoryRepository } from "@/domain/property-status-history/property-status-history.repository";
 import type { ObjectStoragePort } from "@/application/ports/storage/object-storage.port";
 
 import { createObjectStorage } from "@/infrastructure/storage/storage.factory";
@@ -64,6 +66,9 @@ const contactRepository: ContactRepository = new PrismaContactRepository();
 const buyerRequirementRepository: BuyerRequirementRepository =
   new PrismaBuyerRequirementRepository();
 
+const propertyStatusHistoryRepository: PropertyStatusHistoryRepository =
+  new PrismaPropertyStatusHistoryRepository();
+
 // ---------------------------------------------------------------------------
 // Service instances — stateless services (storage, etc.)
 // ---------------------------------------------------------------------------
@@ -86,6 +91,7 @@ export const container = {
     testimonial: testimonialRepository,
     contact: contactRepository,
     buyerRequirement: buyerRequirementRepository,
+    propertyStatusHistory: propertyStatusHistoryRepository,
   },
   services: {
     objectStorage,
@@ -108,6 +114,7 @@ export {
   testimonialRepository,
   contactRepository,
   buyerRequirementRepository,
+  propertyStatusHistoryRepository,
   objectStorage,
 };
 
@@ -122,9 +129,11 @@ import { ListPropertiesUseCase } from "@/application/properties/list-properties.
 import { PublishPropertyUseCase } from "@/application/properties/publish-property.use-case";
 import { UnpublishPropertyUseCase } from "@/application/properties/unpublish-property.use-case";
 import { ArchivePropertyUseCase } from "@/application/properties/archive-property.use-case";
-import { ReservePropertyUseCase } from "@/application/properties/reserve-property.use-case";
+import { MarkPropertyUnderContractUseCase } from "@/application/properties/mark-under-contract.use-case";
+import { RepublishPropertyUseCase } from "@/application/properties/republish-property.use-case";
 import { MarkPropertySoldUseCase } from "@/application/properties/mark-sold.use-case";
 import { MarkPropertyRentedUseCase } from "@/application/properties/mark-rented.use-case";
+import { GetPropertyStatusHistoryUseCase } from "@/application/properties/get-property-status-history.use-case";
 import { GetPropertyStatisticsUseCase } from "@/application/properties/get-property-statistics.use-case";
 import { GenerateImageUploadUseCase } from "@/application/properties/media/generate-image-upload.use-case";
 import { ConfirmImageUploadUseCase } from "@/application/properties/media/confirm-image-upload.use-case";
@@ -186,12 +195,14 @@ export const useCases = {
     update: new UpdatePropertyUseCase(propertyRepository, neighborhoodRepository),
     get: new GetPropertyUseCase(propertyRepository),
     list: new ListPropertiesUseCase(propertyRepository),
-    publish: new PublishPropertyUseCase(propertyRepository),
-    unpublish: new UnpublishPropertyUseCase(propertyRepository),
-    archive: new ArchivePropertyUseCase(propertyRepository),
-    reserve: new ReservePropertyUseCase(propertyRepository),
-    markSold: new MarkPropertySoldUseCase(propertyRepository),
-    markRented: new MarkPropertyRentedUseCase(propertyRepository),
+    publish: new PublishPropertyUseCase(propertyRepository, propertyStatusHistoryRepository),
+    unpublish: new UnpublishPropertyUseCase(propertyRepository, propertyStatusHistoryRepository),
+    archive: new ArchivePropertyUseCase(propertyRepository, propertyStatusHistoryRepository),
+    markUnderContract: new MarkPropertyUnderContractUseCase(propertyRepository, propertyStatusHistoryRepository),
+    republish: new RepublishPropertyUseCase(propertyRepository, propertyStatusHistoryRepository),
+    markSold: new MarkPropertySoldUseCase(propertyRepository, propertyStatusHistoryRepository),
+    markRented: new MarkPropertyRentedUseCase(propertyRepository, propertyStatusHistoryRepository),
+    getStatusHistory: new GetPropertyStatusHistoryUseCase(propertyRepository, propertyStatusHistoryRepository),
     getStatistics: new GetPropertyStatisticsUseCase(propertyRepository),
     generateImageUpload: new GenerateImageUploadUseCase(propertyRepository, objectStorage),
     confirmImageUpload: new ConfirmImageUploadUseCase(propertyRepository, objectStorage),

@@ -452,6 +452,40 @@ export type EnumTestimonialStatusWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedEnumTestimonialStatusFilter<$PrismaModel>
 }
 
+export type EnumPropertyStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatus | Prisma.EnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPropertyStatusNullableFilter<$PrismaModel> | $Enums.PropertyStatus | null
+}
+
+export type EnumPropertyStatusChangeReasonFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatusChangeReason | Prisma.EnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel> | $Enums.PropertyStatusChangeReason
+}
+
+export type EnumPropertyStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatus | Prisma.EnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPropertyStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.PropertyStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyStatusNullableFilter<$PrismaModel>
+}
+
+export type EnumPropertyStatusChangeReasonWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatusChangeReason | Prisma.EnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyStatusChangeReasonWithAggregatesFilter<$PrismaModel> | $Enums.PropertyStatusChangeReason
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
+}
+
 export type NestedStringFilter<$PrismaModel = never> = {
   equals?: string | Prisma.StringFieldRefInput<$PrismaModel>
   in?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
@@ -901,6 +935,40 @@ export type NestedEnumTestimonialStatusWithAggregatesFilter<$PrismaModel = never
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTestimonialStatusFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTestimonialStatusFilter<$PrismaModel>
+}
+
+export type NestedEnumPropertyStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatus | Prisma.EnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPropertyStatusNullableFilter<$PrismaModel> | $Enums.PropertyStatus | null
+}
+
+export type NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatusChangeReason | Prisma.EnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel> | $Enums.PropertyStatusChangeReason
+}
+
+export type NestedEnumPropertyStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatus | Prisma.EnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PropertyStatus[] | Prisma.ListEnumPropertyStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPropertyStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.PropertyStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyStatusNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPropertyStatusChangeReasonWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PropertyStatusChangeReason | Prisma.EnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  in?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  notIn?: $Enums.PropertyStatusChangeReason[] | Prisma.ListEnumPropertyStatusChangeReasonFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumPropertyStatusChangeReasonWithAggregatesFilter<$PrismaModel> | $Enums.PropertyStatusChangeReason
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPropertyStatusChangeReasonFilter<$PrismaModel>
 }
 
 

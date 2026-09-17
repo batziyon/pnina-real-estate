@@ -17,12 +17,12 @@ import type { PropertyData, PropertyStatus, CreatePropertyInput } from "./proper
 // ---------------------------------------------------------------------------
 
 const ALLOWED_TRANSITIONS: Record<PropertyStatus, PropertyStatus[]> = {
-  DRAFT:     ["PUBLISHED", "ARCHIVED"],
-  PUBLISHED: ["RESERVED", "SOLD", "RENTED", "ARCHIVED", "DRAFT"],
-  RESERVED:  ["PUBLISHED", "SOLD", "RENTED", "ARCHIVED"],
-  SOLD:      ["ARCHIVED"],
-  RENTED:    ["PUBLISHED", "ARCHIVED"],
-  ARCHIVED:  ["DRAFT"],
+  DRAFT:          ["PUBLISHED", "ARCHIVED"],
+  PUBLISHED:      ["UNDER_CONTRACT", "SOLD", "RENTED", "ARCHIVED", "DRAFT"],
+  UNDER_CONTRACT: ["PUBLISHED", "SOLD", "RENTED", "ARCHIVED"],
+  SOLD:           ["ARCHIVED"],
+  RENTED:         ["PUBLISHED", "ARCHIVED"],
+  ARCHIVED:       ["DRAFT"],
 };
 
 export function isValidStatusTransition(

@@ -21,7 +21,7 @@ export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 export const PropertyStatus = {
   DRAFT: 'DRAFT',
   PUBLISHED: 'PUBLISHED',
-  RESERVED: 'RESERVED',
+  UNDER_CONTRACT: 'UNDER_CONTRACT',
   SOLD: 'SOLD',
   RENTED: 'RENTED',
   ARCHIVED: 'ARCHIVED'
@@ -131,3 +131,15 @@ export const RequirementPreferenceType = {
 } as const
 
 export type RequirementPreferenceType = (typeof RequirementPreferenceType)[keyof typeof RequirementPreferenceType]
+
+
+export const PropertyStatusChangeReason = {
+  DEAL_FELL_THROUGH: 'DEAL_FELL_THROUGH',
+  TRANSACTION_COMPLETED: 'TRANSACTION_COMPLETED',
+  RENTAL_ENDED: 'RENTAL_ENDED',
+  OWNER_DECISION: 'OWNER_DECISION',
+  PRICE_CHANGE: 'PRICE_CHANGE',
+  OTHER: 'OTHER'
+} as const
+
+export type PropertyStatusChangeReason = (typeof PropertyStatusChangeReason)[keyof typeof PropertyStatusChangeReason]

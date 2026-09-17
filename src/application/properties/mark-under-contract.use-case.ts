@@ -14,7 +14,7 @@ export interface Actor {
   role: UserRole;
 }
 
-export class MarkPropertyRentedUseCase {
+export class MarkPropertyUnderContractUseCase {
   constructor(
     private readonly propertyRepository: PropertyRepository,
     private readonly statusHistoryRepository: PropertyStatusHistoryRepository
@@ -26,12 +26,12 @@ export class MarkPropertyRentedUseCase {
 
     // Authorization: same rules as publish
     if (!canActorPublish(actor.id, actor.role, property)) {
-      throw new UnauthorizedError("You are not authorized to mark this property as rented.");
+      throw new UnauthorizedError("You are not authorized to mark this property as under contract.");
     }
 
-    if (!isValidStatusTransition(property.status, "RENTED")) {
+    if (!isValidStatusTransition(property.status, "UNDER_CONTRACT")) {
       throw new BusinessRuleError(
-        `Cannot mark as rented a property with status "${property.status}".`
+        `Cannot mark as under contract a property with status "${property.status}".`
       );
     }
 
@@ -39,11 +39,11 @@ export class MarkPropertyRentedUseCase {
     await this.statusHistoryRepository.create({
       propertyId: id,
       fromStatus: property.status,
-      toStatus: "RENTED",
-      reason: "TRANSACTION_COMPLETED",
+      toStatus: "UNDER_CONTRACT",
+      reason: "OTHER",
       changedBy: actor.id,
     });
 
-    return this.propertyRepository.update(id, { status: "RENTED" });
+    return this.propertyRepository.update(id, { status: "UNDER_CONTRACT" });
   }
 }
