@@ -18,11 +18,10 @@ export function ContactFormsClient() {
 
   return (
     <div>
-      {/* Form Type Tabs */}
-      <div className="flex gap-4 mb-8 border-b border-gray-200">
+      <div className="mb-6 flex flex-wrap gap-2 border-b border-gray-200 sm:gap-3">
         <button
           onClick={() => setActiveForm("general")}
-          className={`pb-3 px-1 text-sm font-medium transition-all border-b-2 -mb-px ${
+          className={`-mb-px border-b-2 px-1 pb-3 text-[0.9rem] font-medium transition-all sm:text-[1rem] ${
             activeForm === "general"
               ? "border-[#135C87] text-[#135C87]"
               : "border-transparent text-gray-600 hover:text-[#135C87] hover:border-gray-300"
@@ -32,7 +31,7 @@ export function ContactFormsClient() {
         </button>
         <button
           onClick={() => setActiveForm("valuation")}
-          className={`pb-3 px-1 text-sm font-medium transition-all border-b-2 -mb-px ${
+          className={`-mb-px border-b-2 px-1 pb-3 text-[0.9rem] font-medium transition-all sm:text-[1rem] ${
             activeForm === "valuation"
               ? "border-[#135C87] text-[#135C87]"
               : "border-transparent text-gray-600 hover:text-[#135C87] hover:border-gray-300"
@@ -42,7 +41,7 @@ export function ContactFormsClient() {
         </button>
         <button
           onClick={() => setActiveForm("cooperation")}
-          className={`pb-3 px-1 text-sm font-medium transition-all border-b-2 -mb-px ${
+          className={`-mb-px border-b-2 px-1 pb-3 text-[0.9rem] font-medium transition-all sm:text-[1rem] ${
             activeForm === "cooperation"
               ? "border-[#135C87] text-[#135C87]"
               : "border-transparent text-gray-600 hover:text-[#135C87] hover:border-gray-300"
@@ -52,8 +51,7 @@ export function ContactFormsClient() {
         </button>
       </div>
 
-      {/* Form Content */}
-      <div className="bg-white p-8 shadow-sm">
+      <div className="bg-white p-4 shadow-sm sm:p-6 lg:p-8">
         {activeForm === "general" && <GeneralContactForm />}
         {activeForm === "valuation" && <ValuationRequestForm />}
         {activeForm === "cooperation" && <CooperationForm />}

@@ -75,13 +75,13 @@ export function PropertiesListClient() {
   return (
     <div>
       {/* Filter Tabs */}
-      <div className="flex gap-6 mb-8 border-b border-gray-200">
+      <div className="mb-8 flex gap-6 border-b border-gray-200">
         <button
           onClick={() => {
             setActiveFilter("all");
             setPage(1);
           }}
-          className={`pb-3 text-sm font-medium transition-all border-b-2 -mb-px ${
+          className={`pb-3 text-[1rem] font-medium transition-all border-b-2 -mb-px ${
             activeFilter === "all"
               ? "border-[#135C87] text-[#135C87]"
               : "border-transparent text-gray-600 hover:text-[#135C87] hover:border-gray-300"
@@ -94,7 +94,7 @@ export function PropertiesListClient() {
             setActiveFilter("SALE");
             setPage(1);
           }}
-          className={`pb-3 text-sm font-medium transition-all border-b-2 -mb-px ${
+          className={`pb-3 text-[1rem] font-medium transition-all border-b-2 -mb-px ${
             activeFilter === "SALE"
               ? "border-[#135C87] text-[#135C87]"
               : "border-transparent text-gray-600 hover:text-[#135C87] hover:border-gray-300"
@@ -107,7 +107,7 @@ export function PropertiesListClient() {
             setActiveFilter("RENT");
             setPage(1);
           }}
-          className={`pb-3 text-sm font-medium transition-all border-b-2 -mb-px ${
+          className={`pb-3 text-[1rem] font-medium transition-all border-b-2 -mb-px ${
             activeFilter === "RENT"
               ? "border-[#135C87] text-[#135C87]"
               : "border-transparent text-gray-600 hover:text-[#135C87] hover:border-gray-300"
@@ -121,7 +121,7 @@ export function PropertiesListClient() {
       {loading && (
         <div className="text-center py-12">
           <div className="inline-block w-8 h-8 border-4 border-[#135C87] border-t-transparent rounded-full animate-spin" />
-          <p className="mt-4 text-gray-600">טוען נכסים...</p>
+          <p className="mt-4 text-[1rem] text-gray-600">טוען נכסים...</p>
         </div>
       )}
 
@@ -131,8 +131,8 @@ export function PropertiesListClient() {
           <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
-          <p className="mt-4 text-lg text-gray-600">אין נכסים זמינים כרגע</p>
-          <p className="mt-2 text-sm text-gray-500">נכסים חדשים יתווספו בקרוב</p>
+          <p className="mt-4 text-[1.2rem] text-gray-600">אין נכסים זמינים כרגע</p>
+          <p className="mt-2 text-[1rem] text-gray-500">נכסים חדשים יתווספו בקרוב</p>
         </div>
       )}
 
@@ -155,7 +155,7 @@ export function PropertiesListClient() {
               >
                 הקודם
               </button>
-              <span className="px-4 py-2 text-sm text-gray-600">
+              <span className="px-4 py-2 text-[1rem] text-gray-600">
                 עמוד {page} מתוך {totalPages}
               </span>
               <button

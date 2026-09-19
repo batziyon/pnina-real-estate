@@ -12,13 +12,13 @@ interface ContainerProps {
 
 const sizeStyles = {
   narrow: "max-w-4xl",
-  default: "max-w-7xl",
-  wide: "max-w-[1400px]",
+  default: "max-w-[1280px]",
+  wide: "max-w-[1380px]",
 };
 
 export function Container({ children, className = "", size = "default" }: ContainerProps) {
   return (
-    <div className={`mx-auto px-6 lg:px-8 ${sizeStyles[size]} ${className}`}>
+    <div className={`mx-auto px-4 sm:px-6 lg:px-8 ${sizeStyles[size]} ${className}`}>
       {children}
     </div>
   );

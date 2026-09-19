@@ -1,7 +1,5 @@
 /**
  * Section Heading Component
- * 
- * Consistent typography for section headers across the public site
  */
 
 interface SectionHeadingProps {
@@ -11,27 +9,21 @@ interface SectionHeadingProps {
   accentLine?: boolean;
 }
 
-export function SectionHeading({ 
-  children, 
-  subtitle, 
+export function SectionHeading({
+  children,
+  subtitle,
   align = "right",
-  accentLine = false 
+  accentLine = false,
 }: SectionHeadingProps) {
   const alignmentClass = align === "center" ? "text-center mx-auto" : "text-right";
 
   return (
-    <div className={`${alignmentClass} max-w-2xl mb-12`}>
+    <div className={`${alignmentClass} max-w-3xl`}>
       {accentLine && (
-        <div className={`h-0.5 w-12 bg-[#D9822B] mb-4 ${align === "center" ? "mx-auto" : ""}`} />
+        <div className={`mb-4 h-1 w-16 bg-[#D9822B] ${align === "center" ? "mx-auto" : ""}`} />
       )}
-      <h2 className="text-3xl font-bold tracking-tight text-[#135C87] sm:text-4xl">
-        {children}
-      </h2>
-      {subtitle && (
-        <p className="mt-4 text-lg text-gray-600">
-          {subtitle}
-        </p>
-      )}
+      <h2 className="text-[#135C87] leading-[1.08] tracking-[-0.05em]">{children}</h2>
+      {subtitle && <p className="mt-3 text-base leading-7 text-[#4d5f70] sm:text-lg">{subtitle}</p>}
     </div>
   );
 }

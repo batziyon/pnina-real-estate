@@ -81,8 +81,8 @@ export function GeneralContactForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">פנייה כללית</h3>
-        <p className="text-sm text-gray-600 mb-6">
+        <h3 className="mb-2 text-[1.35rem] font-semibold text-gray-900">פנייה כללית</h3>
+        <p className="mb-6 text-[1rem] text-gray-600">
           נשמח לענות על כל שאלה או לסייע בכל נושא הקשור לנדל״ן בירושלים
         </p>
       </div>
@@ -94,7 +94,7 @@ export function GeneralContactForm() {
       )}
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="name" className="mb-2 block text-[1rem] font-medium text-gray-700">
           שם מלא <span className="text-red-500">*</span>
         </label>
         <input
@@ -102,14 +102,14 @@ export function GeneralContactForm() {
           id="name"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.name ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.name ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
           required
         />
-        {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+        {errors.name && <p className="mt-1 text-[0.95rem] text-red-600">{errors.name}</p>}
       </div>
 
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="phone" className="mb-2 block text-[1rem] font-medium text-gray-700">
           טלפון <span className="text-red-500">*</span>
         </label>
         <input
@@ -117,14 +117,14 @@ export function GeneralContactForm() {
           id="phone"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.phone ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.phone ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
           required
         />
-        {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+        {errors.phone && <p className="mt-1 text-[0.95rem] text-red-600">{errors.phone}</p>}
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="email" className="mb-2 block text-[1rem] font-medium text-gray-700">
           אימייל
         </label>
         <input
@@ -132,13 +132,13 @@ export function GeneralContactForm() {
           id="email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.email ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.email ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
         />
-        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+        {errors.email && <p className="mt-1 text-[0.95rem] text-red-600">{errors.email}</p>}
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="message" className="mb-2 block text-[1rem] font-medium text-gray-700">
           הודעה
         </label>
         <textarea
@@ -146,16 +146,16 @@ export function GeneralContactForm() {
           rows={5}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.message ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.message ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
           placeholder="ספרו לנו איך נוכל לעזור..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+        {errors.message && <p className="mt-1 text-[0.95rem] text-red-600">{errors.message}</p>}
       </div>
 
       <button
         type="submit"
         disabled={submitting}
-        className="w-full px-6 py-3 text-base font-medium text-white bg-[#135C87] hover:bg-[#0f4a6d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full px-6 py-3 text-[1rem] font-medium text-white bg-[#135C87] hover:bg-[#0f4a6d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {submitting ? "שולח..." : "שלח פנייה"}
       </button>

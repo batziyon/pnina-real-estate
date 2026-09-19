@@ -1,147 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
-
-/**
- * Pnina Real Estate — Global Styles
- * Professional Jerusalem Real Estate Design System
- *
- * Brand Colors:
- * - Primary Blue: #135C87 (dominant brand color)
- * - Accent Orange: #D9822B (restrained accent only)
- * - Neutrals: white, warm off-whites, charcoal grays
- */
 
 :root {
   --background: #ffffff;
-  --foreground: #1f2937;
-  
-  /* Brand Colors */
-  --color-primary: #135C87;
-  --color-primary-dark: #0f4a6d;
-  --color-primary-light: #1a6fa0;
-  --color-accent: #D9822B;
-  --color-accent-dark: #c2721f;
-  
-  /* Neutrals */
-  --color-gray-50: #f9fafb;
-  --color-gray-100: #f3f4f6;
-  --color-gray-200: #e5e7eb;
-  --color-gray-600: #4b5563;
-  --color-gray-700: #374151;
-  --color-gray-900: #111827;
+  --foreground: #18384C;
+  --paper: #ffffff;
+  --panel: #ffffff;
+  --brand-blue: #135C87;
+  --brand-deep: #123F5A;
+  --brand-orange: #D9822B;
+  --brand-cream: #F7F4EE;
+  --brand-text: #18384C;
+  --brand-muted: #506373;
+  --brand-border: rgba(18, 63, 90, 0.12);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", sans-serif;
+  --font-sans: "Assistant", "Segoe UI", "Noto Sans Hebrew", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: system-ui, -apple-system, "Segoe UI", Arial, "Noto Sans Hebrew", sans-serif;
+  font-family: "Assistant", "Segoe UI", "Noto Sans Hebrew", sans-serif;
   direction: rtl;
+  font-size: 1rem;
+  line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure RTL throughout */
+button,
+input,
+textarea,
+select,
+a {
+  font: inherit;
+}
+
 * {
   direction: rtl;
   text-align: right;
 }
 
-/* Focus visible for accessibility */
 *:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: 2px solid var(--brand-orange);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
-/* Smooth scrolling with reduced motion support */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Improved scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-gray-100);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-gray-600);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
-}
-
-/* Typography Scale - Professional & Editorial */
 h1, h2, h3, h4, h5, h6 {
+  color: var(--brand-blue);
   font-weight: 700;
-  line-height: 1.2;
-  color: var(--color-primary);
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+section,
+main {
+  background-color: transparent;
+}
+
+footer {
+  background-color: #ffffff;
 }
 
 h1 {
-  font-size: 2.5rem; /* 40px */
-  letter-spacing: -0.025em;
+  font-size: clamp(2.8rem, 4vw, 5rem);
 }
 
 h2 {
-  font-size: 2rem; /* 32px */
-  letter-spacing: -0.02em;
+  font-size: clamp(2.15rem, 2.8vw, 3rem);
 }
 
 h3 {
-  font-size: 1.5rem; /* 24px */
-}
-
-h4 {
-  font-size: 1.25rem; /* 20px */
+  font-size: clamp(1.5rem, 2vw, 2rem);
 }
 
 p {
-  line-height: 1.7;
-  color: var(--color-gray-700);
+  line-height: 1.8;
+  color: var(--brand-muted);
+  font-size: 1.04rem;
+  margin: 0;
 }
 
-@media (min-width: 640px) {
-  h1 {
-    font-size: 3rem; /* 48px */
-  }
-  
-  h2 {
-    font-size: 2.25rem; /* 36px */
-  }
+.bg-blue-brand {
+  background-color: #135C87;
 }
 
-/* Links */
-a {
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  color: var(--color-primary);
-}
-
-/* Images */
 img {
+  display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* Selection */
+button,
+a {
+  transition: all 0.2s ease;
+}
+
 ::selection {
-  background-color: var(--color-primary);
-  color: white;
+  background: rgba(217, 130, 43, 0.18);
+  color: var(--brand-deep);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #efe7df;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(18, 63, 90, 0.45);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(18, 63, 90, 0.7);
 }
 

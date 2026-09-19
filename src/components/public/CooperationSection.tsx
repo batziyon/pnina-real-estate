@@ -1,35 +1,41 @@
 /**
  * Cooperation Section
- * 
- * Call-to-action for professional cooperation
+ * Professional B2B call-to-action
  */
 
-import { Container } from "./Container";
-import { Button } from "./Button";
+import Link from "next/link";
 
 export function CooperationSection() {
   return (
-    <section className="py-16 lg:py-20 bg-white">
-      <Container>
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-[#135C87] mb-4">
-            מעוניינים בשיתוף פעולה?
+    <section className="bg-[#135C87] py-16 lg:py-20" dir="rtl">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto text-center">
+          
+          <div className="inline-flex items-center gap-2 mb-6">
+            <div className="w-8 h-[2px] bg-[#D9822B]" />
+            <span className="text-white/70 text-sm font-semibold tracking-wider uppercase">
+              שיתוף פעולה
+            </span>
+            <div className="w-8 h-[2px] bg-[#D9822B]" />
+          </div>
+
+          <h2 className="text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
+            מעוניינים בשיתוף פעולה מקצועי?
           </h2>
-          
-          <p className="text-lg text-gray-600 mb-8">
-            שיתופי פעולה מקצועיים עם משרדי תיווך, יזמים ומשקיעים.
-            נשמח לשמוע ממכם ולבחון אפשרויות.
+
+          <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-2xl mx-auto">
+            שיתופי פעולה עם משרדי תיווך, יזמים ומשקיעים — דרך ליווי מדויק, 
+            תיאום ציפיות וחשיפה נכונה של נכסים.
           </p>
-          
-          <Button 
-            href="/contact" 
-            variant="primary"
-            size="lg"
+
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-[#D9822B] hover:bg-[#c4721f] transition-colors"
           >
             בואו נדבר
-          </Button>
+          </Link>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

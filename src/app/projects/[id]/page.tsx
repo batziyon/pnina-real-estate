@@ -58,56 +58,59 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col bg-[#ffffff]">
       <PublicHeader />
-      
-      <main className="flex-1 bg-gray-50">
-        <Container className="py-12">
-          {/* Header */}
-          <div className="bg-white p-8 mb-6 shadow-sm">
-            <h1 className="text-3xl font-bold text-gray-900 mb-4">
-              {project.name}
-            </h1>
-            {project.address && (
-              <p className="text-lg text-gray-600">{project.address}</p>
+
+      <main className="flex-1">
+        <section className="bg-[#123F5A] py-10 text-white lg:py-14">
+          <Container>
+            <div className="max-w-4xl">
+              <div className="mb-4 h-1 w-14 bg-[#D9822B]" />
+              <h1 className="mb-2 text-4xl font-black leading-[0.96] tracking-[-0.06em] text-white sm:text-5xl">
+                {project.name}
+              </h1>
+              {project.address && (
+                <p className="max-w-2xl text-base leading-7 text-white/90 sm:text-lg">{project.address}</p>
+              )}
+            </div>
+          </Container>
+        </section>
+
+        <Container className="py-10 lg:py-12">
+          <div className="overflow-hidden border border-[#dfeaf1] bg-white">
+            {project.coverImage && (
+              <div className="aspect-[21/9] overflow-hidden bg-white">
+                <img
+                  src={project.coverImage}
+                  alt={project.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
             )}
-          </div>
 
-          {/* Cover Image */}
-          {project.coverImage && (
-            <div className="aspect-[21/9] bg-gray-200 mb-6 overflow-hidden">
-              <img
-                src={project.coverImage}
-                alt={project.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+            {project.description && (
+              <div className="p-6 sm:p-8">
+                <h2 className="mb-4 text-2xl font-bold text-[#135C87] sm:text-3xl">אודות הפרויקט</h2>
+                <p className="whitespace-pre-wrap text-base leading-8 text-[#334155] sm:text-lg">
+                  {project.description}
+                </p>
+              </div>
+            )}
 
-          {/* Description */}
-          {project.description && (
-            <div className="bg-white p-8 mb-6 shadow-sm">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">אודות הפרויקט</h2>
-              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed text-lg">
-                {project.description}
+            <div className="bg-[#135C87] p-6 text-center text-white">
+              <h3 className="mb-2 text-2xl font-bold text-white">
+                מעוניינים לקבל פרטים נוספים?
+              </h3>
+              <p className="mb-5 text-base leading-7 text-white/90">
+                צרו קשר לקבלת מידע מפורט על הפרויקט
               </p>
+              <a
+                href="/contact"
+                className="inline-block bg-white px-7 py-3 text-base font-medium text-[#135C87] transition-colors hover:bg-gray-100"
+              >
+                צור קשר
+              </a>
             </div>
-          )}
-
-          {/* Contact CTA */}
-          <div className="bg-[#135C87] text-white p-8 text-center">
-            <h3 className="text-2xl font-semibold mb-4">
-              מעוניינים לקבל פרטים נוספים?
-            </h3>
-            <p className="text-white/90 mb-6">
-              צרו קשר לקבלת מידע מפורט על הפרויקט
-            </p>
-            <a
-              href="/contact"
-              className="inline-block px-8 py-3 text-base font-medium text-[#135C87] bg-white hover:bg-gray-100 transition-colors"
-            >
-              צור קשר
-            </a>
           </div>
         </Container>
       </main>

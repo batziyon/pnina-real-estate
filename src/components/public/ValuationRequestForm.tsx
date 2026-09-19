@@ -106,8 +106,8 @@ export function ValuationRequestForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
-        <h3 className="text-lg font-semibold text-gray-900 mb-2">הערכת שווי</h3>
-        <p className="text-sm text-gray-600 mb-6">
+        <h3 className="mb-2 text-[1.35rem] font-semibold text-gray-900">הערכת שווי</h3>
+        <p className="mb-6 text-[1rem] text-gray-600">
           קבלו הערכת שווי מקצועית לנכס שלכם ללא התחייבות
         </p>
       </div>
@@ -120,7 +120,7 @@ export function ValuationRequestForm() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="val-name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="val-name" className="mb-2 block text-[1rem] font-medium text-gray-700">
             שם מלא <span className="text-red-500">*</span>
           </label>
           <input
@@ -128,14 +128,14 @@ export function ValuationRequestForm() {
             id="val-name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className={`w-full px-4 py-2 border ${errors.name ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+            className={`w-full px-4 py-3 text-[1rem] border ${errors.name ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
             required
           />
-          {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+          {errors.name && <p className="mt-1 text-[0.95rem] text-red-600">{errors.name}</p>}
         </div>
 
         <div>
-          <label htmlFor="val-phone" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="val-phone" className="mb-2 block text-[1rem] font-medium text-gray-700">
             טלפון <span className="text-red-500">*</span>
           </label>
           <input
@@ -143,15 +143,15 @@ export function ValuationRequestForm() {
             id="val-phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className={`w-full px-4 py-2 border ${errors.phone ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+            className={`w-full px-4 py-3 text-[1rem] border ${errors.phone ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
             required
           />
-          {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+          {errors.phone && <p className="mt-1 text-[0.95rem] text-red-600">{errors.phone}</p>}
         </div>
       </div>
 
       <div>
-        <label htmlFor="val-email" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="val-email" className="mb-2 block text-[1rem] font-medium text-gray-700">
           אימייל
         </label>
         <input
@@ -159,21 +159,21 @@ export function ValuationRequestForm() {
           id="val-email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.email ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.email ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
         />
-        {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+        {errors.email && <p className="mt-1 text-[0.95rem] text-red-600">{errors.email}</p>}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="val-neighborhood" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="val-neighborhood" className="mb-2 block text-[1rem] font-medium text-gray-700">
             שכונה <span className="text-red-500">*</span>
           </label>
           <select
             id="val-neighborhood"
             value={formData.neighborhoodId}
             onChange={(e) => setFormData({ ...formData, neighborhoodId: e.target.value })}
-            className={`w-full px-4 py-2 border ${errors.neighborhoodId ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+            className={`w-full px-4 py-3 text-[1rem] border ${errors.neighborhoodId ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
             required
           >
             <option value="">בחר שכונה</option>
@@ -181,18 +181,18 @@ export function ValuationRequestForm() {
               <option key={n.id} value={n.id}>{n.name}</option>
             ))}
           </select>
-          {errors.neighborhoodId && <p className="mt-1 text-sm text-red-600">{errors.neighborhoodId}</p>}
+          {errors.neighborhoodId && <p className="mt-1 text-[0.95rem] text-red-600">{errors.neighborhoodId}</p>}
         </div>
 
         <div>
-          <label htmlFor="val-property-type" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="val-property-type" className="mb-2 block text-[1rem] font-medium text-gray-700">
             סוג נכס
           </label>
           <select
             id="val-property-type"
             value={formData.propertyType}
             onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-            className={`w-full px-4 py-2 border ${errors.propertyType ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+            className={`w-full px-4 py-3 text-[1rem] border ${errors.propertyType ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
           >
             <option value="">בחר סוג נכס</option>
             <option value="APARTMENT">דירה</option>
@@ -203,12 +203,12 @@ export function ValuationRequestForm() {
             <option value="STUDIO">סטודיו</option>
             <option value="OTHER">אחר</option>
           </select>
-          {errors.propertyType && <p className="mt-1 text-sm text-red-600">{errors.propertyType}</p>}
+          {errors.propertyType && <p className="mt-1 text-[0.95rem] text-red-600">{errors.propertyType}</p>}
         </div>
       </div>
 
       <div>
-        <label htmlFor="val-address" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="val-address" className="mb-2 block text-[1rem] font-medium text-gray-700">
           כתובת
         </label>
         <input
@@ -216,14 +216,14 @@ export function ValuationRequestForm() {
           id="val-address"
           value={formData.address}
           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.address ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.address ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
           placeholder="רחוב ומספר בית"
         />
-        {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
+        {errors.address && <p className="mt-1 text-[0.95rem] text-red-600">{errors.address}</p>}
       </div>
 
       <div>
-        <label htmlFor="val-message" className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="val-message" className="mb-2 block text-[1rem] font-medium text-gray-700">
           פרטים נוספים
         </label>
         <textarea
@@ -231,16 +231,16 @@ export function ValuationRequestForm() {
           rows={4}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          className={`w-full px-4 py-2 border ${errors.message ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
+          className={`w-full px-4 py-3 text-[1rem] border ${errors.message ? 'border-red-300' : 'border-gray-300'} focus:outline-none focus:ring-2 focus:ring-[#135C87]`}
           placeholder="מידע נוסף שיעזור לנו להעריך את הנכס..."
         />
-        {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+        {errors.message && <p className="mt-1 text-[0.95rem] text-red-600">{errors.message}</p>}
       </div>
 
       <button
         type="submit"
         disabled={submitting}
-        className="w-full px-6 py-3 text-base font-medium text-white bg-[#135C87] hover:bg-[#0f4a6d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full px-6 py-3 text-[1rem] font-medium text-white bg-[#135C87] hover:bg-[#0f4a6d] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {submitting ? "שולח..." : "שלח בקשה"}
       </button>

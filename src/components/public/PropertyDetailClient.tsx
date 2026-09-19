@@ -73,111 +73,105 @@ export function PropertyDetailClient({ property }: PropertyDetailClientProps) {
   ].filter(f => f.value);
 
   return (
-    <Container className="py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Main Content */}
-        <div className="lg:col-span-2">
-          {/* Header */}
-          <div className="bg-white p-6 mb-6 shadow-sm">
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <span className="inline-block px-3 py-1 text-xs font-medium bg-[#135C87] text-white mb-3">
-                  {property.dealType === "SALE" ? "למכירה" : "להשכרה"}
-                </span>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                  {property.title}
-                </h1>
-                {property.address && (
-                  <p className="text-gray-600">{property.address}</p>
-                )}
+    <Container className="py-10 lg:py-12">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-7 border border-[#dfe8ee] bg-white p-5">
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <div className="mb-2 inline-flex bg-[#135C87] px-2.5 py-1 text-[10px] font-semibold tracking-[0.18em] text-white">
+                {property.dealType === "SALE" ? "למכירה" : "להשכרה"}
               </div>
+              <h1 className="text-3xl font-black tracking-[-0.05em] text-[#123b58] sm:text-4xl">
+                {property.title}
+              </h1>
             </div>
-
-            <div className={`text-3xl font-bold ${property.price ? 'text-[#135C87]' : 'text-gray-500'}`}>
+            <div className={`text-2xl font-black ${property.price ? "text-[#135C87]" : "text-[#73859a]"}`}>
               {priceDisplay}
             </div>
           </div>
 
-          {/* Key Details */}
-          <div className="bg-white p-6 mb-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">פרטי הנכס</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {property.rooms && (
-                <div className="text-center p-4 bg-gray-50">
-                  <div className="text-2xl font-bold text-[#135C87] mb-1">{property.rooms}</div>
-                  <div className="text-sm text-gray-600">חדרים</div>
-                </div>
-              )}
-              {property.area && (
-                <div className="text-center p-4 bg-gray-50">
-                  <div className="text-2xl font-bold text-[#135C87] mb-1">{property.area}</div>
-                  <div className="text-sm text-gray-600">מ״ר</div>
-                </div>
-              )}
-              {property.floor !== null && (
-                <div className="text-center p-4 bg-gray-50">
-                  <div className="text-2xl font-bold text-[#135C87] mb-1">{property.floor}</div>
-                  <div className="text-sm text-gray-600">קומה</div>
-                </div>
-              )}
-              <div className="text-center p-4 bg-gray-50">
-                <div className="text-sm font-medium text-gray-900 mb-1">{propertyTypeLabels[property.propertyType] || property.propertyType}</div>
-                <div className="text-xs text-gray-600">סוג נכס</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Description */}
-          {property.description && (
-            <div className="bg-white p-6 mb-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">תיאור</h2>
-              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
-                {property.description}
-              </p>
-            </div>
-          )}
-
-          {/* Features */}
-          {features.length > 0 && (
-            <div className="bg-white p-6 shadow-sm">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">מאפיינים</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {features.map((feature) => (
-                  <div key={feature.key} className="flex items-center gap-2 text-gray-700">
-                    <svg className="w-5 h-5 text-[#135C87]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>{feature.label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          {property.address && (
+            <p className="mt-3 text-base text-[#536576]">{property.address}</p>
           )}
         </div>
 
-        {/* Sidebar */}
-        <div className="lg:col-span-1">
-          <div className="bg-white p-6 shadow-sm sticky top-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              מעוניינים בנכס?
-            </h3>
-            <p className="text-gray-600 mb-6">
-              השאירו פרטים ונחזור אליכם בהקדם
-            </p>
-            
-            {!showContact && (
-              <button
-                onClick={() => setShowContact(true)}
-                className="w-full px-6 py-3 text-base font-medium text-white bg-[#D9822B] hover:bg-[#c2721f] transition-colors"
-              >
-                צור קשר
-              </button>
+        <div className="grid grid-cols-1 gap-7 lg:grid-cols-[1.65fr_0.9fr]">
+          <div className="space-y-6">
+            <div className="border border-[#dfe8ee] bg-white p-6">
+              <h2 className="mb-5 text-2xl font-bold text-[#123b58]">פרטי הנכס</h2>
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+                {property.rooms && (
+                  <div className="border border-[#edf2f6] bg-[#f7fafc] p-4 text-center">
+                    <div className="text-2xl font-black text-[#135C87]">{property.rooms}</div>
+                    <div className="mt-1 text-sm text-[#5f6d7a]">חדרים</div>
+                  </div>
+                )}
+                {property.area && (
+                  <div className="border border-[#edf2f6] bg-[#f7fafc] p-4 text-center">
+                    <div className="text-2xl font-black text-[#135C87]">{property.area}</div>
+                    <div className="mt-1 text-sm text-[#5f6d7a]">מ״ר</div>
+                  </div>
+                )}
+                {property.floor !== null && (
+                  <div className="border border-[#edf2f6] bg-[#f7fafc] p-4 text-center">
+                    <div className="text-2xl font-black text-[#135C87]">{property.floor}</div>
+                    <div className="mt-1 text-sm text-[#5f6d7a]">קומה</div>
+                  </div>
+                )}
+                <div className="border border-[#edf2f6] bg-[#f7fafc] p-4 text-center">
+                  <div className="text-sm font-bold text-[#123b58]">{propertyTypeLabels[property.propertyType] || property.propertyType}</div>
+                  <div className="mt-1 text-xs text-[#5f6d7a]">סוג נכס</div>
+                </div>
+              </div>
+            </div>
+
+            {property.description && (
+              <div className="border border-[#dfe8ee] bg-white p-6">
+                <h2 className="mb-4 text-2xl font-bold text-[#123b58]">תיאור</h2>
+                <p className="whitespace-pre-wrap text-[1.03rem] leading-8 text-[#475c6d]">
+                  {property.description}
+                </p>
+              </div>
             )}
-            
-            {showContact && (
-              <PropertyContactForm propertyId={property.id} propertyTitle={property.title} />
+
+            {features.length > 0 && (
+              <div className="border border-[#dfe8ee] bg-white p-6">
+                <h2 className="mb-5 text-2xl font-bold text-[#123b58]">מאפיינים</h2>
+                <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                  {features.map((feature) => (
+                    <div key={feature.key} className="flex items-center gap-2 bg-[#f6f9fb] px-3 py-3 text-[#425562]">
+                      <svg className="h-5 w-5 text-[#135C87]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="font-medium">{feature.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
+
+          <aside className="lg:pl-2">
+            <div className="sticky top-6 border border-[#dfe8ee] bg-white p-6">
+              <h3 className="mb-3 text-2xl font-bold text-[#123b58]">מעוניינים בנכס?</h3>
+              <p className="mb-6 text-base leading-7 text-[#536576]">
+                השאירו פרטים ונחזור אליכם בהקדם עם פרטי המידע, המענה והאפשרויות הנכונות.
+              </p>
+
+              {!showContact && (
+                <button
+                  onClick={() => setShowContact(true)}
+                  className="w-full bg-[#D9822B] px-6 py-3.5 text-base font-semibold text-white transition hover:bg-[#c8721d]"
+                >
+                  צור קשר
+                </button>
+              )}
+
+              {showContact && (
+                <PropertyContactForm propertyId={property.id} propertyTitle={property.title} />
+              )}
+            </div>
+          </aside>
         </div>
       </div>
     </Container>

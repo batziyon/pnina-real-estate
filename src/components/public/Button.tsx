@@ -1,7 +1,5 @@
 /**
  * Button Component
- * 
- * Restrained, professional button styles for public website
  */
 
 import Link from "next/link";
@@ -20,15 +18,15 @@ interface ButtonProps {
 }
 
 const variantStyles = {
-  primary: "bg-[#135C87] hover:bg-[#0f4a6d] text-white border border-[#135C87]",
-  secondary: "bg-white hover:bg-gray-50 text-[#135C87] border border-[#135C87]",
-  accent: "bg-[#D9822B] hover:bg-[#c2721f] text-white border border-[#D9822B]",
+  primary: "bg-[#135C87] hover:bg-[#0f4a6d] text-white border-[#135C87]",
+  secondary: "bg-white hover:bg-[#f4f9fc] text-[#135C87] border-[#dbeaf3]",
+  accent: "bg-[#D9822B] hover:bg-[#c8761f] text-white border-[#D9822B]",
 };
 
 const sizeStyles = {
   sm: "px-4 py-2 text-sm",
   md: "px-5 py-2.5 text-base",
-  lg: "px-6 py-3 text-lg",
+  lg: "px-7 py-3 text-base sm:text-lg",
 };
 
 export function Button({
@@ -40,7 +38,7 @@ export function Button({
   onClick,
   type = "button",
 }: ButtonProps) {
-  const baseStyles = "inline-flex items-center justify-center font-medium transition-colors";
+  const baseStyles = "inline-flex items-center justify-center border font-semibold transition-all duration-200 rounded-[4px]";
   const combinedStyles = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
   if (href) {

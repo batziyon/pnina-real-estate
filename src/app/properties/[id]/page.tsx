@@ -74,11 +74,24 @@ export default async function PropertyDetailPage({ params }: { params: Promise<{
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col bg-[#ffffff]">
       <PublicHeader />
-      
-      <main className="flex-1 bg-gray-50">
-        <PropertyDetailClient property={property} />
+
+      <main className="flex-1">
+        <div className="bg-[#123F5A] py-10 text-white lg:py-14">
+          <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+            <div className="mb-4 h-1 w-14 bg-[#D9822B]" />
+            <h1 className="max-w-4xl text-4xl font-black leading-[0.96] tracking-[-0.06em] text-white sm:text-5xl">
+              {property.title}
+            </h1>
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-[1280px] px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
+          <div className="border border-[#dfeaf1] bg-white">
+            <PropertyDetailClient property={property} />
+          </div>
+        </div>
       </main>
 
       <PublicFooter />
