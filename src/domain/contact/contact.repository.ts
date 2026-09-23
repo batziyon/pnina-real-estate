@@ -32,4 +32,7 @@ export interface ContactRepository {
 
   /** Count contacts matching the given filters. */
   count(filters: ContactFilters): Promise<number>;
+
+  /** Count contacts by role type. */
+  countByRole(role: string, additionalFilters?: Partial<ContactFilters>): Promise<number>;
 }

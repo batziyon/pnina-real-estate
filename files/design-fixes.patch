@@ -1,0 +1,131 @@
+diff --git a/src/components/public/Hero.tsx b/src/components/public/Hero.tsx
+index 428d45e..ba47777 100644
+--- a/src/components/public/Hero.tsx
++++ b/src/components/public/Hero.tsx
+@@ -53,50 +53,46 @@ export function Hero() {
+ 
+               {/* Quick Stats */}
+               <div className="mt-16 pt-8 border-t border-white/20">
+-                <div className="flex justify-center">
+-                  <div className="text-center">
+-                    <div className="text-3xl font-bold text-white">10+</div>
+-                    <div className="text-sm text-white/70 mt-1">שנות ניסיון</div>
+-                  </div>
+-                </div>
++                <div className="text-3xl font-bold text-white">10+</div>
++                <div className="text-sm text-white/70 mt-1">שנות ניסיון</div>
+               </div>
+             </div>
+           </div>
+ 
+           {/* Right Side - Visual Element */}
+-          <div className="relative bg-gradient-to-br from-[#123F5A] to-[#0d3449] hidden lg:block">
+-            {/* Geometric Pattern - Jerusalem Stone inspired */}
+-            <div className="absolute inset-0">
+-              {/* Vertical Lines */}
+-              <div className="absolute top-0 right-[20%] bottom-0 w-px bg-white/5" />
+-              <div className="absolute top-0 right-[40%] bottom-0 w-px bg-white/5" />
+-              <div className="absolute top-0 right-[60%] bottom-0 w-px bg-white/5" />
+-              <div className="absolute top-0 right-[80%] bottom-0 w-px bg-white/5" />
+-              
+-              {/* Horizontal Lines */}
+-              <div className="absolute top-[25%] right-0 left-0 h-px bg-white/5" />
+-              <div className="absolute top-[50%] right-0 left-0 h-px bg-white/5" />
+-              <div className="absolute top-[75%] right-0 left-0 h-px bg-white/5" />
+-            </div>
++          {/* TODO: This is a placeholder treatment. Replace with a real photo the moment one is
++              available — a Jerusalem streetscape, a hero property, or a portrait of Pnina.
++              Swap the motif <div> below for:
++              <Image src="/images/jerusalem-hero.jpg" alt="ירושלים" fill priority className="object-cover" /> */}
++          <div className="relative bg-[#123F5A] hidden lg:block overflow-hidden">
++            {/* Architectural arch motif — evokes Jerusalem stone windows, not a tech grid */}
++            <svg
++              className="absolute inset-0 h-full w-full opacity-[0.07]"
++              viewBox="0 0 400 500"
++              preserveAspectRatio="xMidYMid slice"
++              fill="none"
++            >
++              <defs>
++                <pattern id="jlm-arches" width="140" height="180" patternUnits="userSpaceOnUse">
++                  <path
++                    d="M20 180V90a50 50 0 0 1 100 0v90"
++                    stroke="#F7F4EE"
++                    strokeWidth="3"
++                  />
++                </pattern>
++              </defs>
++              <rect width="400" height="500" fill="url(#jlm-arches)" />
++            </svg>
+ 
+-            {/* Accent Element with gradient */}
+-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-br from-[#D9822B] to-[#c4721f]" />
+-            
+-            {/* Optional: If you have a real Jerusalem photo, uncomment:
+-            <Image
+-              src="/images/jerusalem-hero.jpg"
+-              alt="ירושלים"
+-              fill
+-              className="object-cover opacity-30"
+-              priority
+-            />
+-            */}
++            {/* Warm stone-toned corner accent instead of a glowing gradient block */}
++            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#D9822B]" />
++            <div className="absolute bottom-0 left-0 w-40 h-40 border-t border-r border-[#123F5A]/40" />
+           </div>
+         </div>
+       </div>
+ 
+       {/* Bottom Accent Line */}
+-      <div className="absolute bottom-0 right-0 left-0 h-1 bg-gradient-to-l from-[#D9822B] via-[#D9822B]/50 to-transparent" />
++      <div className="absolute bottom-0 right-0 left-0 h-1 bg-[#D9822B]" />
+     </section>
+   );
+ }
+diff --git a/src/components/public/ProjectCard.tsx b/src/components/public/ProjectCard.tsx
+index 87de2dd..0806eb2 100644
+--- a/src/components/public/ProjectCard.tsx
++++ b/src/components/public/ProjectCard.tsx
+@@ -23,7 +23,7 @@ export function ProjectCard({ project, neighborhoodName }: ProjectCardProps) {
+   return (
+     <Link
+       href={`/projects/${project.id}`}
+-      className="group block bg-white border border-gray-200 overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-xl"
++      className="group block bg-white border border-gray-200 overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-md"
+     >
+       {/* Image */}
+       <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#f0e8dc] to-[#e2d5c4]">
+diff --git a/src/components/public/PropertyCard.tsx b/src/components/public/PropertyCard.tsx
+index 074d2bd..ff7f072 100644
+--- a/src/components/public/PropertyCard.tsx
++++ b/src/components/public/PropertyCard.tsx
+@@ -34,7 +34,7 @@ export function PropertyCard({ property, neighborhoodName }: PropertyCardProps)
+   return (
+     <Link
+       href={`/properties/${property.id}`}
+-      className="group block bg-white border border-gray-200 overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-xl"
++      className="group block bg-white border border-gray-200 overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-md"
+     >
+       {/* Image */}
+       <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#f5ede3] to-[#e8dcc8]">
+diff --git a/src/components/public/PublicHeader.tsx b/src/components/public/PublicHeader.tsx
+index e77d9ad..e529d4c 100644
+--- a/src/components/public/PublicHeader.tsx
++++ b/src/components/public/PublicHeader.tsx
+@@ -16,7 +16,6 @@ const navigation = [
+   { name: "פרויקטים", href: "/projects" },
+   { name: "קצת עליי", href: "/about" },
+   { name: "מעוניינים למכור?", href: "/contact" },
+-  { name: "צור קשר", href: "/contact" },
+ ];
+ 
+ export function PublicHeader() {
+@@ -97,7 +96,7 @@ export function PublicHeader() {
+ 
+         {/* Mobile Navigation */}
+         {mobileMenuOpen && (
+-          <div className="lg:hidden fixed top-[72px] right-0 left-0 bg-white border-t border-gray-200 shadow-xl z-50">
++          <div className="lg:hidden fixed top-[72px] right-0 left-0 bg-white border-t border-gray-200 shadow-lg z-50">
+             <div className="flex flex-col px-6 py-4 max-h-[calc(100vh-72px)] overflow-y-auto">
+               {navigation.map((item) => {
+                 const isActive = pathname === item.href;

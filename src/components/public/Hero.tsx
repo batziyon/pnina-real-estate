@@ -4,6 +4,7 @@
  */
 
 import Link from "next/link";
+import Image from "next/image";
 
 export function Hero() {
   return (
@@ -53,50 +54,35 @@ export function Hero() {
 
               {/* Quick Stats */}
               <div className="mt-16 pt-8 border-t border-white/20">
-                <div className="flex justify-center">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">10+</div>
-                    <div className="text-sm text-white/70 mt-1">שנות ניסיון</div>
-                  </div>
-                </div>
+                <div className="text-3xl font-bold text-white">10+</div>
+                <div className="text-sm text-white/70 mt-1">שנות ניסיון</div>
               </div>
             </div>
           </div>
 
-          {/* Right Side - Visual Element */}
-          <div className="relative bg-gradient-to-br from-[#123F5A] to-[#0d3449] hidden lg:block">
-            {/* Geometric Pattern - Jerusalem Stone inspired */}
-            <div className="absolute inset-0">
-              {/* Vertical Lines */}
-              <div className="absolute top-0 right-[20%] bottom-0 w-px bg-white/5" />
-              <div className="absolute top-0 right-[40%] bottom-0 w-px bg-white/5" />
-              <div className="absolute top-0 right-[60%] bottom-0 w-px bg-white/5" />
-              <div className="absolute top-0 right-[80%] bottom-0 w-px bg-white/5" />
-              
-              {/* Horizontal Lines */}
-              <div className="absolute top-[25%] right-0 left-0 h-px bg-white/5" />
-              <div className="absolute top-[50%] right-0 left-0 h-px bg-white/5" />
-              <div className="absolute top-[75%] right-0 left-0 h-px bg-white/5" />
-            </div>
-
-            {/* Accent Element with gradient */}
-            <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-br from-[#D9822B] to-[#c4721f]" />
-            
-            {/* Optional: If you have a real Jerusalem photo, uncomment:
+          {/* Right Side - Hero Image */}
+          <div className="relative bg-[#123F5A] hidden lg:block overflow-hidden">
             <Image
-              src="/images/jerusalem-hero.jpg"
-              alt="ירושלים"
+              src="/images/ero.jpg"
+              alt="ירושלים - נדל״ן"
               fill
-              className="object-cover opacity-30"
               priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 0vw, 50vw"
             />
-            */}
+            
+            {/* Overlay gradient for text readability */}
+            <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#123F5A]/20 to-[#123F5A]/60" />
+
+            {/* Warm stone-toned corner accent */}
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#D9822B]" />
+            <div className="absolute bottom-0 left-0 w-40 h-40 border-t border-r border-[#123F5A]/40" />
           </div>
         </div>
       </div>
 
       {/* Bottom Accent Line */}
-      <div className="absolute bottom-0 right-0 left-0 h-1 bg-gradient-to-l from-[#D9822B] via-[#D9822B]/50 to-transparent" />
+      <div className="absolute bottom-0 right-0 left-0 h-1 bg-[#D9822B]" />
     </section>
   );
 }

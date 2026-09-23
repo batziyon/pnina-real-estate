@@ -55,6 +55,7 @@ export const ModelName = {
   User: 'User',
   Contact: 'Contact',
   ContactRole: 'ContactRole',
+  ContactNote: 'ContactNote',
   BuyerRequirement: 'BuyerRequirement',
   BuyerRequirementNeighborhood: 'BuyerRequirementNeighborhood',
   Project: 'Project',
@@ -65,7 +66,9 @@ export const ModelName = {
   ValuationRequest: 'ValuationRequest',
   Testimonial: 'Testimonial',
   PropertyStatusHistory: 'PropertyStatusHistory',
-  PropertyInterest: 'PropertyInterest'
+  PropertyInterest: 'PropertyInterest',
+  Activity: 'Activity',
+  Task: 'Task'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -118,6 +121,19 @@ export const ContactScalarFieldEnum = {
   email: 'email',
   notes: 'notes',
   assignedAgentId: 'assignedAgentId',
+  preferredName: 'preferredName',
+  secondaryPhone: 'secondaryPhone',
+  secondaryEmail: 'secondaryEmail',
+  preferredCommunication: 'preferredCommunication',
+  currentCity: 'currentCity',
+  currentNeighborhood: 'currentNeighborhood',
+  currentAddress: 'currentAddress',
+  currentPropertyStatus: 'currentPropertyStatus',
+  interestedInSelling: 'interestedInSelling',
+  sellingTimeframe: 'sellingTimeframe',
+  sellingReason: 'sellingReason',
+  valuationRequested: 'valuationRequested',
+  valuationCompleted: 'valuationCompleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -137,6 +153,19 @@ export const ContactRoleScalarFieldEnum = {
 export type ContactRoleScalarFieldEnum = (typeof ContactRoleScalarFieldEnum)[keyof typeof ContactRoleScalarFieldEnum]
 
 
+export const ContactNoteScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  propertyId: 'propertyId',
+  content: 'content',
+  authorId: 'authorId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ContactNoteScalarFieldEnum = (typeof ContactNoteScalarFieldEnum)[keyof typeof ContactNoteScalarFieldEnum]
+
+
 export const BuyerRequirementScalarFieldEnum = {
   id: 'id',
   contactId: 'contactId',
@@ -148,6 +177,16 @@ export const BuyerRequirementScalarFieldEnum = {
   maxArea: 'maxArea',
   minPrice: 'minPrice',
   maxPrice: 'maxPrice',
+  minFloor: 'minFloor',
+  maxFloor: 'maxFloor',
+  requiresElevator: 'requiresElevator',
+  requiresParking: 'requiresParking',
+  requiresBalcony: 'requiresBalcony',
+  requiresSafeRoom: 'requiresSafeRoom',
+  accessibilityRequired: 'accessibilityRequired',
+  renovationPreference: 'renovationPreference',
+  newConstructionPreference: 'newConstructionPreference',
+  moveInTimeframe: 'moveInTimeframe',
   notes: 'notes',
   active: 'active',
   createdAt: 'createdAt',
@@ -324,6 +363,40 @@ export const PropertyInterestScalarFieldEnum = {
 } as const
 
 export type PropertyInterestScalarFieldEnum = (typeof PropertyInterestScalarFieldEnum)[keyof typeof PropertyInterestScalarFieldEnum]
+
+
+export const ActivityScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  activityType: 'activityType',
+  title: 'title',
+  description: 'description',
+  activityDate: 'activityDate',
+  recordedById: 'recordedById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ActivityScalarFieldEnum = (typeof ActivityScalarFieldEnum)[keyof typeof ActivityScalarFieldEnum]
+
+
+export const TaskScalarFieldEnum = {
+  id: 'id',
+  contactId: 'contactId',
+  propertyId: 'propertyId',
+  title: 'title',
+  description: 'description',
+  dueDate: 'dueDate',
+  priority: 'priority',
+  status: 'status',
+  assignedToId: 'assignedToId',
+  createdById: 'createdById',
+  completedAt: 'completedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
 export const SortOrder = {

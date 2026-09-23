@@ -15,6 +15,8 @@
 
 import "server-only";
 
+import { prisma } from "@/lib/prisma";
+
 import { PrismaNeighborhoodRepository } from "@/infrastructure/neighborhood/prisma-neighborhood.repository";
 import { PrismaUserRepository } from "@/infrastructure/user/prisma-user.repository";
 import { PrismaProjectRepository } from "@/infrastructure/project/prisma-project.repository";
@@ -23,9 +25,12 @@ import { PrismaInquiryRepository } from "@/infrastructure/inquiry/prisma-inquiry
 import { PrismaValuationRequestRepository } from "@/infrastructure/valuation/prisma-valuation-request.repository";
 import { PrismaTestimonialRepository } from "@/infrastructure/testimonial/prisma-testimonial.repository";
 import { PrismaContactRepository } from "@/infrastructure/contact/prisma-contact.repository";
+import { PrismaContactNoteRepository } from "@/infrastructure/contact-note/prisma-contact-note.repository";
 import { PrismaBuyerRequirementRepository } from "@/infrastructure/buyer-requirement/prisma-buyer-requirement.repository";
 import { PrismaPropertyStatusHistoryRepository } from "@/infrastructure/repositories/property-status-history.repository";
 import { PrismaPropertyInterestRepository } from "@/infrastructure/property-interest/prisma-property-interest.repository";
+import { PrismaActivityRepository } from "@/infrastructure/activity/prisma-activity.repository";
+import { PrismaTaskRepository } from "@/infrastructure/task/prisma-task.repository";
 
 import type { NeighborhoodRepository } from "@/domain/neighborhood/neighborhood.repository";
 import type { UserRepository } from "@/domain/user/user.repository";
@@ -35,9 +40,12 @@ import type { InquiryRepository } from "@/domain/inquiry/inquiry.repository";
 import type { ValuationRequestRepository } from "@/domain/valuation/valuation.repository";
 import type { TestimonialRepository } from "@/domain/testimonial/testimonial.repository";
 import type { ContactRepository } from "@/domain/contact/contact.repository";
+import type { ContactNoteRepository } from "@/domain/contact-note/contact-note.repository";
 import type { BuyerRequirementRepository } from "@/domain/buyer-requirement/buyer-requirement.repository";
 import type { PropertyStatusHistoryRepository } from "@/domain/property-status-history/property-status-history.repository";
 import type { PropertyInterestRepository } from "@/domain/property-interest/property-interest.repository";
+import type { ActivityRepository } from "@/domain/activity/activity.repository";
+import type { TaskRepository } from "@/domain/task/task.repository";
 import type { ObjectStoragePort } from "@/application/ports/storage/object-storage.port";
 
 import { createObjectStorage } from "@/infrastructure/storage/storage.factory";
@@ -65,6 +73,8 @@ const testimonialRepository: TestimonialRepository =
 
 const contactRepository: ContactRepository = new PrismaContactRepository();
 
+const contactNoteRepository: ContactNoteRepository = new PrismaContactNoteRepository();
+
 const buyerRequirementRepository: BuyerRequirementRepository =
   new PrismaBuyerRequirementRepository();
 
@@ -73,6 +83,10 @@ const propertyStatusHistoryRepository: PropertyStatusHistoryRepository =
 
 const propertyInterestRepository: PropertyInterestRepository =
   new PrismaPropertyInterestRepository();
+
+const activityRepository: ActivityRepository = new PrismaActivityRepository();
+
+const taskRepository: TaskRepository = new PrismaTaskRepository();
 
 // ---------------------------------------------------------------------------
 // Service instances — stateless services (storage, etc.)
@@ -95,9 +109,12 @@ export const container = {
     valuationRequest: valuationRequestRepository,
     testimonial: testimonialRepository,
     contact: contactRepository,
+    contactNote: contactNoteRepository,
     buyerRequirement: buyerRequirementRepository,
     propertyStatusHistory: propertyStatusHistoryRepository,
     propertyInterest: propertyInterestRepository,
+    activity: activityRepository,
+    task: taskRepository,
   },
   services: {
     objectStorage,
@@ -119,11 +136,17 @@ export {
   valuationRequestRepository,
   testimonialRepository,
   contactRepository,
+  contactNoteRepository,
   buyerRequirementRepository,
   propertyStatusHistoryRepository,
   propertyInterestRepository,
+  activityRepository,
+  taskRepository,
   objectStorage,
 };
+
+// Export repositories object for direct access
+export const repositories = container.repositories;
 
 // ---------------------------------------------------------------------------
 // Use case factories — instantiate application use cases with injected dependencies.
@@ -170,6 +193,8 @@ import { ListValuationRequestsUseCase } from "@/application/valuations/list-valu
 import { UpdateValuationStatusUseCase } from "@/application/valuations/update-valuation-status.use-case";
 
 import { CreateTestimonialUseCase } from "@/application/testimonials/create-testimonial.use-case";
+import { GetTestimonialUseCase } from "@/application/testimonials/get-testimonial.use-case";
+import { UpdateTestimonialUseCase } from "@/application/testimonials/update-testimonial.use-case";
 import { ListPublicTestimonialsUseCase } from "@/application/testimonials/list-public-testimonials.use-case";
 import { ApproveTestimonialUseCase } from "@/application/testimonials/approve-testimonial.use-case";
 import { RejectTestimonialUseCase } from "@/application/testimonials/reject-testimonial.use-case";
@@ -186,6 +211,11 @@ import { CreateContactUseCase } from "@/application/contacts/create-contact.use-
 import { UpdateContactUseCase } from "@/application/contacts/update-contact.use-case";
 import { GetContactUseCase } from "@/application/contacts/get-contact.use-case";
 import { ListContactsUseCase } from "@/application/contacts/list-contacts.use-case";
+import { GetContactStatisticsUseCase } from "@/application/contacts/get-contact-statistics.use-case";
+
+import { CreateContactNoteUseCase } from "@/application/contact-notes/create-contact-note.use-case";
+import { ListContactNotesUseCase } from "@/application/contact-notes/list-contact-notes.use-case";
+import { UpdateContactNoteUseCase } from "@/application/contact-notes/update-contact-note.use-case";
 
 import { CreateBuyerRequirementUseCase } from "@/application/buyer-requirements/create-buyer-requirement.use-case";
 import { UpdateBuyerRequirementUseCase } from "@/application/buyer-requirements/update-buyer-requirement.use-case";
@@ -200,8 +230,20 @@ import { ListPropertyInterestsByPropertyUseCase } from "@/application/property-i
 import { ListPropertyInterestsByContactUseCase } from "@/application/property-interests/list-property-interests-by-contact.use-case";
 import { DeletePropertyInterestUseCase } from "@/application/property-interests/delete-property-interest.use-case";
 
+import { CreateActivityUseCase } from "@/application/activities/create-activity.use-case";
+import { ListActivitiesUseCase } from "@/application/activities/list-activities.use-case";
+import { UpdateActivityUseCase } from "@/application/activities/update-activity.use-case";
+import { DeleteActivityUseCase } from "@/application/activities/delete-activity.use-case";
+
+import { CreateTaskUseCase } from "@/application/tasks/create-task.use-case";
+import { ListTasksUseCase } from "@/application/tasks/list-tasks.use-case";
+import { UpdateTaskUseCase } from "@/application/tasks/update-task.use-case";
+import { CompleteTaskUseCase } from "@/application/tasks/complete-task.use-case";
+import { DeleteTaskUseCase } from "@/application/tasks/delete-task.use-case";
+
 import { CreatePropertyFromAIUseCase } from "@/ai/application/use-cases/create-property-from-ai.use-case";
-import { getAIPropertyExtractor } from "@/lib/ai-container";
+import { CreateContactFromAIUseCase } from "@/ai/application/use-cases/create-contact-from-ai.use-case";
+import { getAIPropertyExtractor, getAIContactExtractor } from "@/lib/ai-container";
 
 export const useCases = {
   properties: {
@@ -251,6 +293,8 @@ export const useCases = {
   },
   testimonials: {
     create: new CreateTestimonialUseCase(testimonialRepository),
+    get: new GetTestimonialUseCase(testimonialRepository),
+    update: new UpdateTestimonialUseCase(testimonialRepository),
     listPublic: new ListPublicTestimonialsUseCase(testimonialRepository),
     approve: new ApproveTestimonialUseCase(testimonialRepository),
     reject: new RejectTestimonialUseCase(testimonialRepository),
@@ -270,6 +314,16 @@ export const useCases = {
     update: new UpdateContactUseCase(contactRepository, userRepository),
     get: new GetContactUseCase(contactRepository),
     list: new ListContactsUseCase(contactRepository),
+    getStatistics: new GetContactStatisticsUseCase(
+      contactRepository,
+      buyerRequirementRepository,
+      propertyInterestRepository
+    ),
+  },
+  contactNotes: {
+    create: new CreateContactNoteUseCase(contactNoteRepository, contactRepository),
+    list: new ListContactNotesUseCase(contactNoteRepository, contactRepository),
+    update: new UpdateContactNoteUseCase(contactNoteRepository),
   },
   buyerRequirements: {
     create: new CreateBuyerRequirementUseCase(
@@ -325,6 +379,19 @@ export const useCases = {
       propertyRepository
     ),
   },
+  activities: {
+    create: new CreateActivityUseCase(activityRepository),
+    list: new ListActivitiesUseCase(activityRepository),
+    update: new UpdateActivityUseCase(activityRepository),
+    delete: new DeleteActivityUseCase(activityRepository),
+  },
+  tasks: {
+    create: new CreateTaskUseCase(taskRepository),
+    list: new ListTasksUseCase(taskRepository),
+    update: new UpdateTaskUseCase(taskRepository),
+    complete: new CompleteTaskUseCase(taskRepository),
+    delete: new DeleteTaskUseCase(taskRepository),
+  },
   // AI use cases with lazy initialization (requires GEMINI_API_KEY at runtime)
   get ai() {
     return {
@@ -333,6 +400,11 @@ export const useCases = {
           getAIPropertyExtractor(),
           propertyRepository,
           neighborhoodRepository
+        );
+      },
+      get createContactFromText() {
+        return new CreateContactFromAIUseCase(
+          getAIContactExtractor()
         );
       },
     };

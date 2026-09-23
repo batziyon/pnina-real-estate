@@ -5,6 +5,7 @@
  */
 
 import { requireAuth } from "@/lib/auth-helpers";
+import { getCookieHeader } from "@/lib/server-fetch-helpers";
 import { BuyerRequirementForm } from "@/components/admin/BuyerRequirementForm";
 import { notFound } from "next/navigation";
 
@@ -17,6 +18,7 @@ interface PageProps {
 export default async function EditBuyerRequirementPage({ params }: PageProps) {
   await requireAuth();
   const { id: contactId, requirementId } = await params;
+  const cookieHeader = await getCookieHeader();
 
   // Fetch requirement
   let requirement;
@@ -25,7 +27,7 @@ export default async function EditBuyerRequirementPage({ params }: PageProps) {
       `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/contacts/${contactId}/requirements/${requirementId}`,
       {
         headers: {
-          Cookie: (await import("next/headers")).cookies().toString(),
+          Cookie: cookieHeader,
         },
         cache: "no-store",
       }

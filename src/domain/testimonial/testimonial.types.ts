@@ -35,6 +35,7 @@ export type CreateTestimonialInput = {
 };
 
 export type UpdateTestimonialInput = Partial<{
+  name: string;
   displayName: string;
   content: string;
   status: TestimonialStatus;

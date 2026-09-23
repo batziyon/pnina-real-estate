@@ -1,102 +1,185 @@
 "use client";
 
-import { useState, useEffect } from "react";
+/**
+ * Public Testimonials Section — Auto-rotating Carousel
+ *
+ * Features:
+ * - Automatically advances every 5 seconds
+ * - Manual navigation with arrow buttons
+ * - Pauses on user interaction
+ * - Shows only APPROVED testimonials
+ * - Responsive design matching Pnina brand
+ * - Accessible (keyboard navigation, ARIA labels)
+ */
 
-interface TestimonialDTO {
+import { useState, useEffect, useCallback } from "react";
+
+interface Testimonial {
   id: string;
-  displayName: string;
+  name: string;
+  displayName: string | null;
   content: string;
-  createdAt: string;
 }
 
-export function TestimonialsSection() {
-  const [testimonials, setTestimonials] = useState<TestimonialDTO[]>([]);
-  const [loading, setLoading] = useState(true);
+interface TestimonialsSectionProps {
+  testimonials: Testimonial[];
+}
 
-  useEffect(() => {
-    async function fetchTestimonials() {
-      setLoading(true);
-      try {
-        const response = await fetch("/api/testimonials");
+export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch testimonials");
-        }
+  // If empty or only 1 testimonial, show static (no carousel)
+  const showCarousel = testimonials.length > 1;
 
-        const data: TestimonialDTO[] = await response.json();
-        setTestimonials(data.slice(0, 3));
-      } catch (error) {
-        console.error("Error fetching testimonials:", error);
-        setTestimonials([]);
-      } finally {
-        setLoading(false);
-      }
-    }
+  const goToNext = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  }, [testimonials.length]);
 
-    fetchTestimonials();
+  const goToPrev = useCallback(() => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  }, [testimonials.length]);
+
+  const goToIndex = useCallback((index: number) => {
+    setCurrentIndex(index);
   }, []);
 
-  if (!loading && testimonials.length === 0) {
-    return null;
+  // Auto-advance every 5 seconds (only if carousel enabled and not paused)
+  useEffect(() => {
+    if (!showCarousel || isPaused) return;
+
+    const interval = setInterval(goToNext, 5000);
+    return () => clearInterval(interval);
+  }, [showCarousel, isPaused, goToNext]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (!showCarousel) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        setIsPaused(true);
+        if (e.key === "ArrowRight") goToNext();
+        if (e.key === "ArrowLeft") goToPrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showCarousel, goToNext, goToPrev]);
+
+  if (testimonials.length === 0) {
+    return null; // Don't render section if no testimonials
   }
 
+  const current = testimonials[currentIndex];
+
   return (
-    <section className="bg-gradient-to-b from-white to-[#f8f9fa] py-20 lg:py-28" dir="rtl">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        
+    <section className="py-20 bg-gray-50" dir="rtl">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="mb-12 lg:mb-16 text-center">
-          <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-[#18384C] leading-tight mb-4">
-            מה אומרים עלינו
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            מה הלקוחות שלנו אומרים
           </h2>
-          <p className="text-lg text-[#18384C]/70 max-w-2xl mx-auto">
-            לקוחות שסמכו עלינו בתהליכים הכי חשובים שלהם
-          </p>
+          <div className="w-20 h-1 bg-[#D9822B] mx-auto"></div>
         </div>
 
-        {/* Loading State */}
-        {loading && (
-          <div className="py-20 text-center">
-            <div className="inline-block h-10 w-10 animate-spin border-4 border-[#135C87] border-t-transparent" />
-            <p className="mt-4 text-[#18384C]/70">טוען המלצות...</p>
-          </div>
-        )}
+        {/* Testimonial Card */}
+        <div
+          className="relative bg-white rounded-lg shadow-sm border border-gray-200 p-8 md:p-12 max-w-4xl mx-auto"
+          onMouseEnter={() => showCarousel && setIsPaused(true)}
+          onMouseLeave={() => showCarousel && setIsPaused(false)}
+          onFocus={() => showCarousel && setIsPaused(true)}
+          onBlur={() => showCarousel && setIsPaused(false)}
+        >
+          {/* Quote Icon */}
+          <div className="text-[#135C87] text-5xl leading-none mb-4 opacity-20">&ldquo;</div>
 
-        {/* Testimonials Grid */}
-        {!loading && testimonials.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className={`p-8 relative bg-gradient-to-br ${
-                  index === 0 ? 'from-[#fef9f5] to-[#fef5ed]' :
-                  index === 1 ? 'from-[#f9fafb] to-[#f3f6f9]' :
-                  'from-[#fefbf8] to-[#fdf8f3]'
-                } border border-gray-100`}
+          {/* Content */}
+          <blockquote className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
+            {current.content}
+          </blockquote>
+
+          {/* Client Name */}
+          <cite className="not-italic">
+            <div className="font-semibold text-gray-900 text-lg">
+              {current.displayName || current.name}
+            </div>
+          </cite>
+
+          {/* Navigation Arrows (only if more than 1 testimonial) */}
+          {showCarousel && (
+            <>
+              {/* Previous Button */}
+              <button
+                onClick={() => {
+                  setIsPaused(true);
+                  goToPrev();
+                }}
+                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#135C87] focus:ring-offset-2"
+                aria-label="המלצה קודמת"
               >
-                {/* Quote Icon */}
-                <svg 
-                  className={`w-10 h-10 mb-6 ${
-                    index === 0 ? 'text-[#D9822B]' :
-                    index === 1 ? 'text-[#135C87]' :
-                    'text-[#D9822B]/80'
-                  }`}
-                  fill="currentColor" 
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
                 </svg>
+              </button>
 
-                {/* Content */}
-                <p className="text-base text-[#18384C]/80 leading-relaxed mb-6 line-clamp-6">
-                  {testimonial.content}
-                </p>
+              {/* Next Button */}
+              <button
+                onClick={() => {
+                  setIsPaused(true);
+                  goToNext();
+                }}
+                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-[#135C87] focus:ring-offset-2"
+                aria-label="המלצה הבאה"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </>
+          )}
+        </div>
 
-                {/* Author */}
-                <div className="pt-4 border-t-2 border-[#135C87]">
-                  <p className="font-bold text-[#135C87]">{testimonial.displayName}</p>
-                </div>
-              </div>
+        {/* Dots Indicator (only if more than 1 testimonial) */}
+        {showCarousel && (
+          <div className="flex justify-center gap-2 mt-8">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setIsPaused(true);
+                  goToIndex(index);
+                }}
+                className={`w-2.5 h-2.5 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-[#135C87] focus:ring-offset-2 ${
+                  index === currentIndex
+                    ? "bg-[#135C87] w-8"
+                    : "bg-gray-300 hover:bg-gray-400"
+                }`}
+                aria-label={`עבור להמלצה ${index + 1}`}
+                aria-current={index === currentIndex ? "true" : "false"}
+              />
             ))}
           </div>
         )}

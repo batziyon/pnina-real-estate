@@ -78,6 +78,7 @@ export class CreateContactUseCase {
       phone: input.phone ?? undefined,
       email: input.email ?? undefined,
       notes: input.notes ?? undefined,
+      roles: input.roles ?? undefined,
       assignedAgentId: assignedAgentId ?? undefined,
     });
   }

@@ -38,6 +38,11 @@ export type Contact = Prisma.ContactModel
  */
 export type ContactRole = Prisma.ContactRoleModel
 /**
+ * Model ContactNote
+ * 
+ */
+export type ContactNote = Prisma.ContactNoteModel
+/**
  * Model BuyerRequirement
  * 
  */
@@ -92,3 +97,13 @@ export type PropertyStatusHistory = Prisma.PropertyStatusHistoryModel
  * 
  */
 export type PropertyInterest = Prisma.PropertyInterestModel
+/**
+ * Model Activity
+ * 
+ */
+export type Activity = Prisma.ActivityModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel

@@ -33,6 +33,8 @@ export type BuyerRequirementAvgAggregateOutputType = {
   maxArea: runtime.Decimal | null
   minPrice: runtime.Decimal | null
   maxPrice: runtime.Decimal | null
+  minFloor: number | null
+  maxFloor: number | null
 }
 
 export type BuyerRequirementSumAggregateOutputType = {
@@ -42,6 +44,8 @@ export type BuyerRequirementSumAggregateOutputType = {
   maxArea: runtime.Decimal | null
   minPrice: runtime.Decimal | null
   maxPrice: runtime.Decimal | null
+  minFloor: number | null
+  maxFloor: number | null
 }
 
 export type BuyerRequirementMinAggregateOutputType = {
@@ -55,6 +59,16 @@ export type BuyerRequirementMinAggregateOutputType = {
   maxArea: runtime.Decimal | null
   minPrice: runtime.Decimal | null
   maxPrice: runtime.Decimal | null
+  minFloor: number | null
+  maxFloor: number | null
+  requiresElevator: boolean | null
+  requiresParking: boolean | null
+  requiresBalcony: boolean | null
+  requiresSafeRoom: boolean | null
+  accessibilityRequired: boolean | null
+  renovationPreference: string | null
+  newConstructionPreference: boolean | null
+  moveInTimeframe: string | null
   notes: string | null
   active: boolean | null
   createdAt: Date | null
@@ -72,6 +86,16 @@ export type BuyerRequirementMaxAggregateOutputType = {
   maxArea: runtime.Decimal | null
   minPrice: runtime.Decimal | null
   maxPrice: runtime.Decimal | null
+  minFloor: number | null
+  maxFloor: number | null
+  requiresElevator: boolean | null
+  requiresParking: boolean | null
+  requiresBalcony: boolean | null
+  requiresSafeRoom: boolean | null
+  accessibilityRequired: boolean | null
+  renovationPreference: string | null
+  newConstructionPreference: boolean | null
+  moveInTimeframe: string | null
   notes: string | null
   active: boolean | null
   createdAt: Date | null
@@ -89,6 +113,16 @@ export type BuyerRequirementCountAggregateOutputType = {
   maxArea: number
   minPrice: number
   maxPrice: number
+  minFloor: number
+  maxFloor: number
+  requiresElevator: number
+  requiresParking: number
+  requiresBalcony: number
+  requiresSafeRoom: number
+  accessibilityRequired: number
+  renovationPreference: number
+  newConstructionPreference: number
+  moveInTimeframe: number
   notes: number
   active: number
   createdAt: number
@@ -104,6 +138,8 @@ export type BuyerRequirementAvgAggregateInputType = {
   maxArea?: true
   minPrice?: true
   maxPrice?: true
+  minFloor?: true
+  maxFloor?: true
 }
 
 export type BuyerRequirementSumAggregateInputType = {
@@ -113,6 +149,8 @@ export type BuyerRequirementSumAggregateInputType = {
   maxArea?: true
   minPrice?: true
   maxPrice?: true
+  minFloor?: true
+  maxFloor?: true
 }
 
 export type BuyerRequirementMinAggregateInputType = {
@@ -126,6 +164,16 @@ export type BuyerRequirementMinAggregateInputType = {
   maxArea?: true
   minPrice?: true
   maxPrice?: true
+  minFloor?: true
+  maxFloor?: true
+  requiresElevator?: true
+  requiresParking?: true
+  requiresBalcony?: true
+  requiresSafeRoom?: true
+  accessibilityRequired?: true
+  renovationPreference?: true
+  newConstructionPreference?: true
+  moveInTimeframe?: true
   notes?: true
   active?: true
   createdAt?: true
@@ -143,6 +191,16 @@ export type BuyerRequirementMaxAggregateInputType = {
   maxArea?: true
   minPrice?: true
   maxPrice?: true
+  minFloor?: true
+  maxFloor?: true
+  requiresElevator?: true
+  requiresParking?: true
+  requiresBalcony?: true
+  requiresSafeRoom?: true
+  accessibilityRequired?: true
+  renovationPreference?: true
+  newConstructionPreference?: true
+  moveInTimeframe?: true
   notes?: true
   active?: true
   createdAt?: true
@@ -160,6 +218,16 @@ export type BuyerRequirementCountAggregateInputType = {
   maxArea?: true
   minPrice?: true
   maxPrice?: true
+  minFloor?: true
+  maxFloor?: true
+  requiresElevator?: true
+  requiresParking?: true
+  requiresBalcony?: true
+  requiresSafeRoom?: true
+  accessibilityRequired?: true
+  renovationPreference?: true
+  newConstructionPreference?: true
+  moveInTimeframe?: true
   notes?: true
   active?: true
   createdAt?: true
@@ -264,6 +332,16 @@ export type BuyerRequirementGroupByOutputType = {
   maxArea: runtime.Decimal | null
   minPrice: runtime.Decimal | null
   maxPrice: runtime.Decimal | null
+  minFloor: number | null
+  maxFloor: number | null
+  requiresElevator: boolean | null
+  requiresParking: boolean | null
+  requiresBalcony: boolean | null
+  requiresSafeRoom: boolean | null
+  accessibilityRequired: boolean | null
+  renovationPreference: string | null
+  newConstructionPreference: boolean | null
+  moveInTimeframe: string | null
   notes: string | null
   active: boolean
   createdAt: Date
@@ -304,6 +382,16 @@ export type BuyerRequirementWhereInput = {
   maxArea?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.IntNullableFilter<"BuyerRequirement"> | number | null
+  maxFloor?: Prisma.IntNullableFilter<"BuyerRequirement"> | number | null
+  requiresElevator?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresParking?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresBalcony?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresSafeRoom?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  accessibilityRequired?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  renovationPreference?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
+  newConstructionPreference?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  moveInTimeframe?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
   notes?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
   active?: Prisma.BoolFilter<"BuyerRequirement"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BuyerRequirement"> | Date | string
@@ -323,6 +411,16 @@ export type BuyerRequirementOrderByWithRelationInput = {
   maxArea?: Prisma.SortOrderInput | Prisma.SortOrder
   minPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   maxPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  minFloor?: Prisma.SortOrderInput | Prisma.SortOrder
+  maxFloor?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresElevator?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresParking?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresBalcony?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresSafeRoom?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessibilityRequired?: Prisma.SortOrderInput | Prisma.SortOrder
+  renovationPreference?: Prisma.SortOrderInput | Prisma.SortOrder
+  newConstructionPreference?: Prisma.SortOrderInput | Prisma.SortOrder
+  moveInTimeframe?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -345,6 +443,16 @@ export type BuyerRequirementWhereUniqueInput = Prisma.AtLeast<{
   maxArea?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.IntNullableFilter<"BuyerRequirement"> | number | null
+  maxFloor?: Prisma.IntNullableFilter<"BuyerRequirement"> | number | null
+  requiresElevator?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresParking?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresBalcony?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresSafeRoom?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  accessibilityRequired?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  renovationPreference?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
+  newConstructionPreference?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  moveInTimeframe?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
   notes?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
   active?: Prisma.BoolFilter<"BuyerRequirement"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BuyerRequirement"> | Date | string
@@ -364,6 +472,16 @@ export type BuyerRequirementOrderByWithAggregationInput = {
   maxArea?: Prisma.SortOrderInput | Prisma.SortOrder
   minPrice?: Prisma.SortOrderInput | Prisma.SortOrder
   maxPrice?: Prisma.SortOrderInput | Prisma.SortOrder
+  minFloor?: Prisma.SortOrderInput | Prisma.SortOrder
+  maxFloor?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresElevator?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresParking?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresBalcony?: Prisma.SortOrderInput | Prisma.SortOrder
+  requiresSafeRoom?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessibilityRequired?: Prisma.SortOrderInput | Prisma.SortOrder
+  renovationPreference?: Prisma.SortOrderInput | Prisma.SortOrder
+  newConstructionPreference?: Prisma.SortOrderInput | Prisma.SortOrder
+  moveInTimeframe?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -389,6 +507,16 @@ export type BuyerRequirementScalarWhereWithAggregatesInput = {
   maxArea?: Prisma.DecimalNullableWithAggregatesFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.DecimalNullableWithAggregatesFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.DecimalNullableWithAggregatesFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.IntNullableWithAggregatesFilter<"BuyerRequirement"> | number | null
+  maxFloor?: Prisma.IntNullableWithAggregatesFilter<"BuyerRequirement"> | number | null
+  requiresElevator?: Prisma.BoolNullableWithAggregatesFilter<"BuyerRequirement"> | boolean | null
+  requiresParking?: Prisma.BoolNullableWithAggregatesFilter<"BuyerRequirement"> | boolean | null
+  requiresBalcony?: Prisma.BoolNullableWithAggregatesFilter<"BuyerRequirement"> | boolean | null
+  requiresSafeRoom?: Prisma.BoolNullableWithAggregatesFilter<"BuyerRequirement"> | boolean | null
+  accessibilityRequired?: Prisma.BoolNullableWithAggregatesFilter<"BuyerRequirement"> | boolean | null
+  renovationPreference?: Prisma.StringNullableWithAggregatesFilter<"BuyerRequirement"> | string | null
+  newConstructionPreference?: Prisma.BoolNullableWithAggregatesFilter<"BuyerRequirement"> | boolean | null
+  moveInTimeframe?: Prisma.StringNullableWithAggregatesFilter<"BuyerRequirement"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"BuyerRequirement"> | string | null
   active?: Prisma.BoolWithAggregatesFilter<"BuyerRequirement"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"BuyerRequirement"> | Date | string
@@ -405,6 +533,16 @@ export type BuyerRequirementCreateInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -424,6 +562,16 @@ export type BuyerRequirementUncheckedCreateInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -441,6 +589,16 @@ export type BuyerRequirementUpdateInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -460,6 +618,16 @@ export type BuyerRequirementUncheckedUpdateInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -478,6 +646,16 @@ export type BuyerRequirementCreateManyInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -494,6 +672,16 @@ export type BuyerRequirementUpdateManyMutationInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -511,6 +699,16 @@ export type BuyerRequirementUncheckedUpdateManyInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,6 +736,16 @@ export type BuyerRequirementCountOrderByAggregateInput = {
   maxArea?: Prisma.SortOrder
   minPrice?: Prisma.SortOrder
   maxPrice?: Prisma.SortOrder
+  minFloor?: Prisma.SortOrder
+  maxFloor?: Prisma.SortOrder
+  requiresElevator?: Prisma.SortOrder
+  requiresParking?: Prisma.SortOrder
+  requiresBalcony?: Prisma.SortOrder
+  requiresSafeRoom?: Prisma.SortOrder
+  accessibilityRequired?: Prisma.SortOrder
+  renovationPreference?: Prisma.SortOrder
+  newConstructionPreference?: Prisma.SortOrder
+  moveInTimeframe?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -551,6 +759,8 @@ export type BuyerRequirementAvgOrderByAggregateInput = {
   maxArea?: Prisma.SortOrder
   minPrice?: Prisma.SortOrder
   maxPrice?: Prisma.SortOrder
+  minFloor?: Prisma.SortOrder
+  maxFloor?: Prisma.SortOrder
 }
 
 export type BuyerRequirementMaxOrderByAggregateInput = {
@@ -564,6 +774,16 @@ export type BuyerRequirementMaxOrderByAggregateInput = {
   maxArea?: Prisma.SortOrder
   minPrice?: Prisma.SortOrder
   maxPrice?: Prisma.SortOrder
+  minFloor?: Prisma.SortOrder
+  maxFloor?: Prisma.SortOrder
+  requiresElevator?: Prisma.SortOrder
+  requiresParking?: Prisma.SortOrder
+  requiresBalcony?: Prisma.SortOrder
+  requiresSafeRoom?: Prisma.SortOrder
+  accessibilityRequired?: Prisma.SortOrder
+  renovationPreference?: Prisma.SortOrder
+  newConstructionPreference?: Prisma.SortOrder
+  moveInTimeframe?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -581,6 +801,16 @@ export type BuyerRequirementMinOrderByAggregateInput = {
   maxArea?: Prisma.SortOrder
   minPrice?: Prisma.SortOrder
   maxPrice?: Prisma.SortOrder
+  minFloor?: Prisma.SortOrder
+  maxFloor?: Prisma.SortOrder
+  requiresElevator?: Prisma.SortOrder
+  requiresParking?: Prisma.SortOrder
+  requiresBalcony?: Prisma.SortOrder
+  requiresSafeRoom?: Prisma.SortOrder
+  accessibilityRequired?: Prisma.SortOrder
+  renovationPreference?: Prisma.SortOrder
+  newConstructionPreference?: Prisma.SortOrder
+  moveInTimeframe?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   active?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -594,6 +824,8 @@ export type BuyerRequirementSumOrderByAggregateInput = {
   maxArea?: Prisma.SortOrder
   minPrice?: Prisma.SortOrder
   maxPrice?: Prisma.SortOrder
+  minFloor?: Prisma.SortOrder
+  maxFloor?: Prisma.SortOrder
 }
 
 export type BuyerRequirementScalarRelationFilter = {
@@ -659,6 +891,14 @@ export type NullableDecimalFieldUpdateOperationsInput = {
   divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
 }
 
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type BuyerRequirementCreateNestedOneWithoutPreferredNeighborhoodsInput = {
   create?: Prisma.XOR<Prisma.BuyerRequirementCreateWithoutPreferredNeighborhoodsInput, Prisma.BuyerRequirementUncheckedCreateWithoutPreferredNeighborhoodsInput>
   connectOrCreate?: Prisma.BuyerRequirementCreateOrConnectWithoutPreferredNeighborhoodsInput
@@ -683,6 +923,16 @@ export type BuyerRequirementCreateWithoutContactInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -700,6 +950,16 @@ export type BuyerRequirementUncheckedCreateWithoutContactInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -747,6 +1007,16 @@ export type BuyerRequirementScalarWhereInput = {
   maxArea?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.DecimalNullableFilter<"BuyerRequirement"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.IntNullableFilter<"BuyerRequirement"> | number | null
+  maxFloor?: Prisma.IntNullableFilter<"BuyerRequirement"> | number | null
+  requiresElevator?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresParking?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresBalcony?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  requiresSafeRoom?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  accessibilityRequired?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  renovationPreference?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
+  newConstructionPreference?: Prisma.BoolNullableFilter<"BuyerRequirement"> | boolean | null
+  moveInTimeframe?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
   notes?: Prisma.StringNullableFilter<"BuyerRequirement"> | string | null
   active?: Prisma.BoolFilter<"BuyerRequirement"> | boolean
   createdAt?: Prisma.DateTimeFilter<"BuyerRequirement"> | Date | string
@@ -763,6 +1033,16 @@ export type BuyerRequirementCreateWithoutPreferredNeighborhoodsInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -781,6 +1061,16 @@ export type BuyerRequirementUncheckedCreateWithoutPreferredNeighborhoodsInput = 
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -813,6 +1103,16 @@ export type BuyerRequirementUpdateWithoutPreferredNeighborhoodsInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -831,6 +1131,16 @@ export type BuyerRequirementUncheckedUpdateWithoutPreferredNeighborhoodsInput = 
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -847,6 +1157,16 @@ export type BuyerRequirementCreateManyContactInput = {
   maxArea?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: number | null
+  maxFloor?: number | null
+  requiresElevator?: boolean | null
+  requiresParking?: boolean | null
+  requiresBalcony?: boolean | null
+  requiresSafeRoom?: boolean | null
+  accessibilityRequired?: boolean | null
+  renovationPreference?: string | null
+  newConstructionPreference?: boolean | null
+  moveInTimeframe?: string | null
   notes?: string | null
   active?: boolean
   createdAt?: Date | string
@@ -863,6 +1183,16 @@ export type BuyerRequirementUpdateWithoutContactInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -880,6 +1210,16 @@ export type BuyerRequirementUncheckedUpdateWithoutContactInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -897,6 +1237,16 @@ export type BuyerRequirementUncheckedUpdateManyWithoutContactInput = {
   maxArea?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   minPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
   maxPrice?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  minFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  maxFloor?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  requiresElevator?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresParking?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresBalcony?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  requiresSafeRoom?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  accessibilityRequired?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  renovationPreference?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  newConstructionPreference?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  moveInTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -945,6 +1295,16 @@ export type BuyerRequirementSelect<ExtArgs extends runtime.Types.Extensions.Inte
   maxArea?: boolean
   minPrice?: boolean
   maxPrice?: boolean
+  minFloor?: boolean
+  maxFloor?: boolean
+  requiresElevator?: boolean
+  requiresParking?: boolean
+  requiresBalcony?: boolean
+  requiresSafeRoom?: boolean
+  accessibilityRequired?: boolean
+  renovationPreference?: boolean
+  newConstructionPreference?: boolean
+  moveInTimeframe?: boolean
   notes?: boolean
   active?: boolean
   createdAt?: boolean
@@ -965,6 +1325,16 @@ export type BuyerRequirementSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   maxArea?: boolean
   minPrice?: boolean
   maxPrice?: boolean
+  minFloor?: boolean
+  maxFloor?: boolean
+  requiresElevator?: boolean
+  requiresParking?: boolean
+  requiresBalcony?: boolean
+  requiresSafeRoom?: boolean
+  accessibilityRequired?: boolean
+  renovationPreference?: boolean
+  newConstructionPreference?: boolean
+  moveInTimeframe?: boolean
   notes?: boolean
   active?: boolean
   createdAt?: boolean
@@ -983,6 +1353,16 @@ export type BuyerRequirementSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   maxArea?: boolean
   minPrice?: boolean
   maxPrice?: boolean
+  minFloor?: boolean
+  maxFloor?: boolean
+  requiresElevator?: boolean
+  requiresParking?: boolean
+  requiresBalcony?: boolean
+  requiresSafeRoom?: boolean
+  accessibilityRequired?: boolean
+  renovationPreference?: boolean
+  newConstructionPreference?: boolean
+  moveInTimeframe?: boolean
   notes?: boolean
   active?: boolean
   createdAt?: boolean
@@ -1001,13 +1381,23 @@ export type BuyerRequirementSelectScalar = {
   maxArea?: boolean
   minPrice?: boolean
   maxPrice?: boolean
+  minFloor?: boolean
+  maxFloor?: boolean
+  requiresElevator?: boolean
+  requiresParking?: boolean
+  requiresBalcony?: boolean
+  requiresSafeRoom?: boolean
+  accessibilityRequired?: boolean
+  renovationPreference?: boolean
+  newConstructionPreference?: boolean
+  moveInTimeframe?: boolean
   notes?: boolean
   active?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type BuyerRequirementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contactId" | "dealType" | "propertyType" | "minRooms" | "maxRooms" | "minArea" | "maxArea" | "minPrice" | "maxPrice" | "notes" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["buyerRequirement"]>
+export type BuyerRequirementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "contactId" | "dealType" | "propertyType" | "minRooms" | "maxRooms" | "minArea" | "maxArea" | "minPrice" | "maxPrice" | "minFloor" | "maxFloor" | "requiresElevator" | "requiresParking" | "requiresBalcony" | "requiresSafeRoom" | "accessibilityRequired" | "renovationPreference" | "newConstructionPreference" | "moveInTimeframe" | "notes" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["buyerRequirement"]>
 export type BuyerRequirementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   contact?: boolean | Prisma.ContactDefaultArgs<ExtArgs>
   preferredNeighborhoods?: boolean | Prisma.BuyerRequirement$preferredNeighborhoodsArgs<ExtArgs>
@@ -1037,6 +1427,16 @@ export type $BuyerRequirementPayload<ExtArgs extends runtime.Types.Extensions.In
     maxArea: runtime.Decimal | null
     minPrice: runtime.Decimal | null
     maxPrice: runtime.Decimal | null
+    minFloor: number | null
+    maxFloor: number | null
+    requiresElevator: boolean | null
+    requiresParking: boolean | null
+    requiresBalcony: boolean | null
+    requiresSafeRoom: boolean | null
+    accessibilityRequired: boolean | null
+    renovationPreference: string | null
+    newConstructionPreference: boolean | null
+    moveInTimeframe: string | null
     notes: string | null
     active: boolean
     createdAt: Date
@@ -1476,6 +1876,16 @@ export interface BuyerRequirementFieldRefs {
   readonly maxArea: Prisma.FieldRef<"BuyerRequirement", 'Decimal'>
   readonly minPrice: Prisma.FieldRef<"BuyerRequirement", 'Decimal'>
   readonly maxPrice: Prisma.FieldRef<"BuyerRequirement", 'Decimal'>
+  readonly minFloor: Prisma.FieldRef<"BuyerRequirement", 'Int'>
+  readonly maxFloor: Prisma.FieldRef<"BuyerRequirement", 'Int'>
+  readonly requiresElevator: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
+  readonly requiresParking: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
+  readonly requiresBalcony: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
+  readonly requiresSafeRoom: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
+  readonly accessibilityRequired: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
+  readonly renovationPreference: Prisma.FieldRef<"BuyerRequirement", 'String'>
+  readonly newConstructionPreference: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
+  readonly moveInTimeframe: Prisma.FieldRef<"BuyerRequirement", 'String'>
   readonly notes: Prisma.FieldRef<"BuyerRequirement", 'String'>
   readonly active: Prisma.FieldRef<"BuyerRequirement", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"BuyerRequirement", 'DateTime'>

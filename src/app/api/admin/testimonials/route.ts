@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireRole } from "@/lib/auth-helpers";
 import { ListTestimonialsUseCase } from "@/application/testimonials/list-testimonials.use-case";
-import { testimonialRepository } from "@/lib/container";
+import { testimonialRepository, useCases } from "@/lib/container";
 
 // Create a new use case for admin to list ALL testimonials (not just public)
 const listAllTestimonialsUseCase = new ListTestimonialsUseCase(testimonialRepository);
@@ -28,5 +28,26 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     return NextResponse.json({ error: "Failed to fetch testimonials" }, { status: 500 });
+  }
+}
+
+export async function POST(req: Request) {
+  try {
+    await requireRole("ADMIN");
+
+    const body = await req.json();
+    
+    const testimonial = await useCases.testimonials.create.execute({
+      name: body.name,
+      displayName: body.displayName,
+      content: body.content,
+    });
+
+    return NextResponse.json(testimonial, { status: 201 });
+  } catch (error) {
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
+    return NextResponse.json({ error: "Failed to create testimonial" }, { status: 500 });
   }
 }

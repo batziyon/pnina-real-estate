@@ -60,26 +60,39 @@ export function TestimonialActions({ testimonialId, status }: TestimonialActions
     }
   };
 
-  if (status !== "PENDING") {
-    return null;
-  }
+  const handleEdit = () => {
+    router.push(`/admin/testimonials/${testimonialId}/edit`);
+  };
 
   return (
     <div className="flex items-center gap-2">
+      {/* Edit button - available for all testimonials */}
       <button
-        onClick={handleApprove}
-        disabled={loading}
-        className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors text-sm"
+        onClick={handleEdit}
+        className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors text-sm"
       >
-        {loading ? "מעבד..." : "אשר"}
+        ✏️ ערוך
       </button>
-      <button
-        onClick={handleReject}
-        disabled={loading}
-        className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-400 transition-colors text-sm"
-      >
-        {loading ? "מעבד..." : "דחה"}
-      </button>
+
+      {/* Approve/Reject buttons - only for PENDING testimonials */}
+      {status === "PENDING" && (
+        <>
+          <button
+            onClick={handleApprove}
+            disabled={loading}
+            className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors text-sm"
+          >
+            {loading ? "מעבד..." : "✓ אשר"}
+          </button>
+          <button
+            onClick={handleReject}
+            disabled={loading}
+            className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-400 transition-colors text-sm"
+          >
+            {loading ? "מעבד..." : "✗ דחה"}
+          </button>
+        </>
+      )}
     </div>
   );
 }

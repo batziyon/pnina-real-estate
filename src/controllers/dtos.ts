@@ -182,6 +182,7 @@ export interface ContactAdminDTO {
     id: string;
     name: string;
   } | null;
+  roles?: Array<{ role: string }>;
   createdAt: string;
   updatedAt: string;
 }
@@ -203,6 +204,7 @@ export function toContactAdminDTO(
           name: assignedAgent.name,
         }
       : null,
+    roles: contact.roles,
     createdAt: contact.createdAt.toISOString(),
     updatedAt: contact.updatedAt.toISOString(),
   };

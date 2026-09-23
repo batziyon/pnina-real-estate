@@ -121,8 +121,8 @@ export async function GET(request: NextRequest) {
     );
 
     return NextResponse.json({
-      items,
-      pagination: result.meta,
+      data: items,
+      meta: result.meta,
     });
   } catch (error) {
     return handleApiError(error);

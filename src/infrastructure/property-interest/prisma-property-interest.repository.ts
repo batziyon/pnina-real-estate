@@ -119,4 +119,22 @@ export class PrismaPropertyInterestRepository implements PropertyInterestReposit
       },
     });
   }
+
+  async count(filters?: { contactId?: string; propertyId?: string; status?: PropertyInterestStatus }): Promise<number> {
+    const where: Record<string, unknown> = {};
+    
+    if (filters?.contactId) {
+      where.contactId = filters.contactId;
+    }
+    
+    if (filters?.propertyId) {
+      where.propertyId = filters.propertyId;
+    }
+    
+    if (filters?.status) {
+      where.status = filters.status;
+    }
+    
+    return prisma.propertyInterest.count({ where });
+  }
 }

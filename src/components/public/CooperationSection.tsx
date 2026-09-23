@@ -29,7 +29,7 @@ export function CooperationSection() {
           </p>
 
           <Link
-            href="/contact"
+            href="/contact?type=cooperation"
             className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-[#D9822B] hover:bg-[#c4721f] transition-colors"
           >
             בואו נדבר

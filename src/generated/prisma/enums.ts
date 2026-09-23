@@ -149,7 +149,12 @@ export const PropertyInterestStatus = {
   INTERESTED: 'INTERESTED',
   WAITING: 'WAITING',
   CONTACTED: 'CONTACTED',
-  NOT_INTERESTED: 'NOT_INTERESTED'
+  VIEWING_SCHEDULED: 'VIEWING_SCHEDULED',
+  VIEWED: 'VIEWED',
+  FOLLOW_UP_REQUIRED: 'FOLLOW_UP_REQUIRED',
+  OFFER_SUBMITTED: 'OFFER_SUBMITTED',
+  NOT_INTERESTED: 'NOT_INTERESTED',
+  CLOSED: 'CLOSED'
 } as const
 
 export type PropertyInterestStatus = (typeof PropertyInterestStatus)[keyof typeof PropertyInterestStatus]
@@ -163,3 +168,35 @@ export const PropertyInterestSource = {
 } as const
 
 export type PropertyInterestSource = (typeof PropertyInterestSource)[keyof typeof PropertyInterestSource]
+
+
+export const ActivityType = {
+  PHONE_CALL: 'PHONE_CALL',
+  MEETING: 'MEETING',
+  EMAIL_SENT: 'EMAIL_SENT',
+  PROPERTY_SENT: 'PROPERTY_SENT',
+  FOLLOW_UP: 'FOLLOW_UP',
+  OTHER: 'OTHER'
+} as const
+
+export type ActivityType = (typeof ActivityType)[keyof typeof ActivityType]
+
+
+export const TaskStatus = {
+  TODO: 'TODO',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED'
+} as const
+
+export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus]
+
+
+export const TaskPriority = {
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  URGENT: 'URGENT'
+} as const
+
+export type TaskPriority = (typeof TaskPriority)[keyof typeof TaskPriority]

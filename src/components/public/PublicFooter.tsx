@@ -1,6 +1,6 @@
 /**
  * Public Footer Component
- * Professional footer with strong contrast and readability
+ * Clean, professional footer for Pnina Real Estate
  */
 
 import Link from "next/link";
@@ -11,75 +11,61 @@ const navigation = {
     { name: "נכסים", href: "/properties" },
     { name: "פרויקטים", href: "/projects" },
     { name: "קצת עליי", href: "/about" },
-    { name: "הערכת שווי", href: "/contact" },
     { name: "צור קשר", href: "/contact" },
   ],
 };
 
 export function PublicFooter() {
   return (
-    <footer className="bg-[#18384C] text-white" dir="rtl">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 py-12 lg:py-16">
+    <footer className="bg-[#18384C]" dir="rtl">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
         
         {/* Main Footer Content */}
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr] mb-12">
-          
-          {/* Brand Column */}
-          <div>
-            <div className="mb-6">
-              <div className="text-2xl font-bold text-white mb-2">פנינה נדל״ן</div>
-              <div className="text-base text-white flex items-center gap-2">
-                <span>תיווך</span>
-                <span className="text-[#D9822B]">·</span>
-                <span>שיווק</span>
-                <span className="text-[#D9822B]">·</span>
-                <span>יזמות</span>
+        <div className="py-12 lg:py-16">
+          <div className="grid gap-12 lg:grid-cols-3">
+            
+            {/* Brand Column */}
+            <div className="lg:col-span-1">
+              <div className="mb-4">
+                <div className="text-2xl font-bold text-white mb-2">פנינה נדל״ן</div>
+                <div className="text-sm text-white/70">תיווך · שיווק · יזמות</div>
               </div>
+              <p className="text-sm text-white/70 leading-relaxed">
+                תיווך, שיווק ויזמות נדל״ן בירושלים<br />
+                ליווי אישי, מחויבות לתוצאה ומקצועיות בכל שלב
+              </p>
             </div>
 
-            <p className="text-base text-white/80 leading-relaxed max-w-md">
-              תיווך, שיווק ויזמות נדל״ן בירושלים — ליווי אישי, מחויבות לתוצאה ומקצועיות בכל שלב.
-            </p>
-          </div>
+            {/* Navigation Column */}
+            <div className="lg:col-span-1">
+              <h3 className="text-sm font-semibold text-white mb-4">ניווט מהיר</h3>
+              <ul className="space-y-2">
+                {navigation.main.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white/70 hover:text-white transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Navigation Column */}
-          <div>
-            <h3 className="text-sm font-bold text-white mb-4 tracking-wider uppercase">
-              ניווט מהיר
-            </h3>
-            <ul className="space-y-2.5">
-              {navigation.main.map((item) => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    className="text-base text-white/80 hover:text-white transition-colors inline-block"
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div>
-            <h3 className="text-sm font-bold text-white mb-4 tracking-wider uppercase">
-              יצירת קשר
-            </h3>
-            <div className="space-y-3 text-base text-white/80">
-              <div>
-                <div className="font-semibold text-white mb-1">מיקום</div>
-                <div>ירושלים</div>
-              </div>
-              <div>
+            {/* Contact Column */}
+            <div className="lg:col-span-1">
+              <h3 className="text-sm font-semibold text-white mb-4">יצירת קשר</h3>
+              <div className="space-y-3">
+                <div className="text-sm text-white/70">
+                  <div className="font-medium text-white mb-1">מיקום</div>
+                  <div>ירושלים</div>
+                </div>
                 <Link 
                   href="/contact" 
-                  className="inline-flex items-center gap-2 text-white font-semibold hover:text-[#D9822B] transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-[#D9822B] hover:text-[#c4721f] transition-colors"
                 >
-                  <span>צרו קשר</span>
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
+                  <span>צרו קשר →</span>
                 </Link>
               </div>
             </div>
@@ -87,14 +73,13 @@ export function PublicFooter() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/20">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-white/70">
+        <div className="border-t border-white/10 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/60">
             <div>
-              &copy; {new Date().getFullYear()} פנינה נדל״ן. כל הזכויות שמורות.
+              © {new Date().getFullYear()} פנינה נדל״ן. כל הזכויות שמורות.
             </div>
-            <div className="flex items-center gap-1">
-              <span>עוצב ונבנה בירושלים</span>
-              <span className="text-[#D9822B]">♦</span>
+            <div>
+              עוצב ונבנה בירושלים
             </div>
           </div>
         </div>

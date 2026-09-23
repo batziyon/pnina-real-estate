@@ -3,6 +3,7 @@
  */
 
 import { requireRole } from "@/lib/auth-helpers";
+import { getCookieHeader } from "@/lib/server-fetch-helpers";
 import { redirect } from "next/navigation";
 import { TestimonialActions } from "@/components/admin/TestimonialActions";
 
@@ -27,44 +28,80 @@ export default async function TestimonialsListPage({ searchParams }: PageProps) 
   const page = parseInt(params.page || "1", 10);
   const status = params.status || undefined;
 
-  // Fetch testimonials via API since we need the admin-specific use case
-  const apiUrl = new URL("/api/admin/testimonials", process.env.NEXTAUTH_URL || "http://localhost:3000");
-  apiUrl.searchParams.set("page", page.toString());
-  apiUrl.searchParams.set("pageSize", "20");
-  if (status) {
-    apiUrl.searchParams.set("status", status);
-  }
+  // Fetch testimonials via API
+  const apiUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/testimonials?page=${page}&pageSize=20${status ? `&status=${status}` : ""}`;
 
-  const response = await fetch(apiUrl.toString(), {
-    headers: {
-      cookie: "", // cookies will be passed automatically in server components
-    },
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch testimonials");
-  }
-
-  const result = await response.json();
-
-  type TestimonialFromAPI = {
-    id: string;
-    name: string;
-    displayName: string | null;
-    content: string;
-    status: string;
-    createdAt: string;
-    updatedAt: string;
+  let result: {
+    data: Array<{
+      id: string;
+      name: string;
+      displayName: string | null;
+      content: string;
+      status: string;
+      createdAt: string;
+      updatedAt: string;
+    }>;
+    meta: {
+      page: number;
+      pageSize: number;
+      total: number;
+      totalPages: number;
+    };
   };
+  let error: string | null = null;
+
+  try {
+    const cookieHeader = await getCookieHeader();
+
+    const response = await fetch(apiUrl, {
+      headers: {
+        Cookie: cookieHeader,
+      },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      error = `שגיאה בטעינת המלצות (${response.status})`;
+      result = {
+        data: [],
+        meta: { page: 1, pageSize: 20, total: 0, totalPages: 0 },
+      };
+    } else {
+      result = await response.json();
+    }
+  } catch (err) {
+    console.error("Failed to fetch testimonials:", err);
+    error = "שגיאה בחיבור לשרת";
+    result = {
+      data: [],
+      meta: { page: 1, pageSize: 20, total: 0, totalPages: 0 },
+    };
+  }
+
+  type TestimonialFromAPI = (typeof result)["data"][0];
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">המלצות</h1>
-        <p className="text-gray-600 mt-1">ניהול המלצות לקוחות</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">המלצות</h1>
+          <p className="text-gray-600 mt-1">ניהול המלצות לקוחות</p>
+        </div>
+        <a
+          href="/admin/testimonials/new"
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+        >
+          + הוסף המלצה
+        </a>
       </div>
+
+      {/* Error message */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+          <p className="text-red-800">{error}</p>
+        </div>
+      )}
 
       {/* Filters */}
       <div className="bg-white rounded-lg shadow p-6">

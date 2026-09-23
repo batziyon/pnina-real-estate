@@ -4,6 +4,7 @@
  */
 
 import Link from "next/link";
+import Image from "next/image";
 
 export function AboutSection() {
   return (
@@ -56,19 +57,13 @@ export function AboutSection() {
             <div className="relative">
               {/* Main Image Area */}
               <div className="relative aspect-[3/4] bg-gradient-to-br from-[#e8dcc8] via-[#d9cdb8] to-[#c9bba8] overflow-hidden">
-                {/* Placeholder - Replace with actual photo */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-[#8b7355] text-sm">תמונה של פנינה</div>
-                </div>
-                
-                {/* TODO: Add actual image
                 <Image
-                  src="/images/pnina-about.jpg"
+                  src="/images/me.jpg"
                   alt="פנינה - מתווכת נדל״ן"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-                */}
               </div>
 
               {/* Accent Element */}

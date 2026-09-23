@@ -4,17 +4,37 @@
  * Contact Forms Client Component
  * 
  * Multi-form contact interface with tabs for different inquiry types
+ * Supports URL-based form selection: ?type=valuation|general|cooperation
  */
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { GeneralContactForm } from "./GeneralContactForm";
 import { ValuationRequestForm } from "./ValuationRequestForm";
 import { CooperationForm } from "./CooperationForm";
 
 type FormType = "general" | "valuation" | "cooperation";
 
-export function ContactFormsClient() {
-  const [activeForm, setActiveForm] = useState<FormType>("general");
+function ContactFormsContent() {
+  const searchParams = useSearchParams();
+  const typeParam = searchParams.get("type");
+  
+  const getInitialForm = (): FormType => {
+    if (typeParam === "valuation") return "valuation";
+    if (typeParam === "cooperation") return "cooperation";
+    return "general";
+  };
+
+  // Use typeParam directly to drive state instead of effect
+  const activeForm = typeParam === "valuation" 
+    ? "valuation" 
+    : typeParam === "cooperation" 
+    ? "cooperation" 
+    : "general";
+
+  const setActiveForm = (_form: FormType) => {
+    // Not used when controlled by URL, but kept for tab clicks
+  };
 
   return (
     <div>
@@ -57,5 +77,14 @@ export function ContactFormsClient() {
         {activeForm === "cooperation" && <CooperationForm />}
       </div>
     </div>
+  );
+}
+
+// Export with Suspense boundary
+export function ContactFormsClient() {
+  return (
+    <Suspense fallback={<div className="text-center py-8">טוען...</div>}>
+      <ContactFormsContent />
+    </Suspense>
   );
 }

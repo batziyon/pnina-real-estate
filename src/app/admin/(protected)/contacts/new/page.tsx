@@ -5,12 +5,14 @@
  */
 
 import { requireAuth } from "@/lib/auth-helpers";
-import { ContactForm } from "@/components/admin/ContactForm";
+import { getCookieHeader } from "@/lib/server-fetch-helpers";
+import { ContactFormSimple } from "@/components/admin/ContactFormSimple";
 
 export const dynamic = "force-dynamic";
 
 export default async function NewContactPage() {
   const user = await requireAuth();
+  const cookieHeader = await getCookieHeader();
 
   // Fetch agents for ADMIN
   let agents: Array<{ id: string; name: string; email: string }> = [];
@@ -20,7 +22,7 @@ export default async function NewContactPage() {
         `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/users?role=AGENT&pageSize=100`,
         {
           headers: {
-            Cookie: (await import("next/headers")).cookies().toString(),
+            Cookie: cookieHeader,
           },
           cache: "no-store",
         }
@@ -44,7 +46,7 @@ export default async function NewContactPage() {
 
       {/* Form card */}
       <div className="bg-white rounded-lg shadow p-6">
-        <ContactForm
+        <ContactFormSimple
           mode="create"
           userRole={user.role}
           userId={user.id}

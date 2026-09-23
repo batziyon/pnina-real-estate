@@ -31,6 +31,19 @@ export type ContactMinAggregateOutputType = {
   email: string | null
   notes: string | null
   assignedAgentId: string | null
+  preferredName: string | null
+  secondaryPhone: string | null
+  secondaryEmail: string | null
+  preferredCommunication: string | null
+  currentCity: string | null
+  currentNeighborhood: string | null
+  currentAddress: string | null
+  currentPropertyStatus: string | null
+  interestedInSelling: boolean | null
+  sellingTimeframe: string | null
+  sellingReason: string | null
+  valuationRequested: boolean | null
+  valuationCompleted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -42,6 +55,19 @@ export type ContactMaxAggregateOutputType = {
   email: string | null
   notes: string | null
   assignedAgentId: string | null
+  preferredName: string | null
+  secondaryPhone: string | null
+  secondaryEmail: string | null
+  preferredCommunication: string | null
+  currentCity: string | null
+  currentNeighborhood: string | null
+  currentAddress: string | null
+  currentPropertyStatus: string | null
+  interestedInSelling: boolean | null
+  sellingTimeframe: string | null
+  sellingReason: string | null
+  valuationRequested: boolean | null
+  valuationCompleted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,6 +79,19 @@ export type ContactCountAggregateOutputType = {
   email: number
   notes: number
   assignedAgentId: number
+  preferredName: number
+  secondaryPhone: number
+  secondaryEmail: number
+  preferredCommunication: number
+  currentCity: number
+  currentNeighborhood: number
+  currentAddress: number
+  currentPropertyStatus: number
+  interestedInSelling: number
+  sellingTimeframe: number
+  sellingReason: number
+  valuationRequested: number
+  valuationCompleted: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -66,6 +105,19 @@ export type ContactMinAggregateInputType = {
   email?: true
   notes?: true
   assignedAgentId?: true
+  preferredName?: true
+  secondaryPhone?: true
+  secondaryEmail?: true
+  preferredCommunication?: true
+  currentCity?: true
+  currentNeighborhood?: true
+  currentAddress?: true
+  currentPropertyStatus?: true
+  interestedInSelling?: true
+  sellingTimeframe?: true
+  sellingReason?: true
+  valuationRequested?: true
+  valuationCompleted?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -77,6 +129,19 @@ export type ContactMaxAggregateInputType = {
   email?: true
   notes?: true
   assignedAgentId?: true
+  preferredName?: true
+  secondaryPhone?: true
+  secondaryEmail?: true
+  preferredCommunication?: true
+  currentCity?: true
+  currentNeighborhood?: true
+  currentAddress?: true
+  currentPropertyStatus?: true
+  interestedInSelling?: true
+  sellingTimeframe?: true
+  sellingReason?: true
+  valuationRequested?: true
+  valuationCompleted?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -88,6 +153,19 @@ export type ContactCountAggregateInputType = {
   email?: true
   notes?: true
   assignedAgentId?: true
+  preferredName?: true
+  secondaryPhone?: true
+  secondaryEmail?: true
+  preferredCommunication?: true
+  currentCity?: true
+  currentNeighborhood?: true
+  currentAddress?: true
+  currentPropertyStatus?: true
+  interestedInSelling?: true
+  sellingTimeframe?: true
+  sellingReason?: true
+  valuationRequested?: true
+  valuationCompleted?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -172,6 +250,19 @@ export type ContactGroupByOutputType = {
   email: string | null
   notes: string | null
   assignedAgentId: string | null
+  preferredName: string | null
+  secondaryPhone: string | null
+  secondaryEmail: string | null
+  preferredCommunication: string | null
+  currentCity: string | null
+  currentNeighborhood: string | null
+  currentAddress: string | null
+  currentPropertyStatus: string | null
+  interestedInSelling: boolean | null
+  sellingTimeframe: string | null
+  sellingReason: string | null
+  valuationRequested: boolean
+  valuationCompleted: boolean
   createdAt: Date
   updatedAt: Date
   _count: ContactCountAggregateOutputType | null
@@ -204,6 +295,19 @@ export type ContactWhereInput = {
   email?: Prisma.StringNullableFilter<"Contact"> | string | null
   notes?: Prisma.StringNullableFilter<"Contact"> | string | null
   assignedAgentId?: Prisma.StringNullableFilter<"Contact"> | string | null
+  preferredName?: Prisma.StringNullableFilter<"Contact"> | string | null
+  secondaryPhone?: Prisma.StringNullableFilter<"Contact"> | string | null
+  secondaryEmail?: Prisma.StringNullableFilter<"Contact"> | string | null
+  preferredCommunication?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentCity?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentNeighborhood?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentAddress?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentPropertyStatus?: Prisma.StringNullableFilter<"Contact"> | string | null
+  interestedInSelling?: Prisma.BoolNullableFilter<"Contact"> | boolean | null
+  sellingTimeframe?: Prisma.StringNullableFilter<"Contact"> | string | null
+  sellingReason?: Prisma.StringNullableFilter<"Contact"> | string | null
+  valuationRequested?: Prisma.BoolFilter<"Contact"> | boolean
+  valuationCompleted?: Prisma.BoolFilter<"Contact"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   assignedAgent?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -213,6 +317,9 @@ export type ContactWhereInput = {
   inquiries?: Prisma.InquiryListRelationFilter
   testimonials?: Prisma.TestimonialListRelationFilter
   propertyInterests?: Prisma.PropertyInterestListRelationFilter
+  contactNotes?: Prisma.ContactNoteListRelationFilter
+  activities?: Prisma.ActivityListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
 }
 
 export type ContactOrderByWithRelationInput = {
@@ -222,6 +329,19 @@ export type ContactOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedAgentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredName?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredCommunication?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentCity?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentNeighborhood?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentPropertyStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  interestedInSelling?: Prisma.SortOrderInput | Prisma.SortOrder
+  sellingTimeframe?: Prisma.SortOrderInput | Prisma.SortOrder
+  sellingReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  valuationRequested?: Prisma.SortOrder
+  valuationCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   assignedAgent?: Prisma.UserOrderByWithRelationInput
@@ -231,6 +351,9 @@ export type ContactOrderByWithRelationInput = {
   inquiries?: Prisma.InquiryOrderByRelationAggregateInput
   testimonials?: Prisma.TestimonialOrderByRelationAggregateInput
   propertyInterests?: Prisma.PropertyInterestOrderByRelationAggregateInput
+  contactNotes?: Prisma.ContactNoteOrderByRelationAggregateInput
+  activities?: Prisma.ActivityOrderByRelationAggregateInput
+  tasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
 export type ContactWhereUniqueInput = Prisma.AtLeast<{
@@ -243,6 +366,19 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   email?: Prisma.StringNullableFilter<"Contact"> | string | null
   notes?: Prisma.StringNullableFilter<"Contact"> | string | null
   assignedAgentId?: Prisma.StringNullableFilter<"Contact"> | string | null
+  preferredName?: Prisma.StringNullableFilter<"Contact"> | string | null
+  secondaryPhone?: Prisma.StringNullableFilter<"Contact"> | string | null
+  secondaryEmail?: Prisma.StringNullableFilter<"Contact"> | string | null
+  preferredCommunication?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentCity?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentNeighborhood?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentAddress?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentPropertyStatus?: Prisma.StringNullableFilter<"Contact"> | string | null
+  interestedInSelling?: Prisma.BoolNullableFilter<"Contact"> | boolean | null
+  sellingTimeframe?: Prisma.StringNullableFilter<"Contact"> | string | null
+  sellingReason?: Prisma.StringNullableFilter<"Contact"> | string | null
+  valuationRequested?: Prisma.BoolFilter<"Contact"> | boolean
+  valuationCompleted?: Prisma.BoolFilter<"Contact"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   assignedAgent?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -252,6 +388,9 @@ export type ContactWhereUniqueInput = Prisma.AtLeast<{
   inquiries?: Prisma.InquiryListRelationFilter
   testimonials?: Prisma.TestimonialListRelationFilter
   propertyInterests?: Prisma.PropertyInterestListRelationFilter
+  contactNotes?: Prisma.ContactNoteListRelationFilter
+  activities?: Prisma.ActivityListRelationFilter
+  tasks?: Prisma.TaskListRelationFilter
 }, "id">
 
 export type ContactOrderByWithAggregationInput = {
@@ -261,6 +400,19 @@ export type ContactOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   notes?: Prisma.SortOrderInput | Prisma.SortOrder
   assignedAgentId?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredName?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryPhone?: Prisma.SortOrderInput | Prisma.SortOrder
+  secondaryEmail?: Prisma.SortOrderInput | Prisma.SortOrder
+  preferredCommunication?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentCity?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentNeighborhood?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentAddress?: Prisma.SortOrderInput | Prisma.SortOrder
+  currentPropertyStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  interestedInSelling?: Prisma.SortOrderInput | Prisma.SortOrder
+  sellingTimeframe?: Prisma.SortOrderInput | Prisma.SortOrder
+  sellingReason?: Prisma.SortOrderInput | Prisma.SortOrder
+  valuationRequested?: Prisma.SortOrder
+  valuationCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ContactCountOrderByAggregateInput
@@ -278,6 +430,19 @@ export type ContactScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
   notes?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
   assignedAgentId?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  preferredName?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  secondaryPhone?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  secondaryEmail?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  preferredCommunication?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  currentCity?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  currentNeighborhood?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  currentAddress?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  currentPropertyStatus?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  interestedInSelling?: Prisma.BoolNullableWithAggregatesFilter<"Contact"> | boolean | null
+  sellingTimeframe?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  sellingReason?: Prisma.StringNullableWithAggregatesFilter<"Contact"> | string | null
+  valuationRequested?: Prisma.BoolWithAggregatesFilter<"Contact"> | boolean
+  valuationCompleted?: Prisma.BoolWithAggregatesFilter<"Contact"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Contact"> | Date | string
 }
@@ -288,6 +453,19 @@ export type ContactCreateInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -297,6 +475,9 @@ export type ContactCreateInput = {
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateInput = {
@@ -306,6 +487,19 @@ export type ContactUncheckedCreateInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -314,6 +508,9 @@ export type ContactUncheckedCreateInput = {
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactUpdateInput = {
@@ -322,6 +519,19 @@ export type ContactUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -331,6 +541,9 @@ export type ContactUpdateInput = {
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateInput = {
@@ -340,6 +553,19 @@ export type ContactUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -348,6 +574,9 @@ export type ContactUncheckedUpdateInput = {
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyInput = {
@@ -357,6 +586,19 @@ export type ContactCreateManyInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -367,6 +609,19 @@ export type ContactUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -378,6 +633,19 @@ export type ContactUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -399,6 +667,19 @@ export type ContactCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   assignedAgentId?: Prisma.SortOrder
+  preferredName?: Prisma.SortOrder
+  secondaryPhone?: Prisma.SortOrder
+  secondaryEmail?: Prisma.SortOrder
+  preferredCommunication?: Prisma.SortOrder
+  currentCity?: Prisma.SortOrder
+  currentNeighborhood?: Prisma.SortOrder
+  currentAddress?: Prisma.SortOrder
+  currentPropertyStatus?: Prisma.SortOrder
+  interestedInSelling?: Prisma.SortOrder
+  sellingTimeframe?: Prisma.SortOrder
+  sellingReason?: Prisma.SortOrder
+  valuationRequested?: Prisma.SortOrder
+  valuationCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -410,6 +691,19 @@ export type ContactMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   assignedAgentId?: Prisma.SortOrder
+  preferredName?: Prisma.SortOrder
+  secondaryPhone?: Prisma.SortOrder
+  secondaryEmail?: Prisma.SortOrder
+  preferredCommunication?: Prisma.SortOrder
+  currentCity?: Prisma.SortOrder
+  currentNeighborhood?: Prisma.SortOrder
+  currentAddress?: Prisma.SortOrder
+  currentPropertyStatus?: Prisma.SortOrder
+  interestedInSelling?: Prisma.SortOrder
+  sellingTimeframe?: Prisma.SortOrder
+  sellingReason?: Prisma.SortOrder
+  valuationRequested?: Prisma.SortOrder
+  valuationCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -421,6 +715,19 @@ export type ContactMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   notes?: Prisma.SortOrder
   assignedAgentId?: Prisma.SortOrder
+  preferredName?: Prisma.SortOrder
+  secondaryPhone?: Prisma.SortOrder
+  secondaryEmail?: Prisma.SortOrder
+  preferredCommunication?: Prisma.SortOrder
+  currentCity?: Prisma.SortOrder
+  currentNeighborhood?: Prisma.SortOrder
+  currentAddress?: Prisma.SortOrder
+  currentPropertyStatus?: Prisma.SortOrder
+  interestedInSelling?: Prisma.SortOrder
+  sellingTimeframe?: Prisma.SortOrder
+  sellingReason?: Prisma.SortOrder
+  valuationRequested?: Prisma.SortOrder
+  valuationCompleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -477,6 +784,10 @@ export type ContactUncheckedUpdateManyWithoutAssignedAgentNestedInput = {
   deleteMany?: Prisma.ContactScalarWhereInput | Prisma.ContactScalarWhereInput[]
 }
 
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
+}
+
 export type ContactCreateNestedOneWithoutRolesInput = {
   create?: Prisma.XOR<Prisma.ContactCreateWithoutRolesInput, Prisma.ContactUncheckedCreateWithoutRolesInput>
   connectOrCreate?: Prisma.ContactCreateOrConnectWithoutRolesInput
@@ -489,6 +800,20 @@ export type ContactUpdateOneRequiredWithoutRolesNestedInput = {
   upsert?: Prisma.ContactUpsertWithoutRolesInput
   connect?: Prisma.ContactWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutRolesInput, Prisma.ContactUpdateWithoutRolesInput>, Prisma.ContactUncheckedUpdateWithoutRolesInput>
+}
+
+export type ContactCreateNestedOneWithoutContactNotesInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutContactNotesInput, Prisma.ContactUncheckedCreateWithoutContactNotesInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutContactNotesInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneRequiredWithoutContactNotesNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutContactNotesInput, Prisma.ContactUncheckedCreateWithoutContactNotesInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutContactNotesInput
+  upsert?: Prisma.ContactUpsertWithoutContactNotesInput
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutContactNotesInput, Prisma.ContactUpdateWithoutContactNotesInput>, Prisma.ContactUncheckedUpdateWithoutContactNotesInput>
 }
 
 export type ContactCreateNestedOneWithoutBuyerRequirementsInput = {
@@ -567,12 +892,55 @@ export type ContactUpdateOneRequiredWithoutPropertyInterestsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutPropertyInterestsInput, Prisma.ContactUpdateWithoutPropertyInterestsInput>, Prisma.ContactUncheckedUpdateWithoutPropertyInterestsInput>
 }
 
+export type ContactCreateNestedOneWithoutActivitiesInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutActivitiesInput, Prisma.ContactUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutActivitiesInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneRequiredWithoutActivitiesNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutActivitiesInput, Prisma.ContactUncheckedCreateWithoutActivitiesInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutActivitiesInput
+  upsert?: Prisma.ContactUpsertWithoutActivitiesInput
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutActivitiesInput, Prisma.ContactUpdateWithoutActivitiesInput>, Prisma.ContactUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type ContactCreateNestedOneWithoutTasksInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutTasksInput, Prisma.ContactUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutTasksInput
+  connect?: Prisma.ContactWhereUniqueInput
+}
+
+export type ContactUpdateOneWithoutTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactCreateWithoutTasksInput, Prisma.ContactUncheckedCreateWithoutTasksInput>
+  connectOrCreate?: Prisma.ContactCreateOrConnectWithoutTasksInput
+  upsert?: Prisma.ContactUpsertWithoutTasksInput
+  disconnect?: Prisma.ContactWhereInput | boolean
+  delete?: Prisma.ContactWhereInput | boolean
+  connect?: Prisma.ContactWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactUpdateToOneWithWhereWithoutTasksInput, Prisma.ContactUpdateWithoutTasksInput>, Prisma.ContactUncheckedUpdateWithoutTasksInput>
+}
+
 export type ContactCreateWithoutAssignedAgentInput = {
   id?: string
   name: string
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleCreateNestedManyWithoutContactInput
@@ -581,6 +949,9 @@ export type ContactCreateWithoutAssignedAgentInput = {
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutAssignedAgentInput = {
@@ -589,6 +960,19 @@ export type ContactUncheckedCreateWithoutAssignedAgentInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -597,6 +981,9 @@ export type ContactUncheckedCreateWithoutAssignedAgentInput = {
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutAssignedAgentInput = {
@@ -635,6 +1022,19 @@ export type ContactScalarWhereInput = {
   email?: Prisma.StringNullableFilter<"Contact"> | string | null
   notes?: Prisma.StringNullableFilter<"Contact"> | string | null
   assignedAgentId?: Prisma.StringNullableFilter<"Contact"> | string | null
+  preferredName?: Prisma.StringNullableFilter<"Contact"> | string | null
+  secondaryPhone?: Prisma.StringNullableFilter<"Contact"> | string | null
+  secondaryEmail?: Prisma.StringNullableFilter<"Contact"> | string | null
+  preferredCommunication?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentCity?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentNeighborhood?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentAddress?: Prisma.StringNullableFilter<"Contact"> | string | null
+  currentPropertyStatus?: Prisma.StringNullableFilter<"Contact"> | string | null
+  interestedInSelling?: Prisma.BoolNullableFilter<"Contact"> | boolean | null
+  sellingTimeframe?: Prisma.StringNullableFilter<"Contact"> | string | null
+  sellingReason?: Prisma.StringNullableFilter<"Contact"> | string | null
+  valuationRequested?: Prisma.BoolFilter<"Contact"> | boolean
+  valuationCompleted?: Prisma.BoolFilter<"Contact"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Contact"> | Date | string
 }
@@ -645,6 +1045,19 @@ export type ContactCreateWithoutRolesInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -653,6 +1066,9 @@ export type ContactCreateWithoutRolesInput = {
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutRolesInput = {
@@ -662,6 +1078,19 @@ export type ContactUncheckedCreateWithoutRolesInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
@@ -669,6 +1098,9 @@ export type ContactUncheckedCreateWithoutRolesInput = {
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutRolesInput = {
@@ -693,6 +1125,19 @@ export type ContactUpdateWithoutRolesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -701,6 +1146,9 @@ export type ContactUpdateWithoutRolesInput = {
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutRolesInput = {
@@ -710,6 +1158,19 @@ export type ContactUncheckedUpdateWithoutRolesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
@@ -717,6 +1178,153 @@ export type ContactUncheckedUpdateWithoutRolesInput = {
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutContactNotesInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
+  roles?: Prisma.ContactRoleCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutContactNotesInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutContactNotesInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutContactNotesInput, Prisma.ContactUncheckedCreateWithoutContactNotesInput>
+}
+
+export type ContactUpsertWithoutContactNotesInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutContactNotesInput, Prisma.ContactUncheckedUpdateWithoutContactNotesInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutContactNotesInput, Prisma.ContactUncheckedCreateWithoutContactNotesInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutContactNotesInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutContactNotesInput, Prisma.ContactUncheckedUpdateWithoutContactNotesInput>
+}
+
+export type ContactUpdateWithoutContactNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
+  roles?: Prisma.ContactRoleUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutContactNotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutBuyerRequirementsInput = {
@@ -725,6 +1333,19 @@ export type ContactCreateWithoutBuyerRequirementsInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -733,6 +1354,9 @@ export type ContactCreateWithoutBuyerRequirementsInput = {
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutBuyerRequirementsInput = {
@@ -742,6 +1366,19 @@ export type ContactUncheckedCreateWithoutBuyerRequirementsInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -749,6 +1386,9 @@ export type ContactUncheckedCreateWithoutBuyerRequirementsInput = {
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutBuyerRequirementsInput = {
@@ -773,6 +1413,19 @@ export type ContactUpdateWithoutBuyerRequirementsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -781,6 +1434,9 @@ export type ContactUpdateWithoutBuyerRequirementsInput = {
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutBuyerRequirementsInput = {
@@ -790,6 +1446,19 @@ export type ContactUncheckedUpdateWithoutBuyerRequirementsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -797,6 +1466,9 @@ export type ContactUncheckedUpdateWithoutBuyerRequirementsInput = {
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutOwnedPropertiesInput = {
@@ -805,6 +1477,19 @@ export type ContactCreateWithoutOwnedPropertiesInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -813,6 +1498,9 @@ export type ContactCreateWithoutOwnedPropertiesInput = {
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutOwnedPropertiesInput = {
@@ -822,6 +1510,19 @@ export type ContactUncheckedCreateWithoutOwnedPropertiesInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -829,6 +1530,9 @@ export type ContactUncheckedCreateWithoutOwnedPropertiesInput = {
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutOwnedPropertiesInput = {
@@ -853,6 +1557,19 @@ export type ContactUpdateWithoutOwnedPropertiesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -861,6 +1578,9 @@ export type ContactUpdateWithoutOwnedPropertiesInput = {
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutOwnedPropertiesInput = {
@@ -870,6 +1590,19 @@ export type ContactUncheckedUpdateWithoutOwnedPropertiesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -877,6 +1610,9 @@ export type ContactUncheckedUpdateWithoutOwnedPropertiesInput = {
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutInquiriesInput = {
@@ -885,6 +1621,19 @@ export type ContactCreateWithoutInquiriesInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -893,6 +1642,9 @@ export type ContactCreateWithoutInquiriesInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutInquiriesInput = {
@@ -902,6 +1654,19 @@ export type ContactUncheckedCreateWithoutInquiriesInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -909,6 +1674,9 @@ export type ContactUncheckedCreateWithoutInquiriesInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutInquiriesInput = {
@@ -933,6 +1701,19 @@ export type ContactUpdateWithoutInquiriesInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -941,6 +1722,9 @@ export type ContactUpdateWithoutInquiriesInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutInquiriesInput = {
@@ -950,6 +1734,19 @@ export type ContactUncheckedUpdateWithoutInquiriesInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -957,6 +1754,9 @@ export type ContactUncheckedUpdateWithoutInquiriesInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutTestimonialsInput = {
@@ -965,6 +1765,19 @@ export type ContactCreateWithoutTestimonialsInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -973,6 +1786,9 @@ export type ContactCreateWithoutTestimonialsInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutTestimonialsInput = {
@@ -982,6 +1798,19 @@ export type ContactUncheckedCreateWithoutTestimonialsInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -989,6 +1818,9 @@ export type ContactUncheckedCreateWithoutTestimonialsInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutTestimonialsInput = {
@@ -1013,6 +1845,19 @@ export type ContactUpdateWithoutTestimonialsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -1021,6 +1866,9 @@ export type ContactUpdateWithoutTestimonialsInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutTestimonialsInput = {
@@ -1030,6 +1878,19 @@ export type ContactUncheckedUpdateWithoutTestimonialsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -1037,6 +1898,9 @@ export type ContactUncheckedUpdateWithoutTestimonialsInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateWithoutPropertyInterestsInput = {
@@ -1045,6 +1909,19 @@ export type ContactCreateWithoutPropertyInterestsInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
@@ -1053,6 +1930,9 @@ export type ContactCreateWithoutPropertyInterestsInput = {
   ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
 }
 
 export type ContactUncheckedCreateWithoutPropertyInterestsInput = {
@@ -1062,6 +1942,19 @@ export type ContactUncheckedCreateWithoutPropertyInterestsInput = {
   email?: string | null
   notes?: string | null
   assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
@@ -1069,6 +1962,9 @@ export type ContactUncheckedCreateWithoutPropertyInterestsInput = {
   ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
   inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
 }
 
 export type ContactCreateOrConnectWithoutPropertyInterestsInput = {
@@ -1093,6 +1989,19 @@ export type ContactUpdateWithoutPropertyInterestsInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
@@ -1101,6 +2010,9 @@ export type ContactUpdateWithoutPropertyInterestsInput = {
   ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutPropertyInterestsInput = {
@@ -1110,6 +2022,19 @@ export type ContactUncheckedUpdateWithoutPropertyInterestsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -1117,6 +2042,297 @@ export type ContactUncheckedUpdateWithoutPropertyInterestsInput = {
   ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutActivitiesInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
+  roles?: Prisma.ContactRoleCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutActivitiesInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutActivitiesInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutActivitiesInput, Prisma.ContactUncheckedCreateWithoutActivitiesInput>
+}
+
+export type ContactUpsertWithoutActivitiesInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutActivitiesInput, Prisma.ContactUncheckedUpdateWithoutActivitiesInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutActivitiesInput, Prisma.ContactUncheckedCreateWithoutActivitiesInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutActivitiesInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutActivitiesInput, Prisma.ContactUncheckedUpdateWithoutActivitiesInput>
+}
+
+export type ContactUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
+  roles?: Prisma.ContactRoleUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutActivitiesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
+}
+
+export type ContactCreateWithoutTasksInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedAgent?: Prisma.UserCreateNestedOneWithoutAssignedContactsInput
+  roles?: Prisma.ContactRoleCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityCreateNestedManyWithoutContactInput
+}
+
+export type ContactUncheckedCreateWithoutTasksInput = {
+  id?: string
+  name: string
+  phone?: string | null
+  email?: string | null
+  notes?: string | null
+  assignedAgentId?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  roles?: Prisma.ContactRoleUncheckedCreateNestedManyWithoutContactInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedCreateNestedManyWithoutContactInput
+  ownedProperties?: Prisma.PropertyUncheckedCreateNestedManyWithoutOwnerContactInput
+  inquiries?: Prisma.InquiryUncheckedCreateNestedManyWithoutContactInput
+  testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutContactInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedCreateNestedManyWithoutContactInput
+  contactNotes?: Prisma.ContactNoteUncheckedCreateNestedManyWithoutContactInput
+  activities?: Prisma.ActivityUncheckedCreateNestedManyWithoutContactInput
+}
+
+export type ContactCreateOrConnectWithoutTasksInput = {
+  where: Prisma.ContactWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactCreateWithoutTasksInput, Prisma.ContactUncheckedCreateWithoutTasksInput>
+}
+
+export type ContactUpsertWithoutTasksInput = {
+  update: Prisma.XOR<Prisma.ContactUpdateWithoutTasksInput, Prisma.ContactUncheckedUpdateWithoutTasksInput>
+  create: Prisma.XOR<Prisma.ContactCreateWithoutTasksInput, Prisma.ContactUncheckedCreateWithoutTasksInput>
+  where?: Prisma.ContactWhereInput
+}
+
+export type ContactUpdateToOneWithWhereWithoutTasksInput = {
+  where?: Prisma.ContactWhereInput
+  data: Prisma.XOR<Prisma.ContactUpdateWithoutTasksInput, Prisma.ContactUncheckedUpdateWithoutTasksInput>
+}
+
+export type ContactUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedAgent?: Prisma.UserUpdateOneWithoutAssignedContactsNestedInput
+  roles?: Prisma.ContactRoleUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+}
+
+export type ContactUncheckedUpdateWithoutTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedAgentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
+  buyerRequirements?: Prisma.BuyerRequirementUncheckedUpdateManyWithoutContactNestedInput
+  ownedProperties?: Prisma.PropertyUncheckedUpdateManyWithoutOwnerContactNestedInput
+  inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
+  testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
+  propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactCreateManyAssignedAgentInput = {
@@ -1125,6 +2341,19 @@ export type ContactCreateManyAssignedAgentInput = {
   phone?: string | null
   email?: string | null
   notes?: string | null
+  preferredName?: string | null
+  secondaryPhone?: string | null
+  secondaryEmail?: string | null
+  preferredCommunication?: string | null
+  currentCity?: string | null
+  currentNeighborhood?: string | null
+  currentAddress?: string | null
+  currentPropertyStatus?: string | null
+  interestedInSelling?: boolean | null
+  sellingTimeframe?: string | null
+  sellingReason?: string | null
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1135,6 +2364,19 @@ export type ContactUpdateWithoutAssignedAgentInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUpdateManyWithoutContactNestedInput
@@ -1143,6 +2385,9 @@ export type ContactUpdateWithoutAssignedAgentInput = {
   inquiries?: Prisma.InquiryUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateWithoutAssignedAgentInput = {
@@ -1151,6 +2396,19 @@ export type ContactUncheckedUpdateWithoutAssignedAgentInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   roles?: Prisma.ContactRoleUncheckedUpdateManyWithoutContactNestedInput
@@ -1159,6 +2417,9 @@ export type ContactUncheckedUpdateWithoutAssignedAgentInput = {
   inquiries?: Prisma.InquiryUncheckedUpdateManyWithoutContactNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutContactNestedInput
   propertyInterests?: Prisma.PropertyInterestUncheckedUpdateManyWithoutContactNestedInput
+  contactNotes?: Prisma.ContactNoteUncheckedUpdateManyWithoutContactNestedInput
+  activities?: Prisma.ActivityUncheckedUpdateManyWithoutContactNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutContactNestedInput
 }
 
 export type ContactUncheckedUpdateManyWithoutAssignedAgentInput = {
@@ -1167,6 +2428,19 @@ export type ContactUncheckedUpdateManyWithoutAssignedAgentInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryPhone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  secondaryEmail?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preferredCommunication?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentCity?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentNeighborhood?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  currentPropertyStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  interestedInSelling?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  sellingTimeframe?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sellingReason?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  valuationRequested?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  valuationCompleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1183,6 +2457,9 @@ export type ContactCountOutputType = {
   inquiries: number
   testimonials: number
   propertyInterests: number
+  contactNotes: number
+  activities: number
+  tasks: number
 }
 
 export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1192,6 +2469,9 @@ export type ContactCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   inquiries?: boolean | ContactCountOutputTypeCountInquiriesArgs
   testimonials?: boolean | ContactCountOutputTypeCountTestimonialsArgs
   propertyInterests?: boolean | ContactCountOutputTypeCountPropertyInterestsArgs
+  contactNotes?: boolean | ContactCountOutputTypeCountContactNotesArgs
+  activities?: boolean | ContactCountOutputTypeCountActivitiesArgs
+  tasks?: boolean | ContactCountOutputTypeCountTasksArgs
 }
 
 /**
@@ -1246,6 +2526,27 @@ export type ContactCountOutputTypeCountPropertyInterestsArgs<ExtArgs extends run
   where?: Prisma.PropertyInterestWhereInput
 }
 
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountContactNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactNoteWhereInput
+}
+
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountActivitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActivityWhereInput
+}
+
+/**
+ * ContactCountOutputType without action
+ */
+export type ContactCountOutputTypeCountTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskWhereInput
+}
+
 
 export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1254,6 +2555,19 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   email?: boolean
   notes?: boolean
   assignedAgentId?: boolean
+  preferredName?: boolean
+  secondaryPhone?: boolean
+  secondaryEmail?: boolean
+  preferredCommunication?: boolean
+  currentCity?: boolean
+  currentNeighborhood?: boolean
+  currentAddress?: boolean
+  currentPropertyStatus?: boolean
+  interestedInSelling?: boolean
+  sellingTimeframe?: boolean
+  sellingReason?: boolean
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   assignedAgent?: boolean | Prisma.Contact$assignedAgentArgs<ExtArgs>
@@ -1263,6 +2577,9 @@ export type ContactSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   inquiries?: boolean | Prisma.Contact$inquiriesArgs<ExtArgs>
   testimonials?: boolean | Prisma.Contact$testimonialsArgs<ExtArgs>
   propertyInterests?: boolean | Prisma.Contact$propertyInterestsArgs<ExtArgs>
+  contactNotes?: boolean | Prisma.Contact$contactNotesArgs<ExtArgs>
+  activities?: boolean | Prisma.Contact$activitiesArgs<ExtArgs>
+  tasks?: boolean | Prisma.Contact$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contact"]>
 
@@ -1273,6 +2590,19 @@ export type ContactSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   email?: boolean
   notes?: boolean
   assignedAgentId?: boolean
+  preferredName?: boolean
+  secondaryPhone?: boolean
+  secondaryEmail?: boolean
+  preferredCommunication?: boolean
+  currentCity?: boolean
+  currentNeighborhood?: boolean
+  currentAddress?: boolean
+  currentPropertyStatus?: boolean
+  interestedInSelling?: boolean
+  sellingTimeframe?: boolean
+  sellingReason?: boolean
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   assignedAgent?: boolean | Prisma.Contact$assignedAgentArgs<ExtArgs>
@@ -1285,6 +2615,19 @@ export type ContactSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   email?: boolean
   notes?: boolean
   assignedAgentId?: boolean
+  preferredName?: boolean
+  secondaryPhone?: boolean
+  secondaryEmail?: boolean
+  preferredCommunication?: boolean
+  currentCity?: boolean
+  currentNeighborhood?: boolean
+  currentAddress?: boolean
+  currentPropertyStatus?: boolean
+  interestedInSelling?: boolean
+  sellingTimeframe?: boolean
+  sellingReason?: boolean
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   assignedAgent?: boolean | Prisma.Contact$assignedAgentArgs<ExtArgs>
@@ -1297,11 +2640,24 @@ export type ContactSelectScalar = {
   email?: boolean
   notes?: boolean
   assignedAgentId?: boolean
+  preferredName?: boolean
+  secondaryPhone?: boolean
+  secondaryEmail?: boolean
+  preferredCommunication?: boolean
+  currentCity?: boolean
+  currentNeighborhood?: boolean
+  currentAddress?: boolean
+  currentPropertyStatus?: boolean
+  interestedInSelling?: boolean
+  sellingTimeframe?: boolean
+  sellingReason?: boolean
+  valuationRequested?: boolean
+  valuationCompleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "email" | "notes" | "assignedAgentId" | "createdAt" | "updatedAt", ExtArgs["result"]["contact"]>
+export type ContactOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "email" | "notes" | "assignedAgentId" | "preferredName" | "secondaryPhone" | "secondaryEmail" | "preferredCommunication" | "currentCity" | "currentNeighborhood" | "currentAddress" | "currentPropertyStatus" | "interestedInSelling" | "sellingTimeframe" | "sellingReason" | "valuationRequested" | "valuationCompleted" | "createdAt" | "updatedAt", ExtArgs["result"]["contact"]>
 export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignedAgent?: boolean | Prisma.Contact$assignedAgentArgs<ExtArgs>
   roles?: boolean | Prisma.Contact$rolesArgs<ExtArgs>
@@ -1310,6 +2666,9 @@ export type ContactInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   inquiries?: boolean | Prisma.Contact$inquiriesArgs<ExtArgs>
   testimonials?: boolean | Prisma.Contact$testimonialsArgs<ExtArgs>
   propertyInterests?: boolean | Prisma.Contact$propertyInterestsArgs<ExtArgs>
+  contactNotes?: boolean | Prisma.Contact$contactNotesArgs<ExtArgs>
+  activities?: boolean | Prisma.Contact$activitiesArgs<ExtArgs>
+  tasks?: boolean | Prisma.Contact$tasksArgs<ExtArgs>
   _count?: boolean | Prisma.ContactCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ContactIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1329,6 +2688,9 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     inquiries: Prisma.$InquiryPayload<ExtArgs>[]
     testimonials: Prisma.$TestimonialPayload<ExtArgs>[]
     propertyInterests: Prisma.$PropertyInterestPayload<ExtArgs>[]
+    contactNotes: Prisma.$ContactNotePayload<ExtArgs>[]
+    activities: Prisma.$ActivityPayload<ExtArgs>[]
+    tasks: Prisma.$TaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1337,6 +2699,19 @@ export type $ContactPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     email: string | null
     notes: string | null
     assignedAgentId: string | null
+    preferredName: string | null
+    secondaryPhone: string | null
+    secondaryEmail: string | null
+    preferredCommunication: string | null
+    currentCity: string | null
+    currentNeighborhood: string | null
+    currentAddress: string | null
+    currentPropertyStatus: string | null
+    interestedInSelling: boolean | null
+    sellingTimeframe: string | null
+    sellingReason: string | null
+    valuationRequested: boolean
+    valuationCompleted: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["contact"]>
@@ -1740,6 +3115,9 @@ export interface Prisma__ContactClient<T, Null = never, ExtArgs extends runtime.
   inquiries<T extends Prisma.Contact$inquiriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$inquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testimonials<T extends Prisma.Contact$testimonialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$testimonialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestimonialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   propertyInterests<T extends Prisma.Contact$propertyInterestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$propertyInterestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PropertyInterestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contactNotes<T extends Prisma.Contact$contactNotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$contactNotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactNotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activities<T extends Prisma.Contact$activitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$activitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  tasks<T extends Prisma.Contact$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Contact$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1775,6 +3153,19 @@ export interface ContactFieldRefs {
   readonly email: Prisma.FieldRef<"Contact", 'String'>
   readonly notes: Prisma.FieldRef<"Contact", 'String'>
   readonly assignedAgentId: Prisma.FieldRef<"Contact", 'String'>
+  readonly preferredName: Prisma.FieldRef<"Contact", 'String'>
+  readonly secondaryPhone: Prisma.FieldRef<"Contact", 'String'>
+  readonly secondaryEmail: Prisma.FieldRef<"Contact", 'String'>
+  readonly preferredCommunication: Prisma.FieldRef<"Contact", 'String'>
+  readonly currentCity: Prisma.FieldRef<"Contact", 'String'>
+  readonly currentNeighborhood: Prisma.FieldRef<"Contact", 'String'>
+  readonly currentAddress: Prisma.FieldRef<"Contact", 'String'>
+  readonly currentPropertyStatus: Prisma.FieldRef<"Contact", 'String'>
+  readonly interestedInSelling: Prisma.FieldRef<"Contact", 'Boolean'>
+  readonly sellingTimeframe: Prisma.FieldRef<"Contact", 'String'>
+  readonly sellingReason: Prisma.FieldRef<"Contact", 'String'>
+  readonly valuationRequested: Prisma.FieldRef<"Contact", 'Boolean'>
+  readonly valuationCompleted: Prisma.FieldRef<"Contact", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Contact", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Contact", 'DateTime'>
 }
@@ -2338,6 +3729,78 @@ export type Contact$propertyInterestsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.PropertyInterestScalarFieldEnum | Prisma.PropertyInterestScalarFieldEnum[]
+}
+
+/**
+ * Contact.contactNotes
+ */
+export type Contact$contactNotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContactNote
+   */
+  select?: Prisma.ContactNoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContactNote
+   */
+  omit?: Prisma.ContactNoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactNoteInclude<ExtArgs> | null
+  where?: Prisma.ContactNoteWhereInput
+  orderBy?: Prisma.ContactNoteOrderByWithRelationInput | Prisma.ContactNoteOrderByWithRelationInput[]
+  cursor?: Prisma.ContactNoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactNoteScalarFieldEnum | Prisma.ContactNoteScalarFieldEnum[]
+}
+
+/**
+ * Contact.activities
+ */
+export type Contact$activitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Activity
+   */
+  select?: Prisma.ActivitySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Activity
+   */
+  omit?: Prisma.ActivityOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityInclude<ExtArgs> | null
+  where?: Prisma.ActivityWhereInput
+  orderBy?: Prisma.ActivityOrderByWithRelationInput | Prisma.ActivityOrderByWithRelationInput[]
+  cursor?: Prisma.ActivityWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActivityScalarFieldEnum | Prisma.ActivityScalarFieldEnum[]
+}
+
+/**
+ * Contact.tasks
+ */
+export type Contact$tasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Task
+   */
+  select?: Prisma.TaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Task
+   */
+  omit?: Prisma.TaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskInclude<ExtArgs> | null
+  where?: Prisma.TaskWhereInput
+  orderBy?: Prisma.TaskOrderByWithRelationInput | Prisma.TaskOrderByWithRelationInput[]
+  cursor?: Prisma.TaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskScalarFieldEnum | Prisma.TaskScalarFieldEnum[]
 }
 
 /**

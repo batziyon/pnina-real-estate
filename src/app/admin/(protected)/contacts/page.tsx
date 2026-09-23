@@ -6,6 +6,7 @@
 
 import Link from "next/link";
 import { requireAuth } from "@/lib/auth-helpers";
+import { getCookieHeader } from "@/lib/server-fetch-helpers";
 
 export const dynamic = "force-dynamic";
 
@@ -39,11 +40,42 @@ interface ContactListResponse {
 export default async function ContactsListPage({ searchParams }: PageProps) {
   const user = await requireAuth();
   const params = await searchParams;
+  const cookieHeader = await getCookieHeader();
 
   // Parse query params
   const page = parseInt(params.page || "1", 10);
   const search = params.search || undefined;
   const assignedAgentId = params.assignedAgentId || undefined;
+
+  // Fetch statistics
+  let statistics = {
+    totalContacts: 0,
+    buyers: 0,
+    sellers: 0,
+    renters: 0,
+    landlords: 0,
+    investors: 0,
+    activeRequirements: 0,
+    activePropertyInterests: 0,
+    interestedInSelling: 0,
+  };
+
+  try {
+    const statsResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/contacts/statistics`,
+      {
+        headers: {
+          Cookie: cookieHeader,
+        },
+        cache: "no-store",
+      }
+    );
+    if (statsResponse.ok) {
+      statistics = await statsResponse.json();
+    }
+  } catch {
+    // Ignore statistics error - not critical
+  }
 
   // Build query string
   const queryParams = new URLSearchParams();
@@ -54,26 +86,27 @@ export default async function ContactsListPage({ searchParams }: PageProps) {
 
   // Fetch contacts from API
   const apiUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/contacts?${queryParams.toString()}`;
-  let result: ContactListResponse;
+  let result: ContactListResponse = {
+    data: [],
+    meta: { total: 0, page: 1, pageSize: 20, totalPages: 0 }
+  };
   let error: string | null = null;
 
   try {
     const response = await fetch(apiUrl, {
       headers: {
-        Cookie: (await import("next/headers")).cookies().toString(),
+        Cookie: cookieHeader,
       },
       cache: "no-store",
     });
 
     if (!response.ok) {
       error = `שגיאה בטעינת אנשי הקשר (${response.status})`;
-      result = { data: [], meta: { total: 0, page: 1, pageSize: 20, totalPages: 0 } };
     } else {
       result = await response.json();
     }
   } catch {
     error = "שגיאה בחיבור לשרת";
-    result = { data: [], meta: { total: 0, page: 1, pageSize: 20, totalPages: 0 } };
   }
 
   // Fetch agents for ADMIN filter
@@ -84,7 +117,7 @@ export default async function ContactsListPage({ searchParams }: PageProps) {
         `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/api/admin/users?role=AGENT&pageSize=100`,
         {
           headers: {
-            Cookie: (await import("next/headers")).cookies().toString(),
+            Cookie: cookieHeader,
           },
           cache: "no-store",
         }
@@ -94,7 +127,7 @@ export default async function ContactsListPage({ searchParams }: PageProps) {
         agents = agentsData.data || [];
       }
     } catch {
-      // Ignore agents fetch error
+      // Ignore agents fetch error - not critical
     }
   }
 
@@ -109,12 +142,60 @@ export default async function ContactsListPage({ searchParams }: PageProps) {
           <h1 className="text-3xl font-bold text-gray-900">אנשי קשר</h1>
           <p className="text-gray-600 mt-1">מאגר אנשי הקשר המרכזי של ה-CRM</p>
         </div>
-        <Link
-          href="/admin/contacts/new"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-        >
-          + איש קשר חדש
-        </Link>
+        <div className="flex gap-2">
+          <Link
+            href="/admin/contacts/ai-new"
+            className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
+          >
+            🤖 יצירה באמצעות AI
+          </Link>
+          <Link
+            href="/admin/contacts/new"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+          >
+            + איש קשר חדש
+          </Link>
+        </div>
+      </div>
+
+      {/* Statistics Summary */}
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">סה״כ אנשי קשר</div>
+          <div className="text-2xl font-bold text-gray-900">{statistics.totalContacts}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">קוני</div>
+          <div className="text-2xl font-bold text-blue-600">{statistics.buyers}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">מוכרים</div>
+          <div className="text-2xl font-bold text-green-600">{statistics.sellers}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">שוכרים</div>
+          <div className="text-2xl font-bold text-purple-600">{statistics.renters}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">משכירים</div>
+          <div className="text-2xl font-bold text-orange-600">{statistics.landlords}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">משקיעים</div>
+          <div className="text-2xl font-bold text-yellow-600">{statistics.investors}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">דרישות פעילות</div>
+          <div className="text-2xl font-bold text-indigo-600">{statistics.activeRequirements}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">עניין בנכסים</div>
+          <div className="text-2xl font-bold text-pink-600">{statistics.activePropertyInterests}</div>
+        </div>
+        <div className="bg-white rounded-lg shadow p-4">
+          <div className="text-sm text-gray-500">מעוניינים למכור</div>
+          <div className="text-2xl font-bold text-red-600">{statistics.interestedInSelling}</div>
+        </div>
       </div>
 
       {/* Error message */}

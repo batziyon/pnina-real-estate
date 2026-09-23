@@ -31,7 +31,7 @@ export default function PropertiesPage() {
         </section>
 
         <Container className="py-10 lg:py-12">
-          <div className="border border-[#dfeaf1] bg-white p-4 sm:p-6">
+          <div className="border border-[#dfeaf1] bg-white p-4 sm:p-6 rounded-lg shadow-sm">
             <PropertiesListClient />
           </div>
         </Container>

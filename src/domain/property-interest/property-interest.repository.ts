@@ -70,4 +70,9 @@ export interface PropertyInterestRepository {
     propertyId: string,
     statusFilter?: PropertyInterestStatus
   ): Promise<number>;
+
+  /**
+   * Count all property interests, optionally filtered.
+   */
+  count(filters?: { contactId?: string; propertyId?: string; status?: PropertyInterestStatus }): Promise<number>;
 }

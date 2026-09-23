@@ -113,7 +113,7 @@ export default function AboutPage() {
                     מעוניינים במידע נוסף או בזיהוי נכס שיתאים לכם?
                   </p>
                   <Link
-                    href="/contact"
+                    href="/contact?type=general"
                     className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-[#D9822B] hover:bg-[#c4721f] transition-colors"
                   >
                     צרו קשר

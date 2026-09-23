@@ -22,7 +22,7 @@ export function ContactSection() {
             </p>
 
             <Link
-              href="/contact"
+              href="/contact?type=general"
               className="inline-flex items-center justify-center px-8 py-4 text-base font-semibold text-white bg-[#135C87] hover:bg-[#123F5A] transition-colors"
             >
               צרו קשר עכשיו

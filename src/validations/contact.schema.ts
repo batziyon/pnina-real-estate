@@ -1,26 +1,69 @@
 import { z } from "zod";
 
+// Helper for optional email that can be null or empty string
+const optionalEmail = z
+  .union([
+    z.string().trim().email("כתובת אימייל לא תקינה"),
+    z.literal(""),
+    z.null(),
+    z.undefined(),
+  ])
+  .optional();
+
+// Helper for optional phone - only validate if not empty
+const optionalPhone = z
+  .union([
+    z.string().trim().min(9, "מספר טלפון לא תקין").max(20, "מספר טלפון לא תקין"),
+    z.literal(""),
+    z.null(),
+    z.undefined(),
+  ])
+  .optional();
+
+// Helper for optional string
+const optionalString = (maxLength?: number) =>
+  z
+    .union([
+      maxLength ? z.string().trim().max(maxLength) : z.string().trim(),
+      z.literal(""),
+      z.null(),
+      z.undefined(),
+    ])
+    .optional();
+
 export const CreateContactSchema = z.object({
   name: z
     .string()
     .trim()
     .min(2, "שם חייב להכיל לפחות 2 תווים")
     .max(255, "שם ארוך מדי"),
-  phone: z
-    .string()
-    .trim()
-    .min(9, "מספר טלפון לא תקין")
-    .max(20, "מספר טלפון לא תקין")
-    .nullable()
+  phone: optionalPhone,
+  email: optionalEmail,
+  notes: optionalString(),
+  roles: z.array(z.enum(["BUYER", "SELLER", "RENTER", "LANDLORD", "INVESTOR", "COLLABORATOR", "OTHER"])).optional().default([]),
+  assignedAgentId: z
+    .union([
+      z.string().cuid("מזהה סוכן לא תקין"),
+      z.literal(""),
+      z.null(),
+      z.undefined(),
+    ])
     .optional(),
-  email: z
-    .string()
-    .trim()
-    .email("כתובת אימייל לא תקינה")
-    .nullable()
-    .optional(),
-  notes: z.string().trim().nullable().optional(),
-  assignedAgentId: z.string().cuid("מזהה סוכן לא תקין").nullable().optional(),
+  
+  // PHASE 2 - Enhanced fields
+  preferredName: optionalString(255),
+  secondaryPhone: optionalString(20),
+  secondaryEmail: optionalEmail,
+  preferredCommunication: z.enum(["PHONE", "EMAIL", "WHATSAPP"]).optional().default("PHONE"),
+  currentCity: optionalString(100),
+  currentNeighborhood: optionalString(100),
+  currentAddress: optionalString(500),
+  currentPropertyStatus: optionalString(100),
+  interestedInSelling: z.boolean().optional().default(false),
+  sellingTimeframe: optionalString(100),
+  sellingReason: optionalString(500),
+  valuationRequested: z.boolean().optional().default(false),
+  valuationCompleted: z.boolean().optional().default(false),
 });
 
 export const UpdateContactSchema = CreateContactSchema.partial();

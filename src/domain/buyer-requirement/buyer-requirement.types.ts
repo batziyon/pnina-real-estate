@@ -49,6 +49,19 @@ export interface BuyerRequirementData {
   maxArea: number | null;
   minPrice: number | null;
   maxPrice: number | null;
+  
+  // Enhanced fields (PHASE 2)
+  minFloor: number | null;
+  maxFloor: number | null;
+  requiresElevator: boolean;
+  requiresParking: boolean;
+  requiresBalcony: boolean;
+  requiresSafeRoom: boolean;
+  accessibilityRequired: boolean;
+  renovationPreference: string | null;
+  newConstructionPreference: boolean | null;
+  moveInTimeframe: string | null;
+  
   notes: string | null;
   active: boolean;
   neighborhoods: NeighborhoodPreference[];
@@ -70,6 +83,19 @@ export type CreateBuyerRequirementInput = {
   maxArea?: number | null;
   minPrice?: number | null;
   maxPrice?: number | null;
+  
+  // Enhanced fields (PHASE 2)
+  minFloor?: number | null;
+  maxFloor?: number | null;
+  requiresElevator?: boolean;
+  requiresParking?: boolean;
+  requiresBalcony?: boolean;
+  requiresSafeRoom?: boolean;
+  accessibilityRequired?: boolean;
+  renovationPreference?: string | null;
+  newConstructionPreference?: boolean | null;
+  moveInTimeframe?: string | null;
+  
   notes?: string | null;
   neighborhoods: Array<{
     neighborhoodId: string;
@@ -86,6 +112,19 @@ export type UpdateBuyerRequirementInput = Partial<{
   maxArea: number | null;
   minPrice: number | null;
   maxPrice: number | null;
+  
+  // Enhanced fields (PHASE 2)
+  minFloor: number | null;
+  maxFloor: number | null;
+  requiresElevator: boolean;
+  requiresParking: boolean;
+  requiresBalcony: boolean;
+  requiresSafeRoom: boolean;
+  accessibilityRequired: boolean;
+  renovationPreference: string | null;
+  newConstructionPreference: boolean | null;
+  moveInTimeframe: string | null;
+  
   notes: string | null;
   active: boolean;
   neighborhoods: Array<{

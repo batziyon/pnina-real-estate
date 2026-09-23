@@ -75,7 +75,7 @@ export function PropertyDetailClient({ property }: PropertyDetailClientProps) {
   return (
     <Container className="py-10 lg:py-12">
       <div className="mx-auto max-w-6xl">
-        <div className="mb-7 border border-[#dfe8ee] bg-white p-5">
+        <div className="mb-7 border border-[#dfe8ee] bg-white p-5 rounded-lg shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
               <div className="mb-2 inline-flex bg-[#135C87] px-2.5 py-1 text-[10px] font-semibold tracking-[0.18em] text-white">
@@ -97,7 +97,7 @@ export function PropertyDetailClient({ property }: PropertyDetailClientProps) {
 
         <div className="grid grid-cols-1 gap-7 lg:grid-cols-[1.65fr_0.9fr]">
           <div className="space-y-6">
-            <div className="border border-[#dfe8ee] bg-white p-6">
+            <div className="border border-[#dfe8ee] bg-white p-6 rounded-lg shadow-sm">
               <h2 className="mb-5 text-2xl font-bold text-[#123b58]">פרטי הנכס</h2>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 {property.rooms && (

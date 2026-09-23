@@ -23,7 +23,7 @@ export function ProjectCard({ project, neighborhoodName }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.id}`}
-      className="group block bg-white border border-gray-200 overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-xl"
+      className="group block bg-white border border-gray-200 rounded-lg overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-lg"
     >
       {/* Image */}
       <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-[#f0e8dc] to-[#e2d5c4]">

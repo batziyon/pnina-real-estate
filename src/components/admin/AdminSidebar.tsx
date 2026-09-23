@@ -48,14 +48,15 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
   };
 
   return (
-    <aside className="w-64 bg-[#135C87] flex flex-col">
+    <aside className="hidden lg:flex lg:w-64 bg-[#135C87] flex-col">
       {/* Logo/Brand */}
       <div className="px-6 py-5 border-b border-white/10">
         <div className="relative w-full h-16">
           <Image
-            src="/images/pnina-logo.jpg"
+            src="/images/pnina-logo.png"
             alt="פנינה נדל״ן"
             fill
+            sizes="(max-width: 768px) 100vw, 256px"
             className="object-contain"
             priority
           />

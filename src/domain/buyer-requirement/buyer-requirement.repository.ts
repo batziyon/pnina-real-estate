@@ -51,4 +51,9 @@ export interface BuyerRequirementRepository {
    * Soft-deactivate a buyer requirement.
    */
   deactivate(id: string): Promise<BuyerRequirementData>;
+
+  /**
+   * Count buyer requirements matching filters.
+   */
+  count(filters: BuyerRequirementFilters): Promise<number>;
 }

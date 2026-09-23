@@ -77,7 +77,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </section>
 
         <Container className="py-10 lg:py-12">
-          <div className="overflow-hidden border border-[#dfeaf1] bg-white">
+          <div className="overflow-hidden border border-[#dfeaf1] bg-white rounded-lg shadow-sm">
             {project.coverImage && (
               <div className="aspect-[21/9] overflow-hidden bg-white">
                 <img
@@ -105,7 +105,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
                 צרו קשר לקבלת מידע מפורט על הפרויקט
               </p>
               <a
-                href="/contact"
+                href="/contact?type=general"
                 className="inline-block bg-white px-7 py-3 text-base font-medium text-[#135C87] transition-colors hover:bg-gray-100"
               >
                 צור קשר

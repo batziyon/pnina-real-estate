@@ -79,6 +79,17 @@ export function BuyerRequirementForm({
     minPrice: requirement?.minPrice?.toString() || "",
     maxPrice: requirement?.maxPrice?.toString() || "",
     notes: requirement?.notes || "",
+    // PHASE 2 fields
+    minFloor: (requirement as any)?.minFloor?.toString() || "",
+    maxFloor: (requirement as any)?.maxFloor?.toString() || "",
+    requiresElevator: (requirement as any)?.requiresElevator || false,
+    requiresParking: (requirement as any)?.requiresParking || false,
+    requiresBalcony: (requirement as any)?.requiresBalcony || false,
+    requiresSafeRoom: (requirement as any)?.requiresSafeRoom || false,
+    accessibilityRequired: (requirement as any)?.accessibilityRequired || false,
+    renovationPreference: (requirement as any)?.renovationPreference || "",
+    newConstructionPreference: (requirement as any)?.newConstructionPreference === null ? "" : String((requirement as any)?.newConstructionPreference || ""),
+    moveInTimeframe: (requirement as any)?.moveInTimeframe || "",
   });
 
   const [selectedNeighborhoods, setSelectedNeighborhoods] = useState<
@@ -109,6 +120,17 @@ export function BuyerRequirementForm({
         maxPrice: formData.maxPrice ? parseFloat(formData.maxPrice) : null,
         notes: formData.notes.trim() || null,
         neighborhoods: selectedNeighborhoods,
+        // PHASE 2 fields
+        minFloor: formData.minFloor ? parseFloat(formData.minFloor) : null,
+        maxFloor: formData.maxFloor ? parseFloat(formData.maxFloor) : null,
+        requiresElevator: formData.requiresElevator,
+        requiresParking: formData.requiresParking,
+        requiresBalcony: formData.requiresBalcony,
+        requiresSafeRoom: formData.requiresSafeRoom,
+        accessibilityRequired: formData.accessibilityRequired,
+        renovationPreference: formData.renovationPreference.trim() || null,
+        newConstructionPreference: formData.newConstructionPreference === "" ? null : formData.newConstructionPreference === "true",
+        moveInTimeframe: formData.moveInTimeframe.trim() || null,
       };
 
       // API call
@@ -518,6 +540,150 @@ export function BuyerRequirementForm({
         {errors.notes && (
           <p className="mt-1 text-sm text-red-600">{errors.notes}</p>
         )}
+      </div>
+
+      {/* PHASE 2 - Enhanced Requirements */}
+      <div className="border-t pt-6">
+        <h3 className="text-lg font-semibold mb-4">דרישות מפורטות</h3>
+        
+        {/* Floor */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label htmlFor="minFloor" className="block text-sm font-medium text-gray-700 mb-2">
+              קומה מינימלית
+            </label>
+            <input
+              type="number"
+              id="minFloor"
+              value={formData.minFloor}
+              onChange={(e) => setFormData({ ...formData, minFloor: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              placeholder="0"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div>
+            <label htmlFor="maxFloor" className="block text-sm font-medium text-gray-700 mb-2">
+              קומה מקסימלית
+            </label>
+            <input
+              type="number"
+              id="maxFloor"
+              value={formData.maxFloor}
+              onChange={(e) => setFormData({ ...formData, maxFloor: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              placeholder="20"
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
+
+        {/* Checkboxes */}
+        <div className="space-y-2 mb-4">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="requiresElevator"
+              checked={formData.requiresElevator}
+              onChange={(e) => setFormData({ ...formData, requiresElevator: e.target.checked })}
+              className="w-4 h-4"
+              disabled={isSubmitting}
+            />
+            <label htmlFor="requiresElevator" className="text-sm">דורש מעלית</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="requiresParking"
+              checked={formData.requiresParking}
+              onChange={(e) => setFormData({ ...formData, requiresParking: e.target.checked })}
+              className="w-4 h-4"
+              disabled={isSubmitting}
+            />
+            <label htmlFor="requiresParking" className="text-sm">דורש חניה</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="requiresBalcony"
+              checked={formData.requiresBalcony}
+              onChange={(e) => setFormData({ ...formData, requiresBalcony: e.target.checked })}
+              className="w-4 h-4"
+              disabled={isSubmitting}
+            />
+            <label htmlFor="requiresBalcony" className="text-sm">דורש מרפסת</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="requiresSafeRoom"
+              checked={formData.requiresSafeRoom}
+              onChange={(e) => setFormData({ ...formData, requiresSafeRoom: e.target.checked })}
+              className="w-4 h-4"
+              disabled={isSubmitting}
+            />
+            <label htmlFor="requiresSafeRoom" className="text-sm">דורש ממ&quot;ד</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="accessibilityRequired"
+              checked={formData.accessibilityRequired}
+              onChange={(e) => setFormData({ ...formData, accessibilityRequired: e.target.checked })}
+              className="w-4 h-4"
+              disabled={isSubmitting}
+            />
+            <label htmlFor="accessibilityRequired" className="text-sm">דרישות נגישות</label>
+          </div>
+        </div>
+
+        {/* Renovation & Construction */}
+        <div className="space-y-4">
+          <div>
+            <label htmlFor="renovationPreference" className="block text-sm font-medium text-gray-700 mb-2">
+              העדפת שיפוץ
+            </label>
+            <input
+              type="text"
+              id="renovationPreference"
+              value={formData.renovationPreference}
+              onChange={(e) => setFormData({ ...formData, renovationPreference: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              placeholder="משופץ / דורש שיפוץ / גמיש"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div>
+            <label htmlFor="newConstructionPreference" className="block text-sm font-medium text-gray-700 mb-2">
+              העדפת בנייה חדשה
+            </label>
+            <select
+              id="newConstructionPreference"
+              value={formData.newConstructionPreference}
+              onChange={(e) => setFormData({ ...formData, newConstructionPreference: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              disabled={isSubmitting}
+            >
+              <option value="">לא משנה</option>
+              <option value="true">בנייה חדשה בלבד</option>
+              <option value="false">לא בנייה חדשה</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="moveInTimeframe" className="block text-sm font-medium text-gray-700 mb-2">
+              מועד כניסה מבוקש
+            </label>
+            <input
+              type="text"
+              id="moveInTimeframe"
+              value={formData.moveInTimeframe}
+              onChange={(e) => setFormData({ ...formData, moveInTimeframe: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              placeholder="מיידי / 3 חודשים / גמיש"
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Submit */}

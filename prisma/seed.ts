@@ -11,7 +11,7 @@
 
 import "dotenv/config";
 import * as bcrypt from "bcryptjs";
-import { PrismaClient } from "../src/generated/prisma/client";
+import { PrismaClient, TestimonialStatus } from "../src/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -104,6 +104,9 @@ async function main() {
   // 2. Bootstrap admin user
   await seedAdminUser();
 
+  // 3. Seed demo testimonials (for development)
+  await seedDemoTestimonials();
+
   console.log("\n=== Seeding Complete ===");
 }
 
@@ -149,6 +152,66 @@ async function seedAdminUser() {
   });
 
   console.log(`✓ Admin user seeded/updated: ${admin.email}`);
+}
+
+/**
+ * Seed demo testimonials (marked for easy removal).
+ *
+ * Creates 3-4 realistic Hebrew testimonials with status APPROVED.
+ * Clearly marked as development/demo data.
+ */
+async function seedDemoTestimonials() {
+  console.log("Seeding demo testimonials...");
+
+  const demoTestimonials = [
+    {
+      id: "demo-testimonial-1",
+      name: "משפחת כהן",
+      displayName: "משפחת כהן - רחביה",
+      content: "פנינה ליוותה אותנו בקנייה של דירה ברחביה. השירות היה מקצועי, היא ידעה בדיוק מה אנחנו מחפשים וחסכה לנו המון זמן. ממליצים בחום!",
+      status: TestimonialStatus.APPROVED,
+      createdAt: new Date("2026-01-15"),
+    },
+    {
+      id: "demo-testimonial-2",
+      name: "דוד ושרה לוי",
+      displayName: "דוד ושרה לוי - קטמון",
+      content: "רכשנו דירה בקטמון דרך פנינה. היא הייתה מאוד סבלנית, הסבירה כל פרט והייתה זמינה לכל שאלה. תודה על השירות המצוין!",
+      status: TestimonialStatus.APPROVED,
+      createdAt: new Date("2026-02-20"),
+    },
+    {
+      id: "demo-testimonial-3",
+      name: "אברהם מנדלבאום",
+      displayName: "אברהם מנדלבאום - מרכז העיר",
+      content: "מכרתי דירה במרכז העיר בעזרת פנינה. התהליך היה מהיר וחלק, והיא דאגה לכל הפרטים הקטנים. שירות אמין ואיכותי.",
+      status: TestimonialStatus.APPROVED,
+      createdAt: new Date("2026-03-10"),
+    },
+    {
+      id: "demo-testimonial-4",
+      name: "משפחת גולדשטיין",
+      displayName: "משפחת גולדשטיין - גבעת שאול",
+      content: "חיפשנו דירה בגבעת שאול למעלה משנה. פנינה הבינה בדיוק מה אנחנו צריכים ומצאה לנו את הדירה המושלמת. אנחנו מאוד מרוצים!",
+      status: TestimonialStatus.APPROVED,
+      createdAt: new Date("2026-04-05"),
+    },
+  ];
+
+  for (const t of demoTestimonials) {
+    await prisma.testimonial.upsert({
+      where: { id: t.id },
+      update: {
+        name: t.name,
+        displayName: t.displayName,
+        content: t.content,
+        status: t.status,
+      },
+      create: t,
+    });
+  }
+
+  console.log(`✓ ${demoTestimonials.length} demo testimonials upserted (DEMO DATA - easy to remove).\n`);
 }
 
 main()

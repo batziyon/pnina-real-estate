@@ -34,7 +34,7 @@ export function PropertyCard({ property, neighborhoodName }: PropertyCardProps) 
   return (
     <Link
       href={`/properties/${property.id}`}
-      className="group block bg-white border border-gray-200 overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-xl"
+      className="group block bg-white border border-gray-200 rounded-lg overflow-hidden transition-all hover:border-[#D9822B] hover:shadow-lg"
     >
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#f5ede3] to-[#e8dcc8]">

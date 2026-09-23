@@ -47,6 +47,19 @@ export class PrismaBuyerRequirementRepository
       maxArea: record.maxArea ? Number(record.maxArea) : null,
       minPrice: record.minPrice ? Number(record.minPrice) : null,
       maxPrice: record.maxPrice ? Number(record.maxPrice) : null,
+      
+      // Enhanced fields (PHASE 2)
+      minFloor: record.minFloor ? Number(record.minFloor) : null,
+      maxFloor: record.maxFloor ? Number(record.maxFloor) : null,
+      requiresElevator: record.requiresElevator ?? false,
+      requiresParking: record.requiresParking ?? false,
+      requiresBalcony: record.requiresBalcony ?? false,
+      requiresSafeRoom: record.requiresSafeRoom ?? false,
+      accessibilityRequired: record.accessibilityRequired ?? false,
+      renovationPreference: record.renovationPreference,
+      newConstructionPreference: record.newConstructionPreference,
+      moveInTimeframe: record.moveInTimeframe,
+      
       notes: record.notes,
       active: record.active,
       neighborhoods: record.preferredNeighborhoods.map(
@@ -153,6 +166,19 @@ export class PrismaBuyerRequirementRepository
         maxArea: input.maxArea !== undefined ? input.maxArea : null,
         minPrice: input.minPrice !== undefined ? input.minPrice : null,
         maxPrice: input.maxPrice !== undefined ? input.maxPrice : null,
+        
+        // Enhanced fields (PHASE 2)
+        minFloor: input.minFloor !== undefined ? input.minFloor : null,
+        maxFloor: input.maxFloor !== undefined ? input.maxFloor : null,
+        requiresElevator: input.requiresElevator ?? false,
+        requiresParking: input.requiresParking ?? false,
+        requiresBalcony: input.requiresBalcony ?? false,
+        requiresSafeRoom: input.requiresSafeRoom ?? false,
+        accessibilityRequired: input.accessibilityRequired ?? false,
+        renovationPreference: input.renovationPreference || null,
+        newConstructionPreference: input.newConstructionPreference !== undefined ? input.newConstructionPreference : null,
+        moveInTimeframe: input.moveInTimeframe || null,
+        
         notes: input.notes || null,
         active: true,
         preferredNeighborhoods: {
@@ -197,6 +223,19 @@ export class PrismaBuyerRequirementRepository
         ...(input.maxArea !== undefined && { maxArea: input.maxArea }),
         ...(input.minPrice !== undefined && { minPrice: input.minPrice }),
         ...(input.maxPrice !== undefined && { maxPrice: input.maxPrice }),
+        
+        // Enhanced fields (PHASE 2)
+        ...(input.minFloor !== undefined && { minFloor: input.minFloor }),
+        ...(input.maxFloor !== undefined && { maxFloor: input.maxFloor }),
+        ...(input.requiresElevator !== undefined && { requiresElevator: input.requiresElevator }),
+        ...(input.requiresParking !== undefined && { requiresParking: input.requiresParking }),
+        ...(input.requiresBalcony !== undefined && { requiresBalcony: input.requiresBalcony }),
+        ...(input.requiresSafeRoom !== undefined && { requiresSafeRoom: input.requiresSafeRoom }),
+        ...(input.accessibilityRequired !== undefined && { accessibilityRequired: input.accessibilityRequired }),
+        ...(input.renovationPreference !== undefined && { renovationPreference: input.renovationPreference }),
+        ...(input.newConstructionPreference !== undefined && { newConstructionPreference: input.newConstructionPreference }),
+        ...(input.moveInTimeframe !== undefined && { moveInTimeframe: input.moveInTimeframe }),
+        
         ...(input.notes !== undefined && { notes: input.notes }),
         ...(input.active !== undefined && { active: input.active }),
         ...(input.neighborhoods !== undefined && {
@@ -232,5 +271,23 @@ export class PrismaBuyerRequirementRepository
     });
 
     return this.toDomain(record);
+  }
+
+  async count(filters: BuyerRequirementFilters): Promise<number> {
+    const where: Record<string, unknown> = {};
+
+    if (filters.contactId) {
+      where.contactId = filters.contactId;
+    }
+
+    if (filters.active !== undefined) {
+      where.active = filters.active;
+    }
+
+    if (filters.dealType) {
+      where.dealType = filters.dealType;
+    }
+
+    return prisma.buyerRequirement.count({ where });
   }
 }

@@ -104,6 +104,7 @@ export class PrismaTestimonialRepository implements TestimonialRepository {
     const record = await prisma.testimonial.update({
       where: { id },
       data: {
+        ...(input.name !== undefined && { name: input.name }),
         ...(input.displayName !== undefined && { displayName: input.displayName }),
         ...(input.content !== undefined && { content: input.content }),
         ...(input.status !== undefined && { status: input.status }),

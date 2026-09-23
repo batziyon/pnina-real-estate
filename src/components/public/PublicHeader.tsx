@@ -14,9 +14,9 @@ const navigation = [
   { name: "דף הבית", href: "/" },
   { name: "נכסים", href: "/properties" },
   { name: "פרויקטים", href: "/projects" },
+  { name: "המלצות", href: "/testimonials" },
   { name: "קצת עליי", href: "/about" },
   { name: "מעוניינים למכור?", href: "/contact" },
-  { name: "צור קשר", href: "/contact" },
 ];
 
 export function PublicHeader() {
@@ -97,7 +97,7 @@ export function PublicHeader() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed top-[72px] right-0 left-0 bg-white border-t border-gray-200 shadow-xl z-50">
+          <div className="lg:hidden fixed top-[72px] right-0 left-0 bg-white border-t border-gray-200 shadow-lg z-50">
             <div className="flex flex-col px-6 py-4 max-h-[calc(100vh-72px)] overflow-y-auto">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;
